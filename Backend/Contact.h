@@ -109,7 +109,7 @@ public:
    * @param <Contact> Input : Another Instance of <Contact> Class
    * @return <bool> : Compares Between Two Instances
    */
-  inline bool operator==(const Contact &Input) {
+  bool operator==(const Contact &Input) {
     return this->_NAME == Input._NAME;
   }
   /**
