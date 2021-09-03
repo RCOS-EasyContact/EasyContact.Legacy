@@ -44,25 +44,17 @@ public:
   }
   /**
    * Class Copy Constructor
+   * Redirects to this->operator=()
    * @param <Contact> Input : Another Instance of <Contact> Class
    */
-  explicit Contact(const Contact &Input) {
-    this->_PHONE = Input._PHONE;
-    this->_NAME = Input._NAME;
-    this->_ADDRESS = Input._ADDRESS;
-    this->_LATEST = Input._LATEST;
-    this->_RECEIVED = Input._RECEIVED;
-  }
+  explicit Contact(const Contact &Input) : Contact() { this->operator=(Input); }
   /**
    * Class Move Constructor
+   * Redirects to this->operator=()
    * @param <Contact> Input : Another Instance of <Contact> Class
    */
-  explicit Contact(const Contact &&Input) noexcept {
-    this->_PHONE = Input._PHONE;
-    this->_NAME = Input._NAME;
-    this->_ADDRESS = Input._ADDRESS;
-    this->_LATEST = Input._LATEST;
-    this->_RECEIVED = Input._RECEIVED;
+  explicit Contact(const Contact &&Input) noexcept : Contact() {
+    this->operator=(std::move(Input));
   }
   /**
    * Representation Accessor
@@ -109,9 +101,7 @@ public:
    * @param <Contact> Input : Another Instance of <Contact> Class
    * @return <bool> : Compares Between Two Instances
    */
-  bool operator==(const Contact &Input) {
-    return this->_NAME == Input._NAME;
-  }
+  bool operator==(const Contact &Input) { return this->_NAME == Input._NAME; }
   /**
    * Compare Different Instances
    * @param <Contact> LEFT : An Instance of <Contact> Class
@@ -148,7 +138,7 @@ public:
    * @return <Contact> : Reference to Current Instance
    */
   Contact &operator=(const Contact &Input) {
-    if (!this->operator==(Input)) {
+    if (this != &Input) {
       this->_PHONE = Input._PHONE;
       this->_NAME = Input._NAME;
       this->_ADDRESS = Input._ADDRESS;
@@ -163,7 +153,7 @@ public:
    * @return <Contact> : Reference to Current Instance
    */
   Contact &operator=(const Contact &&Input) noexcept {
-    if (!this->operator==(Input)) {
+    if (this != &Input) {
       this->_PHONE = Input._PHONE;
       this->_NAME = Input._NAME;
       this->_ADDRESS = Input._ADDRESS;
