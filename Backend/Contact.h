@@ -21,6 +21,10 @@ class Contact {
 public:
   /**
    * Default Class Constructor
+   */
+  explicit Contact() = default;
+  /**
+   * Default Class Constructor
    * @param <std::string> Phone : Phone Number to be Stored
    * @param <std::string> Name : Contact Name to be Stored
    * @param <std::string> Address : Email Address to be Stored
@@ -43,6 +47,17 @@ public:
    * @param <Contact> Input : Another Instance of <Contact> Class
    */
   explicit Contact(const Contact &Input) {
+    this->_PHONE = Input._PHONE;
+    this->_NAME = Input._NAME;
+    this->_ADDRESS = Input._ADDRESS;
+    this->_LATEST = Input._LATEST;
+    this->_RECEIVED = Input._RECEIVED;
+  }
+  /**
+   * Class Move Constructor
+   * @param <Contact> Input : Another Instance of <Contact> Class
+   */
+  explicit Contact(const Contact &&Input) noexcept {
     this->_PHONE = Input._PHONE;
     this->_NAME = Input._NAME;
     this->_ADDRESS = Input._ADDRESS;
@@ -75,7 +90,7 @@ public:
    */
   const long unsigned int &getReceived() { return _RECEIVED; }
   /**
-   * Class Function
+   * Calculates Hash Code
    * @param <long unsigned int> : Hash Table Stack Size
    * @return <long unsigned int> : Hash Code for Current Instance
    */
@@ -90,13 +105,33 @@ public:
     return (long unsigned int)(BUFFER % STACK);
   }
   /**
-   * Operator Overload
+   * Compare Different Instances
    * @param <Contact> Input : Another Instance of <Contact> Class
    * @return <bool> : Compares Between Two Instances
    */
-  bool operator==(const Contact &Input) { return this->_NAME == Input._NAME; }
+  inline bool operator==(const Contact &Input) {
+    return this->_NAME == Input._NAME;
+  }
   /**
-   * Operator Overload
+   * Compare Different Instances
+   * @param <Contact> LEFT : An Instance of <Contact> Class
+   * @param <Contact> RIGHT : An Instance of <Contact> Class
+   * @return <bool> : Compares Between Two Instances
+   */
+  friend bool operator<(const Contact &LEFT, const Contact &RIGHT) {
+    return LEFT._RECEIVED < RIGHT._RECEIVED;
+  }
+  /**
+   * Calculates Hash Code
+   * Redirects to this->Hash()
+   * @param <long unsigned int> : Hash Table Stack Size
+   * @return <long unsigned int> : Hash Code for Current Instance
+   */
+  long unsigned int operator%(const long unsigned int &STACK) {
+    return this->Hash(STACK);
+  }
+  /**
+   * Print Class Representation to File Descriptor
    * @param <std::ostream> FILE : File Descriptor
    * @param <Contact> Input : Another Instance of <Contact> Class
    * @return <std::ostream> : Original File Descriptor
@@ -108,7 +143,7 @@ public:
     return FILE;
   }
   /**
-   * Operator Overload
+   * Class Copy Constructor
    * @param <Contact> Input : Another Instance of <Contact> Class
    * @return <Contact> : Reference to Current Instance
    */
@@ -123,7 +158,22 @@ public:
     return *this;
   }
   /**
-   * Operator Overload
+   * Class Move Constructor
+   * @param <Contact> Input : Another Instance of <Contact> Class
+   * @return <Contact> : Reference to Current Instance
+   */
+  Contact &operator=(const Contact &&Input) noexcept {
+    if (!this->operator==(Input)) {
+      this->_PHONE = Input._PHONE;
+      this->_NAME = Input._NAME;
+      this->_ADDRESS = Input._ADDRESS;
+      this->_LATEST = Input._LATEST;
+      this->_RECEIVED = Input._RECEIVED;
+    }
+    return *this;
+  }
+  /**
+   * Received New Email from this Email Address
    * @param <std::string> LatestEmail : Latest Email Received from this Email
    * Address
    * @return <Contact> : Reference to Current Instance
@@ -136,7 +186,8 @@ public:
     return *this;
   }
   /**
-   * Operator Overload
+   * >> DEBUG ONLY FUNCTION <<
+   * Overwrite Number Emails Received
    * @param <long unsigned int> NumReceived : Total Number of Emails Received
    * from this Email Address
    * @return <Contact> : Reference to Current Instance
