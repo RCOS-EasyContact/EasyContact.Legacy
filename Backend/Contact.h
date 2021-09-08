@@ -5,16 +5,16 @@
 /**
  * <Contact> Represents an Mutable Object for Contact Information
  * <Contact> Contains:
- *           <std::string> Phone Number
  *           <std::string> Contact Name
  *           <std::string> Email Address
+ *           <std::string> Phone Number
  *           <std::string> Latest Email
  *           <long unsigned int> Number Emails Received
  */
 class Contact {
-  std::string _PHONE;
   std::string _NAME;
   std::string _ADDRESS;
+  std::string _PHONE;
   std::string _LATEST;
   long unsigned int _RECEIVED;
 
@@ -25,20 +25,20 @@ public:
   explicit Contact() = default;
   /**
    * Default Class Constructor
-   * @param <std::string> Phone : Phone Number to be Stored
    * @param <std::string> Name : Contact Name to be Stored
    * @param <std::string> Address : Email Address to be Stored
+   * @param <std::string> Phone : Phone Number to be Stored
    * @param <std::string> LatestEmail : Latest Email Received from this Email
    * Address
    * @param <long unsigned int> NumReceived : Total Number of Emails Received
    * from this Email Address
    */
-  explicit Contact(const std::string &Phone, const std::string &Name,
-                   const std::string &Address, const std::string &LatestEmail,
+  explicit Contact(const std::string &Name, const std::string &Address,
+                   const std::string &Phone, const std::string &LatestEmail,
                    const long unsigned int &NumReceived) {
-    _PHONE = Phone;
     _NAME = Name;
     _ADDRESS = Address;
+    _PHONE = Phone;
     _LATEST = LatestEmail;
     _RECEIVED = NumReceived;
   }
@@ -139,9 +139,9 @@ public:
    */
   Contact &operator=(const Contact &Input) {
     if (this != &Input) {
-      this->_PHONE = Input._PHONE;
       this->_NAME = Input._NAME;
       this->_ADDRESS = Input._ADDRESS;
+      this->_PHONE = Input._PHONE;
       this->_LATEST = Input._LATEST;
       this->_RECEIVED = Input._RECEIVED;
     }
@@ -154,9 +154,9 @@ public:
    */
   Contact &operator=(const Contact &&Input) noexcept {
     if (this != &Input) {
-      this->_PHONE = Input._PHONE;
       this->_NAME = Input._NAME;
       this->_ADDRESS = Input._ADDRESS;
+      this->_PHONE = Input._PHONE;
       this->_LATEST = Input._LATEST;
       this->_RECEIVED = Input._RECEIVED;
     }
