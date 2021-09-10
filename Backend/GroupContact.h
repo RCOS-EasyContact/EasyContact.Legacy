@@ -27,21 +27,13 @@ class GroupContact {
     if (RIGHT_SIZE > 1)
       RIGHT_VEC = MergeSort(RIGHT_VEC);
     for (const Contact &N : RIGHT_VEC) {
-      for (long unsigned int i = LEFT_VEC.size() / 2;; i++) {
-        if (LEFT_VEC[i - 1] < N &&
+      for (long unsigned int i = 0;; i++) {
+        if ((i != 0 ? LEFT_VEC[i - 1] < N : true) &&
             (i + 1 != LEFT_VEC.size() ? N < LEFT_VEC[i + 1] : true)) {
           std::vector<Contact>::iterator itr = LEFT_VEC.begin();
           std::advance(itr, i);
           LEFT_VEC.insert(itr, N);
           break;
-        }
-        if (LEFT_VEC[i + 1] < N) {
-          i += i / 2;
-          continue;
-        }
-        if (N < LEFT_VEC[i - 1]) {
-          i -= i / 2;
-          continue;
         }
       }
     }
