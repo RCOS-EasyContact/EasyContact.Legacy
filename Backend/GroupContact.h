@@ -103,13 +103,10 @@ GroupContact::MergeSort(const std::vector<Contact> &Input) {
     RIGHT_VEC.push_back(Input[LEFT_SIZE + i]);
   LEFT_VEC = MergeSort(LEFT_VEC);
   RIGHT_VEC = MergeSort(RIGHT_VEC);
-  for(long unsigned int R=0;R<RIGHT_VEC.size();R++)
-  // for (const Contact &N : RIGHT_VEC) {
+  for (const Contact &N : RIGHT_VEC) {
     for (long unsigned int i = 0; true; i++) {
       if ((i != 0 ? N < LEFT_VEC[i - 1] : true) &&
           (i + 1 < LEFT_VEC.size() ? LEFT_VEC[i + 1] < N : true)) {
-        // if ((i != 0 ? LEFT_VEC[i - 1] < N : true) &&
-        // (i + 1 < LEFT_VEC.size() ? N < LEFT_VEC[i + 1] : true)) {
         std::vector<Contact>::iterator itr = LEFT_VEC.begin();
         std::advance(itr, i + 1);
         LEFT_VEC.insert(itr, N);
