@@ -1,5 +1,5 @@
-#ifndef RCOS_EASYCONTACT_CXX_HEADER_CONTACT
-#define RCOS_EASYCONTACT_CXX_HEADER_CONTACT
+#ifndef __RCOS_EASYCONTACT_CXX_HEADER_CONTACT__
+#define __RCOS_EASYCONTACT_CXX_HEADER_CONTACT__
 #include <iostream>
 #include <string>
 /**
@@ -88,9 +88,6 @@ public:
    */
   long unsigned int Hash(const long unsigned int &STACK) {
     long unsigned int BUFFER = 0;
-    for (const char &N : _NAME) {
-      BUFFER += (int)N;
-    }
     for (const char &N : _ADDRESS) {
       BUFFER += (int)N;
     }

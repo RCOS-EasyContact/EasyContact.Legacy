@@ -1,5 +1,5 @@
-#ifndef RCOS_EASYCONTACT_CXX_HEADER_GROUPCONTACT
-#define RCOS_EASYCONTACT_CXX_HEADER_GROUPCONTACT
+#ifndef __RCOS_EASYCONTACT_CXX_HEADER_GROUPCONTACT__
+#define __RCOS_EASYCONTACT_CXX_HEADER_GROUPCONTACT__
 #include "Contact.h"
 #include <algorithm>
 #include <iostream>
@@ -9,36 +9,7 @@
 class GroupContact {
   std::string _NAME;
   std::vector<Contact> _GROUP;
-  std::vector<Contact> MergeSort(const std::vector<Contact> &Input) {
-    std::cout << "Sort<<" << Input.size() << std::endl;
-    if (Input.size() == 1)
-      return Input;
-    const long unsigned int LEFT_SIZE = Input.size() / 2;
-    const long unsigned int RIGHT_SIZE =
-        Input.size() % 2 ? LEFT_SIZE + 1 : LEFT_SIZE;
-    std::vector<Contact> LEFT_VEC;
-    std::vector<Contact> RIGHT_VEC;
-    for (long unsigned int i = 0; i < LEFT_SIZE; i++)
-      LEFT_VEC.push_back(Input[i]);
-    for (long unsigned int i = 0; i < RIGHT_SIZE; i++)
-      RIGHT_VEC.push_back(Input[LEFT_SIZE + i]);
-    if (LEFT_SIZE > 1)
-      LEFT_VEC = MergeSort(LEFT_VEC);
-    if (RIGHT_SIZE > 1)
-      RIGHT_VEC = MergeSort(RIGHT_VEC);
-    for (const Contact &N : RIGHT_VEC) {
-      for (long unsigned int i = 0;; i++) {
-        if ((i != 0 ? LEFT_VEC[i - 1] < N : true) &&
-            (i + 1 != LEFT_VEC.size() ? N < LEFT_VEC[i + 1] : true)) {
-          std::vector<Contact>::iterator itr = LEFT_VEC.begin();
-          std::advance(itr, i);
-          LEFT_VEC.insert(itr, N);
-          break;
-        }
-      }
-    }
-    return LEFT_VEC;
-  }
+  std::vector<Contact> MergeSort(const std::vector<Contact> &Input);
 
 public:
   explicit GroupContact() = default;
@@ -63,6 +34,8 @@ public:
     return _NAME;
   }
   inline bool sortGroupContact() {
+    if (!_GROUP.size())
+      return false;
     _GROUP = this->MergeSort(_GROUP);
     return true;
   }
@@ -111,4 +84,37 @@ public:
     return _GROUP[ContactIndex];
   }
 };
+std::vector<Contact>
+GroupContact::MergeSort(const std::vector<Contact> &Input) {
+  std::cout << "Sort<<" << Input.size();
+  if (Input.size() == 1)
+    return Input;
+  const long unsigned int LEFT_SIZE = Input.size() / 2;
+  const long unsigned int RIGHT_SIZE =
+      Input.size() % 2 ? LEFT_SIZE + 1 : LEFT_SIZE;
+  std::vector<Contact> LEFT_VEC;
+  std::vector<Contact> RIGHT_VEC;
+  for (long unsigned int i = 0; i < LEFT_SIZE; i++)
+    LEFT_VEC.push_back(Input[i]);
+  for (long unsigned int i = 0; i < RIGHT_SIZE; i++)
+    RIGHT_VEC.push_back(Input[LEFT_SIZE + i]);
+  if (LEFT_SIZE > 1)
+    LEFT_VEC = MergeSort(LEFT_VEC);
+  if (RIGHT_SIZE > 1)
+    RIGHT_VEC = MergeSort(RIGHT_VEC);
+  for (const Contact &N : RIGHT_VEC) {
+    for (long unsigned int i = 0; true; i++) {
+      if ((i != 0 ? LEFT_VEC[i - 1] < N : true) &&
+          (i + 1 < LEFT_VEC.size() ? N < LEFT_VEC[i + 1] : true)) {
+        std::vector<Contact>::iterator itr = LEFT_VEC.begin();
+        std::advance(itr, i);
+        LEFT_VEC.insert(itr, N);
+        std::cout<<"Insert<<";
+        break;
+      }
+    }
+  }
+  std::cout<<"EoSort\n";
+  return LEFT_VEC;
+}
 #endif
