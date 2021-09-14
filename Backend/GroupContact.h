@@ -84,9 +84,12 @@ public:
     return _GROUP[ContactIndex];
   }
 };
+/**
+ * Implementation to
+ * GroupContact::MergeSort()
+ */
 std::vector<Contact>
 GroupContact::MergeSort(const std::vector<Contact> &Input) {
-  std::cout << "Sort<<" << Input.size();
   if (Input.size() == 1)
     return Input;
   const long unsigned int LEFT_SIZE = Input.size() / 2;
@@ -98,23 +101,22 @@ GroupContact::MergeSort(const std::vector<Contact> &Input) {
     LEFT_VEC.push_back(Input[i]);
   for (long unsigned int i = 0; i < RIGHT_SIZE; i++)
     RIGHT_VEC.push_back(Input[LEFT_SIZE + i]);
-  if (LEFT_SIZE > 1)
-    LEFT_VEC = MergeSort(LEFT_VEC);
-  if (RIGHT_SIZE > 1)
-    RIGHT_VEC = MergeSort(RIGHT_VEC);
-  for (const Contact &N : RIGHT_VEC) {
+  LEFT_VEC = MergeSort(LEFT_VEC);
+  RIGHT_VEC = MergeSort(RIGHT_VEC);
+  for(long unsigned int R=0;R<RIGHT_VEC.size();R++)
+  // for (const Contact &N : RIGHT_VEC) {
     for (long unsigned int i = 0; true; i++) {
-      if ((i != 0 ? LEFT_VEC[i - 1] < N : true) &&
-          (i + 1 < LEFT_VEC.size() ? N < LEFT_VEC[i + 1] : true)) {
+      if ((i != 0 ? N < LEFT_VEC[i - 1] : true) &&
+          (i + 1 < LEFT_VEC.size() ? LEFT_VEC[i + 1] < N : true)) {
+        // if ((i != 0 ? LEFT_VEC[i - 1] < N : true) &&
+        // (i + 1 < LEFT_VEC.size() ? N < LEFT_VEC[i + 1] : true)) {
         std::vector<Contact>::iterator itr = LEFT_VEC.begin();
-        std::advance(itr, i);
+        std::advance(itr, i + 1);
         LEFT_VEC.insert(itr, N);
-        std::cout<<"Insert<<";
         break;
       }
     }
   }
-  std::cout<<"EoSort\n";
   return LEFT_VEC;
 }
 #endif
