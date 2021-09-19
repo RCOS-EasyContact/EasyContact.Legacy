@@ -1,4 +1,4 @@
-# Easy Contact
+# Easy Contact - Rensselaer Center for Open Source
 
 ![](.FILES/SocialMediaPreview_1280x640.png)
 
