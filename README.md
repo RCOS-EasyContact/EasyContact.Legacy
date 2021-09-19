@@ -4,6 +4,8 @@ A Contact Book & Address Book System Aims to Polarize Information Stored in the 
 
 ![](.FILES/LOGO_200x200.png)
 
+[Project Proposal](.FILES/PROPOSAL_FALL2021.pdf)
+
 ## Run Application
 
 **Make Sure ALL [Required Softwares](.FILES/WIKI/INSTALL-GUIDE.md#required-softwares) is Installed**
