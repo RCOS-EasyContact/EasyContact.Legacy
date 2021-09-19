@@ -1,4 +1,4 @@
-# Easy Contact - Rensselaer Center for Open Source
+# Easy Contact - RCOS Project
 
 ![](.FILES/SocialMediaPreview_1280x640.png)
 
