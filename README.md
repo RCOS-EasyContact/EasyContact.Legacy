@@ -1,5 +1,6 @@
 # Easy Contact
 
+![CodeQL(JavaScript)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/CodeQL(JavaScript).yml/badge.svg?branch=R-MAIN)
 [![Github All Releases](https://img.shields.io/github/downloads/RCOS-EasyContact/EasyContact/total.svg)]()
 
 A Contact Book & Address Book System Aims to Polarize Information Stored in the DataBase Using Machine Learning
