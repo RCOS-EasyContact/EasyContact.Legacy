@@ -1,6 +1,6 @@
 # Easy Contact
 
-![](.FILES/LOGO_200x200.png)
+![](.FILES/SocialMediaPreview_1280x640.png)
 
 ![CodeQL(JavaScript)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/CodeQL(JavaScript).yml/badge.svg?branch=R-MAIN)
 [![Github All Releases](https://img.shields.io/github/downloads/RCOS-EasyContact/EasyContact/total.svg)]()
