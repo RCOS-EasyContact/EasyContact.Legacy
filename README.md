@@ -7,7 +7,7 @@
 
 A Contact Book & Address Book System Aims to Polarize Information Stored in the DataBase Using Machine Learning
 
-[Project Proposal](.FILES/PROPOSAL_FALL2021.pdf)
+[Project Proposal](.FILES/PROPOSAL/FALL2021.pdf)
 
 ## Run Application
 
@@ -21,8 +21,8 @@ A Contact Book & Address Book System Aims to Polarize Information Stored in the 
 
 ## Team Collaboration
 
-- [Google Drive](https://drive.google.com/drive/folders/1PN4iRY6Ssj9KtPzD5J1Yq-yM3hU2hdww?usp=sharing) (RCOS Team Members Only)
-- [Webex Space]() (RCOS Team Members Only)
+- [Google Drive](https://drive.google.com/drive/folders/1PN4iRY6Ssj9KtPzD5J1Yq-yM3hU2hdww?usp=sharing)
+- [Webex Space]()
 
 ## Linked Files
 
