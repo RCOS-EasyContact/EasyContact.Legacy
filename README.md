@@ -1,11 +1,11 @@
 # Easy Contact
 
+![](.FILES/LOGO_200x200.png)
+
 ![CodeQL(JavaScript)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/CodeQL(JavaScript).yml/badge.svg?branch=R-MAIN)
 [![Github All Releases](https://img.shields.io/github/downloads/RCOS-EasyContact/EasyContact/total.svg)]()
 
 A Contact Book & Address Book System Aims to Polarize Information Stored in the DataBase Using Machine Learning
-
-![](.FILES/LOGO_200x200.png)
 
 [Project Proposal](.FILES/PROPOSAL_FALL2021.pdf)
 
