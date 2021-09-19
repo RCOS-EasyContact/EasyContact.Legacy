@@ -2,7 +2,7 @@
 
 ### Description of Changes:
 
-(YOUR TEXT HERE)
+- (YOUR TEXT HERE)
 
 ### Type of Changes:
 <!-- Replace the Space with an 'x' in the Box Below-->
