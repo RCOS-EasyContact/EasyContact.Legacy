@@ -1,6 +1,6 @@
 # Easy Contact
 
-[![Github All Releases](https://img.shields.io/github/downloads/atom/atom/total.svg)]()
+[![Github All Releases](https://img.shields.io/github/downloads/RCOS-EasyContact/EasyContact/total.svg)]()
 
 A Contact Book & Address Book System Aims to Polarize Information Stored in the DataBase Using Machine Learning
 
