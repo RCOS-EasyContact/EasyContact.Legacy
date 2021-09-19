@@ -1,5 +1,7 @@
 # Easy Contact
 
+[![Github All Releases](https://img.shields.io/github/downloads/atom/atom/total.svg)]()
+
 A Contact Book & Address Book System Aims to Polarize Information Stored in the DataBase Using Machine Learning
 
 ![](.FILES/LOGO_200x200.png)
