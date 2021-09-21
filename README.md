@@ -1,8 +1,18 @@
-# Easy Contact
+# Easy Contact - RCOS Project
 
-A Contact Book & Address Book System Aims to Polarize Information Stored in the DataBase Using Machine Learning
+![](.FILES/SocialMediaPreview_1280x640.png)
 
-![](.FILES/LOGO_200x200.png)
+![CodeQL(JavaScript)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/CodeQL(JavaScript).yml/badge.svg?branch=R-MAIN)
+
+<!--
+[![Github All Releases](https://img.shields.io/github/downloads/RCOS-EasyContact/EasyContact/total.svg)]()
+-->
+
+## Overview
+
+Easy Contact is an interactive platform with customizable grouping and communication. We noticed that the RPI email interfaces are relatively outdated. In addition, it does not offer a sense of community as it only similarly displays emails compared to mainstream email applications (that is, alphabetical, chronological order, etc.). When we use the email ourselves as RPI students, we want to distinguish the function of professional use and everyday communication. Easy contact will therefore offer solutions to both of the scenarios which traditional email applications can not achieve. When trying to communicate with your peers, the platform will offer a more casual and stress-free feeling. On the other hand, when trying to contact the professor or other official users, Easy Contact will provide the standard professionalism.
+
+[Project Proposal](.FILES/PROPOSAL/FALL2021.pdf)
 
 ## Run Application
 
@@ -16,8 +26,8 @@ A Contact Book & Address Book System Aims to Polarize Information Stored in the 
 
 ## Team Collaboration
 
-- [Google Drive](https://drive.google.com/drive/folders/1PN4iRY6Ssj9KtPzD5J1Yq-yM3hU2hdww?usp=sharing) (RCOS Team Members Only)
-- [Webex Space]() (RCOS Team Members Only)
+- [Google Drive](https://drive.google.com/drive/folders/1PN4iRY6Ssj9KtPzD5J1Yq-yM3hU2hdww?usp=sharing)
+- [Webex Space]()
 
 ## Linked Files
 
