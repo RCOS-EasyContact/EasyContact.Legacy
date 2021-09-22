@@ -12,6 +12,9 @@ class GroupContact {
   std::vector<Contact> MergeSort(const std::vector<Contact> &Input);
 
 public:
+  /**
+   * Default Class Constructor
+   */
   explicit GroupContact() = default;
   explicit GroupContact(const std::string &Name) { _NAME = Name; }
   explicit GroupContact(const GroupContact &Input) : GroupContact() {
