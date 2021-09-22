@@ -90,30 +90,47 @@ public:
  */
 std::vector<Contact>
 GroupContact::MergeSort(const std::vector<Contact> &Input) {
+  // Recursion Base Case
   if (Input.size() == 1)
     return Input;
+
+  // Construct Vectors
   const long unsigned int LEFT_SIZE = Input.size() / 2;
   const long unsigned int RIGHT_SIZE =
       Input.size() % 2 ? LEFT_SIZE + 1 : LEFT_SIZE;
   std::vector<Contact> LEFT_VEC;
   std::vector<Contact> RIGHT_VEC;
+  std::vector<Contact> RESULT_VEC;
   for (long unsigned int i = 0; i < LEFT_SIZE; i++)
     LEFT_VEC.push_back(Input[i]);
   for (long unsigned int i = 0; i < RIGHT_SIZE; i++)
     RIGHT_VEC.push_back(Input[LEFT_SIZE + i]);
+
+  // Recursive Sorting
   LEFT_VEC = MergeSort(LEFT_VEC);
   RIGHT_VEC = MergeSort(RIGHT_VEC);
-  for (const Contact &N : RIGHT_VEC) {
-    for (long unsigned int i = 0; true; i++) {
-      if ((i != 0 ? N < LEFT_VEC[i - 1] : true) &&
-          (i + 1 < LEFT_VEC.size() ? LEFT_VEC[i + 1] < N : true)) {
-        std::vector<Contact>::iterator itr = LEFT_VEC.begin();
-        std::advance(itr, i + 1);
-        LEFT_VEC.insert(itr, N);
-        break;
-      }
+
+  // Merge from Large to Small
+  long unsigned int L = 0;
+  long unsigned int R = 0;
+  while (L < LEFT_SIZE && R < RIGHT_SIZE) {
+    if (LEFT_VEC[L] < RIGHT_VEC[R]) {
+      RESULT_VEC.push_back(RIGHT_VEC[R]);
+      R++;
+    } else {
+      RESULT_VEC.push_back(LEFT_VEC[L]);
+      L++;
     }
   }
-  return LEFT_VEC;
+  while (L < LEFT_SIZE) {
+    RESULT_VEC.push_back(LEFT_VEC[L]);
+    L++;
+  }
+  while (R < RIGHT_SIZE) {
+    RESULT_VEC.push_back(RIGHT_VEC[R]);
+    R++;
+  }
+
+  return RESULT_VEC;
 }
 #endif
