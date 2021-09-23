@@ -9,6 +9,7 @@
 #define BACKEND_CONTACT_H_
 #include <iostream>
 #include <string>
+#include <utility>
 /**
  * <Contact> Represents an Mutable Object for Contact Information
  * <Contact> Contains:
@@ -29,7 +30,7 @@ public:
   /**
    * Default Class Constructor
    */
-  explicit Contact() = default;
+  Contact() = default;
   /**
    * Default Class Constructor
    * @param <std::string> Name : Contact Name to be Stored
@@ -54,7 +55,7 @@ public:
    * Redirects to this->operator=()
    * @param <Contact> Input : Another Instance of <Contact> Class
    */
-  Contact(const Contact &Input) : Contact() { this->operator=(Input); }
+  explicit Contact(const Contact &Input) : Contact() { this->operator=(Input); }
   /**
    * Class Move Constructor
    * Redirects to this->operator=()
@@ -97,7 +98,7 @@ public:
   uint64_t Hash(const uint64_t &STACK) {
     uint64_t BUFFER = 0;
     for (const char &N : _ADDRESS) {
-      BUFFER += (int)N;
+      BUFFER += static_cast<int>(N);
     }
     return (uint64_t)(BUFFER % STACK);
   }
@@ -181,13 +182,14 @@ public:
   /**
    * >> DEBUG ONLY FUNCTION <<
    * Overwrite Number Emails Received
-   * @param <long unsigned int> NumReceived : Total Number of Emails Received
-   * from this Email Address
+   * @param <uint64_t (long unsigned int)> NumReceived : Total Number of Emails
+   * Received from this Email Address
    * @return <Contact> : Reference to Current Instance
    */
-  Contact &operator[](const long unsigned int &NumReceived) {
+  Contact &operator[](const uint64_t &NumReceived) {
     this->_RECEIVED = NumReceived;
     return *this;
   }
 };
+
 #endif // BACKEND_CONTACT_H_

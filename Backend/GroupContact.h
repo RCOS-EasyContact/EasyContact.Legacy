@@ -5,14 +5,13 @@
  * Copyright [2021] <RCOS-EasyContact>
  */
 
-#ifndef __RCOS_EASYCONTACT_CXX_HEADER_GROUPCONTACT__
-#define __RCOS_EASYCONTACT_CXX_HEADER_GROUPCONTACT__
+#ifndef BACKEND_GROUPCONTACT_H_
+#define BACKEND_GROUPCONTACT_H_
 #include "Contact.h"
 #include <algorithm>
 #include <iostream>
 #include <iterator>
 #include <string>
-#include <utility>
 #include <vector>
 class GroupContact {
   std::string _NAME;
@@ -23,7 +22,7 @@ public:
   /**
    * Default Class Constructor
    */
-   GroupContact() = default;
+  GroupContact() = default;
   explicit GroupContact(const std::string &Name) { _NAME = Name; }
   explicit GroupContact(const GroupContact &Input) : GroupContact() {
     this->operator=(Input);
@@ -63,9 +62,7 @@ public:
   friend bool operator<(const GroupContact &LEFT, const GroupContact &RIGHT) {
     return LEFT._GROUP.size() < RIGHT._GROUP.size();
   }
-  uint64_t operator%(const uint64_t &STACK) {
-    return this->Hash(STACK);
-  }
+  uint64_t operator%(const uint64_t &STACK) { return this->Hash(STACK); }
   friend std::ostream &operator<<(std::ostream &FILE,
                                   const GroupContact &Input) {
     FILE << "<" << Input._NAME << ":" << Input._GROUP.size() << ">";
@@ -107,8 +104,7 @@ GroupContact::MergeSort(const std::vector<Contact> &Input) {
 
   // Construct Vectors
   const uint64_t LEFT_SIZE = Input.size() / 2;
-  const uint64_t RIGHT_SIZE =
-      Input.size() % 2 ? LEFT_SIZE + 1 : LEFT_SIZE;
+  const uint64_t RIGHT_SIZE = Input.size() % 2 ? LEFT_SIZE + 1 : LEFT_SIZE;
   std::vector<Contact> LEFT_VEC;
   std::vector<Contact> RIGHT_VEC;
   std::vector<Contact> RESULT_VEC;
@@ -144,4 +140,5 @@ GroupContact::MergeSort(const std::vector<Contact> &Input) {
 
   return RESULT_VEC;
 }
-#endif
+
+#endif // BACKEND_GROUPCONTACT_H_
