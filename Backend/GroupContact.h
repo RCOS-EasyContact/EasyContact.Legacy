@@ -7,18 +7,19 @@
 
 #ifndef BACKEND_GROUPCONTACT_H_
 #define BACKEND_GROUPCONTACT_H_
-#include "Contact.h"
 #include <algorithm>
 #include <iostream>
 #include <iterator>
 #include <string>
+#include <utility>
 #include <vector>
+#include "Contact.h"
 class GroupContact {
   std::string _NAME;
   std::vector<Contact> _GROUP;
   std::vector<Contact> MergeSort(const std::vector<Contact> &Input);
 
-public:
+ public:
   /**
    * Default Class Constructor
    */
@@ -52,7 +53,7 @@ public:
   uint64_t Hash(const uint64_t &STACK) {
     uint64_t BUFFER = 0;
     for (const char &N : _NAME) {
-      BUFFER += (int)N;
+      BUFFER += static_cast<int>(N);
     }
     return (uint64_t)(BUFFER % STACK);
   }

@@ -26,7 +26,7 @@ class Contact {
   std::string _LATEST;
   uint64_t _RECEIVED;
 
-public:
+ public:
   /**
    * Default Class Constructor
    */
