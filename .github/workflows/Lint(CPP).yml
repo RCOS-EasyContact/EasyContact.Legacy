@@ -1,10 +1,25 @@
-name: cpplint
-on: [push, pull_request]
+name: "Lint-CPP"
+
+on:
+  push:
+    branches: [ R-MAIN ]
+  pull_request:
+    branches: [ R-MAIN ]
+
 jobs:
   cpplint:
+    name: Lint
     runs-on: ubuntu-latest
+    
     steps:
-    - uses: actions/checkout@v1
-    - uses: actions/setup-python@v1
-    - run: pip install cpplint
-    - run: cpplint --recursive .
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+    
+    - name: Setup Python
+      uses: actions/setup-python@v1
+      
+    - name: Install CPP-Lint
+      run: pip install cpplint
+      
+    - name: Run Lint
+      run: cpplint --recursive .
