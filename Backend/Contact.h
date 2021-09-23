@@ -4,7 +4,6 @@
  * Contact.h
  * Copyright [2021] <RCOS-EasyContact>
  */
-
 #ifndef BACKEND_CONTACT_H_
 #define BACKEND_CONTACT_H_
 #include <iostream>
@@ -191,5 +190,4 @@ class Contact {
     return *this;
   }
 };
-
-#endif // BACKEND_CONTACT_H_
+#endif  // BACKEND_CONTACT_H_

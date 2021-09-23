@@ -4,7 +4,6 @@
  * GroupContact.h
  * Copyright [2021] <RCOS-EasyContact>
  */
-
 #ifndef BACKEND_GROUPCONTACT_H_
 #define BACKEND_GROUPCONTACT_H_
 #include <algorithm>
@@ -141,5 +140,4 @@ GroupContact::MergeSort(const std::vector<Contact> &Input) {
 
   return RESULT_VEC;
 }
-
-#endif // BACKEND_GROUPCONTACT_H_
+#endif  // BACKEND_GROUPCONTACT_H_
