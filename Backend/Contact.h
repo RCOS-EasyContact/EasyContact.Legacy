@@ -1,5 +1,12 @@
-#ifndef __RCOS_EASYCONTACT_CXX_HEADER_CONTACT__
-#define __RCOS_EASYCONTACT_CXX_HEADER_CONTACT__
+/**
+ * RCOS-EasyContact
+ * EasyContact/Backend
+ * Contact.h
+ * Copyright [2021] <RCOS-EasyContact>
+ */
+
+#ifndef BACKEND_CONTACT_H_
+#define BACKEND_CONTACT_H_
 #include <iostream>
 #include <string>
 /**
@@ -9,14 +16,14 @@
  *           <std::string> Email Address
  *           <std::string> Phone Number
  *           <std::string> Latest Email
- *           <long unsigned int> Number Emails Received
+ *           <uint64_t (long unsigned int)> Number Emails Received
  */
 class Contact {
   std::string _NAME;
   std::string _ADDRESS;
   std::string _PHONE;
   std::string _LATEST;
-  long unsigned int _RECEIVED;
+  uint64_t _RECEIVED;
 
 public:
   /**
@@ -30,12 +37,12 @@ public:
    * @param <std::string> Phone : Phone Number to be Stored
    * @param <std::string> LatestEmail : Latest Email Received from this Email
    * Address
-   * @param <long unsigned int> NumReceived : Total Number of Emails Received
-   * from this Email Address
+   * @param <uint64_t (long unsigned int)> NumReceived : Total Number of Emails
+   * Received from this Email Address
    */
   explicit Contact(const std::string &Name, const std::string &Address,
                    const std::string &Phone, const std::string &LatestEmail,
-                   const long unsigned int &NumReceived) {
+                   const uint64_t &NumReceived) {
     _NAME = Name;
     _ADDRESS = Address;
     _PHONE = Phone;
@@ -47,7 +54,7 @@ public:
    * Redirects to this->operator=()
    * @param <Contact> Input : Another Instance of <Contact> Class
    */
-  explicit Contact(const Contact &Input) : Contact() { this->operator=(Input); }
+  Contact(const Contact &Input) : Contact() { this->operator=(Input); }
   /**
    * Class Move Constructor
    * Redirects to this->operator=()
@@ -78,20 +85,21 @@ public:
   const std::string &getEmail() { return _LATEST; }
   /**
    * Representation Accessor
-   * @return <long unsigned int> : Get Total Number of Emails Received
+   * @return <uint64_t (long unsigned int)> : Get Total Number of Emails
+   * Received
    */
-  const long unsigned int &getReceived() { return _RECEIVED; }
+  const uint64_t &getReceived() { return _RECEIVED; }
   /**
    * Calculates Hash Code
-   * @param <long unsigned int> : Hash Table Stack Size
-   * @return <long unsigned int> : Hash Code for Current Instance
+   * @param <uint64_t (long unsigned int)> : Hash Table Stack Size
+   * @return <uint64_t (long unsigned int)> : Hash Code for Current Instance
    */
-  long unsigned int Hash(const long unsigned int &STACK) {
-    long unsigned int BUFFER = 0;
+  uint64_t Hash(const uint64_t &STACK) {
+    uint64_t BUFFER = 0;
     for (const char &N : _ADDRESS) {
       BUFFER += (int)N;
     }
-    return (long unsigned int)(BUFFER % STACK);
+    return (uint64_t)(BUFFER % STACK);
   }
   /**
    * Compare Different Instances
@@ -111,12 +119,10 @@ public:
   /**
    * Calculates Hash Code
    * Redirects to this->Hash()
-   * @param <long unsigned int> : Hash Table Stack Size
-   * @return <long unsigned int> : Hash Code for Current Instance
+   * @param <uint64_t (long unsigned int)> : Hash Table Stack Size
+   * @return <uint64_t (long unsigned int)> : Hash Code for Current Instance
    */
-  long unsigned int operator%(const long unsigned int &STACK) {
-    return this->Hash(STACK);
-  }
+  uint64_t operator%(const uint64_t &STACK) { return this->Hash(STACK); }
   /**
    * Print Class Representation to File Descriptor
    * @param <std::ostream> FILE : File Descriptor
@@ -184,4 +190,4 @@ public:
     return *this;
   }
 };
-#endif
+#endif // BACKEND_CONTACT_H_
