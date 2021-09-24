@@ -1,5 +1,3 @@
-# Easy Contact - RCOS Project
-
 <p align="center">
   <img src="https://raw.githubusercontent.com/RCOS-EasyContact/EasyContact/R-MAIN/.FILES/SocialMediaPreview_1280x640.png" width="100%" title="Easy Contact Logo">
 </p>
