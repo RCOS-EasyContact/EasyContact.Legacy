@@ -1,6 +1,8 @@
-# Easy Contact - RCOS Project
+<p align="center">
+  <img src="https://raw.githubusercontent.com/RCOS-EasyContact/EasyContact/R-MAIN/.FILES/SocialMediaPreview_1280x640.png" width="80%" title="Easy Contact Logo">
+</p>
 
-![](.FILES/SocialMediaPreview_1280x640.png)
+# Easy Contact - RCOS Project
 
 ![CodeQL(JavaScript)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/CodeQL(JavaScript).yml/badge.svg?branch=R-MAIN)
 ![Lint(CPP)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/Lint(CPP).yml/badge.svg?branch=R-MAIN)
