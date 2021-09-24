@@ -1,21 +1,28 @@
-#ifndef __RCOS_EASYCONTACT_CXX_HEADER_GROUPCONTACT__
-#define __RCOS_EASYCONTACT_CXX_HEADER_GROUPCONTACT__
-#include "Contact.h"
+/**
+ * RCOS-EasyContact
+ * EasyContact/Backend
+ * GroupContact.h
+ * Copyright [2021] <RCOS-EasyContact>
+ */
+#ifndef BACKEND_GROUPCONTACT_H_
+#define BACKEND_GROUPCONTACT_H_
 #include <algorithm>
 #include <iostream>
 #include <iterator>
 #include <string>
+#include <utility>
 #include <vector>
+#include "Contact.h"
 class GroupContact {
   std::string _NAME;
   std::vector<Contact> _GROUP;
   std::vector<Contact> MergeSort(const std::vector<Contact> &Input);
 
-public:
+ public:
   /**
    * Default Class Constructor
    */
-  explicit GroupContact() = default;
+  GroupContact() = default;
   explicit GroupContact(const std::string &Name) { _NAME = Name; }
   explicit GroupContact(const GroupContact &Input) : GroupContact() {
     this->operator=(Input);
@@ -42,12 +49,12 @@ public:
     _GROUP = this->MergeSort(_GROUP);
     return true;
   }
-  long unsigned int Hash(const long unsigned int &STACK) {
-    long unsigned int BUFFER = 0;
+  uint64_t Hash(const uint64_t &STACK) {
+    uint64_t BUFFER = 0;
     for (const char &N : _NAME) {
-      BUFFER += (int)N;
+      BUFFER += static_cast<int>(N);
     }
-    return (long unsigned int)(BUFFER % STACK);
+    return (uint64_t)(BUFFER % STACK);
   }
   bool operator==(const GroupContact &Input) {
     return this->_NAME == Input._NAME;
@@ -55,9 +62,7 @@ public:
   friend bool operator<(const GroupContact &LEFT, const GroupContact &RIGHT) {
     return LEFT._GROUP.size() < RIGHT._GROUP.size();
   }
-  long unsigned int operator%(const long unsigned int &STACK) {
-    return this->Hash(STACK);
-  }
+  uint64_t operator%(const uint64_t &STACK) { return this->Hash(STACK); }
   friend std::ostream &operator<<(std::ostream &FILE,
                                   const GroupContact &Input) {
     FILE << "<" << Input._NAME << ":" << Input._GROUP.size() << ">";
@@ -83,7 +88,7 @@ public:
   inline bool operator+=(const Contact &NewContact) {
     return this->addNewContact(NewContact);
   }
-  Contact &operator[](const long unsigned int &ContactIndex) {
+  Contact &operator[](const uint64_t &ContactIndex) {
     return _GROUP[ContactIndex];
   }
 };
@@ -98,15 +103,14 @@ GroupContact::MergeSort(const std::vector<Contact> &Input) {
     return Input;
 
   // Construct Vectors
-  const long unsigned int LEFT_SIZE = Input.size() / 2;
-  const long unsigned int RIGHT_SIZE =
-      Input.size() % 2 ? LEFT_SIZE + 1 : LEFT_SIZE;
+  const uint64_t LEFT_SIZE = Input.size() / 2;
+  const uint64_t RIGHT_SIZE = Input.size() % 2 ? LEFT_SIZE + 1 : LEFT_SIZE;
   std::vector<Contact> LEFT_VEC;
   std::vector<Contact> RIGHT_VEC;
   std::vector<Contact> RESULT_VEC;
-  for (long unsigned int i = 0; i < LEFT_SIZE; i++)
+  for (uint64_t i = 0; i < LEFT_SIZE; i++)
     LEFT_VEC.push_back(Input[i]);
-  for (long unsigned int i = 0; i < RIGHT_SIZE; i++)
+  for (uint64_t i = 0; i < RIGHT_SIZE; i++)
     RIGHT_VEC.push_back(Input[LEFT_SIZE + i]);
 
   // Recursive Sorting
@@ -114,8 +118,8 @@ GroupContact::MergeSort(const std::vector<Contact> &Input) {
   RIGHT_VEC = MergeSort(RIGHT_VEC);
 
   // Merge from Large to Small
-  long unsigned int L = 0;
-  long unsigned int R = 0;
+  uint64_t L = 0;
+  uint64_t R = 0;
   while (L < LEFT_SIZE && R < RIGHT_SIZE) {
     if (LEFT_VEC[L] < RIGHT_VEC[R]) {
       RESULT_VEC.push_back(RIGHT_VEC[R]);
@@ -136,4 +140,4 @@ GroupContact::MergeSort(const std::vector<Contact> &Input) {
 
   return RESULT_VEC;
 }
-#endif
+#endif  // BACKEND_GROUPCONTACT_H_
