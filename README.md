@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/RCOS-EasyContact/EasyContact/R-MAIN/.FILES/SocialMediaPreview_1280x640.png" width="80%" title="Easy Contact Logo">
+  <img src="https://raw.githubusercontent.com/RCOS-EasyContact/EasyContact/R-MAIN/.FILES/SocialMediaPreview_1280x640.png" width="100%" title="Easy Contact Logo">
 </p>
 
 # Easy Contact - RCOS Project
