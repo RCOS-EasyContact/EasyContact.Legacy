@@ -22,6 +22,12 @@
 class GroupContact {
   std::string _NAME;
   std::vector<Contact> _GROUP;
+  /**
+   * Sort the Group from Large <Contact> Object to Small <Contact> Object
+   * Implemented with Merge Sort Algorithm
+   * @param <std::vector<Contact>> : Group of <Contact> Objects to be Sort
+   * @return <std::vector<Contact>> : Group of <Contact> Objects Sorted
+   */
   std::vector<Contact> __H_MergeSort(const std::vector<Contact> &Input);
 
  public:
@@ -194,4 +200,4 @@ GroupContact::__H_MergeSort(const std::vector<Contact> &Input) {
 
   return RESULT_VEC;
 }
-#endif // BACKEND_GROUPCONTACT_H_
+#endif  // BACKEND_GROUPCONTACT_H_
