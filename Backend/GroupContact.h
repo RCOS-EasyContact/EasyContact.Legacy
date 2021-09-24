@@ -16,7 +16,7 @@
 class GroupContact {
   std::string _NAME;
   std::vector<Contact> _GROUP;
-  std::vector<Contact> MergeSort(const std::vector<Contact> &Input);
+  std::vector<Contact> __H_MergeSort(const std::vector<Contact> &Input);
 
  public:
   /**
@@ -46,7 +46,7 @@ class GroupContact {
   inline bool sortGroupContact() {
     if (!_GROUP.size())
       return false;
-    _GROUP = this->MergeSort(_GROUP);
+    _GROUP = this->__H_MergeSort(_GROUP);
     return true;
   }
   uint64_t Hash(const uint64_t &STACK) {
@@ -94,10 +94,10 @@ class GroupContact {
 };
 /**
  * Implementation to
- * GroupContact::MergeSort()
+ * GroupContact::__H_MergeSort()
  */
 std::vector<Contact>
-GroupContact::MergeSort(const std::vector<Contact> &Input) {
+GroupContact::__H_MergeSort(const std::vector<Contact> &Input) {
   // Recursion Base Case
   if (Input.size() == 1)
     return Input;
@@ -114,8 +114,8 @@ GroupContact::MergeSort(const std::vector<Contact> &Input) {
     RIGHT_VEC.push_back(Input[LEFT_SIZE + i]);
 
   // Recursive Sorting
-  LEFT_VEC = MergeSort(LEFT_VEC);
-  RIGHT_VEC = MergeSort(RIGHT_VEC);
+  LEFT_VEC = __H_MergeSort(LEFT_VEC);
+  RIGHT_VEC = __H_MergeSort(RIGHT_VEC);
 
   // Merge from Large to Small
   uint64_t L = 0;
