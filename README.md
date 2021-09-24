@@ -1,6 +1,6 @@
-# Easy Contact - RCOS Project
-
-![](.FILES/SocialMediaPreview_1280x640.png)
+<p align="center">
+  <img src="https://github.com/RCOS-EasyContact/EasyContact/blob/Logo-Design/.FILES/LOGO_NEW_2388x1668.png" width="50%" title="Easy Contact Logo">
+</p>
 
 ![CodeQL(JavaScript)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/CodeQL(JavaScript).yml/badge.svg?branch=R-MAIN)
 ![Lint(CPP)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/Lint(CPP).yml/badge.svg?branch=R-MAIN)
