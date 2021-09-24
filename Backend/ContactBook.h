@@ -1,3 +1,9 @@
+/**
+ * RCOS-EasyContact
+ * EasyContact/Backend
+ * ContactBook.h
+ * Copyright [2021] <RCOS-EasyContact>
+ */
 #ifndef BACKEND_CONTACTBOOK_H_
 #define BACKEND_CONTACTBOOK_H_
 #include "GroupContact.h"

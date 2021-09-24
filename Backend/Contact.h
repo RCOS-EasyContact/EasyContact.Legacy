@@ -12,10 +12,10 @@
 /**
  * <Contact> Represents an Mutable Object for Contact Information
  * <Contact> Contains:
- *           <std::string> Contact Name
- *           <std::string> Email Address
- *           <std::string> Phone Number
- *           <std::string> Latest Email
+ *           <std::string> ---------------- Contact Name
+ *           <std::string> ---------------- Email Address
+ *           <std::string> ---------------- Phone Number
+ *           <std::string> ---------------- Latest Email
  *           <uint64_t (long unsigned int)> Number Emails Received
  */
 class Contact {

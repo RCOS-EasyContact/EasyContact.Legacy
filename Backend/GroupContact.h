@@ -13,6 +13,12 @@
 #include <utility>
 #include <vector>
 #include "Contact.h"
+/**
+ * <GroupContact> Represents an Mutable Object for a Group of <Contact> Objects
+ * <GroupContact> Contains:
+ *           <std::string> -------- Name of the Group
+ *           <std::vector<Contact>> Group of <Contact> Objects
+ */
 class GroupContact {
   std::string _NAME;
   std::vector<Contact> _GROUP;
@@ -23,15 +29,43 @@ class GroupContact {
    * Default Class Constructor
    */
   GroupContact() = default;
+  /**
+   * Default Class Constructor
+   * @param <std::string> Name : Name of the Group
+   */
   explicit GroupContact(const std::string &Name) { _NAME = Name; }
+  /**
+   * Class Copy Constructor
+   * Redirects to this->operator=()
+   * @param <GroupContact> Input : Another Instance of <GroupContact> Class
+   */
   explicit GroupContact(const GroupContact &Input) : GroupContact() {
     this->operator=(Input);
   }
+  /**
+   * Class Move Constructor
+   * Redirects to this->operator=()
+   * @param <GroupContact> Input : Another Instance of <GroupContact> Class
+   */
   explicit GroupContact(const GroupContact &&Input) noexcept : GroupContact() {
     this->operator=(std::move(Input));
   }
+  /**
+   * Representation Accessor
+   * @return <std::string> : Get Name of the Group
+   */
   const std::string &getGroupName() { return _NAME; }
+  /**
+   * Representation Accessor
+   * @return <std::vector<Contact>> : Get the Whole Group of Contact Objects
+   */
   const std::vector<Contact> &getGroupContact() { return _GROUP; }
+  /**
+   * Representation Modifier
+   * Does Not Allow Duplicate <Contact> Objects
+   * @param <Contact> NewContact : Contact Information to be Saved
+   * @return <bool> : Add New Contact Successfulness
+   */
   inline bool addNewContact(const Contact &NewContact) {
     if (std::find(_GROUP.begin(), _GROUP.end(), NewContact) == _GROUP.end()) {
       _GROUP.push_back(NewContact);
@@ -39,16 +73,31 @@ class GroupContact {
     }
     return false;
   }
+  /**
+   * Representation Modifier
+   * Sets the Name of the Group
+   * @param <std::string> Name : New Name for the Group
+   * @return <std::string> : New Name of the Group
+   */
   const std::string &setGroupName(const std::string &Name) {
     _NAME = Name;
-    return _NAME;
+    return this->getGroupName();
   }
+  /**
+   * Sort the Group from Large <Contact> Object to Small <Contact> Object
+   * @return <bool> : Sort Successfulness
+   */
   inline bool sortGroupContact() {
     if (!_GROUP.size())
       return false;
     _GROUP = this->__H_MergeSort(_GROUP);
     return true;
   }
+  /**
+   * Calculates Hash Code
+   * @param <uint64_t (long unsigned int)> : Hash Table Stack Size
+   * @return <uint64_t (long unsigned int)> : Hash Code for Current Instance
+   */
   uint64_t Hash(const uint64_t &STACK) {
     uint64_t BUFFER = 0;
     for (const char &N : _NAME) {
@@ -56,6 +105,11 @@ class GroupContact {
     }
     return (uint64_t)(BUFFER % STACK);
   }
+  /**
+   * Compare Different Instances
+   * @param <GroupContact> Input : Another Instance of <GroupContact> Class
+   * @return <bool> : Compares Between Two Instances
+   */
   bool operator==(const GroupContact &Input) {
     return this->_NAME == Input._NAME;
   }
@@ -140,4 +194,4 @@ GroupContact::__H_MergeSort(const std::vector<Contact> &Input) {
 
   return RESULT_VEC;
 }
-#endif  // BACKEND_GROUPCONTACT_H_
+#endif // BACKEND_GROUPCONTACT_H_
