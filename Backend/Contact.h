@@ -6,6 +6,7 @@
  */
 #ifndef BACKEND_CONTACT_H_
 #define BACKEND_CONTACT_H_
+#include <exception>
 #include <iostream>
 #include <string>
 #include <utility>
