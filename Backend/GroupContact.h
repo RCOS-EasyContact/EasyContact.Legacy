@@ -123,8 +123,8 @@ class GroupContact {
   }
   /**
    * Calculates Hash Code
-   * @param <uint64_t (long unsigned int)> : Hash Table Stack Size
-   * @return <uint64_t (long unsigned int)> : Hash Code for Current Instance
+   * @param <uint64_t> : Hash Table Stack Size
+   * @return <uint64_t> : Hash Code for Current Instance
    */
   uint64_t Hash(const uint64_t &STACK) {
     uint64_t BUFFER = 0;
