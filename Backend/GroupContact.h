@@ -40,7 +40,13 @@ class GroupContact {
    * Default Class Constructor
    * @param <std::string> Name : Name of the Group
    */
-  explicit GroupContact(const std::string &Name) { _NAME = Name; }
+  explicit GroupContact(const std::string &Name) {
+    try {
+      _NAME = Name;
+    } catch (std::exception &ERR) {
+      std::cerr << "GroupContact: " << ERR.what() << std::endl;
+    }
+  }
   /**
    * Class Copy Constructor
    * Redirects to this->operator=()

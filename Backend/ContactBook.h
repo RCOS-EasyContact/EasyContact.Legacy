@@ -31,7 +31,7 @@ class ContactBook {
       return true;
     }
     return false;
-  };
+  }
   bool addNewContact(const std::string &GroupName, const Contact &NewContact) {
     const ssize_t GroupIndex = __H_ExistsGroup(GroupName);
     if (GroupIndex != -1) {
@@ -73,5 +73,4 @@ ssize_t ContactBook::__H_ExistsGroup(const std::string &GroupName) {
   }
   return (ssize_t)-1;
 }
-
 #endif  // BACKEND_CONTACTBOOK_H_
