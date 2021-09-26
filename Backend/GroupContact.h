@@ -7,6 +7,7 @@
 #ifndef BACKEND_GROUPCONTACT_H_
 #define BACKEND_GROUPCONTACT_H_
 #include <algorithm>
+#include <exception>
 #include <iostream>
 #include <iterator>
 #include <string>
@@ -73,9 +74,13 @@ class GroupContact {
    * @return <bool> : Add New Contact Successfulness
    */
   inline bool addNewContact(const Contact &NewContact) {
-    if (std::find(_GROUP.begin(), _GROUP.end(), NewContact) == _GROUP.end()) {
-      _GROUP.push_back(NewContact);
-      return true;
+    try {
+      if (std::find(_GROUP.begin(), _GROUP.end(), NewContact) == _GROUP.end()) {
+        _GROUP.push_back(NewContact);
+        return true;
+      }
+    } catch (std::exception &ERR) {
+      std::cerr << "GroupContact: " << ERR.what() << std::endl;
     }
     return false;
   }
@@ -86,7 +91,11 @@ class GroupContact {
    * @return <std::string> : New Name of the Group
    */
   const std::string &setGroupName(const std::string &Name) {
-    _NAME = Name;
+    try {
+      _NAME = Name;
+    } catch (std::exception &ERR) {
+      std::cerr << "GroupContact: " << ERR.what() << std::endl;
+    }
     return this->getGroupName();
   }
   /**
@@ -94,9 +103,14 @@ class GroupContact {
    * @return <bool> : Sort Successfulness
    */
   inline bool sortGroupContact() {
-    if (!_GROUP.size())
+    if (!_GROUP.size()) {
       return false;
-    _GROUP = this->__H_MergeSort(_GROUP);
+    }
+    try {
+      _GROUP = this->__H_MergeSort(_GROUP);
+    } catch (std::exception &ERR) {
+      std::cerr << "GroupContact: " << ERR.what() << std::endl;
+    }
     return true;
   }
   /**
@@ -125,9 +139,13 @@ class GroupContact {
   uint64_t operator%(const uint64_t &STACK) { return this->Hash(STACK); }
   friend std::ostream &operator<<(std::ostream &FILE,
                                   const GroupContact &Input) {
-    FILE << "<" << Input._NAME << ":" << Input._GROUP.size() << ">";
-    for (const Contact &N : Input._GROUP) {
-      FILE << ", <" << N << ">";
+    try {
+      FILE << "<" << Input._NAME << ":" << Input._GROUP.size() << ">";
+      for (const Contact &N : Input._GROUP) {
+        FILE << ", <" << N << ">";
+      }
+    } catch (std::exception &ERR) {
+      std::cerr << "GroupContact: " << ERR.what() << std::endl;
     }
     return FILE;
   }
@@ -149,7 +167,11 @@ class GroupContact {
     return this->addNewContact(NewContact);
   }
   Contact &operator[](const uint64_t &ContactIndex) {
-    return _GROUP[ContactIndex];
+    try {
+      return _GROUP[ContactIndex];
+    } catch (std::exception &ERR) {
+      std::cerr << "GroupContact: " << ERR.what() << std::endl;
+    }
   }
 };
 /**
