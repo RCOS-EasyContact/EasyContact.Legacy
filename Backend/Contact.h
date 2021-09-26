@@ -139,10 +139,10 @@ class Contact {
       FILE << "\"" << Input._NAME << "\",\"" << Input._ADDRESS << "\",\""
            << Input._PHONE << "\",\"" << Input._LATEST << "\",\""
            << Input._RECEIVED << "\"";
-      return FILE;
     } catch (std::exception &ERR) {
       std::cerr << "Contact: " << ERR.what() << std::endl;
     }
+    return FILE;
   }
   /**
    * Class Copy Constructor
