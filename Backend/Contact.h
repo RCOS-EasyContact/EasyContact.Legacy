@@ -13,11 +13,11 @@
 /**
  * <Contact> Represents an Mutable Object for Contact Information
  * <Contact> Contains:
- *           <std::string> ---------------- Contact Name
- *           <std::string> ---------------- Email Address
- *           <std::string> ---------------- Phone Number
- *           <std::string> ---------------- Latest Email
- *           <uint64_t (long unsigned int)> Number Emails Received
+ *           <std::string> : Contact Name
+ *           <std::string> : Email Address
+ *           <std::string> : Phone Number
+ *           <std::string> : Latest Email
+ *           <uint64_t> : Number Emails Received
  */
 class Contact {
   std::string _NAME;
@@ -38,7 +38,7 @@ class Contact {
    * @param <std::string> Phone : Phone Number to be Stored
    * @param <std::string> LatestEmail : Latest Email Received from this Email
    * Address
-   * @param <uint64_t (long unsigned int)> NumReceived : Total Number of Emails
+   * @param <uint64_t> NumReceived : Total Number of Emails
    * Received from this Email Address
    */
   explicit Contact(const std::string &Name, const std::string &Address,
@@ -90,19 +90,23 @@ class Contact {
   const std::string &getEmail() { return _LATEST; }
   /**
    * Representation Accessor
-   * @return <uint64_t (long unsigned int)> : Get Total Number of Emails
+   * @return <uint64_t> : Get Total Number of Emails
    * Received
    */
   const uint64_t &getReceived() { return _RECEIVED; }
   /**
    * Calculates Hash Code
-   * @param <uint64_t (long unsigned int)> : Hash Table Stack Size
-   * @return <uint64_t (long unsigned int)> : Hash Code for Current Instance
+   * @param <uint64_t> : Hash Table Stack Size
+   * @return <uint64_t> : Hash Code for Current Instance
    */
   uint64_t Hash(const uint64_t &STACK) {
     uint64_t BUFFER = 0;
-    for (const char &N : _ADDRESS) {
-      BUFFER += static_cast<int>(N);
+    try {
+      for (const char &N : _ADDRESS) {
+        BUFFER += static_cast<int>(N);
+      }
+    } catch (std::exception &ERR) {
+      std::cerr << "Contact: " << ERR.what() << std::endl;
     }
     return (uint64_t)(BUFFER % STACK);
   }
@@ -111,7 +115,13 @@ class Contact {
    * @param <Contact> Input : Another Instance of <Contact> Class
    * @return <bool> : Compares Between Two Instances
    */
-  bool operator==(const Contact &Input) { return this->_NAME == Input._NAME; }
+  bool operator==(const Contact &Input) {
+    try {
+      return this->_NAME == Input._NAME;
+    } catch (std::exception &ERR) {
+      std::cerr << "Contact: " << ERR.what() << std::endl;
+    }
+  }
   /**
    * Compare Different Instances
    * @param <Contact> LEFT : An Instance of <Contact> Class
@@ -119,13 +129,17 @@ class Contact {
    * @return <bool> : Compares Between Two Instances
    */
   friend bool operator<(const Contact &LEFT, const Contact &RIGHT) {
-    return LEFT._RECEIVED < RIGHT._RECEIVED;
+    try {
+      return LEFT._RECEIVED < RIGHT._RECEIVED;
+    } catch (std::exception &ERR) {
+      std::cerr << "Contact: " << ERR.what() << std::endl;
+    }
   }
   /**
    * Calculates Hash Code
    * Redirects to this->Hash()
-   * @param <uint64_t (long unsigned int)> : Hash Table Stack Size
-   * @return <uint64_t (long unsigned int)> : Hash Code for Current Instance
+   * @param <uint64_t> : Hash Table Stack Size
+   * @return <uint64_t> : Hash Code for Current Instance
    */
   uint64_t operator%(const uint64_t &STACK) { return this->Hash(STACK); }
   /**
@@ -151,11 +165,15 @@ class Contact {
    */
   Contact &operator=(const Contact &Input) {
     if (this != &Input) {
-      this->_NAME = Input._NAME;
-      this->_ADDRESS = Input._ADDRESS;
-      this->_PHONE = Input._PHONE;
-      this->_LATEST = Input._LATEST;
-      this->_RECEIVED = Input._RECEIVED;
+      try {
+        this->_NAME = Input._NAME;
+        this->_ADDRESS = Input._ADDRESS;
+        this->_PHONE = Input._PHONE;
+        this->_LATEST = Input._LATEST;
+        this->_RECEIVED = Input._RECEIVED;
+      } catch (std::exception &ERR) {
+        std::cerr << "Contact: " << ERR.what() << std::endl;
+      }
     }
     return *this;
   }
@@ -166,11 +184,15 @@ class Contact {
    */
   Contact &operator=(const Contact &&Input) noexcept {
     if (this != &Input) {
-      this->_NAME = Input._NAME;
-      this->_ADDRESS = Input._ADDRESS;
-      this->_PHONE = Input._PHONE;
-      this->_LATEST = Input._LATEST;
-      this->_RECEIVED = Input._RECEIVED;
+      try {
+        this->_NAME = Input._NAME;
+        this->_ADDRESS = Input._ADDRESS;
+        this->_PHONE = Input._PHONE;
+        this->_LATEST = Input._LATEST;
+        this->_RECEIVED = Input._RECEIVED;
+      } catch (std::exception &ERR) {
+        std::cerr << "Contact: " << ERR.what() << std::endl;
+      }
     }
     return *this;
   }
@@ -194,12 +216,16 @@ class Contact {
   /**
    * >> DEBUG ONLY FUNCTION <<
    * Overwrite Number Emails Received
-   * @param <uint64_t (long unsigned int)> NumReceived : Total Number of Emails
+   * @param <uint64_t> NumReceived : Total Number of Emails
    * Received from this Email Address
    * @return <Contact> : Reference to Current Instance
    */
   Contact &operator[](const uint64_t &NumReceived) {
-    this->_RECEIVED = NumReceived;
+    try {
+      this->_RECEIVED = NumReceived;
+    } catch (std::exception &ERR) {
+      std::cerr << "Contact: " << ERR.what() << std::endl;
+    }
     return *this;
   }
 };

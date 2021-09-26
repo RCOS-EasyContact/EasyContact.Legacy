@@ -17,12 +17,14 @@
 /**
  * <GroupContact> Represents an Mutable Object for a Group of <Contact> Objects
  * <GroupContact> Contains:
- *           <std::string> -------- Name of the Group
- *           <std::vector<Contact>> Group of <Contact> Objects
+ *           <std::string> : Name of the Group
+ *           <std::vector<Contact>> : Group of <Contact> Objects
+ *           <Contact> : NULL Contact Object
  */
 class GroupContact {
   std::string _NAME;
   std::vector<Contact> _GROUP;
+  static Contact _NULL;
   /**
    * Sort the Group from Large <Contact> Object to Small <Contact> Object
    * Implemented with Merge Sort Algorithm
@@ -126,8 +128,12 @@ class GroupContact {
    */
   uint64_t Hash(const uint64_t &STACK) {
     uint64_t BUFFER = 0;
-    for (const char &N : _NAME) {
-      BUFFER += static_cast<int>(N);
+    try {
+      for (const char &N : _NAME) {
+        BUFFER += static_cast<int>(N);
+      }
+    } catch (std::exception &ERR) {
+      std::cerr << "GroupContact: " << ERR.what() << std::endl;
     }
     return (uint64_t)(BUFFER % STACK);
   }
@@ -137,10 +143,18 @@ class GroupContact {
    * @return <bool> : Compares Between Two Instances
    */
   bool operator==(const GroupContact &Input) {
-    return this->_NAME == Input._NAME;
+    try {
+      return this->_NAME == Input._NAME;
+    } catch (std::exception &ERR) {
+      std::cerr << "GroupContact: " << ERR.what() << std::endl;
+    }
   }
   friend bool operator<(const GroupContact &LEFT, const GroupContact &RIGHT) {
-    return LEFT._GROUP.size() < RIGHT._GROUP.size();
+    try {
+      return LEFT._GROUP.size() < RIGHT._GROUP.size();
+    } catch (std::exception &ERR) {
+      std::cerr << "GroupContact: " << ERR.what() << std::endl;
+    }
   }
   uint64_t operator%(const uint64_t &STACK) { return this->Hash(STACK); }
   friend std::ostream &operator<<(std::ostream &FILE,
@@ -157,15 +171,23 @@ class GroupContact {
   }
   GroupContact &operator=(const GroupContact &Input) {
     if (this != &Input) {
-      this->_NAME = Input._NAME;
-      this->_GROUP = Input._GROUP;
+      try {
+        this->_NAME = Input._NAME;
+        this->_GROUP = Input._GROUP;
+      } catch (std::exception &ERR) {
+        std::cerr << "GroupContact: " << ERR.what() << std::endl;
+      }
     }
     return *this;
   }
   GroupContact &operator=(const GroupContact &&Input) noexcept {
     if (this != &Input) {
-      this->_NAME = Input._NAME;
-      this->_GROUP = Input._GROUP;
+      try {
+        this->_NAME = Input._NAME;
+        this->_GROUP = Input._GROUP;
+      } catch (std::exception &ERR) {
+        std::cerr << "GroupContact: " << ERR.what() << std::endl;
+      }
     }
     return *this;
   }
@@ -174,10 +196,13 @@ class GroupContact {
   }
   Contact &operator[](const uint64_t &ContactIndex) {
     try {
-      return _GROUP[ContactIndex];
+      if (ContactIndex < ContactIndex) {
+        return _GROUP[ContactIndex];
+      }
     } catch (std::exception &ERR) {
       std::cerr << "GroupContact: " << ERR.what() << std::endl;
     }
+    return _NULL;
   }
 };
 /**
