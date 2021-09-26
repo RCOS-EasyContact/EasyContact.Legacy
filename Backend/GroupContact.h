@@ -196,7 +196,7 @@ class GroupContact {
   }
   Contact &operator[](const uint64_t &ContactIndex) {
     try {
-      if (ContactIndex < ContactIndex) {
+      if (ContactIndex < _GROUP.size()) {
         return _GROUP[ContactIndex];
       }
     } catch (std::exception &ERR) {

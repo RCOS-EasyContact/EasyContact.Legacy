@@ -14,6 +14,7 @@
 class ContactBook {
   std::vector<GroupContact> _BOOKS;
   inline ssize_t __H_ExistsGroup(const std::string &GroupName);
+  static GroupContact _NULL;
 
  public:
   ContactBook() = default;
@@ -54,7 +55,14 @@ class ContactBook {
     return this->addNewGroup(GroupName);
   }
   GroupContact &operator[](const uint64_t &GroupIndex) {
-    return _BOOKS[GroupIndex];
+    try {
+      if (GroupIndex < _BOOKS.size()) {
+        return _BOOKS[GroupIndex];
+      }
+    } catch (std::exception &ERR) {
+      std::cerr << "ContactBook: " << ERR.what() << std::endl;
+    }
+    return _NULL;
   }
 };
 /**
