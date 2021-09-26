@@ -32,7 +32,7 @@ Easy Contact is an interactive platform with customizable grouping and communica
 
 ## Linked Files
 
-- [MIT License](LICENSE)
+- [MIT License](LICENSE.md)
 - [Code of Conduct](.github/CODE_OF_CONDUCT.md)
 - [Contributing Guidelines](.github/CONTRIBUTING.md)
 - [Security Policies](.github/SECURITY.md)
