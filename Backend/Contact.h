@@ -43,11 +43,15 @@ class Contact {
   explicit Contact(const std::string &Name, const std::string &Address,
                    const std::string &Phone, const std::string &LatestEmail,
                    const uint64_t &NumReceived) {
-    _NAME = Name;
-    _ADDRESS = Address;
-    _PHONE = Phone;
-    _LATEST = LatestEmail;
-    _RECEIVED = NumReceived;
+    try {
+      _NAME = Name;
+      _ADDRESS = Address;
+      _PHONE = Phone;
+      _LATEST = LatestEmail;
+      _RECEIVED = NumReceived;
+    } catch (std::exception &ERR) {
+      std::cerr << "Contact: " << ERR.what() << std::endl;
+    }
   }
   /**
    * Class Copy Constructor
@@ -130,10 +134,14 @@ class Contact {
    * @return <std::ostream> : Original File Descriptor
    */
   friend std::ostream &operator<<(std::ostream &FILE, const Contact &Input) {
-    FILE << "\"" << Input._NAME << "\",\"" << Input._ADDRESS << "\",\""
-         << Input._PHONE << "\",\"" << Input._LATEST << "\",\""
-         << Input._RECEIVED << "\"";
-    return FILE;
+    try {
+      FILE << "\"" << Input._NAME << "\",\"" << Input._ADDRESS << "\",\""
+           << Input._PHONE << "\",\"" << Input._LATEST << "\",\""
+           << Input._RECEIVED << "\"";
+      return FILE;
+    } catch (std::exception &ERR) {
+      std::cerr << "Contact: " << ERR.what() << std::endl;
+    }
   }
   /**
    * Class Copy Constructor
@@ -172,9 +180,13 @@ class Contact {
    * @return <Contact> : Reference to Current Instance
    */
   Contact &operator+=(const std::string &LatestEmail) {
-    if (!LatestEmail.empty()) {
-      this->_LATEST = LatestEmail;
-      this->_RECEIVED++;
+    try {
+      if (!LatestEmail.empty()) {
+        this->_LATEST = LatestEmail;
+        this->_RECEIVED++;
+      }
+    } catch (std::exception &ERR) {
+      std::cerr << "Contact: " << ERR.what() << std::endl;
     }
     return *this;
   }
