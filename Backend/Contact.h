@@ -213,6 +213,7 @@ class Contact {
     }
     return *this;
   }
+#ifdef DEBUG
   /**
    * >> DEBUG ONLY FUNCTION <<
    * Overwrite Number Emails Received
@@ -228,5 +229,6 @@ class Contact {
     }
     return *this;
   }
+#endif
 };
 #endif  // BACKEND_CONTACT_H_

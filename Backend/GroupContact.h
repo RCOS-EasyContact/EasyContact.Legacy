@@ -92,6 +92,9 @@ class GroupContact {
     }
     return false;
   }
+#ifdef DEPLETED
+% This Function Will Break Hash Code,
+% Therefore is No Longer Used.
   /**
    * Representation Modifier
    * Sets the Name of the Group
@@ -106,6 +109,7 @@ class GroupContact {
     }
     return this->getGroupName();
   }
+#endif
   /**
    * Sort the Group from Large <Contact> Object to Small <Contact> Object
    * @return <bool> : Sort Successfulness
@@ -214,7 +218,6 @@ GroupContact::__H_MergeSort(const std::vector<Contact> &Input) {
   // Recursion Base Case
   if (Input.size() == 1)
     return Input;
-
   // Construct Vectors
   const uint64_t LEFT_SIZE = Input.size() / 2;
   const uint64_t RIGHT_SIZE = Input.size() % 2 ? LEFT_SIZE + 1 : LEFT_SIZE;
@@ -225,11 +228,9 @@ GroupContact::__H_MergeSort(const std::vector<Contact> &Input) {
     LEFT_VEC.push_back(Input[i]);
   for (uint64_t i = 0; i < RIGHT_SIZE; i++)
     RIGHT_VEC.push_back(Input[LEFT_SIZE + i]);
-
   // Recursive Sorting
   LEFT_VEC = __H_MergeSort(LEFT_VEC);
   RIGHT_VEC = __H_MergeSort(RIGHT_VEC);
-
   // Merge from Large to Small
   uint64_t L = 0;
   uint64_t R = 0;
@@ -250,7 +251,7 @@ GroupContact::__H_MergeSort(const std::vector<Contact> &Input) {
     RESULT_VEC.push_back(RIGHT_VEC[R]);
     R++;
   }
-
+  // Return Sorted Vector
   return RESULT_VEC;
 }
 #endif  // BACKEND_GROUPCONTACT_H_
