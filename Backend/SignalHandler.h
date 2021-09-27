@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <iostream>
+#include "ContactBook.h"
 /**
  * Handles Different Signals
  */

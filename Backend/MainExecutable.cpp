@@ -6,7 +6,6 @@
  */
 #ifndef BACKEND_MAINEXECUTABLE_CPP_
 #define BACKEND_MAINEXECUTABLE_CPP_
-#include "ContactBook.h"
 #include "SignalHandler.h"
 ContactBook *CBS;
 int main() {
