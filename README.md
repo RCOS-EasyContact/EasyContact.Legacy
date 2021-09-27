@@ -3,6 +3,7 @@
 </p>
 
 ![CodeQL(JavaScript)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/CodeQL(JavaScript).yml/badge.svg?branch=R-MAIN)
+![CodeQL(CPP)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/CodeQL(CPP).yml/badge.svg?branch=R-MAIN)
 ![Lint(CPP)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/Lint(CPP).yml/badge.svg?branch=R-MAIN)
 
 <!--
