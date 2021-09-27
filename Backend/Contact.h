@@ -213,7 +213,9 @@ class Contact {
     }
     return *this;
   }
-#ifdef DEBUG
+#ifdef DEPLETED
+% This is a Debug Function,
+% And is No Longer Used.
   /**
    * >> DEBUG ONLY FUNCTION <<
    * Overwrite Number Emails Received
