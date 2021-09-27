@@ -7,81 +7,187 @@
 #ifndef BACKEND_GROUPCONTACT_H_
 #define BACKEND_GROUPCONTACT_H_
 #include <algorithm>
+#include <exception>
 #include <iostream>
 #include <iterator>
 #include <string>
 #include <utility>
 #include <vector>
 #include "Contact.h"
+/**
+ * <GroupContact> Represents an Mutable Object for a Group of <Contact> Objects
+ * <GroupContact> Contains:
+ *           <std::string> : Name of the Group
+ *           <std::vector<Contact>> : Group of <Contact> Objects
+ *           <Contact> : NULL Contact Object
+ */
 class GroupContact {
   std::string _NAME;
   std::vector<Contact> _GROUP;
-  std::vector<Contact> MergeSort(const std::vector<Contact> &Input);
+  static Contact _NULL;
+  /**
+   * Sort the Group from Large <Contact> Object to Small <Contact> Object
+   * Implemented with Merge Sort Algorithm
+   * @param <std::vector<Contact>> : Group of <Contact> Objects to be Sort
+   * @return <std::vector<Contact>> : Group of <Contact> Objects Sorted
+   */
+  std::vector<Contact> __H_MergeSort(const std::vector<Contact> &Input);
 
  public:
   /**
    * Default Class Constructor
    */
   GroupContact() = default;
-  explicit GroupContact(const std::string &Name) { _NAME = Name; }
+  /**
+   * Default Class Constructor
+   * @param <std::string> Name : Name of the Group
+   */
+  explicit GroupContact(const std::string &Name) {
+    try {
+      _NAME = Name;
+    } catch (std::exception &ERR) {
+      std::cerr << "GroupContact: " << ERR.what() << std::endl;
+    }
+  }
+  /**
+   * Class Copy Constructor
+   * Redirects to this->operator=()
+   * @param <GroupContact> Input : Another Instance of <GroupContact> Class
+   */
   explicit GroupContact(const GroupContact &Input) : GroupContact() {
     this->operator=(Input);
   }
+  /**
+   * Class Move Constructor
+   * Redirects to this->operator=()
+   * @param <GroupContact> Input : Another Instance of <GroupContact> Class
+   */
   explicit GroupContact(const GroupContact &&Input) noexcept : GroupContact() {
     this->operator=(std::move(Input));
   }
+  /**
+   * Representation Accessor
+   * @return <std::string> : Get Name of the Group
+   */
   const std::string &getGroupName() { return _NAME; }
+  /**
+   * Representation Accessor
+   * @return <std::vector<Contact>> : Get the Whole Group of Contact Objects
+   */
   const std::vector<Contact> &getGroupContact() { return _GROUP; }
+  /**
+   * Representation Modifier
+   * Does Not Allow Duplicate <Contact> Objects
+   * @param <Contact> NewContact : Contact Information to be Saved
+   * @return <bool> : Add New Contact Successfulness
+   */
   inline bool addNewContact(const Contact &NewContact) {
-    if (std::find(_GROUP.begin(), _GROUP.end(), NewContact) == _GROUP.end()) {
-      _GROUP.push_back(NewContact);
-      return true;
+    try {
+      if (std::find(_GROUP.begin(), _GROUP.end(), NewContact) == _GROUP.end()) {
+        _GROUP.push_back(NewContact);
+        return true;
+      }
+    } catch (std::exception &ERR) {
+      std::cerr << "GroupContact: " << ERR.what() << std::endl;
     }
     return false;
   }
+  /**
+   * Representation Modifier
+   * Sets the Name of the Group
+   * @param <std::string> Name : New Name for the Group
+   * @return <std::string> : New Name of the Group
+   */
   const std::string &setGroupName(const std::string &Name) {
-    _NAME = Name;
-    return _NAME;
+    try {
+      _NAME = Name;
+    } catch (std::exception &ERR) {
+      std::cerr << "GroupContact: " << ERR.what() << std::endl;
+    }
+    return this->getGroupName();
   }
+  /**
+   * Sort the Group from Large <Contact> Object to Small <Contact> Object
+   * @return <bool> : Sort Successfulness
+   */
   inline bool sortGroupContact() {
-    if (!_GROUP.size())
+    if (!_GROUP.size()) {
       return false;
-    _GROUP = this->MergeSort(_GROUP);
+    }
+    try {
+      _GROUP = this->__H_MergeSort(_GROUP);
+    } catch (std::exception &ERR) {
+      std::cerr << "GroupContact: " << ERR.what() << std::endl;
+    }
     return true;
   }
+  /**
+   * Calculates Hash Code
+   * @param <uint64_t> : Hash Table Stack Size
+   * @return <uint64_t> : Hash Code for Current Instance
+   */
   uint64_t Hash(const uint64_t &STACK) {
     uint64_t BUFFER = 0;
-    for (const char &N : _NAME) {
-      BUFFER += static_cast<int>(N);
+    try {
+      for (const char &N : _NAME) {
+        BUFFER += static_cast<int>(N);
+      }
+    } catch (std::exception &ERR) {
+      std::cerr << "GroupContact: " << ERR.what() << std::endl;
     }
     return (uint64_t)(BUFFER % STACK);
   }
+  /**
+   * Compare Different Instances
+   * @param <GroupContact> Input : Another Instance of <GroupContact> Class
+   * @return <bool> : Compares Between Two Instances
+   */
   bool operator==(const GroupContact &Input) {
-    return this->_NAME == Input._NAME;
+    try {
+      return this->_NAME == Input._NAME;
+    } catch (std::exception &ERR) {
+      std::cerr << "GroupContact: " << ERR.what() << std::endl;
+    }
   }
   friend bool operator<(const GroupContact &LEFT, const GroupContact &RIGHT) {
-    return LEFT._GROUP.size() < RIGHT._GROUP.size();
+    try {
+      return LEFT._GROUP.size() < RIGHT._GROUP.size();
+    } catch (std::exception &ERR) {
+      std::cerr << "GroupContact: " << ERR.what() << std::endl;
+    }
   }
   uint64_t operator%(const uint64_t &STACK) { return this->Hash(STACK); }
   friend std::ostream &operator<<(std::ostream &FILE,
                                   const GroupContact &Input) {
-    FILE << "<" << Input._NAME << ":" << Input._GROUP.size() << ">";
-    for (const Contact &N : Input._GROUP) {
-      FILE << ", <" << N << ">";
+    try {
+      FILE << "<" << Input._NAME << ":" << Input._GROUP.size() << ">";
+      for (const Contact &N : Input._GROUP) {
+        FILE << ", <" << N << ">";
+      }
+    } catch (std::exception &ERR) {
+      std::cerr << "GroupContact: " << ERR.what() << std::endl;
     }
     return FILE;
   }
   GroupContact &operator=(const GroupContact &Input) {
     if (this != &Input) {
-      this->_NAME = Input._NAME;
-      this->_GROUP = Input._GROUP;
+      try {
+        this->_NAME = Input._NAME;
+        this->_GROUP = Input._GROUP;
+      } catch (std::exception &ERR) {
+        std::cerr << "GroupContact: " << ERR.what() << std::endl;
+      }
     }
     return *this;
   }
   GroupContact &operator=(const GroupContact &&Input) noexcept {
     if (this != &Input) {
-      this->_NAME = Input._NAME;
-      this->_GROUP = Input._GROUP;
+      try {
+        this->_NAME = Input._NAME;
+        this->_GROUP = Input._GROUP;
+      } catch (std::exception &ERR) {
+        std::cerr << "GroupContact: " << ERR.what() << std::endl;
+      }
     }
     return *this;
   }
@@ -89,15 +195,22 @@ class GroupContact {
     return this->addNewContact(NewContact);
   }
   Contact &operator[](const uint64_t &ContactIndex) {
-    return _GROUP[ContactIndex];
+    try {
+      if (ContactIndex < _GROUP.size()) {
+        return _GROUP[ContactIndex];
+      }
+    } catch (std::exception &ERR) {
+      std::cerr << "GroupContact: " << ERR.what() << std::endl;
+    }
+    return _NULL;
   }
 };
 /**
  * Implementation to
- * GroupContact::MergeSort()
+ * GroupContact::__H_MergeSort()
  */
 std::vector<Contact>
-GroupContact::MergeSort(const std::vector<Contact> &Input) {
+GroupContact::__H_MergeSort(const std::vector<Contact> &Input) {
   // Recursion Base Case
   if (Input.size() == 1)
     return Input;
@@ -114,8 +227,8 @@ GroupContact::MergeSort(const std::vector<Contact> &Input) {
     RIGHT_VEC.push_back(Input[LEFT_SIZE + i]);
 
   // Recursive Sorting
-  LEFT_VEC = MergeSort(LEFT_VEC);
-  RIGHT_VEC = MergeSort(RIGHT_VEC);
+  LEFT_VEC = __H_MergeSort(LEFT_VEC);
+  RIGHT_VEC = __H_MergeSort(RIGHT_VEC);
 
   // Merge from Large to Small
   uint64_t L = 0;
