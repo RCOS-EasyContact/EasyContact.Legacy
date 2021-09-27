@@ -6,8 +6,10 @@
  */
 #ifndef BACKEND_SIGNALHANDLER_H_
 #define BACKEND_SIGNALHANDLER_H_
-#include <iostream>
 #include <signal.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <iostream>
 /**
  * Handles Different Signals
  */
@@ -19,7 +21,15 @@ void SIG_HANDLER(int Argv) {
     std::cout << "USR1" << std::endl;
   }
   if (Argv == SIGINT) {
-    std::cout << "Shutdown" << std::endl;
+    std::cout << "EasyContact: "
+              << "Received Shutdown Signal" << std::endl;
+    std::cout << "EasyContact: "
+              << "Saving Information to Local Disk" << std::endl;
+    extern ContactBook *CBS;
+    delete CBS;
+    std::cout << "EasyContact: "
+              << "All Done, Thanks for Using" << std::endl;
+    exit(EXIT_SUCCESS);
   }
 }
 /**
@@ -34,4 +44,4 @@ void REG_SIGACTION() {
   sigaction(SIGUSR1, &SIG_ACTION, 0);
   sigaction(SIGINT, &SIG_ACTION, 0);
 }
-#endif // BACKEND_SIGNALHANDLER_H_
+#endif  // BACKEND_SIGNALHANDLER_H_
