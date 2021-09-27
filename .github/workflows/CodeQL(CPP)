@@ -1,12 +1,10 @@
-name: "CodeQL-JavaScript"
+name: "CodeQL-CPP"
 
 on:
   push:
-    branches: [ R-NONE ]
-    # branches: [ R-MAIN ]
+    branches: [ R-MAIN ]
   pull_request:
-    branches: [ R-NONE ]
-    # branches: [ R-MAIN ]
+    branches: [ R-MAIN ]
 
 jobs:
   analyze:
@@ -20,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [ 'javascript' ]
+        language: [ 'cpp' ]
 
     steps:
     - name: Checkout Repository
@@ -31,8 +29,8 @@ jobs:
       with:
         languages: ${{ matrix.language }}
 
-    - name: Build JavaScript
-      uses: github/codeql-action/autobuild@v1
+    - name: Build C++
+      run: cd Backend/ && make CodeQL
 
     - name: CodeQL Analysis
       uses: github/codeql-action/analyze@v1
