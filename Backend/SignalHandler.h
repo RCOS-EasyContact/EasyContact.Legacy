@@ -8,6 +8,7 @@
 #define BACKEND_SIGNALHANDLER_H_
 #include <signal.h>
 #include <stdlib.h>
+#include <sys/wait.h>
 #include <unistd.h>
 #include <iostream>
 #include "ContactBook.h"
@@ -16,7 +17,18 @@
  */
 void SIG_HANDLER(int Argv) {
   if (Argv == SIGCHLD) {
-    std::cout << "CHLD" << std::endl;
+    pid_t ChildPID = 0;
+    int ChildStatus = 0;
+    while ((ChildPID = waitpid(-1, &ChildStatus, WNOHANG)) > 0) {
+      if (WIFSIGNALED(ChildStatus)) {
+        std::cerr << "EasyContact: "
+                  << "Sub-Module Terminate Unexpectedly, "
+                  << "Quitting Main Executable" << std::endl;
+        exit(EXIT_FAILURE);
+      }
+    }
+    std::cout << "EasyContact: "
+              << "All Sub-Modules are Working Normal" << std::endl;
   }
   if (Argv == SIGUSR1) {
     std::cout << "USR1" << std::endl;
