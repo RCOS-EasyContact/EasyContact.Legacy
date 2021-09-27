@@ -1,9 +1,9 @@
 default: Release
 
-Release: *.h
+Release: *.h *.cpp
 	g++ -O2 -w -o EasyContact.so MainExecutable.cpp
 
-CodeQL: *.h
+CodeQL: *.h *.cpp
 	g++ -O0 -g -Wall -Wextra -Werror -o CodeQL-Main.so *.h MainExecutable.cpp
 
 Clean:
