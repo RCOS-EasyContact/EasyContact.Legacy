@@ -1,16 +1,22 @@
 default: Release
 
 Release: MainExecutable.cpp
-	g++ -O2 -w -c -o Contact.link ContactSystem/Contact.cpp
-	g++ -O2 -w -c -o GroupContact.link ContactSystem/GroupContact.cpp
-	g++ -O2 -w -c -o ContactBook.link ContactSystem/ContactBook.cpp
-	g++ -O2 -w -o EasyContact.so *.link MainExecutable.cpp
+	mkdir BuildTemp
+	g++ -O2 -w -c -o BuildTemp/Contact.CXXLink ContactSystem/Contact.cpp
+	g++ -O2 -w -c -o BuildTemp/GroupContact.CXXLink ContactSystem/GroupContact.cpp
+	g++ -O2 -w -c -o BuildTemp/ContactBook.CXXLink ContactSystem/ContactBook.cpp
+	g++ -O2 -w -o EasyContact.so BuildTemp/*.CXXLink MainExecutable.cpp
+	rm -rf BuildTemp/
 
-CodeQL: ContactSystem/*.h SignalHandler.h MainExecutable.cpp
-	g++ -O0 -g -Wall -Wextra -Werror -c -o Contact.link ContactSystem/Contact.cpp
-	g++ -O0 -g -Wall -Wextra -Werror -c -o GroupContact.link ContactSystem/GroupContact.cpp
-	g++ -O0 -g -Wall -Wextra -Werror -c -o ContactBook.link ContactSystem/ContactBook.cpp
-	g++ -O0 -g -Wall -Wextra -Werror -o CodeQL-Main.so *.link MainExecutable.cpp
+CodeQL: MainExecutable.cpp
+	mkdir BuildTemp
+	g++ -O0 -g -Wall -Wextra -Werror -c -o BuildTemp/Contact.CXXLink ContactSystem/Contact.cpp
+	g++ -O0 -g -Wall -Wextra -Werror -c -o BuildTemp/GroupContact.CXXLink ContactSystem/GroupContact.cpp
+	g++ -O0 -g -Wall -Wextra -Werror -c -o BuildTemp/GroupContact.CXXLink ContactSystem/ContactBook.cpp
+	g++ -O0 -g -Wall -Wextra -Werror -o CodeQL-Main.so BuildTemp/*.CXXLink MainExecutable.cpp
+	rm -rf BuildTemp/
 
 Clean:
-	rm -f *.link
+	rm -rf BuildTemp/
+	rm -f EasyContact.so
+	rm -f CodeQL-Main.so
