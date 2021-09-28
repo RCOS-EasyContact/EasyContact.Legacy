@@ -8,6 +8,7 @@ on:
 
 jobs:
   cpplint:
+    if: ${{!startsWith(github.event.head_commit.message,'[SKIP]')}}
     name: Lint
     runs-on: ubuntu-latest
     

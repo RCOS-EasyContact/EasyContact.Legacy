@@ -8,6 +8,7 @@ on:
 
 jobs:
   analyze:
+    if: ${{!startsWith(github.event.head_commit.message,'[SKIP]')}}
     name: Analyze
     runs-on: ubuntu-latest
     permissions:
@@ -18,7 +19,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [ 'cpp' ]
+        language: [ 'CPP' ]
 
     steps:
     - name: Checkout Repository
