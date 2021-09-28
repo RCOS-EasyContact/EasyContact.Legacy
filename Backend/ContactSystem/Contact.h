@@ -153,19 +153,6 @@ class Contact {
    * @return <Contact> : Reference to Current Instance
    */
   Contact &operator+=(const std::string &LatestEmail);
-#ifdef DEPLETED
-  /**
-   * >> DEBUG ONLY FUNCTION <<
-   * Overwrite Number Emails Received
-   * @param <uint64_t> NumReceived : Total Number of Emails
-   * Received from this Email Address
-   * @return <Contact> : Reference to Current Instance
-   */
-  Contact &operator[](const uint64_t &NumReceived) {
-    this->_RECEIVED = NumReceived;
-    return *this;
-  }
-#endif
 };
 } // namespace BCS
-#endif //  BACKEND_CONTACTSYSTEM_CONTACT_H_
+#endif  // BACKEND_CONTACTSYSTEM_CONTACT_H_

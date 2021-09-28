@@ -6,13 +6,14 @@
  */
 #ifndef BACKEND_CONTACTSYSTEM_GROUPCONTACT_H_
 #define BACKEND_CONTACTSYSTEM_GROUPCONTACT_H_
-#include "Contact.h"
 #include <algorithm>
+#include <exception>
 #include <iostream>
 #include <iterator>
 #include <string>
 #include <utility>
 #include <vector>
+#include "Contact.h"
 /**
  * EasyContact Custom Namespace
  * BCS : Backend Contact System
@@ -23,12 +24,10 @@ namespace BCS {
  * <GroupContact> Contains:
  *           <std::string> : Name of the Group
  *           <std::vector<Contact>> : Group of <Contact> Objects
- *           <Contact> : NULL Contact Object
  */
 class GroupContact {
   std::string _NAME;
   std::vector<Contact> _GROUP;
-  static Contact _NULL;
   /**
    * Sort the Group from Large <Contact> Object to Small <Contact> Object
    * Implemented with Merge Sort Algorithm
@@ -37,7 +36,7 @@ class GroupContact {
    */
   std::vector<Contact> __H_MergeSort(const std::vector<Contact> &Input);
 
- public:
+public:
   /**
    * Default Class Constructor
    */
@@ -79,48 +78,18 @@ class GroupContact {
    * @param <Contact> NewContact : Contact Information to be Saved
    * @return <bool> : Add New Contact Successfulness
    */
-  inline bool addNewContact(const Contact &NewContact) {
-    if (std::find(_GROUP.begin(), _GROUP.end(), NewContact) == _GROUP.end()) {
-      _GROUP.push_back(NewContact);
-      return true;
-    }
-    return false;
-  }
-#ifdef DEPLETED
-  /**
-   * Representation Modifier
-   * Sets the Name of the Group
-   * @param <std::string> Name : New Name for the Group
-   * @return <std::string> : New Name of the Group
-   */
-  const std::string &setGroupName(const std::string &Name) {
-    _NAME = Name;
-    return this->getGroupName();
-  }
-#endif
+  bool addNewContact(const Contact &NewContact);
   /**
    * Sort the Group from Large <Contact> Object to Small <Contact> Object
    * @return <bool> : Sort Successfulness
    */
-  inline bool sortGroupContact() {
-    if (!_GROUP.size()) {
-      return false;
-    }
-    _GROUP = this->__H_MergeSort(_GROUP);
-    return true;
-  }
+  bool sortGroupContact();
   /**
    * Calculates Hash Code
    * @param <uint64_t> : Hash Table Stack Size
    * @return <uint64_t> : Hash Code for Current Instance
    */
-  uint64_t Hash(const uint64_t &STACK) {
-    uint64_t BUFFER = 0;
-    for (const char &N : _NAME) {
-      BUFFER += static_cast<int>(N);
-    }
-    return (uint64_t)(BUFFER % STACK);
-  }
+  uint64_t Hash(const uint64_t &STACK);
   /**
    * Compare Different Instances
    * @param <GroupContact> Input : Another Instance of <GroupContact> Class
@@ -141,74 +110,12 @@ class GroupContact {
     }
     return FILE;
   }
-  GroupContact &operator=(const GroupContact &Input) {
-    if (this != &Input) {
-      this->_NAME = Input._NAME;
-      this->_GROUP = Input._GROUP;
-    }
-    return *this;
-  }
-  GroupContact &operator=(const GroupContact &&Input) noexcept {
-    if (this != &Input) {
-      this->_NAME = Input._NAME;
-      this->_GROUP = Input._GROUP;
-    }
-    return *this;
-  }
+  GroupContact &operator=(const GroupContact &Input);
+  GroupContact &operator=(const GroupContact &&Input) noexcept;
   inline bool operator+=(const Contact &NewContact) {
     return this->addNewContact(NewContact);
   }
-  Contact &operator[](const uint64_t &ContactIndex) {
-    if (ContactIndex < _GROUP.size()) {
-      return _GROUP[ContactIndex];
-    }
-    return _NULL;
-  }
+  Contact &operator[](const uint64_t &ContactIndex);
 };
-/**
- * Implementation to
- * GroupContact::__H_MergeSort()
- */
-std::vector<Contact>
-GroupContact::__H_MergeSort(const std::vector<Contact> &Input) {
-  // Recursion Base Case
-  if (Input.size() == 1)
-    return Input;
-  // Construct Vectors
-  const uint64_t LEFT_SIZE = Input.size() / 2;
-  const uint64_t RIGHT_SIZE = Input.size() % 2 ? LEFT_SIZE + 1 : LEFT_SIZE;
-  std::vector<Contact> LEFT_VEC;
-  std::vector<Contact> RIGHT_VEC;
-  std::vector<Contact> RESULT_VEC;
-  for (uint64_t i = 0; i < LEFT_SIZE; i++)
-    LEFT_VEC.push_back(Input[i]);
-  for (uint64_t i = 0; i < RIGHT_SIZE; i++)
-    RIGHT_VEC.push_back(Input[LEFT_SIZE + i]);
-  // Recursive Sorting
-  LEFT_VEC = __H_MergeSort(LEFT_VEC);
-  RIGHT_VEC = __H_MergeSort(RIGHT_VEC);
-  // Merge from Large to Small
-  uint64_t L = 0;
-  uint64_t R = 0;
-  while (L < LEFT_SIZE && R < RIGHT_SIZE) {
-    if (LEFT_VEC[L] < RIGHT_VEC[R]) {
-      RESULT_VEC.push_back(RIGHT_VEC[R]);
-      R++;
-    } else {
-      RESULT_VEC.push_back(LEFT_VEC[L]);
-      L++;
-    }
-  }
-  while (L < LEFT_SIZE) {
-    RESULT_VEC.push_back(LEFT_VEC[L]);
-    L++;
-  }
-  while (R < RIGHT_SIZE) {
-    RESULT_VEC.push_back(RIGHT_VEC[R]);
-    R++;
-  }
-  // Return Sorted Vector
-  return RESULT_VEC;
-}
 } // namespace BCS
 #endif  // BACKEND_CONTACTSYSTEM_GROUPCONTACT_H_
