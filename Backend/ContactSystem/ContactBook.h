@@ -6,10 +6,11 @@
  */
 #ifndef BACKEND_CONTACTSYSTEM_CONTACTBOOK_H_
 #define BACKEND_CONTACTSYSTEM_CONTACTBOOK_H_
-#include "GroupContact.h"
+#include <exception>
 #include <iostream>
 #include <string>
 #include <vector>
+#include "GroupContact.h"
 /**
  * EasyContact Custom Namespace
  * BCS : Backend Contact System
@@ -18,7 +19,6 @@ namespace BCS {
 class ContactBook {
   std::vector<GroupContact> _BOOKS;
   inline ssize_t __H_ExistsGroup(const std::string &GroupName);
-  static GroupContact _NULL;
 
  public:
   ContactBook() = default;
@@ -54,20 +54,7 @@ class ContactBook {
     if (GroupIndex < _BOOKS.size()) {
       return _BOOKS[GroupIndex];
     }
-    return _NULL;
   }
 };
-/**
- * Implementation to
- * ContactBook::__H_ExistsGroup()
- */
-ssize_t ContactBook::__H_ExistsGroup(const std::string &GroupName) {
-  for (size_t i = 0; i < _BOOKS.size(); i++) {
-    if (_BOOKS[i].getGroupName() == GroupName) {
-      return (ssize_t)i;
-    }
-  }
-  return (ssize_t)-1;
-}
 } // namespace BCS
 #endif  // BACKEND_CONTACTSYSTEM_CONTACTBOOK_H_
