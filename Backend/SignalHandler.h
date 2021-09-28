@@ -11,7 +11,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include <iostream>
-#include "ContactBook.h"
+#include "ContactSystem/ContactBook.h"
 /**
  * Handles Different Signals
  */
@@ -38,8 +38,8 @@ void SIG_HANDLER(int Argv) {
               << "Received Shutdown Signal" << std::endl;
     std::cout << "EasyContact: "
               << "Saving Information to Local Disk" << std::endl;
-    extern ContactBook *CBS;
-    delete CBS;
+    extern BCS::ContactBook *ContactBookSystem;
+    delete ContactBookSystem;
     std::cout << "EasyContact: "
               << "All Done, Thanks for Using" << std::endl;
     exit(EXIT_SUCCESS);
@@ -57,4 +57,4 @@ void REG_SIGACTION() {
   sigaction(SIGUSR1, &SIG_ACTION, 0);
   sigaction(SIGINT, &SIG_ACTION, 0);
 }
-#endif  // BACKEND_SIGNALHANDLER_H_
+#endif //  BACKEND_SIGNALHANDLER_H_

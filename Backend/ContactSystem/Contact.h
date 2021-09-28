@@ -4,12 +4,16 @@
  * Contact.h
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_CONTACT_H_
-#define BACKEND_CONTACT_H_
-#include <exception>
+#ifndef BACKEND_CONTACTSYSTEM_CONTACT_H_
+#define BACKEND_CONTACTSYSTEM_CONTACT_H_
 #include <iostream>
 #include <string>
 #include <utility>
+/**
+ * EasyContact Custom Namespace
+ * BCS : Backend Contact System
+ */
+namespace BCS {
 /**
  * <Contact> Represents an Mutable Object for Contact Information
  * <Contact> Contains:
@@ -44,15 +48,11 @@ class Contact {
   explicit Contact(const std::string &Name, const std::string &Address,
                    const std::string &Phone, const std::string &LatestEmail,
                    const uint64_t &NumReceived) {
-    try {
-      _NAME = Name;
-      _ADDRESS = Address;
-      _PHONE = Phone;
-      _LATEST = LatestEmail;
-      _RECEIVED = NumReceived;
-    } catch (std::exception &ERR) {
-      std::cerr << "Contact: " << ERR.what() << std::endl;
-    }
+    _NAME = Name;
+    _ADDRESS = Address;
+    _PHONE = Phone;
+    _LATEST = LatestEmail;
+    _RECEIVED = NumReceived;
   }
   /**
    * Class Copy Constructor
@@ -99,29 +99,13 @@ class Contact {
    * @param <uint64_t> : Hash Table Stack Size
    * @return <uint64_t> : Hash Code for Current Instance
    */
-  uint64_t Hash(const uint64_t &STACK) {
-    uint64_t BUFFER = 0;
-    try {
-      for (const char &N : _ADDRESS) {
-        BUFFER += static_cast<int>(N);
-      }
-    } catch (std::exception &ERR) {
-      std::cerr << "Contact: " << ERR.what() << std::endl;
-    }
-    return (uint64_t)(BUFFER % STACK);
-  }
+  uint64_t Hash(const uint64_t &STACK);
   /**
    * Compare Different Instances
    * @param <Contact> Input : Another Instance of <Contact> Class
    * @return <bool> : Compares Between Two Instances
    */
-  bool operator==(const Contact &Input) {
-    try {
-      return this->_NAME == Input._NAME;
-    } catch (std::exception &ERR) {
-      std::cerr << "Contact: " << ERR.what() << std::endl;
-    }
-  }
+  bool operator==(const Contact &Input) { return this->_NAME == Input._NAME; }
   /**
    * Compare Different Instances
    * @param <Contact> LEFT : An Instance of <Contact> Class
@@ -129,11 +113,7 @@ class Contact {
    * @return <bool> : Compares Between Two Instances
    */
   friend bool operator<(const Contact &LEFT, const Contact &RIGHT) {
-    try {
-      return LEFT._RECEIVED < RIGHT._RECEIVED;
-    } catch (std::exception &ERR) {
-      std::cerr << "Contact: " << ERR.what() << std::endl;
-    }
+    return LEFT._RECEIVED < RIGHT._RECEIVED;
   }
   /**
    * Calculates Hash Code
@@ -149,13 +129,9 @@ class Contact {
    * @return <std::ostream> : Original File Descriptor
    */
   friend std::ostream &operator<<(std::ostream &FILE, const Contact &Input) {
-    try {
-      FILE << "\"" << Input._NAME << "\",\"" << Input._ADDRESS << "\",\""
-           << Input._PHONE << "\",\"" << Input._LATEST << "\",\""
-           << Input._RECEIVED << "\"";
-    } catch (std::exception &ERR) {
-      std::cerr << "Contact: " << ERR.what() << std::endl;
-    }
+    FILE << "\"" << Input._NAME << "\",\"" << Input._ADDRESS << "\",\""
+         << Input._PHONE << "\",\"" << Input._LATEST << "\",\""
+         << Input._RECEIVED << "\"";
     return FILE;
   }
   /**
@@ -163,59 +139,21 @@ class Contact {
    * @param <Contact> Input : Another Instance of <Contact> Class
    * @return <Contact> : Reference to Current Instance
    */
-  Contact &operator=(const Contact &Input) {
-    if (this != &Input) {
-      try {
-        this->_NAME = Input._NAME;
-        this->_ADDRESS = Input._ADDRESS;
-        this->_PHONE = Input._PHONE;
-        this->_LATEST = Input._LATEST;
-        this->_RECEIVED = Input._RECEIVED;
-      } catch (std::exception &ERR) {
-        std::cerr << "Contact: " << ERR.what() << std::endl;
-      }
-    }
-    return *this;
-  }
+  Contact &operator=(const Contact &Input);
   /**
    * Class Move Constructor
    * @param <Contact> Input : Another Instance of <Contact> Class
    * @return <Contact> : Reference to Current Instance
    */
-  Contact &operator=(const Contact &&Input) noexcept {
-    if (this != &Input) {
-      try {
-        this->_NAME = Input._NAME;
-        this->_ADDRESS = Input._ADDRESS;
-        this->_PHONE = Input._PHONE;
-        this->_LATEST = Input._LATEST;
-        this->_RECEIVED = Input._RECEIVED;
-      } catch (std::exception &ERR) {
-        std::cerr << "Contact: " << ERR.what() << std::endl;
-      }
-    }
-    return *this;
-  }
+  Contact &operator=(const Contact &&Input) noexcept;
   /**
    * Received New Email from this Email Address
    * @param <std::string> LatestEmail : Latest Email Received from this Email
    * Address
    * @return <Contact> : Reference to Current Instance
    */
-  Contact &operator+=(const std::string &LatestEmail) {
-    try {
-      if (!LatestEmail.empty()) {
-        this->_LATEST = LatestEmail;
-        this->_RECEIVED++;
-      }
-    } catch (std::exception &ERR) {
-      std::cerr << "Contact: " << ERR.what() << std::endl;
-    }
-    return *this;
-  }
+  Contact &operator+=(const std::string &LatestEmail);
 #ifdef DEPLETED
-% This is a Debug Function,
-% And is No Longer Used.
   /**
    * >> DEBUG ONLY FUNCTION <<
    * Overwrite Number Emails Received
@@ -224,13 +162,10 @@ class Contact {
    * @return <Contact> : Reference to Current Instance
    */
   Contact &operator[](const uint64_t &NumReceived) {
-    try {
-      this->_RECEIVED = NumReceived;
-    } catch (std::exception &ERR) {
-      std::cerr << "Contact: " << ERR.what() << std::endl;
-    }
+    this->_RECEIVED = NumReceived;
     return *this;
   }
 #endif
 };
-#endif  // BACKEND_CONTACT_H_
+} // namespace BCS
+#endif //  BACKEND_CONTACTSYSTEM_CONTACT_H_

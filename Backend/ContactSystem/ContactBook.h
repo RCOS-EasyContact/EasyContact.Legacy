@@ -4,13 +4,17 @@
  * ContactBook.h
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_CONTACTBOOK_H_
-#define BACKEND_CONTACTBOOK_H_
-#include <exception>
+#ifndef BACKEND_CONTACTSYSTEM_CONTACTBOOK_H_
+#define BACKEND_CONTACTSYSTEM_CONTACTBOOK_H_
+#include "GroupContact.h"
 #include <iostream>
 #include <string>
 #include <vector>
-#include "GroupContact.h"
+/**
+ * EasyContact Custom Namespace
+ * BCS : Backend Contact System
+ */
+namespace BCS {
 class ContactBook {
   std::vector<GroupContact> _BOOKS;
   inline ssize_t __H_ExistsGroup(const std::string &GroupName);
@@ -19,11 +23,7 @@ class ContactBook {
  public:
   ContactBook() = default;
   const GroupContact &getGroup(const std::string &GroupName) {
-    try {
-      return _BOOKS[__H_ExistsGroup(GroupName)];
-    } catch (std::exception &ERR) {
-      std::cerr << "ContactBook: " << ERR.what() << std::endl;
-    }
+    return _BOOKS[__H_ExistsGroup(GroupName)];
   }
   bool addNewGroup(const std::string &GroupName) {
     const ssize_t GroupIndex = __H_ExistsGroup(GroupName);
@@ -42,12 +42,8 @@ class ContactBook {
   }
   friend std::ostream &operator<<(std::ostream &FILE,
                                   const ContactBook &Input) {
-    try {
-      for (const GroupContact &N : Input._BOOKS) {
-        FILE << N << " | ";
-      }
-    } catch (std::exception &ERR) {
-      std::cerr << "ContactBook: " << ERR.what() << std::endl;
+    for (const GroupContact &N : Input._BOOKS) {
+      FILE << N << " | ";
     }
     return FILE;
   }
@@ -55,12 +51,8 @@ class ContactBook {
     return this->addNewGroup(GroupName);
   }
   GroupContact &operator[](const uint64_t &GroupIndex) {
-    try {
-      if (GroupIndex < _BOOKS.size()) {
-        return _BOOKS[GroupIndex];
-      }
-    } catch (std::exception &ERR) {
-      std::cerr << "ContactBook: " << ERR.what() << std::endl;
+    if (GroupIndex < _BOOKS.size()) {
+      return _BOOKS[GroupIndex];
     }
     return _NULL;
   }
@@ -70,15 +62,12 @@ class ContactBook {
  * ContactBook::__H_ExistsGroup()
  */
 ssize_t ContactBook::__H_ExistsGroup(const std::string &GroupName) {
-  try {
-    for (size_t i = 0; i < _BOOKS.size(); i++) {
-      if (_BOOKS[i].getGroupName() == GroupName) {
-        return (ssize_t)i;
-      }
+  for (size_t i = 0; i < _BOOKS.size(); i++) {
+    if (_BOOKS[i].getGroupName() == GroupName) {
+      return (ssize_t)i;
     }
-  } catch (std::exception &ERR) {
-    std::cerr << "ContactBook: " << ERR.what() << std::endl;
   }
   return (ssize_t)-1;
 }
-#endif  // BACKEND_CONTACTBOOK_H_
+} // namespace BCS
+#endif  // BACKEND_CONTACTSYSTEM_CONTACTBOOK_H_

@@ -4,16 +4,20 @@
  * GroupContact.h
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_GROUPCONTACT_H_
-#define BACKEND_GROUPCONTACT_H_
+#ifndef BACKEND_CONTACTSYSTEM_GROUPCONTACT_H_
+#define BACKEND_CONTACTSYSTEM_GROUPCONTACT_H_
+#include "Contact.h"
 #include <algorithm>
-#include <exception>
 #include <iostream>
 #include <iterator>
 #include <string>
 #include <utility>
 #include <vector>
-#include "Contact.h"
+/**
+ * EasyContact Custom Namespace
+ * BCS : Backend Contact System
+ */
+namespace BCS {
 /**
  * <GroupContact> Represents an Mutable Object for a Group of <Contact> Objects
  * <GroupContact> Contains:
@@ -42,13 +46,7 @@ class GroupContact {
    * Default Class Constructor
    * @param <std::string> Name : Name of the Group
    */
-  explicit GroupContact(const std::string &Name) {
-    try {
-      _NAME = Name;
-    } catch (std::exception &ERR) {
-      std::cerr << "GroupContact: " << ERR.what() << std::endl;
-    }
-  }
+  explicit GroupContact(const std::string &Name) { _NAME = Name; }
   /**
    * Class Copy Constructor
    * Redirects to this->operator=()
@@ -82,19 +80,13 @@ class GroupContact {
    * @return <bool> : Add New Contact Successfulness
    */
   inline bool addNewContact(const Contact &NewContact) {
-    try {
-      if (std::find(_GROUP.begin(), _GROUP.end(), NewContact) == _GROUP.end()) {
-        _GROUP.push_back(NewContact);
-        return true;
-      }
-    } catch (std::exception &ERR) {
-      std::cerr << "GroupContact: " << ERR.what() << std::endl;
+    if (std::find(_GROUP.begin(), _GROUP.end(), NewContact) == _GROUP.end()) {
+      _GROUP.push_back(NewContact);
+      return true;
     }
     return false;
   }
 #ifdef DEPLETED
-% This Function Will Break Hash Code,
-% Therefore is No Longer Used.
   /**
    * Representation Modifier
    * Sets the Name of the Group
@@ -102,11 +94,7 @@ class GroupContact {
    * @return <std::string> : New Name of the Group
    */
   const std::string &setGroupName(const std::string &Name) {
-    try {
-      _NAME = Name;
-    } catch (std::exception &ERR) {
-      std::cerr << "GroupContact: " << ERR.what() << std::endl;
-    }
+    _NAME = Name;
     return this->getGroupName();
   }
 #endif
@@ -118,11 +106,7 @@ class GroupContact {
     if (!_GROUP.size()) {
       return false;
     }
-    try {
-      _GROUP = this->__H_MergeSort(_GROUP);
-    } catch (std::exception &ERR) {
-      std::cerr << "GroupContact: " << ERR.what() << std::endl;
-    }
+    _GROUP = this->__H_MergeSort(_GROUP);
     return true;
   }
   /**
@@ -132,12 +116,8 @@ class GroupContact {
    */
   uint64_t Hash(const uint64_t &STACK) {
     uint64_t BUFFER = 0;
-    try {
-      for (const char &N : _NAME) {
-        BUFFER += static_cast<int>(N);
-      }
-    } catch (std::exception &ERR) {
-      std::cerr << "GroupContact: " << ERR.what() << std::endl;
+    for (const char &N : _NAME) {
+      BUFFER += static_cast<int>(N);
     }
     return (uint64_t)(BUFFER % STACK);
   }
@@ -147,51 +127,31 @@ class GroupContact {
    * @return <bool> : Compares Between Two Instances
    */
   bool operator==(const GroupContact &Input) {
-    try {
-      return this->_NAME == Input._NAME;
-    } catch (std::exception &ERR) {
-      std::cerr << "GroupContact: " << ERR.what() << std::endl;
-    }
+    return this->_NAME == Input._NAME;
   }
   friend bool operator<(const GroupContact &LEFT, const GroupContact &RIGHT) {
-    try {
-      return LEFT._GROUP.size() < RIGHT._GROUP.size();
-    } catch (std::exception &ERR) {
-      std::cerr << "GroupContact: " << ERR.what() << std::endl;
-    }
+    return LEFT._GROUP.size() < RIGHT._GROUP.size();
   }
   uint64_t operator%(const uint64_t &STACK) { return this->Hash(STACK); }
   friend std::ostream &operator<<(std::ostream &FILE,
                                   const GroupContact &Input) {
-    try {
-      FILE << "<" << Input._NAME << ":" << Input._GROUP.size() << ">";
-      for (const Contact &N : Input._GROUP) {
-        FILE << ", <" << N << ">";
-      }
-    } catch (std::exception &ERR) {
-      std::cerr << "GroupContact: " << ERR.what() << std::endl;
+    FILE << "<" << Input._NAME << ":" << Input._GROUP.size() << ">";
+    for (const Contact &N : Input._GROUP) {
+      FILE << ", <" << N << ">";
     }
     return FILE;
   }
   GroupContact &operator=(const GroupContact &Input) {
     if (this != &Input) {
-      try {
-        this->_NAME = Input._NAME;
-        this->_GROUP = Input._GROUP;
-      } catch (std::exception &ERR) {
-        std::cerr << "GroupContact: " << ERR.what() << std::endl;
-      }
+      this->_NAME = Input._NAME;
+      this->_GROUP = Input._GROUP;
     }
     return *this;
   }
   GroupContact &operator=(const GroupContact &&Input) noexcept {
     if (this != &Input) {
-      try {
-        this->_NAME = Input._NAME;
-        this->_GROUP = Input._GROUP;
-      } catch (std::exception &ERR) {
-        std::cerr << "GroupContact: " << ERR.what() << std::endl;
-      }
+      this->_NAME = Input._NAME;
+      this->_GROUP = Input._GROUP;
     }
     return *this;
   }
@@ -199,12 +159,8 @@ class GroupContact {
     return this->addNewContact(NewContact);
   }
   Contact &operator[](const uint64_t &ContactIndex) {
-    try {
-      if (ContactIndex < _GROUP.size()) {
-        return _GROUP[ContactIndex];
-      }
-    } catch (std::exception &ERR) {
-      std::cerr << "GroupContact: " << ERR.what() << std::endl;
+    if (ContactIndex < _GROUP.size()) {
+      return _GROUP[ContactIndex];
     }
     return _NULL;
   }
@@ -254,4 +210,5 @@ GroupContact::__H_MergeSort(const std::vector<Contact> &Input) {
   // Return Sorted Vector
   return RESULT_VEC;
 }
-#endif  // BACKEND_GROUPCONTACT_H_
+} // namespace BCS
+#endif  // BACKEND_CONTACTSYSTEM_GROUPCONTACT_H_
