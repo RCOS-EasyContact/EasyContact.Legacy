@@ -39,5 +39,5 @@ class ContactBook {
   }
   GroupContact &operator[](const uint64_t &GroupIndex);
 };
-} // namespace BCS
+}  // namespace BCS
 #endif  // BACKEND_CONTACTSYSTEM_CONTACTBOOK_H_

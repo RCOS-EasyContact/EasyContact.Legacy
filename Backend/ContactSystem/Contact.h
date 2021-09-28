@@ -154,5 +154,5 @@ class Contact {
    */
   Contact &operator+=(const std::string &LatestEmail);
 };
-} // namespace BCS
+}  // namespace BCS
 #endif  // BACKEND_CONTACTSYSTEM_CONTACT_H_

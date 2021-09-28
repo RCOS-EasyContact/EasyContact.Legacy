@@ -18,4 +18,4 @@ int main() {
             << "Unexpected Behavior, Terminating..." << std::endl;
   exit(EXIT_FAILURE);
 }
-#endif //  BACKEND_MAINEXECUTABLE_CPP_
+#endif  //  BACKEND_MAINEXECUTABLE_CPP_

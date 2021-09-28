@@ -36,7 +36,7 @@ class GroupContact {
    */
   std::vector<Contact> __H_MergeSort(const std::vector<Contact> &Input);
 
-public:
+ public:
   /**
    * Default Class Constructor
    */
@@ -117,5 +117,5 @@ public:
   }
   Contact &operator[](const uint64_t &ContactIndex);
 };
-} // namespace BCS
+}  // namespace BCS
 #endif  // BACKEND_CONTACTSYSTEM_GROUPCONTACT_H_
