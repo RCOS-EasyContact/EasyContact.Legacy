@@ -1,3 +1,9 @@
+/**
+ * RCOS-EasyContact
+ * EasyContact/Backend/ContactSystem
+ * GroupContact.cpp
+ * Copyright [2021] <RCOS-EasyContact>
+ */
 #ifndef BACKEND_CONTACTSYSTEM_GROUPCONTACT_CPP_
 #define BACKEND_CONTACTSYSTEM_GROUPCONTACT_CPP_
 #include "GroupContact.h"

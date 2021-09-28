@@ -1,3 +1,9 @@
+/**
+ * RCOS-EasyContact
+ * EasyContact/Backend/ContactSystem
+ * Contact.cpp
+ * Copyright [2021] <RCOS-EasyContact>
+ */
 #ifndef BACKEND_CONTACTSYSTEM_CONTACT_CPP_
 #define BACKEND_CONTACTSYSTEM_CONTACT_CPP_
 #include "Contact.h"

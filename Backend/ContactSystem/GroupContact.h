@@ -1,6 +1,6 @@
 /**
  * RCOS-EasyContact
- * EasyContact/Backend
+ * EasyContact/Backend/ContactSystem
  * GroupContact.h
  * Copyright [2021] <RCOS-EasyContact>
  */
