@@ -1,6 +1,6 @@
 Clang=g++
-ReleaseFlags=-O2 -w
-CodeQLFlags=-O0 -g -Wall -Wextra -Werror
+ReleaseFlags=-O2 -w -std=gnu++17
+CodeQLFlags=-O0 -g -Wall -Wextra -Werror -std=gnu++17
 
 default: Release
 
