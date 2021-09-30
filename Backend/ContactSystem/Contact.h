@@ -99,7 +99,7 @@ class Contact {
    * @param <uint64_t> : Hash Table Stack Size
    * @return <uint64_t> : Hash Code for Current Instance
    */
-  [[nodiscard]] constexpr uint64_t Hash(const uint64_t &STACK);
+  [[nodiscard]] uint64_t Hash(const uint64_t &STACK);
   /**
    * Compare Different Instances
    * @param <Contact> Input : Another Instance of <Contact> Class
@@ -121,7 +121,9 @@ class Contact {
    * @param <uint64_t> : Hash Table Stack Size
    * @return <uint64_t> : Hash Code for Current Instance
    */
-  [[nodiscard]] constexpr uint64_t operator%(const uint64_t &STACK) { return this->Hash(STACK); }
+  [[nodiscard]] uint64_t operator%(const uint64_t &STACK) {
+    return this->Hash(STACK);
+  }
   /**
    * Print Class Representation to File Descriptor
    * @param <std::ostream> FILE : File Descriptor

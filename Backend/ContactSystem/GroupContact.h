@@ -89,7 +89,7 @@ class GroupContact {
    * @param <uint64_t> : Hash Table Stack Size
    * @return <uint64_t> : Hash Code for Current Instance
    */
-  uint64_t Hash(const uint64_t &STACK);
+  [[nodiscard]] uint64_t Hash(const uint64_t &STACK);
   /**
    * Compare Different Instances
    * @param <GroupContact> Input : Another Instance of <GroupContact> Class
@@ -101,7 +101,9 @@ class GroupContact {
   friend bool operator<(const GroupContact &LEFT, const GroupContact &RIGHT) {
     return LEFT._GROUP.size() < RIGHT._GROUP.size();
   }
-  uint64_t operator%(const uint64_t &STACK) { return this->Hash(STACK); }
+  [[nodiscard]] uint64_t operator%(const uint64_t &STACK) {
+    return this->Hash(STACK);
+  }
   friend std::ostream &operator<<(std::ostream &FILE,
                                   const GroupContact &Input) {
     FILE << "<" << Input._NAME << ":" << Input._GROUP.size() << ">";
