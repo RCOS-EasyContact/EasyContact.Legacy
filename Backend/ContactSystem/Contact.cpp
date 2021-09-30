@@ -7,7 +7,7 @@
 #ifndef BACKEND_CONTACTSYSTEM_CONTACT_CPP_
 #define BACKEND_CONTACTSYSTEM_CONTACT_CPP_
 #include "Contact.h"
-uint64_t BCS::Contact::Hash(const uint64_t &STACK) {
+[[nodiscard]] constexpr uint64_t BCS::Contact::Hash(const uint64_t &STACK) {
   uint64_t BUFFER = 0;
   for (const char &N : _ADDRESS) {
     BUFFER += static_cast<int>(N);
