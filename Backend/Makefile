@@ -24,3 +24,4 @@ Clean:
 	@rm -rf BuildTemp/ || true
 	@rm -f EasyContact.so || true
 	@rm -f CodeQL-Main.so || true
+	
