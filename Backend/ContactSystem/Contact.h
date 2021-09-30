@@ -72,28 +72,28 @@ class Contact {
    * Representation Accessor
    * @return <std::string> : Get Saved Phone Number
    */
-  const std::string &getPhone() { return _PHONE; }
+  [[nodiscard]] const std::string &getPhone() { return _PHONE; }
   /**
    * Representation Accessor
    * @return <std::string> : Get Saved Contact Name
    */
-  const std::string &getName() { return _NAME; }
+  [[nodiscard]] const std::string &getName() { return _NAME; }
   /**
    * Representation Accessor
    * @return <std::string> : Get Saved Email Address
    */
-  const std::string &getAddress() { return _ADDRESS; }
+  [[nodiscard]] const std::string &getAddress() { return _ADDRESS; }
   /**
    * Representation Accessor
    * @return <std::string> : Get Latest Email Received
    */
-  const std::string &getEmail() { return _LATEST; }
+  [[nodiscard]] const std::string &getEmail() { return _LATEST; }
   /**
    * Representation Accessor
    * @return <uint64_t> : Get Total Number of Emails
    * Received
    */
-  const uint64_t &getReceived() { return _RECEIVED; }
+  [[nodiscard]] const uint64_t &getReceived() { return _RECEIVED; }
   /**
    * Calculates Hash Code
    * @param <uint64_t> : Hash Table Stack Size
@@ -157,4 +157,4 @@ class Contact {
   Contact &operator+=(const std::string &LatestEmail);
 };
 }  // namespace BCS
-#endif  // BACKEND_CONTACTSYSTEM_CONTACT_H_
+#endif  //  BACKEND_CONTACTSYSTEM_CONTACT_H_

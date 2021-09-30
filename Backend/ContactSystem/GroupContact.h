@@ -6,6 +6,7 @@
  */
 #ifndef BACKEND_CONTACTSYSTEM_GROUPCONTACT_H_
 #define BACKEND_CONTACTSYSTEM_GROUPCONTACT_H_
+#include "Contact.h"
 #include <algorithm>
 #include <exception>
 #include <iostream>
@@ -13,7 +14,6 @@
 #include <string>
 #include <utility>
 #include <vector>
-#include "Contact.h"
 /**
  * EasyContact Custom Namespace
  * BCS : Backend Contact System
@@ -34,7 +34,8 @@ class GroupContact {
    * @param <std::vector<Contact>> : Group of <Contact> Objects to be Sort
    * @return <std::vector<Contact>> : Group of <Contact> Objects Sorted
    */
-  std::vector<Contact> __H_MergeSort(const std::vector<Contact> &Input);
+  [[nodiscard]] std::vector<Contact>
+  __H_MergeSort(const std::vector<Contact> &Input);
 
  public:
   /**
@@ -66,12 +67,12 @@ class GroupContact {
    * Representation Accessor
    * @return <std::string> : Get Name of the Group
    */
-  const std::string &getGroupName() { return _NAME; }
+  [[nodiscard]] const std::string &getGroupName() { return _NAME; }
   /**
    * Representation Accessor
    * @return <std::vector<Contact>> : Get the Whole Group of Contact Objects
    */
-  const std::vector<Contact> &getGroupContact() { return _GROUP; }
+  [[nodiscard]] const std::vector<Contact> &getGroupContact() { return _GROUP; }
   /**
    * Representation Modifier
    * Does Not Allow Duplicate <Contact> Objects
@@ -114,10 +115,10 @@ class GroupContact {
   }
   GroupContact &operator=(const GroupContact &Input);
   GroupContact &operator=(const GroupContact &&Input) noexcept;
-  inline bool operator+=(const Contact &NewContact) {
+  bool operator+=(const Contact &NewContact) {
     return this->addNewContact(NewContact);
   }
-  Contact &operator[](const uint64_t &ContactIndex);
+  [[nodiscard]] Contact &operator[](const uint64_t &ContactIndex);
 };
 }  // namespace BCS
 #endif  // BACKEND_CONTACTSYSTEM_GROUPCONTACT_H_

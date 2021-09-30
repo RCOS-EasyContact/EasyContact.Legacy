@@ -65,7 +65,7 @@ bool BCS::GroupContact::sortGroupContact() {
   _GROUP = this->__H_MergeSort(_GROUP);
   return true;
 }
-[[nodiscard]] uint64_t BCS::GroupContact::Hash(const uint64_t &STACK) {
+uint64_t BCS::GroupContact::Hash(const uint64_t &STACK) {
   uint64_t BUFFER = 0;
   for (const char &N : _NAME) {
     BUFFER += static_cast<int>(N);
@@ -101,4 +101,4 @@ BCS::Contact &BCS::GroupContact::operator[](const uint64_t &ContactIndex) {
   }
   return _GROUP[ContactIndex];
 }
-#endif // BACKEND_CONTACTSYSTEM_GROUPCONTACT_CPP_
+#endif  // BACKEND_CONTACTSYSTEM_GROUPCONTACT_CPP_
