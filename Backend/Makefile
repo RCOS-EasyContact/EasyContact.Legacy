@@ -1,22 +1,26 @@
+Clang=g++
+ReleaseFlags=-O2 -w
+CodeQLFlags=-O0 -g -Wall -Wextra -Werror
+
 default: Release
 
 Release: MainExecutable.cpp
-	mkdir BuildTemp
-	g++ -O2 -w -c -o BuildTemp/Contact.CXXLink ContactSystem/Contact.cpp
-	g++ -O2 -w -c -o BuildTemp/GroupContact.CXXLink ContactSystem/GroupContact.cpp
-	g++ -O2 -w -c -o BuildTemp/ContactBook.CXXLink ContactSystem/ContactBook.cpp
-	g++ -O2 -w -o EasyContact.so BuildTemp/*.CXXLink MainExecutable.cpp
-	rm -rf BuildTemp/
+	@mkdir BuildTemp
+	$(Clang) $(ReleaseFlags) -c -o BuildTemp/Contact.CXXLink ContactSystem/Contact.cpp
+	$(Clang) $(ReleaseFlags) -c -o BuildTemp/GroupContact.CXXLink ContactSystem/GroupContact.cpp
+	$(Clang) $(ReleaseFlags) -c -o BuildTemp/ContactBook.CXXLink ContactSystem/ContactBook.cpp
+	$(Clang) $(ReleaseFlags) -o EasyContact.so BuildTemp/*.CXXLink MainExecutable.cpp
+	@rm -rf BuildTemp/
 
 CodeQL: MainExecutable.cpp
-	mkdir BuildTemp
-	g++ -O0 -g -Wall -Wextra -Werror -c -o BuildTemp/Contact.CXXLink ContactSystem/Contact.cpp
-	g++ -O0 -g -Wall -Wextra -Werror -c -o BuildTemp/GroupContact.CXXLink ContactSystem/GroupContact.cpp
-	g++ -O0 -g -Wall -Wextra -Werror -c -o BuildTemp/GroupContact.CXXLink ContactSystem/ContactBook.cpp
-	g++ -O0 -g -Wall -Wextra -Werror -o CodeQL-Main.so BuildTemp/*.CXXLink MainExecutable.cpp
-	rm -rf BuildTemp/
+	@mkdir BuildTemp
+	$(Clang) $(CodeQLFlags) -c -o BuildTemp/Contact.CXXLink ContactSystem/Contact.cpp
+	$(Clang) $(CodeQLFlags) -c -o BuildTemp/GroupContact.CXXLink ContactSystem/GroupContact.cpp
+	$(Clang) $(CodeQLFlags) -c -o BuildTemp/ContactBook.CXXLink ContactSystem/ContactBook.cpp
+	$(Clang) $(CodeQLFlags) -o CodeQL-Main.so BuildTemp/*.CXXLink MainExecutable.cpp
+	@rm -rf BuildTemp/
 
 Clean:
-	rm -rf BuildTemp/
-	rm -f EasyContact.so
-	rm -f CodeQL-Main.so
+	-rm -rf BuildTemp/
+	-rm -f EasyContact.so
+	-rm -f CodeQL-Main.so
