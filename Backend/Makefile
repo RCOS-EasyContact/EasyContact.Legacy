@@ -5,7 +5,7 @@ CodeQLFlags=-O0 -g -Wall -Wextra -Werror -std=gnu++17
 default: Release
 
 Release: MainExecutable.cpp
-	@mkdir BuildTemp
+	@rm -rf BuildTemp/ && mkdir BuildTemp
 	@$(Clang) $(ReleaseFlags) -c -o BuildTemp/Contact.CXXLink ContactSystem/Contact.cpp
 	@$(Clang) $(ReleaseFlags) -c -o BuildTemp/GroupContact.CXXLink ContactSystem/GroupContact.cpp
 	@$(Clang) $(ReleaseFlags) -c -o BuildTemp/ContactBook.CXXLink ContactSystem/ContactBook.cpp
@@ -13,7 +13,7 @@ Release: MainExecutable.cpp
 	@rm -rf BuildTemp/
 
 CodeQL: MainExecutable.cpp
-	@mkdir BuildTemp
+	@rm -rf BuildTemp/ && mkdir BuildTemp
 	@$(Clang) $(CodeQLFlags) -c -o BuildTemp/Contact.CXXLink ContactSystem/Contact.cpp
 	@$(Clang) $(CodeQLFlags) -c -o BuildTemp/GroupContact.CXXLink ContactSystem/GroupContact.cpp
 	@$(Clang) $(CodeQLFlags) -c -o BuildTemp/ContactBook.CXXLink ContactSystem/ContactBook.cpp
