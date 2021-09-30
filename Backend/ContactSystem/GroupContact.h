@@ -6,7 +6,6 @@
  */
 #ifndef BACKEND_CONTACTSYSTEM_GROUPCONTACT_H_
 #define BACKEND_CONTACTSYSTEM_GROUPCONTACT_H_
-#include "Contact.h"
 #include <algorithm>
 #include <exception>
 #include <iostream>
@@ -14,6 +13,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include "Contact.h"
 /**
  * EasyContact Custom Namespace
  * BCS : Backend Contact System
@@ -99,8 +99,8 @@ class GroupContact {
   bool operator==(const GroupContact &Input) {
     return this->_NAME == Input._NAME;
   }
-  friend bool operator<(const GroupContact &LEFT, const GroupContact &RIGHT) {
-    return LEFT._GROUP.size() < RIGHT._GROUP.size();
+  bool operator<(const GroupContact &Input) {
+    return this->_GROUP.size() < Input._GROUP.size();
   }
   [[nodiscard]] uint64_t operator%(const uint64_t &STACK) {
     return this->Hash(STACK);

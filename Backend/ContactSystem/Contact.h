@@ -108,12 +108,11 @@ class Contact {
   bool operator==(const Contact &Input) { return this->_NAME == Input._NAME; }
   /**
    * Compare Different Instances
-   * @param <Contact> LEFT : An Instance of <Contact> Class
-   * @param <Contact> RIGHT : An Instance of <Contact> Class
+   * @param <Contact> Input : Another Instance of <Contact> Class
    * @return <bool> : Compares Between Two Instances
    */
-  friend bool operator<(const Contact &LEFT, const Contact &RIGHT) {
-    return LEFT._RECEIVED < RIGHT._RECEIVED;
+  bool operator<(const Contact &Input) {
+    return this->_RECEIVED < Input._RECEIVED;
   }
   /**
    * Calculates Hash Code
