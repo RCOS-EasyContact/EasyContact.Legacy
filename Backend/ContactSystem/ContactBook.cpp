@@ -46,4 +46,6 @@ bool BCS::ContactBook::removeTag(const std::string &TagName) {
   }
   return false;
 }
+std::vector<BCS::Triple<std::string, std::string, std::vector<std::string>>>
+BCS::ContactBook::getAllContacts() {}
 #endif // BACKEND_CONTACTSYSTEM_CONTACTBOOK_CPP_

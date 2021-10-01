@@ -86,10 +86,13 @@ public:
    * @return <std::ostream> : Original File Descriptor
    */
   friend std::ostream &operator<<(std::ostream &FILE, const Contact &Input) {
-    FILE << "\"" << Input._NAME << "\",\"" << Input._ADDRESS << "\"";
-    for (const uint8_t &N : Input._TAG) {
-      FILE << ":" << (int)N;
+    FILE << "\"" << Input._NAME << "\",\"" << Input._ADDRESS << "\",\"";
+    std::set<uint8_t>::const_iterator N = Input._TAG.begin();
+    FILE << (int)(*N);
+    while (++N != Input._TAG.end()) {
+      FILE << ":" << (int)(*N);
     }
+    FILE << "\"";
     return FILE;
   }
   /**

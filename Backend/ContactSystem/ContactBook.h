@@ -15,8 +15,10 @@
 // Standard Template Library
 #include <deque>
 #include <map>
+#include <vector>
 // ContactSystem Header Files
 #include "Contact.h"
+#include "Triple.h"
 /**
  * EasyContact Custom Namespace
  * BCS : Backend Contact System
@@ -33,6 +35,16 @@ public:
   bool addTag(const std::string &TagName);
   bool removeTag(const std::string &TagName);
   bool assignTag(const std::string &TagName, const std::string &ExistContact);
+  [[nodiscard]] std::vector<
+      BCS::Triple<std::string, std::string, std::vector<std::string>>>
+  getAllContacts();
+  friend std::ostream &operator<<(std::ostream &FILE,
+                                  const ContactBook &Input) {
+    for (size_t i = 0; i < Input._BOOK_SYSTEM.size(); i++) {
+      FILE << "<" << i << ">: ";
+    }
+    return FILE;
+  }
 };
 } // namespace BCS
 #endif // BACKEND_CONTACTSYSTEM_CONTACTBOOK_H_
