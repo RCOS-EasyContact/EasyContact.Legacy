@@ -6,21 +6,13 @@
  */
 #ifndef BACKEND_CONTACTSYSTEM_CONTACT_CPP_
 #define BACKEND_CONTACTSYSTEM_CONTACT_CPP_
+// ContactSystem Header Files
 #include "Contact.h"
-uint64_t BCS::Contact::Hash(const uint64_t &STACK) {
-  uint64_t BUFFER = 0;
-  for (const char &N : _ADDRESS) {
-    BUFFER += static_cast<uint8_t>(N);
-  }
-  return (uint64_t)(BUFFER % STACK);
-}
 BCS::Contact &BCS::Contact::operator=(const BCS::Contact &Input) {
   if (this != &Input) {
     this->_NAME = Input._NAME;
     this->_ADDRESS = Input._ADDRESS;
-    this->_PHONE = Input._PHONE;
-    this->_LATEST = Input._LATEST;
-    this->_RECEIVED = Input._RECEIVED;
+    this->_TAG = Input._TAG;
   }
   return *this;
 }
@@ -28,17 +20,17 @@ BCS::Contact &BCS::Contact::operator=(const BCS::Contact &&Input) noexcept {
   if (this != &Input) {
     this->_NAME = Input._NAME;
     this->_ADDRESS = Input._ADDRESS;
-    this->_PHONE = Input._PHONE;
-    this->_LATEST = Input._LATEST;
-    this->_RECEIVED = Input._RECEIVED;
+    this->_TAG = Input._TAG;
   }
   return *this;
 }
-BCS::Contact &BCS::Contact::operator+=(const std::string &LatestEmail) {
-  if (!LatestEmail.empty()) {
-    this->_LATEST = LatestEmail;
-    this->_RECEIVED++;
-  }
-  return *this;
+bool BCS::Contact::operator+=(const uint8_t &NewTag) {
+  return _TAG.insert(NewTag).second;
 }
-#endif  // BACKEND_CONTACTSYSTEM_CONTACT_CPP_
+bool BCS::Contact::operator-=(const uint8_t &ExistTag) {
+  if (_TAG.erase(ExistTag) > 0) {
+    return true;
+  }
+  return false;
+}
+#endif // BACKEND_CONTACTSYSTEM_CONTACT_CPP_

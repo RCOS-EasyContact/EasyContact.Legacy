@@ -6,12 +6,15 @@
  */
 #ifndef BACKEND_SIGNALHANDLER_H_
 #define BACKEND_SIGNALHANDLER_H_
+// C Standard Library
 #include <signal.h>
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <unistd.h>
+// C++ Standard Library
 #include <iostream>
-#include "ContactSystem/ContactBook.h"
+// ContactSystem Header Files
+#include "ContactSystem/Contact.h"
 /**
  * Handles Different Signals
  */
