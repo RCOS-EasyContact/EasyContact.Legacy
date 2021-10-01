@@ -29,7 +29,7 @@ class Contact {
   std::string _ADDRESS;
   std::set<uint8_t> _TAG;
 
- public:
+public:
   /**
    * Default Class Constructor
    */
@@ -41,11 +41,8 @@ class Contact {
    * @param <std::set<uint8_t>> Tags : Associated Tags to be Stored
    */
   explicit Contact(const std::string &Name, const std::string &Address,
-                   const std::set<uint8_t> &Tags) {
-    _NAME = Name;
-    _ADDRESS = Address;
-    _TAG = Tags;
-  }
+                   const std::set<uint8_t> &Tags)
+      : _NAME(Name), _ADDRESS(Address), _TAG(Tags) {}
   /**
    * Class Copy Constructor
    * Redirects to this->operator=()
@@ -77,7 +74,10 @@ class Contact {
    * @return <bool> : Compares Between Two Instances
    */
   [[nodiscard]] bool operator==(const Contact &Input) {
-    return (this->_NAME == Input._NAME) && (this->_ADDRESS == Input._ADDRESS);
+    return this->_NAME == Input._NAME;
+  }
+  [[nodiscard]] bool operator==(const std::string &Input) {
+    return this->_NAME == Input;
   }
   /**
    * Print Class Representation to File Descriptor
@@ -113,5 +113,5 @@ class Contact {
   bool operator+=(const uint8_t &NewTag);
   bool operator-=(const uint8_t &ExistTag);
 };
-}  // namespace BCS
-#endif  //  BACKEND_CONTACTSYSTEM_CONTACT_H_
+} // namespace BCS
+#endif //  BACKEND_CONTACTSYSTEM_CONTACT_H_
