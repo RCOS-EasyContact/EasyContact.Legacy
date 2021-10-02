@@ -30,9 +30,16 @@ public:
         .second;
   }
   bool removeTag(const std::string &TagName) { return _TAGS.erase(TagName); }
-  void assignTag(const std::string &TagName, const std::string &ContactName) {
+  void assignTagTo(const std::string &TagName, const std::string &ContactName) {
     _TAGS[TagName].insert(ContactName);
   }
+  void removeTagFor(const std::string &ContactName){
+    for (std::map<std::string, std::set<std::string>>::iterator i =
+             _TAGS.begin();
+         i != _TAGS.end(); ++i) {
+i->second.erase(ContactName);
+      }
+    }
   std::vector<std::string> getAllTags() {
     std::vector<std::string> Result;
     for (std::map<std::string, std::set<std::string>>::const_iterator i =
@@ -42,8 +49,28 @@ public:
     }
     return Result;
   }
-    std::vector<std::string> getTagsByName(const std::string&ContactName) {
+  std::vector<std::string> getTagContains(const std::string &TagName) {
     std::vector<std::string> Result;
+    const std::set<std::string> &T = _TAGS[TagName];
+    for (std::set<std::string>::const_iterator i = T.begin(); i != T.end();
+         ++i) {
+      Result.push_back(*i);
+    }
+    return Result;
+  }
+  std::vector<std::string> getNameInTags(const std::string &ContactName) {
+    std::vector<std::string> Result;
+    for (std::map<std::string, std::set<std::string>>::const_iterator i =
+             _TAGS.begin();
+         i != _TAGS.end(); ++i) {
+      for (std::set<std::string>::const_iterator N = i->second.begin();
+           N != i->second.end(); ++N) {
+        if (*N == ContactName) {
+          Result.push_back(i->first);
+          break;
+        }
+      }
+    }
     return Result;
   }
 };
