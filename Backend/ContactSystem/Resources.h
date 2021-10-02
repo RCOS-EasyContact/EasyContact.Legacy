@@ -15,6 +15,7 @@ using namespace std;
 #include <unistd.h>
 // C++ LIBIARY
 #include <algorithm>
+#include <exception>
 #include <deque>
 #include <fstream>
 #include <iostream>
