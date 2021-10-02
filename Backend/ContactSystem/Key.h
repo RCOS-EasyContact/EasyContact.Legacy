@@ -46,9 +46,9 @@ class Key {
    * @param <Key&> : Another Instance of <Key> Class
    * @return <bool> : Compares Between Two Instances
    */
-  [[_GLIBCXX_NODISCARD]] inline bool operator==(const Key &Instance) {
+  [[nodiscard]] inline bool operator==(const Key &Instance) {
     return this->Name == Instance.Name;
   }
 };
-} //  namespace BCS
-#endif //   BACKEND_CONTACTSYSTEM_KEY_H_
+}  // namespace BCS
+#endif  // BACKEND_CONTACTSYSTEM_KEY_H_
