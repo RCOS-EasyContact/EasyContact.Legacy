@@ -26,7 +26,7 @@ class APIRouter{
     static void register_router(HttpService* router) {
         router->preprocessor = pre;
         router->postprocessor = post;
-        
+
         router->GET("", [](HttpRequest* req, HttpResponse* resp) {
             return 404;
         });
@@ -49,4 +49,4 @@ class APIRouter{
     }
 };
 
-#endif // BACKEND_APIROUTER_H_
+#endif  // BACKEND_APIROUTER_H_
