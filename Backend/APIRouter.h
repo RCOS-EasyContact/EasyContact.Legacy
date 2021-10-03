@@ -1,7 +1,13 @@
-#ifndef EASYCONTACT_APIROUTER_H_
-#define EASYCONTACT_APIROUTER_H_
+/**
+ * RCOS-EasyContact
+ * EasyContact/Backend/APIRouter
+ * APIRouter.h
+ * Copyright [2021] <RCOS-EasyContact>
+ */
+#ifndef BACKEND_APIROUTER_H_
+#define BACKEND_APIROUTER_H_
 
-#include "ConatctSystem/Resources.h"
+//#include "ConatctSystem/Resources.h"
 #include "hv/HttpService.h"
 
 class APIRouter{
@@ -11,29 +17,37 @@ class APIRouter{
         resp->content_type = APPLICATION_JSON;
         req->ParseBody();
         return 0;
-    };
+    }
 
     static int post(HttpRequest* req, HttpResponse* resp) {
-        BYPASSUNUSED(req);
+        //BYPASSUNUSED(req);
         return 0;
-    };
+    }
 
     static void register_router(HttpService& router) {
         router.preprocessor = pre;
         router.postprocessor = post;
         
-        router.GET();
+        router.GET("", [](HttpRequest* req, HttpResponse* resp) {
+            return 404;
+        });
 
-        router.POST();
+        router.POST("", [](HttpRequest* req, HttpResponse* resp) {
+            return 404;
+        });
 
-        router.PUT();
+        router.PUT("", [](HttpRequest* req, HttpResponse* resp) {
+            return 404;
+        });
 
-        router.DELETE();
+        router.Delete("", [](HttpRequest* req, HttpResponse* resp) {
+            return 404;
+        });
 
-        router.PATCH();
-    };
-
-}
-
+        router.PATCH("", [](HttpRequest* req, HttpResponse* resp) {
+            return 404;
+        });
+    }
+};
 
 #endif
