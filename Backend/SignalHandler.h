@@ -59,4 +59,4 @@ void REG_SIGACTION() {
   sigaction(SIGUSR1, &SIG_ACTION, 0);
   sigaction(SIGINT, &SIG_ACTION, 0);
 }
-#endif //  BACKEND_SIGNALHANDLER_H_
+#endif  // BACKEND_SIGNALHANDLER_H_
