@@ -49,13 +49,13 @@ class Key {
   [[nodiscard]] inline bool operator==(const Key &Instance) {
     return this->Name == Instance.Name;
   }
-    /**
+  /**
    * Compare Different Instances
    * No Duplicate Names Are Allowed
    * @param <std::string> : Contact Name of Another Instance
    * @return <bool> : Compares Between Two Instances
    */
-  [[nodiscard]] inline bool operator==(const std::string& ContactName) {
+  [[nodiscard]] inline bool operator==(const std::string &ContactName) {
     return this->Name == ContactName;
   }
 };

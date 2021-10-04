@@ -1,7 +1,7 @@
 /**
  * RCOS-EasyContact
  * EasyContact/Backend/ContactSystem
- * Key.h
+ * Tags.h
  * Copyright [2021] <RCOS-EasyContact>
  */
 #ifndef BACKEND_CONTACTSYSTEM_TAGS_H_
@@ -18,61 +18,71 @@
  * BCS : Backend Contact System
  */
 namespace BCS {
+/**
+ * Mutable Class
+ * <Tags> Repersents
+ * Tag Database That Manages All
+ * The Tags Associated With Contacts
+ * -----   -----   -----
+ * No Duplicate Tag Names Are Allowed
+ */
 class Tags {
   std::map<std::string, std::set<std::string>> _TAGS;
 
-public:
+ public:
+  /**
+   * Default Class Constructor
+   */
   Tags() = default;
-  bool newTag(const std::string &TagName) {
-    return _TAGS
-        .insert(std::pair<std::string, std::set<std::string>>(
-            TagName, std::set<std::string>()))
-        .second;
-  }
-  bool removeTag(const std::string &TagName) { return _TAGS.erase(TagName); }
-  void assignTagTo(const std::string &TagName, const std::string &ContactName) {
-    _TAGS[TagName].insert(ContactName);
-  }
-  void removeTagFor(const std::string &ContactName){
-    for (std::map<std::string, std::set<std::string>>::iterator i =
-             _TAGS.begin();
-         i != _TAGS.end(); ++i) {
-i->second.erase(ContactName);
-      }
-    }
-  std::vector<std::string> getAllTags() {
-    std::vector<std::string> Result;
-    for (std::map<std::string, std::set<std::string>>::const_iterator i =
-             _TAGS.begin();
-         i != _TAGS.end(); ++i) {
-      Result.push_back(i->first);
-    }
-    return Result;
-  }
-  std::vector<std::string> getTagContains(const std::string &TagName) {
-    std::vector<std::string> Result;
-    const std::set<std::string> &T = _TAGS[TagName];
-    for (std::set<std::string>::const_iterator i = T.begin(); i != T.end();
-         ++i) {
-      Result.push_back(*i);
-    }
-    return Result;
-  }
-  std::vector<std::string> getNameInTags(const std::string &ContactName) {
-    std::vector<std::string> Result;
-    for (std::map<std::string, std::set<std::string>>::const_iterator i =
-             _TAGS.begin();
-         i != _TAGS.end(); ++i) {
-      for (std::set<std::string>::const_iterator N = i->second.begin();
-           N != i->second.end(); ++N) {
-        if (*N == ContactName) {
-          Result.push_back(i->first);
-          break;
-        }
-      }
-    }
-    return Result;
-  }
+  /**
+   * Create A New Tag
+   * Duplicate Tags Are Not Allowed
+   * @param <std::string> : Tag Name
+   * @return <bool> : Success or Failed (Existing Tag)
+   */
+  bool newTag(const std::string &TagName);
+  /**
+   * Remove A Existing Tag
+   * All Contacts Associated With This Tag Will Also Be Removed From This Tag
+   * Group. The Contact Itself Will Not Be Removed, However
+   * @param <std::string> : Tag to be Removed
+   * @return <bool> : Success or Failed (Tag not Exist)
+   */
+  bool removeTag(const std::string &TagName);
+  /**
+   * Assign A Existing Tag to One Contact
+   * @param <std::string> : Tag Name
+   * @param <std::string> : Contact Name
+   */
+  void assignTagTo(const std::string &TagName, const std::string &ContactName);
+  /**
+   * Remove An Assigned Tag From One Contact
+   * @param <std::string> : Tag Name
+   * @param <std::string> : Contact Name
+   */
+  void removeTagFor(const std::string &TagName, const std::string &ContactName);
+  /**
+   * Remove All Tags Associated With One Contact
+   * @param <std::string> : Contact Name
+   */
+  void clearTagFor(const std::string &ContactName);
+  /**
+   * Get All Tag Names
+   * @return <std::vector<std::string>> : All Tag Names
+   */
+  std::vector<std::string> getAllTags();
+  /**
+   * Get All Contacts Tagged with the Tag Name
+   * @param <std::string> : Tag Name
+   * @return <std::vector<std::string>> : All Contacts With This Tag
+   */
+  std::vector<std::string> getTagContains(const std::string &TagName);
+  /**
+   * Get All Tags Associated with one Contact
+   * @param <std::string> : Contact Name
+   * @return <std::vector<std::string>> : All Tags Associated
+   */
+  std::vector<std::string> getNameInTags(const std::string &ContactName);
 };
-} // namespace BCS
-#endif // BACKEND_CONTACTSYSTEM_TAGS_H_
+}  // namespace BCS
+#endif  // BACKEND_CONTACTSYSTEM_TAGS_H_

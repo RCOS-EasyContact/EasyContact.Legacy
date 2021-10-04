@@ -12,9 +12,9 @@ template <class A, class B, class C> class Triple {
   B second;
   C third;
 
- public:
+public:
   Triple<A, B, C>(const A &ArgA, const B &ArgB, const C &ArgC)
       : first(ArgA), second(ArgB), third(ArgC) {}
 };
-}  // namespace BCS
-#endif  // BACKEND_CONTACTSYSTEM_TRIPLE_H_
+} // namespace BCS
+#endif // BACKEND_CONTACTSYSTEM_TRIPLE_H_
