@@ -27,9 +27,9 @@ using namespace std;
 #include <utility>
 #include <vector>
 // LOCAL LIBIARY
-#include "Contact.h"
-#include "ContactBook.h"
-#include "GroupContact.h"
-#include "Import.h"
+#include "Book.h"
+#include "Key.h"
+#include "Tags.h"
+#include "Triple.h"
 
 #endif
