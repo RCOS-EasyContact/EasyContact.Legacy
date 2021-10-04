@@ -6,7 +6,7 @@
  */
 #ifndef BACKEND_CONTACTSYSTEM_TAGS_CPP_
 #define BACKEND_CONTACTSYSTEM_TAGS_CPP_
-#include "Tags.h"
+#include "Tags.hpp"
 bool BCS::Tags::newTag(const std::string &TagName) {
   return _TAGS
       .insert(std::pair<std::string, std::set<std::string>>(

@@ -1,11 +1,11 @@
 /**
  * RCOS-EasyContact
  * EasyContact/Backend/ContactSystem
- * Key.h
+ * Key.hpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_CONTACTSYSTEM_KEY_H_
-#define BACKEND_CONTACTSYSTEM_KEY_H_
+#ifndef BACKEND_CONTACTSYSTEM_KEY_HPP_
+#define BACKEND_CONTACTSYSTEM_KEY_HPP_
 // C++ Standard Library
 #include <string>
 /**
@@ -60,4 +60,4 @@ class Key {
   }
 };
 }  // namespace BCS
-#endif  // BACKEND_CONTACTSYSTEM_KEY_H_
+#endif  // BACKEND_CONTACTSYSTEM_KEY_HPP_

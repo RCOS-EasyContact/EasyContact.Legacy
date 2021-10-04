@@ -1,11 +1,11 @@
 /**
  * RCOS-EasyContact
  * EasyContact/Backend/ContactSystem
- * Book.h
+ * Book.hpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_CONTACTSYSTEM_BOOK_H_
-#define BACKEND_CONTACTSYSTEM_BOOK_H_
+#ifndef BACKEND_CONTACTSYSTEM_BOOK_HPP_
+#define BACKEND_CONTACTSYSTEM_BOOK_HPP_
 // C++ Standard Library
 #include <algorithm>
 #include <string>
@@ -14,8 +14,8 @@
 #include <set>
 #include <vector>
 // Backend/ContactSystem
-#include "Key.h"
-#include "Tags.h"
+#include "Key.hpp"
+#include "Tags.hpp"
 /**
  * EasyContact Custom Namespace
  * BCS : Backend Contact System
@@ -35,4 +35,4 @@ class Book {
   std::vector<std::string> getAllContacts();
 };
 }  // namespace BCS
-#endif  // BACKEND_CONTACTSYSTEM_BOOK_H_
+#endif  // BACKEND_CONTACTSYSTEM_BOOK_HPP_

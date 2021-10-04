@@ -1,11 +1,11 @@
 /**
  * RCOS-EasyContact
  * EasyContact/Backend/ContactSystem
- * Tags.h
+ * Tags.hpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_CONTACTSYSTEM_TAGS_H_
-#define BACKEND_CONTACTSYSTEM_TAGS_H_
+#ifndef BACKEND_CONTACTSYSTEM_TAGS_HPP_
+#define BACKEND_CONTACTSYSTEM_TAGS_HPP_
 // C++ Standard Library
 #include <string>
 #include <utility>
@@ -85,4 +85,4 @@ class Tags {
   std::vector<std::string> getNameInTags(const std::string &ContactName);
 };
 }  // namespace BCS
-#endif  // BACKEND_CONTACTSYSTEM_TAGS_H_
+#endif  // BACKEND_CONTACTSYSTEM_TAGS_HPP_
