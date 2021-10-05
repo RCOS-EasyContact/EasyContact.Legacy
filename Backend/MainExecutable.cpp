@@ -11,7 +11,8 @@
 // Global Representation
 // BCS::ContactBook *ContactBookSystem;
 pthread_mutex_t CBS_Mutex;
-int main() {
+int main()
+{
   // Reg Sigactions
   REG_SIGACTION();
   // Initilize Global Representation
@@ -20,11 +21,12 @@ int main() {
   // Create Pthreads for Each Function
   // pthread_create();
   // Main Executable Waits for Signal
-  while (true) {
+  while (true)
+  {
     pause();
   }
   std::cerr << "EasyContact: "
             << "Unexpected Behavior, Terminating..." << std::endl;
   exit(EXIT_FAILURE);
 }
-#endif  // BACKEND_MAINEXECUTABLE_CPP_
+#endif // BACKEND_MAINEXECUTABLE_CPP_
