@@ -19,6 +19,7 @@ namespace BCS {
  * One Contact Information
  * -----   -----   -----
  * No Duplicate Names Are Allowed
+ * Regarding Their Email Address
  */
 class Key {
  public:
@@ -31,22 +32,21 @@ class Key {
    * <std::string> Represents
    * Contact Email Address
    */
-  const std::string Address;
+  const std::string Email;
   /**
    * Default Class Constructor
    * @param <std::string> : Contact Name to be Stored
    * @param <std::string> : Email Address to be Stored
    */
-  explicit Key(const std::string &ContactName,
-               const std::string &ContactAddress)
-      : Name(ContactName), Address(ContactAddress) {}
+  explicit Key(const std::string &ContactName, const std::string &ContactEmail)
+      : Name(ContactName), Email(ContactEmail) {}
   /**
    * Compare Different Instances
    * No Duplicate Names Are Allowed
    * @param <Key> : Another Instance of <Key> Class
    * @return <bool> : Compares Between Two Instances
    */
-  [[nodiscard]] inline bool operator==(const Key &Instance) {
+  [[nodiscard]] inline bool operator==(const Key &Instance) const {
     return this->Name == Instance.Name;
   }
   /**
@@ -55,7 +55,7 @@ class Key {
    * @param <std::string> : Contact Name of Another Instance
    * @return <bool> : Compares Between Two Instances
    */
-  [[nodiscard]] inline bool operator==(const std::string &ContactName) {
+  [[nodiscard]] inline bool operator==(const std::string &ContactName) const {
     return this->Name == ContactName;
   }
 };
