@@ -21,6 +21,12 @@
  * BCS : Backend Contact System
  */
 namespace BCS {
+/**
+ * Mutable Class
+ * <Book> Repersents
+ * Contact Database That Manages All
+ * Contacts & Tags
+ */
 class Book {
   std::set<BCS::Key> _BOOK;
   BCS::Tags _TAGS;
@@ -30,9 +36,30 @@ class Book {
    * Default Class Constructor
    */
   Book() = default;
+  /**
+   * Add New Contact
+   * Duplicate Contacts Are Not Allowed
+   * @param <BCS::Key> : Contact Name
+   * @return <bool> : Success or Failed (Existing Contact)
+   */
   bool addContact(const Key &NewContact);
-  bool removeContact(const std::string &ExistContact);
-  std::vector<std::string> getAllContacts();
+  /**
+   * Remove A Existing Contact
+   * Will Also Remove From Existing
+   * Tag Group
+   * @param <std::string> : Contact to be Removed
+   */
+  void removeContact(const std::string &ExistContact);
+  /**
+   * Get All the Contacts
+   * @return std::vector<BCS::Key> : All Contacts
+   */
+  std::vector<Key> getAllContacts();
+  /**
+   * Access BCS::Tags Database
+   * @return <BCS::Tags> : Tags Reference
+   */
+  Tags &operator->() { return _TAGS; }
 };
 }  // namespace BCS
 #endif  // BACKEND_CONTACTSYSTEM_BOOK_HPP_
