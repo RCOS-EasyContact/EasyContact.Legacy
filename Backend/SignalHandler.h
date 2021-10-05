@@ -6,12 +6,14 @@
  */
 #ifndef BACKEND_SIGNALHANDLER_H_
 #define BACKEND_SIGNALHANDLER_H_
+// C Standard Library
 #include <signal.h>
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <unistd.h>
+// C++ Standard Library
 #include <iostream>
-#include "ContactSystem/ContactBook.h"
+// ContactSystem Header Files
 /**
  * Handles Different Signals
  */
@@ -38,8 +40,8 @@ void SIG_HANDLER(int Argv) {
               << "Received Shutdown Signal" << std::endl;
     std::cout << "EasyContact: "
               << "Saving Information to Local Disk" << std::endl;
-    extern BCS::ContactBook *ContactBookSystem;
-    delete ContactBookSystem;
+    // extern BCS::ContactBook *ContactBookSystem;
+    // delete ContactBookSystem;
     std::cout << "EasyContact: "
               << "All Done, Thanks for Using" << std::endl;
     exit(EXIT_SUCCESS);
@@ -57,4 +59,4 @@ void REG_SIGACTION() {
   sigaction(SIGUSR1, &SIG_ACTION, 0);
   sigaction(SIGINT, &SIG_ACTION, 0);
 }
-#endif  //  BACKEND_SIGNALHANDLER_H_
+#endif  // BACKEND_SIGNALHANDLER_H_
