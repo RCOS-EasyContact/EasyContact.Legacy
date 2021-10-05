@@ -1,11 +1,11 @@
 /**
  * RCOS-EasyContact
  * EasyContact/Backend/ContactSystem
- * Triple.h
+ * Triple.hpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_CONTACTSYSTEM_TRIPLE_H_
-#define BACKEND_CONTACTSYSTEM_TRIPLE_H_
+#ifndef BACKEND_CONTACTSYSTEM_TRIPLE_HPP_
+#define BACKEND_CONTACTSYSTEM_TRIPLE_HPP_
 /**
  * EasyContact Custom Namespace
  * BCS : Backend Contact System
@@ -25,4 +25,4 @@ template <class A, class B, class C> class Triple {
       : first(ArgA), second(ArgB), third(ArgC) {}
 };
 }  // namespace BCS
-#endif  // BACKEND_CONTACTSYSTEM_TRIPLE_H_
+#endif  // BACKEND_CONTACTSYSTEM_TRIPLE_HPP_
