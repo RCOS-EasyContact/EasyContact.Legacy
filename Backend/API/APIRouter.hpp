@@ -1,15 +1,12 @@
 /**
  * RCOS-EasyContact
  * EasyContact/Backend/API
- * APIRouter.h
+ * APIRouter.hpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_API_APIROUTER_H_
-#define BACKEND_API_APIROUTER_H_
-
-// #include "ConatctSystem/Resources.h"
+#ifndef BACKEND_API_APIROUTER_HPP_
+#define BACKEND_API_APIROUTER_HPP_
 #include "hv/HttpService.h"
-
 class APIRouter{
  public:
     static int pre(HttpRequest* req, HttpResponse* resp) {
@@ -19,7 +16,6 @@ class APIRouter{
     }
 
     static int post(HttpRequest* req, HttpResponse* resp) {
-        // BYPASSUNUSED(req);
         return 0;
     }
 
@@ -48,5 +44,4 @@ class APIRouter{
         });
     }
 };
-
-#endif  // BACKEND_API_APIROUTER_H_
+#endif  // BACKEND_API_APIROUTER_HPP_
