@@ -1,7 +1,7 @@
 /**
  * RCOS-EasyContact
  * EasyContact/Backend/ContactSystem
- * ContactBook.hpp
+ * Books.hpp
  * Copyright [2021] <RCOS-EasyContact>
  */
 #ifndef BACKEND_CONTACTSYSTEM_CONTACTBOOK_HPP_
@@ -27,7 +27,7 @@ namespace BCS {
  * Contact Database That Manages All
  * Contacts & Tags
  */
-class ContactBook {
+class Books {
   std::set <BCS::Key> _DB;
   std::map<std::string, std::set<BCS::Key>> _TAGS;
 
@@ -35,7 +35,7 @@ class ContactBook {
   /**
    * Default Class Constructor
    */
-  ContactBook() = default;
+  Books() = default;
   /**
    * Add New Contact
    * Duplicate Contacts Are Not Allowed
