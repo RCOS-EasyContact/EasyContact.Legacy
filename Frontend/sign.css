@@ -1,0 +1,110 @@
+/*Environmental settings*/
+html{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+}
+body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    background: url(bg1.jpg) 50% 50% no-repeat;
+    background-size: cover;
+    display: table;
+}
+h1{
+    font-family: 'Sansita Swashed', cursive;;
+    font-weight: lighter;
+    color: #fff;
+    font-size: 50px;
+    text-align: center;
+}
+a{
+    color: white;
+    text-decoration: none;
+}
+pre{
+    color: white;
+}
+
+.signin{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.back_signin{
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.boxx{
+    display: block;
+    width: 320px;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.3);
+    outline: none;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: lighter;
+    color:#fff;
+    font-size: 14px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+}
+
+button{
+    width: 332px;
+    height: 50px;
+    font-size: 16px;
+    background: #000;
+    font-weight: lighter;
+    color:#fff;
+    border: 0px;
+    border-radius: 5px;
+}
+
+#save{
+    width: 332px;
+    height: 50px;
+    font-size: 16px;
+    background: #000;
+    font-weight: lighter;
+    color:#fff;
+    border: 0px;
+    border-radius: 5px;
+}
+
+h4{
+    color:#fff;
+    font-size: 100px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 100px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+#back_sign_in{
+    left:50%;
+    border: 5px;
+    text-align: center;
+    color:#fff;
+    border-color: #fff;
+    border-radius: 5px;
+}
+
+.mege{
+    color:#fff;
+}
+
+img{
+    padding-left: 30px;  
+    margin-top: 5px;
+
+}
