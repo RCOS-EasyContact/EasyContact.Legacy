@@ -4,8 +4,8 @@
  * Books.hpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_CONTACTSYSTEM_CONTACTBOOK_HPP_
-#define BACKEND_CONTACTSYSTEM_CONTACTBOOK_HPP_
+#ifndef BACKEND_CONTACTSYSTEM_BOOKS_HPP_
+#define BACKEND_CONTACTSYSTEM_BOOKS_HPP_
 // C++ Standard Library
 #include <algorithm>
 #include <string>
@@ -105,4 +105,4 @@ class Books {
   std::set<std::string> getNameInTags(const std::string &ContactName);
 };
 }  // namespace BCS
-#endif  // BACKEND_CONTACTSYSTEM_BOOK_HPP_
+#endif  // BACKEND_CONTACTSYSTEM_BOOKS_HPP_
