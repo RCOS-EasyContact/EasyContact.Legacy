@@ -22,7 +22,7 @@
 namespace BCS {
 /**
  * Mutable Class
- * <Book> Repersents
+ * <Books> Repersents
  * Contact Database That Manages All
  * Contacts & Tags
  */
@@ -51,9 +51,10 @@ class Books {
   bool newTag(const std::string &TagName);
   /**
    * Remove A Existing Contact
-   * Will Also Remove From Existing
+   * Will Also Remove From Any Existing
    * Tag Group
    * @param <std::string> : Contact to be Removed
+   * @return <bool> : Success or Failed (Tag not Exist)
    */
   bool removeContact(const std::string &ExistContact);
   /**
@@ -66,7 +67,7 @@ class Books {
   bool removeTag(const std::string &TagName);
   /**
    * Get All the Contacts
-   * @return std::set<BCS::Key> : All Contacts
+   * @return <std::set<BCS::Key>> : All Contacts
    */
   const std::set<BCS::Key> &getAllContacts();
   /**
