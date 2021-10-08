@@ -6,16 +6,14 @@ default: Release
 
 Release: MainExecutable.cpp
 	@rm -rf BuildTemp/ && mkdir BuildTemp
-	@$(Clang) $(ReleaseFlags) -c -o BuildTemp/Tags.link ContactSystem/Tags.cpp
-	@$(Clang) $(ReleaseFlags) -c -o BuildTemp/Book.link ContactSystem/Book.cpp
-	@$(Clang) $(ReleaseFlags) -o EasyContact.so BuildTemp/*.link MainExecutable.cpp
+	@$(Clang) $(ReleaseFlags) -c -o BuildTemp/Books.o ContactSystem/Books.cpp
+	@$(Clang) $(ReleaseFlags) -o EasyContact.so BuildTemp/*.o MainExecutable.cpp
 	@rm -rf BuildTemp/
 
 CodeQL: MainExecutable.cpp
 	@rm -rf BuildTemp/ && mkdir BuildTemp
-	@$(Clang) $(CodeQLFlags) -c -o BuildTemp/Tags.link ContactSystem/Tags.cpp
-	@$(Clang) $(CodeQLFlags) -c -o BuildTemp/Book.link ContactSystem/Book.cpp
-	@$(Clang) $(CodeQLFlags) -o CodeQL-Main.so BuildTemp/*.link MainExecutable.cpp
+	@$(Clang) $(CodeQLFlags) -c -o BuildTemp/Books.o ContactSystem/Books.cpp
+	@$(Clang) $(CodeQLFlags) -o CodeQL-Main.so BuildTemp/*.o MainExecutable.cpp
 	@rm -rf BuildTemp/
 
 Clean:

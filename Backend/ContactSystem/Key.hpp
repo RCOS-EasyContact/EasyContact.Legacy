@@ -58,6 +58,14 @@ class Key {
   [[nodiscard]] inline bool operator==(const std::string &ContactName) const {
     return this->Name == ContactName;
   }
+  /**
+   * Compare Different Instances
+   * @param <BCS::Key> : Another Instance
+   * @return <bool> : Weather This Instance is Less than the Other Instace
+   */
+  [[nodiscard]] inline bool operator<(const BCS::Key &Instance) const {
+    return this->Name < Instance.Name;
+  }
 };
 }  // namespace BCS
 #endif  // BACKEND_CONTACTSYSTEM_KEY_HPP_
