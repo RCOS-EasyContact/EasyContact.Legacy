@@ -61,6 +61,11 @@ class Key {
 };
 }  // namespace BCS
 namespace std {
+/**
+ * Calculate Hash for <BCS::Key>
+ * @param <BCS::Key> : A Instance of <BCS::Key>
+ * @return <size_t> : Hash Value
+ */
 template <> struct hash<BCS::Key> {
   size_t operator()(const BCS::Key &Instance) const {
     return hash<string>()(Instance.Name);
