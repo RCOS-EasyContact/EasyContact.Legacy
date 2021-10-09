@@ -12,8 +12,8 @@ bool BCS::Books::newContact(const BCS::Key &NewContact) {
 }
 bool BCS::Books::newTag(const std::string &TagName) {
   return (_TAGS
-              .insert(std::pair<std::string, std::set<std::string>>(
-                  TagName, std::set<std::string>()))
+              .insert(std::pair<std::string, std::unordered_set<std::string>>(
+                  TagName, std::unordered_set<std::string>()))
               .second) > 0;
 }
 bool BCS::Books::removeContact(const std::string &ExistContact) {
@@ -23,10 +23,11 @@ bool BCS::Books::removeContact(const std::string &ExistContact) {
 bool BCS::Books::removeTag(const std::string &TagName) {
   return _TAGS.erase(TagName);
 }
-const std::set<BCS::Key> &BCS::Books::getAllContacts() { return _DB; }
-std::set<std::string> BCS::Books::getAllTags() {
-  std::set<std::string> Result;
-  for (std::map<std::string, std::set<std::string>>::const_iterator i =
+const std::unordered_set<BCS::Key> &BCS::Books::getAllContacts() { return _DB; }
+std::unordered_set<std::string> BCS::Books::getAllTags() {
+  std::unordered_set<std::string> Result;
+  for (std::unordered_map<std::string,
+                          std::unordered_set<std::string>>::const_iterator i =
            _TAGS.begin();
        i != _TAGS.end(); ++i) {
     Result.insert(i->first);
@@ -42,27 +43,32 @@ void BCS::Books::removeTagFor(const std::string &TagName,
   _TAGS[TagName].erase(ContactName);
 }
 void BCS::Books::clearTagFor(const std::string &ContactName) {
-  for (std::map<std::string, std::set<std::string>>::iterator i = _TAGS.begin();
+  for (std::unordered_map<std::string,
+                          std::unordered_set<std::string>>::iterator i =
+           _TAGS.begin();
        i != _TAGS.end(); ++i) {
     i->second.erase(ContactName);
   }
 }
 
-std::set<std::string> BCS::Books::getTagContains(const std::string &TagName) {
-  std::set<std::string> Result;
-  const std::set<std::string> &T = _TAGS[TagName];
-  for (std::set<std::string>::const_iterator i = T.begin(); i != T.end(); ++i) {
+std::unordered_set<std::string>
+BCS::Books::getTagContains(const std::string &TagName) {
+  std::unordered_set<std::string> Result;
+  const std::unordered_set<std::string> &T = _TAGS[TagName];
+  for (std::unordered_set<std::string>::const_iterator i = T.begin();
+       i != T.end(); ++i) {
     Result.insert(*i);
   }
   return Result;
 }
-std::set<std::string>
+std::unordered_set<std::string>
 BCS::Books::getNameInTags(const std::string &ContactName) {
-  std::set<std::string> Result;
-  for (std::map<std::string, std::set<std::string>>::const_iterator i =
+  std::unordered_set<std::string> Result;
+  for (std::unordered_map<std::string,
+                          std::unordered_set<std::string>>::const_iterator i =
            _TAGS.begin();
        i != _TAGS.end(); ++i) {
-    for (std::set<std::string>::const_iterator N = i->second.begin();
+    for (std::unordered_set<std::string>::const_iterator N = i->second.begin();
          N != i->second.end(); ++N) {
       if (*N == ContactName) {
         Result.insert(i->first);
