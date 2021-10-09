@@ -1,18 +1,20 @@
 /**
  * RCOS-EasyContact
  * EasyContact/Backend/ContactSystem
- * Tags.h
+ * Books.hpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_CONTACTSYSTEM_TAGS_H_
-#define BACKEND_CONTACTSYSTEM_TAGS_H_
+#ifndef BACKEND_CONTACTSYSTEM_BOOKS_HPP_
+#define BACKEND_CONTACTSYSTEM_BOOKS_HPP_
 // C++ Standard Library
+#include <algorithm>
 #include <string>
 #include <utility>
 // Standard Template Library
 #include <map>
 #include <set>
-#include <vector>
+// Backend/ContactSystem
+#include "Key.hpp"
 /**
  * EasyContact Custom Namespace
  * BCS : Backend Contact System
@@ -20,20 +22,26 @@
 namespace BCS {
 /**
  * Mutable Class
- * <Tags> Repersents
- * Tag Database That Manages All
- * The Tags Associated With Contacts
- * -----   -----   -----
- * No Duplicate Tag Names Are Allowed
+ * <Books> Repersents
+ * Contact Database That Manages All
+ * Contacts & Tags
  */
-class Tags {
+class Books {
+  std::set<BCS::Key> _DB;
   std::map<std::string, std::set<std::string>> _TAGS;
 
  public:
   /**
    * Default Class Constructor
    */
-  Tags() = default;
+  Books() = default;
+  /**
+   * Add New Contact
+   * Duplicate Contacts Are Not Allowed
+   * @param <BCS::Key> : Contact Name
+   * @return <bool> : Success or Failed (Existing Contact)
+   */
+  bool newContact(const BCS::Key &NewContact);
   /**
    * Create A New Tag
    * Duplicate Tags Are Not Allowed
@@ -42,6 +50,14 @@ class Tags {
    */
   bool newTag(const std::string &TagName);
   /**
+   * Remove A Existing Contact
+   * Will Also Remove From Any Existing
+   * Tag Group
+   * @param <std::string> : Contact to be Removed
+   * @return <bool> : Success or Failed (Tag not Exist)
+   */
+  bool removeContact(const std::string &ExistContact);
+  /**
    * Remove A Existing Tag
    * All Contacts Associated With This Tag Will Also Be Removed From This Tag
    * Group. The Contact Itself Will Not Be Removed, However
@@ -49,6 +65,16 @@ class Tags {
    * @return <bool> : Success or Failed (Tag not Exist)
    */
   bool removeTag(const std::string &TagName);
+  /**
+   * Get All the Contacts
+   * @return <std::set<BCS::Key>> : All Contacts
+   */
+  const std::set<BCS::Key> &getAllContacts();
+  /**
+   * Get All Tag Names
+   * @return <std::set<std::string>> : All Tag Names
+   */
+  std::set<std::string> getAllTags();
   /**
    * Assign A Existing Tag to One Contact
    * @param <std::string> : Tag Name
@@ -67,22 +93,17 @@ class Tags {
    */
   void clearTagFor(const std::string &ContactName);
   /**
-   * Get All Tag Names
-   * @return <std::vector<std::string>> : All Tag Names
-   */
-  std::vector<std::string> getAllTags();
-  /**
    * Get All Contacts Tagged with the Tag Name
    * @param <std::string> : Tag Name
-   * @return <std::vector<std::string>> : All Contacts With This Tag
+   * @return <std::set<std::string>> : All Contacts With This Tag
    */
-  std::vector<std::string> getTagContains(const std::string &TagName);
+  std::set<std::string> getTagContains(const std::string &TagName);
   /**
    * Get All Tags Associated with one Contact
    * @param <std::string> : Contact Name
-   * @return <std::vector<std::string>> : All Tags Associated
+   * @return <std::set<std::string>> : All Tags Associated
    */
-  std::vector<std::string> getNameInTags(const std::string &ContactName);
+  std::set<std::string> getNameInTags(const std::string &ContactName);
 };
 }  // namespace BCS
-#endif  // BACKEND_CONTACTSYSTEM_TAGS_H_
+#endif  // BACKEND_CONTACTSYSTEM_BOOKS_HPP_
