@@ -1,11 +1,12 @@
-import Todo from './components/Todo';
+import React from 'react';
+import './App.css';
+import ChatShell from './chat/shell/Chat-Shell';
 
 function App() {
   return (
-    <div>
-      <h1>Hello</h1>
-      <Todo text='Login' />
-    </div>
+    // currently, the profile is empty therefore the compile is failed
+    //After adding profiles's imgaie, it will works. 
+    <ChatShell />
   );
 }
 

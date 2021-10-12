@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './Conversation-List.css';
-
+//forget to finished images/profiles 
 function ConversationList() {
     return (
         <div id="conversation-list">
@@ -10,7 +10,7 @@ function ConversationList() {
                 <div className="title-text">Daryl Duckmanton</div>
                 <div className="created-date">Apr 16</div>
                 <div className="conversation-message">
-                    This is a message
+                    This is a message sended test
                 </div>
             </div>
             <div className="conversation">
@@ -18,7 +18,7 @@ function ConversationList() {
                 <div className="title-text">Kim O'Neil</div>
                 <div className="created-date">2 days ago</div>
                 <div className="conversation-message">
-                    Very funny
+                    Very funny, love it
                 </div>
             </div>
             <div className="conversation">
@@ -34,7 +34,7 @@ function ConversationList() {
                 <div className="title-text">Ben Smith</div>
                 <div className="created-date">2:49 PM</div>
                 <div className="conversation-message">
-                    Yeah Miami Heat are done
+                    Yeah, what a nice day
                 </div>
             </div>
             <div className="conversation">
@@ -42,7 +42,7 @@ function ConversationList() {
                 <div className="title-text">Douglas Johannasen</div>
                 <div className="created-date">6:14 PM</div>
                 <div className="conversation-message">
-                    No it does not
+                    No it is not
                 </div>
             </div>
             <div className="conversation">
@@ -50,7 +50,7 @@ function ConversationList() {
                 <div className="title-text">Jacob Manly</div>
                 <div className="created-date">3 secs ago</div>
                 <div className="conversation-message">
-                    Just be very careful doing that
+                    Just be very careful doing your homework
                 </div>
             </div>
             <div className="conversation">
