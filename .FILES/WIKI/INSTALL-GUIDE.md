@@ -7,14 +7,14 @@ This Guide Will Help You Install Easy Contact
 Docker Version is Coming Soon...
 
 # Native Linux
-## Required Softwares
+### Required Softwares
 - Frontend
   - Nodejs
 - Backend
   - Make
   - Clang
 
-## Compile
+### Compile
 Clone the Repository:
 ```shell
 git clone https://github.com/RCOS-EasyContact/EasyContact.git
