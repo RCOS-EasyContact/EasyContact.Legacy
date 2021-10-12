@@ -1,101 +1,99 @@
 # EasyContact/Backend/API
-Easy Contact API Specifications
+## Easy Contact API Specifications
+- This API is based on libhv in C++ and will be initialized as the backend database starts, and serves as an interface between node.js and database.  The API creates an HTTP server as a RESTful API.  
+- Current state: Working
 
-　　This API is based on libhv in C++ and will be initialized as the backend database starts, and serves as an interface between node.js and database.  The API creates an HTTP server as a RESTful API.  
-
-　　Current state: Working
-
-Login
+## Login
 /login/:userName/:password
-POST
+### POST
 create (and encrypt?) login information
-Parameters
-All two parameters (userName, password) should be provided.
-Return Values
-200 Succeed login
-400 Bad Request
-505 Invalid information
+#### Parameters
+- All two parameters (userName, password) should be provided.
+#### Return Values
+- 200 Succeed login
+- 400 Bad Request
+- 505 Invalid information
 
-Keys
+## Keys
 /keys/:contactName
-GET
+### GET
 Get key’s information based on name 
-Return Body
-application/json: { name: “string”, email: “string”, [tag: “string”, …] }
-Return Values
-200 OK
-400 Bad Request
-404 Not Found
+#### Return Body
+- application/json: { name: “string”, email: “string”, [tag: “string”, …] }
+#### Return Values
+- 200 OK
+- 400 Bad Request
+- 404 Not Found
 
-POST/PUT
+### POST/PUT
 Create/Modify a key.
-Parameters
-All two parameters (contactName, email) should be provided.
-Return Values
-200 OK (PUT)
-201 Created (POST)
-400 Bad Request
-404 Not Found: The key cannot be updated since it does not exist. (PUT)
-406 Not Acceptable: Key is not created.
-410 Conflict: This will be returned when the key is conflicted with name.
-500 Internal Error: The API cannot perform remove and add contact. (PUT)
-DELETE
+#### Parameters
+- All two parameters (contactName, email) should be provided.
+#### Return Values
+- 200 OK (PUT)
+- 201 Created (POST)
+- 400 Bad Request
+- 404 Not Found: The key cannot be updated since it does not exist. (PUT)
+- 406 Not Acceptable: Key is not created.
+- 410 Conflict: This will be returned when the key is conflicted with name.
+- 500 Internal Error: The API cannot perform remove and add contact. (PUT)
+### DELETE
 Delete a key.
-Parameters
-Only contactName
-Return Values
-200 OK
-400 Bad Request: empty parameter
-404 Not Found: no specific contact
+#### Parameters
+- Only contactName
+#### Return Values
+- 200 OK
+- 400 Bad Request: empty parameter
+- 404 Not Found: no specific contact
 
-Tags
-/tags/:tagName
-GET
+## Tags
+ /tags/:tagName
+### GET
 Get tag’s information based on tagName 
-Return Body
-application/json: [{name: “string”, email: “string”}, …]
-Return Values
-200 OK
-400 Bad Request
-404 Not Found
-POST 
+#### Return Body
+- application/json: [{name: “string”, email: “string”}, …]
+#### Return Values
+- 200 OK
+- 400 Bad Request
+- 404 Not Found
+### POST 
 Create a tag.
-Parameters
-only tagName should be provided
-Return Values
-200 Created 
-400 Bad Request
-406 Not Acceptable: Tag is not created.
-DELETE
+#### Parameters
+- only tagName should be provided
+#### Return Values
+- 200 Created 
+- 400 Bad Request
+- 406 Not Acceptable: Tag is not created.
+### DELETE
 Delete a tag.
-Parameters
-Only tagName
-Return Values
-200 OK
-400 Bad Request: empty parameter
-404 Not Found: no specific tag
+#### Parameters
+- Only tagName
+#### Return Values
+- 200 OK
+- 400 Bad Request: empty parameter
+- 404 Not Found: no specific tag
 
-Books
+## Books
 books/:contactName/:tagName
-POST/PUT
+### POST/PUT
 Create a tag for the contactName.
-Parameters
-Both contactName and tagName must be provided.
-Return Values
-200 tag contactName with existing tag
-201 created a new tag and tag contactName with it
-400 Bad Request
-404 Not Found: no specific contactName
-406 Not Acceptable: Tag is not created.
-500 Internal Error: The API cannot perform remove and add tag. (PUT)
-DELETE
+#### Parameters
+- Both contactName and tagName must be provided.
+#### Return Values
+- 200 tag contactName with existing tag
+- 201 created a new tag and tag contactName with it
+- 400 Bad Request
+- 404 Not Found: no specific contactName
+- 406 Not Acceptable: Tag is not created.
+- 500 Internal Error: The API cannot perform remove and add tag. (PUT)
+### DELETE
 Delete a tag for given contactName.
-Parameters
-Both contactName and tagName
-Return Values
-200 OK
-400 Bad Request: empty parameter
-404 Not Found: no specific contactName
-405 Not Found: no specific tagName for given contactName
+#### Parameters
+- Both contactName and tagName
+#### Return Values
+- 200 OK
+- 400 Bad Request: empty parameter
+- 404 Not Found: no specific contactName
+- 405 Not Found: no specific tagName for given contactName
 
 
