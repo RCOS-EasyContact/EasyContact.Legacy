@@ -2,5 +2,24 @@
 This Guide Will Help You Install Easy Contact
 
 ## Required Softwares
-1. CMake
-2. Node.js
+- Frontend
+  - Nodejs
+- Backend
+  - Make
+  - Clang
+
+## Compile
+Clone the Repository:
+```shell
+git clone https://github.com/RCOS-EasyContact/EasyContact.git
+cd EasyContact/
+```
+Update Sub-Modules:
+```shell
+git submodule update --init --recursive
+```
+Make Backend:
+```shell
+cd Backend/
+make
+```
