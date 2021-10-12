@@ -27,5 +27,5 @@ git submodule update --init --recursive
 Make Backend:
 ```shell
 cd Backend/
-make
+make Release
 ```
