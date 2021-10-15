@@ -24,7 +24,7 @@ template <typename T> class GlobalMutex {
 
  public:
   std::mutex Mutex;
-  GlobalMutex(T *pValue) : pDATA(pValue) {}
+  explicit GlobalMutex(T *pValue) : pDATA(pValue) {}
   ~GlobalMutex() { delete pDATA; }
   T &operator*() { return *pDATA; }
   T *operator->() { return pDATA; }
