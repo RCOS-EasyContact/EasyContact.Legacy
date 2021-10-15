@@ -25,7 +25,7 @@ Get key’s information based on name
 #### Return Body
 ```json
 application/json: 
-{ name: "string", email: "string", [tag: "string", ...] }
+{ "name": "string", "email": "string", ["tag": "string", ...] }
 ```
 #### Return Values
 - `200` OK
@@ -70,7 +70,7 @@ Get tag’s information based on `tagName`
 #### Return Body
 ```json
 application/json: 
-[{name: "string", email: "string"}, ...]
+[{"name": "string", "email": "string"}, ...]
 ```
 
 #### Return Values
