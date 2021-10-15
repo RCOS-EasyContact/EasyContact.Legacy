@@ -16,8 +16,8 @@
 #include <mutex>
 #include <thread>
 // EasyContact Header Files
-#include "ContactSystem/Books.hpp"
-#include "ContactSystem/Key.hpp"
+#include "../ContactSystem/Books.hpp"
+#include "../ContactSystem/Key.hpp"
 #include "GlobalMutex.hpp"
 // Global Representation
 GM::GlobalMutex<BCS::Books> ContactBook(new BCS::Books);
