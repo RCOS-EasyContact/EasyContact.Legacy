@@ -14,8 +14,8 @@ function ConversationList() {
                 </div>
             </div>
             <div className="conversation">
-                <img src={require("../../images/profiles/kim.jpeg")} alt="Kim O'Neil" />
-                <div className="title-text">Kim O'Neil</div>
+                <img src={require("../../images/profiles/kim.jpeg")} alt="Kim Neil" />
+                <div className="title-text">Kim Neil</div>
                 <div className="created-date">2 days ago</div>
                 <div className="conversation-message">
                     Very funny, love it
