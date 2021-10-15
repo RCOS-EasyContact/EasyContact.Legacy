@@ -1,11 +1,11 @@
 /**
  * RCOS-EasyContact
- * EasyContact/Backend
- * MainExecutable.cpp
+ * EasyContact/Backend/Executable
+ * Main.cpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_MAINEXECUTABLE_CPP_
-#define BACKEND_MAINEXECUTABLE_CPP_
+#ifndef BACKEND_EXECUTABLE_MAIN_CPP_
+#define BACKEND_EXECUTABLE_MAIN_CPP_
 // C Standard Library
 #include <signal.h>
 #include <stdlib.h>
@@ -79,4 +79,4 @@ int main() {
             << "Unexpected Behavior, Terminating..." << std::endl;
   exit(EXIT_FAILURE);
 }
-#endif  // BACKEND_MAINEXECUTABLE_CPP_
+#endif  // BACKEND_EXECUTABLE_MAIN_CPP_

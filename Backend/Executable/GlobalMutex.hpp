@@ -1,11 +1,11 @@
 /**
  * RCOS-EasyContact
- * EasyContact/Backend/
+ * EasyContact/Backend/Executable
  * GlobalMutex.hpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_GLOBALMUTEX_HPP_
-#define BACKEND_GLOBALMUTEX_HPP_
+#ifndef BACKEND_EXECUTABLE_GLOBALMUTEX_HPP_
+#define BACKEND_EXECUTABLE_GLOBALMUTEX_HPP_
 // C++ Standard Library
 #include <mutex>
 /**
@@ -30,4 +30,4 @@ template <typename T> class GlobalMutex {
   T *operator->() { return pDATA; }
 };
 }  // namespace GM
-#endif  // BACKEND_GLOBALMUTEX_HPP_
+#endif  // BACKEND_EXECUTABLE_GLOBALMUTEX_HPP_

@@ -7,13 +7,13 @@ default: Release
 Release:
 	@rm -rf BuildTemp/ && mkdir BuildTemp
 	@$(Compiler) $(ReleaseFlags) -c -o BuildTemp/Books.o ContactSystem/Books.cpp
-	@$(Compiler) $(ReleaseFlags) -o EasyContact.so BuildTemp/*.o MainExecutable/MainExecutable.cpp
+	@$(Compiler) $(ReleaseFlags) -o EasyContact.so BuildTemp/*.o Executable/Main.cpp
 	@rm -rf BuildTemp/
 
 CodeQL:
 	@rm -rf BuildTemp/ && mkdir BuildTemp
 	@$(Compiler) $(CodeQLFlags) -c -o BuildTemp/Books.o ContactSystem/Books.cpp
-	@$(Compiler) $(CodeQLFlags) -o CodeQL-Main.so BuildTemp/*.o MainExecutable/MainExecutable.cpp
+	@$(Compiler) $(CodeQLFlags) -o CodeQL-Main.so BuildTemp/*.o Executable/Main.cpp
 	@rm -rf BuildTemp/
 
 Clean:
