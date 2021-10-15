@@ -5,7 +5,7 @@ function ConversationList() {
     return (
         <div id="conversation-list">
             <div className="conversation active">
-                <img src={require("../../images/profiles/daryl.png")} alt="Daryl Duckmanton" />
+                <img src={require("../../images/profiles/daryl.png").default} alt="Daryl Duckmanton" />
                 <div className="title-text">Daryl Duckmanton</div>
                 <div className="created-date">Apr 16</div>
                 <div className="conversation-message">
@@ -13,7 +13,7 @@ function ConversationList() {
                 </div>
             </div>
             <div className="conversation">
-                <img src={require("../../images/profiles/kim.jpeg")} alt="Kim Neil" />
+                <img src={require("../../images/profiles/kim.jpeg").default} alt="Kim Neil" />
                 <div className="title-text">Kim Neil</div>
                 <div className="created-date">2 days ago</div>
                 <div className="conversation-message">
@@ -21,7 +21,7 @@ function ConversationList() {
                 </div>
             </div>
             <div className="conversation">
-                <img src={require("../../images/profiles/john.jpeg")} alt="John Anderson" />
+                <img src={require("../../images/profiles/john.jpeg").default} alt="John Anderson" />
                 <div className="title-text">John Anderson</div>
                 <div className="created-date">1 week ago</div>
                 <div className="conversation-message">
@@ -29,7 +29,7 @@ function ConversationList() {
                 </div>
             </div>
             <div className="conversation">
-                <img src={require("../../images/profiles/ben.png")} alt="Ben Smith" />
+                <img src={require("../../images/profiles/ben.png").default} alt="Ben Smith" />
                 <div className="title-text">Ben Smith</div>
                 <div className="created-date">2:49 PM</div>
                 <div className="conversation-message">
@@ -37,7 +37,7 @@ function ConversationList() {
                 </div>
             </div>
             <div className="conversation">
-                <img src={require("../../images/profiles/douglas.png")} alt="Douglas Johannasen" />
+                <img src={require("../../images/profiles/douglas.png").default} alt="Douglas Johannasen" />
                 <div className="title-text">Douglas Johannasen</div>
                 <div className="created-date">6:14 PM</div>
                 <div className="conversation-message">
@@ -45,7 +45,7 @@ function ConversationList() {
                 </div>
             </div>
             <div className="conversation">
-                <img src={require("../../images/profiles/jacob.png")} alt="Jacob Manly" />
+                <img src={require("../../images/profiles/jacob.png").default} alt="Jacob Manly" />
                 <div className="title-text">Jacob Manly</div>
                 <div className="created-date">3 secs ago</div>
                 <div className="conversation-message">
@@ -53,7 +53,7 @@ function ConversationList() {
                 </div>
             </div>
             <div className="conversation">
-                <img src={require("../../images/profiles/stacey.jpeg")} alt="Stacey Wilson" />
+                <img src={require("../../images/profiles/stacey.jpeg").default} alt="Stacey Wilson" />
                 <div className="title-text">Stacey Wilson</div>
                 <div className="created-date">30 mins ago</div>
                 <div className="conversation-message">
@@ -61,7 +61,7 @@ function ConversationList() {
                 </div>
             </div>
             <div className="conversation">
-                <img src={require("../../images/profiles/stan.jpeg")} alt="Stan George" />
+                <img src={require("../../images/profiles/stan.jpeg").default} alt="Stan George" />
                 <div className="title-text">Stan George</div>
                 <div className="created-date">1 week ago</div>
                 <div className="conversation-message">
@@ -69,7 +69,7 @@ function ConversationList() {
                 </div>
             </div>
             <div className="conversation">
-                <img src={require("../../images/profiles/sarah.jpeg")} alt="Sarah Momes" />
+                <img src={require("../../images/profiles/sarah.jpeg").default} alt="Sarah Momes" />
                 <div className="title-text">Sarah Momes</div>
                 <div className="created-date">1 year ago</div>
                 <div className="conversation-message">
