@@ -1,7 +1,6 @@
 import React from 'react';
 
 import './Conversation-List.css';
-//forget to finished images/profiles 
 function ConversationList() {
     return (
         <div id="conversation-list">
