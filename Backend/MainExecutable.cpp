@@ -13,6 +13,7 @@
 #include <unistd.h>
 // C++ Standard Library
 #include <iostream>
+#include <thread>
 // EasyContact Header Files
 #include "ContactSystem/Key.hpp"
 #include "ContactSystem/Books.hpp"
