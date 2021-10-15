@@ -1,11 +1,11 @@
 /**
  * RCOS-EasyContact
- * EasyContact/Backend
- * SignalHandler.h
+ * EasyContact/Backend/Executable
+ * Main.cpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_SIGNALHANDLER_H_
-#define BACKEND_SIGNALHANDLER_H_
+#ifndef BACKEND_EXECUTABLE_MAIN_CPP_
+#define BACKEND_EXECUTABLE_MAIN_CPP_
 // C Standard Library
 #include <signal.h>
 #include <stdlib.h>
@@ -13,7 +13,14 @@
 #include <unistd.h>
 // C++ Standard Library
 #include <iostream>
-// ContactSystem Header Files
+#include <mutex>
+#include <thread>
+// EasyContact Header Files
+#include "../ContactSystem/Books.hpp"
+#include "../ContactSystem/Key.hpp"
+#include "GlobalMutex.hpp"
+// Global Representation
+GM::GlobalMutex<BCS::Books> ContactBook(new BCS::Books);
 /**
  * Handles Different Signals
  */
@@ -59,4 +66,17 @@ void REG_SIGACTION() {
   sigaction(SIGUSR1, &SIG_ACTION, 0);
   sigaction(SIGINT, &SIG_ACTION, 0);
 }
-#endif  // BACKEND_SIGNALHANDLER_H_
+int main() {
+  // Reg Sigactions
+  REG_SIGACTION();
+  // Create Pthreads for Each Function
+  // std::thread();
+  // Main Executable Waits for Signal
+  while (true) {
+    pause();
+  }
+  std::cerr << "EasyContact: "
+            << "Unexpected Behavior, Terminating..." << std::endl;
+  exit(EXIT_FAILURE);
+}
+#endif  // BACKEND_EXECUTABLE_MAIN_CPP_
