@@ -17,10 +17,10 @@ namespace BDO {
  * Data Stored in .csv Format
  * @param <uint8_t> : Elements Per Line
  * @param <std::string> : File Name
- * @return <std::vector<std::string>> : Data Read From File
+ * @return <std::vector<std::vector<std::string>>> : Data Read From File
  */
-std::vector<std::string> LoadFromDisk(const uint8_t &ElementsPerLine,
-                                      const std::string &FileName);
+std::vector<std::vector<std::string>> LoadFromDisk(const uint8_t &ElementsPerLine,
+                                                   const std::string &FileName);
 /**
  * Save Data To Hard Disk
  * Data Stored in .csv Format
