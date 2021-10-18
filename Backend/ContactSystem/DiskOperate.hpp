@@ -29,6 +29,6 @@ std::vector<std::vector<std::string>> LoadFromDisk(const uint8_t &ElementsPerLin
  * @param <std::vector<std::string>> : Data to be Saved
  */
 void SaveToDisk(const uint8_t &ElementsPerLine, const std::string &FileName,
-                const std::vector<std::string> &Data);
+                const std::vector<std::vector<std::string>>> &Data);
 }  // namespace BDO
 #endif  // BACKEND_CONTACTSYSTEM_DISKOPERATE_HPP_

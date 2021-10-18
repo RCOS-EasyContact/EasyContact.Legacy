@@ -50,7 +50,18 @@ std::vector<std::vector<std::string>> LoadFromDisk(const uint8_t &ElementsPerLin
     return group;
 }
 void SaveToDisk(const uint8_t &ElementsPerLine, const std::string &FileName,
-                const std::vector<std::string> &Data){
-
+                const std::vector<std::vector<std::string>> &Data){
+    std::ofstream file (FileName);
+    if(file.is_open()){
+        for(int i=0, i<Data.size(), i++){
+            for(int j=0, j<Data[i].size(), j++){
+                for(int k=0, k<Data[i][j].size(), k++){
+                    std::cout << Data[i][j][k] << ',';               
+                }
+                std::cout << '\n';
+            }
+        }
+    }
+    file.close();
 }
 #endif  // BACKEND_CONTACTSYSTEM_DiskOperate_CPP_
