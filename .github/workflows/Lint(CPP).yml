@@ -23,4 +23,4 @@ jobs:
       run: pip install cpplint
       
     - name: Run Lint
-      run: cpplint --recursive .
+      run: cpplint --filter=-build/c++11 --recursive .
