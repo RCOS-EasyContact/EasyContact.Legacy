@@ -11,8 +11,8 @@
 #include <string>
 #include <utility>
 // Standard Template Library
-#include <map>
-#include <set>
+#include <unordered_map>
+#include <unordered_set>
 // Backend/ContactSystem
 #include "Key.hpp"
 /**
@@ -27,8 +27,8 @@ namespace BCS {
  * Contacts & Tags
  */
 class Books {
-  std::set<BCS::Key> _DB;
-  std::map<std::string, std::set<std::string>> _TAGS;
+  std::unordered_set<BCS::Key> _DB;
+  std::unordered_map<std::string, std::unordered_set<std::string>> _TAGS;
 
  public:
   /**
@@ -67,14 +67,14 @@ class Books {
   bool removeTag(const std::string &TagName);
   /**
    * Get All the Contacts
-   * @return <std::set<BCS::Key>> : All Contacts
+   * @return <std::unordered_set<BCS::Key>> : All Contacts
    */
-  const std::set<BCS::Key> &getAllContacts();
+  const std::unordered_set<BCS::Key> &getAllContacts();
   /**
    * Get All Tag Names
-   * @return <std::set<std::string>> : All Tag Names
+   * @return <std::unordered_set<std::string>> : All Tag Names
    */
-  std::set<std::string> getAllTags();
+  std::unordered_set<std::string> getAllTags();
   /**
    * Assign A Existing Tag to One Contact
    * @param <std::string> : Tag Name
@@ -95,15 +95,15 @@ class Books {
   /**
    * Get All Contacts Tagged with the Tag Name
    * @param <std::string> : Tag Name
-   * @return <std::set<std::string>> : All Contacts With This Tag
+   * @return <std::unordered_set<std::string>> : All Contacts With This Tag
    */
-  std::set<std::string> getTagContains(const std::string &TagName);
+  std::unordered_set<std::string> getTagContains(const std::string &TagName);
   /**
    * Get All Tags Associated with one Contact
    * @param <std::string> : Contact Name
-   * @return <std::set<std::string>> : All Tags Associated
+   * @return <std::unordered_set<std::string>> : All Tags Associated
    */
-  std::set<std::string> getNameInTags(const std::string &ContactName);
+  std::unordered_set<std::string> getNameInTags(const std::string &ContactName);
 };
 }  // namespace BCS
 #endif  // BACKEND_CONTACTSYSTEM_BOOKS_HPP_

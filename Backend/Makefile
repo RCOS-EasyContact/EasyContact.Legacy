@@ -1,19 +1,19 @@
-Clang=g++
+Compiler=clang++
 ReleaseFlags=-O2 -w -pthread -std=gnu++17
 CodeQLFlags=-O0 -g -Wall -Wextra -Werror -pthread -std=gnu++17
 
 default: Release
 
-Release: MainExecutable.cpp
+Release:
 	@rm -rf BuildTemp/ && mkdir BuildTemp
-	@$(Clang) $(ReleaseFlags) -c -o BuildTemp/Books.o ContactSystem/Books.cpp
-	@$(Clang) $(ReleaseFlags) -o EasyContact.so BuildTemp/*.o MainExecutable.cpp
+	@$(Compiler) $(ReleaseFlags) -c -o BuildTemp/Books.o ContactSystem/Books.cpp
+	@$(Compiler) $(ReleaseFlags) -o EasyContact.so BuildTemp/*.o Executable/Main.cpp
 	@rm -rf BuildTemp/
 
-CodeQL: MainExecutable.cpp
+CodeQL:
 	@rm -rf BuildTemp/ && mkdir BuildTemp
-	@$(Clang) $(CodeQLFlags) -c -o BuildTemp/Books.o ContactSystem/Books.cpp
-	@$(Clang) $(CodeQLFlags) -o CodeQL-Main.so BuildTemp/*.o MainExecutable.cpp
+	@$(Compiler) $(CodeQLFlags) -c -o BuildTemp/Books.o ContactSystem/Books.cpp
+	@$(Compiler) $(CodeQLFlags) -o CodeQL-Main.so BuildTemp/*.o Executable/Main.cpp
 	@rm -rf BuildTemp/
 
 Clean:
