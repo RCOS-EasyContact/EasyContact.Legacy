@@ -1,12 +1,12 @@
 /**
  * RCOS-EasyContact
  * EasyContact/Backend/ContactSystem
- * DiskOperate.cpp
+ * DiskRW.cpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_CONTACTSYSTEM_DISKOPERATE_CPP_
-#define BACKEND_CONTACTSYSTEM_DISKOPERATE_CPP_
-#include "DiskOperate.hpp"
+#ifndef BACKEND_CONTACTSYSTEM_DISKRW_CPP_
+#define BACKEND_CONTACTSYSTEM_DISKRW_CPP_
+#include "DiskRW.hpp"
 void BDO::LoadFromDisk(const uint8_t &ElementsPerLine,
                        const std::string &FileName,
                        std::vector<std::vector<std::string>> &Data) {
@@ -22,7 +22,7 @@ void BDO::LoadFromDisk(const uint8_t &ElementsPerLine,
       int start = 0;
       int end = 0;
       // Run through each character
-      for (unsigned int i = 0; i < line.length() - 1; ++i) {
+      for (size_t i = 0; i < line.length() - 1; ++i) {
         // get current character
         char tmp1 = line[i];
         // If the Contact info start
@@ -51,9 +51,9 @@ void BDO::SaveToDisk(const uint8_t &ElementsPerLine,
                      const std::vector<std::vector<std::string>> &Data) {
   std::ofstream file(FileName);
   if (file.is_open()) {
-    for (int i = 0, i < Data.size(), ++i) {
-      for (int j = 0, j < Data[i].size(), ++j) {
-        for (int k = 0, k < Data[i][j].size(), ++k) {
+    for (size_t i = 0, i < Data.size(), ++i) {
+      for (size_t j = 0, j < Data[i].size(), ++j) {
+        for (size_t k = 0, k < Data[i][j].size(), ++k) {
           file << Data[i][j][k] << k == Data[i][j].size() - 1 ? '\n' : ',';
         }
       }
@@ -61,4 +61,4 @@ void BDO::SaveToDisk(const uint8_t &ElementsPerLine,
   }
   file.close();
 }
-#endif  // BACKEND_CONTACTSYSTEM_DISKOPERATE_CPP_
+#endif  // BACKEND_CONTACTSYSTEM_DISKRW_CPP_

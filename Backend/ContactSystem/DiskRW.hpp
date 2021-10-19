@@ -1,11 +1,11 @@
 /**
  * RCOS-EasyContact
  * EasyContact/Backend/ContactSystem
- * DiskOperate.hpp
+ * DiskRW.hpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_CONTACTSYSTEM_DISKOPERATE_HPP_
-#define BACKEND_CONTACTSYSTEM_DISKOPERATE_HPP_
+#ifndef BACKEND_CONTACTSYSTEM_DISKRW_HPP_
+#define BACKEND_CONTACTSYSTEM_DISKRW_HPP_
 // C++ Standard Library
 #include <fstream>
 #include <string>
@@ -31,4 +31,4 @@ void LoadFromDisk(const uint8_t &ElementsPerLine, const std::string &FileName,
 void SaveToDisk(const uint8_t &ElementsPerLine, const std::string &FileName,
                 const std::vector < std::vector < std::string >>> &Data);
 }  // namespace BDO
-#endif  // BACKEND_CONTACTSYSTEM_DISKOPERATE_HPP_
+#endif  // BACKEND_CONTACTSYSTEM_DISKRW_HPP_
