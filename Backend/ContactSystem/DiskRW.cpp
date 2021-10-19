@@ -44,16 +44,20 @@ void BDO::LoadFromDisk(const uint8_t &ElementsPerLine,
 void BDO::SaveToDisk(const uint8_t &ElementsPerLine,
                      const std::string &FileName,
                      const std::vector<std::vector<std::string>> &Data) {
-  std::ofstream file(FileName);
-  if (file.is_open()) {
-    for (size_t i = 0, i < Data.size(), ++i) {
-      for (size_t j = 0, j < Data[i].size(), ++j) {
-        for (size_t k = 0, k < Data[i][j].size(), ++k) {
-          file << Data[i][j][k] << k == Data[i][j].size() - 1 ? '\n' : ',';
-        }
+  std::ofstream FILE(FileName);
+  if (!FILE.is_open()) {
+    std::cerr << "Run-time Warning: " << std::endl
+              << "LoadFromDisk:"
+              << "File Not Exist" << std : endl;
+    return;
+  }
+  for (size_t i = 0; i < Data.size(); ++i) {
+    for (size_t j = 0; j < Data[i].size(); ++j) {
+      for (size_t k = 0; k < Data[i][j].size(); ++k) {
+        FILE << Data[i][j][k] << k == Data[i][j].size() - 1 ? '\n' : ',';
       }
     }
   }
-  file.close();
+  FILE.close();
 }
 #endif  // BACKEND_CONTACTSYSTEM_DISKRW_CPP_
