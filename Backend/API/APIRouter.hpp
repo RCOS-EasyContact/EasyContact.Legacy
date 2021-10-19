@@ -6,11 +6,16 @@
  */
 #ifndef BACKEND_API_APIROUTER_HPP_
 #define BACKEND_API_APIROUTER_HPP_
+// C++ Standard Library
+#include <string>
+// Standard Template Library
+#include <unordered_set>
+// Local Headers
 #include "../ContactSystem/Books.hpp"
 #include "hv/HttpService.h"
 
 class APIRouter {
-public:
+ public:
   static int pre(HttpRequest *req, HttpResponse *resp) {
     resp->content_type = APPLICATION_JSON;
     req->ParseBody();
