@@ -17,7 +17,11 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Install Lint
+        run: npm install --save-dev stylelint stylelint-config-standard
+
       - name: Run Lint
         uses: wearerequired/lint-action@v1
         with:
           stylelint: true
+
