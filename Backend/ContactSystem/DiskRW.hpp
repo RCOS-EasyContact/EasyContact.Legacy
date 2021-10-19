@@ -8,6 +8,7 @@
 #define BACKEND_CONTACTSYSTEM_DISKRW_HPP_
 // C++ Standard Library
 #include <fstream>
+#include <iostream>
 #include <string>
 // Standard Template Library
 #include <vector>
