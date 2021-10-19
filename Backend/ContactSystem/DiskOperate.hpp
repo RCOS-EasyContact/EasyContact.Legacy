@@ -17,10 +17,10 @@ namespace BDO {
  * Data Stored in ".csv" Format
  * @param <uint8_t> : Elements Per Line
  * @param <std::string> : File Name
- * @return <std::vector<std::vector<std::string>>> : Data Read From File
+ * @param <std::vector<std::vector<std::string>>> : Data Read From File
  */
-std::vector<std::vector<std::string>> LoadFromDisk(const uint8_t &ElementsPerLine,
-                                                   const std::string &FileName);
+void LoadFromDisk(const uint8_t &ElementsPerLine, const std::string &FileName,
+                  std::vector<std::vector<std::string>> &Data);
 /**
  * Save Data To Hard Disk
  * Data Stored in ".csv" Format
@@ -29,6 +29,6 @@ std::vector<std::vector<std::string>> LoadFromDisk(const uint8_t &ElementsPerLin
  * @param <std::vector<std::vector<std::string>>> : Data to be Saved
  */
 void SaveToDisk(const uint8_t &ElementsPerLine, const std::string &FileName,
-                const std::vector<std::vector<std::string>>> &Data);
+                const std::vector < std::vector < std::string >>> &Data);
 }  // namespace BDO
 #endif  // BACKEND_CONTACTSYSTEM_DISKOPERATE_HPP_
