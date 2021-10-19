@@ -70,7 +70,7 @@ Get tag’s information based on `tagName`
 #### Return Body
 ```json
 application/json: 
-[{"name": "string", "email": "string"}, ...]
+[{"name": "string"}, ...]
 ```
 
 #### Return Values
