@@ -7,8 +7,7 @@
 #ifndef BACKEND_DISKRW_DATAREADWRITE_CPP_
 #define BACKEND_DISKRW_DATAREADWRITE_CPP_
 #include "DataReadWrite.hpp"
-void DRW::LoadFromDisk(const uint8_t &ElementsPerLine,
-                       const std::string &FileName,
+void DRW::LoadFromDisk(const std::string &FileName,
                        std::vector<std::vector<std::string>> &Data) {
   std::ifstream FILE;
   FILE.open(FileName);
@@ -41,8 +40,7 @@ void DRW::LoadFromDisk(const uint8_t &ElementsPerLine,
   }
   FILE.close();
 }
-void DRW::SaveToDisk(const uint8_t &ElementsPerLine,
-                     const std::string &FileName,
+void DRW::SaveToDisk(const std::string &FileName,
                      const std::vector<std::vector<std::string>> &Data) {
   std::ofstream FILE(FileName);
   if (!FILE.is_open()) {
@@ -51,11 +49,11 @@ void DRW::SaveToDisk(const uint8_t &ElementsPerLine,
               << "File Could Not Be Created" << std::endl;
     return;
   }
-  for (size_t i = 0; i < Data.size(); ++i) {
-    for (size_t j = 0; j < Data[i].size(); ++j) {
-      for (size_t k = 0; k < Data[i][j].size(); ++k) {
-        FILE << Data[i][j][k] << (k == Data[i][j].size() - 1) ? "\n" : ",";
-      }
+  for (std::vector<std::vector<std::string>>::const_iterator A = Data.begin();
+       A != Data.end(); ++A) {
+    for (std::vector<std::string>::const_iterator B = A->begin();
+         B != A->end();) {
+      FILE << *B << (++B == A->end() ? "\n" : ",");
     }
   }
   FILE.close();

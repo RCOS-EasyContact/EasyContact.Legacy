@@ -16,20 +16,18 @@ namespace DRW {
 /**
  * Load Data From Hard Disk
  * Data Stored in ".csv" Format
- * @param <uint8_t> : Elements Per Line
  * @param <std::string> : File Name
  * @param <std::vector<std::vector<std::string>>> : Data Read From File
  */
-void LoadFromDisk(const uint8_t &ElementsPerLine, const std::string &FileName,
+void LoadFromDisk(const std::string &FileName,
                   std::vector<std::vector<std::string>> &Data);
 /**
  * Save Data To Hard Disk
  * Data Stored in ".csv" Format
- * @param <uint8_t> : Elements Per Line
  * @param <std::string> : File Name
  * @param <std::vector<std::vector<std::string>>> : Data to be Saved
  */
-void SaveToDisk(const uint8_t &ElementsPerLine, const std::string &FileName,
-                const std::vector < std::vector < std::string >> &Data);
+void SaveToDisk(const std::string &FileName,
+                const std::vector<std::vector<std::string>> &Data);
 }  // namespace DRW
 #endif  // BACKEND_DISKRW_DATAREADWRITE_HPP_
