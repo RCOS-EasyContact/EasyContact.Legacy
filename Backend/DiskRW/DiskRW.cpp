@@ -1,13 +1,13 @@
 /**
  * RCOS-EasyContact
- * EasyContact/Backend/ContactSystem
+ * EasyContact/Backend/DiskRW
  * DiskRW.cpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_CONTACTSYSTEM_DISKRW_CPP_
-#define BACKEND_CONTACTSYSTEM_DISKRW_CPP_
+#ifndef BACKEND_DISKRW_DISKRW_CPP_
+#define BACKEND_DISKRW_DISKRW_CPP_
 #include "DiskRW.hpp"
-void BDO::LoadFromDisk(const uint8_t &ElementsPerLine,
+void DRW::LoadFromDisk(const uint8_t &ElementsPerLine,
                        const std::string &FileName,
                        std::vector<std::vector<std::string>> &Data) {
   std::ifstream FILE;
@@ -41,7 +41,7 @@ void BDO::LoadFromDisk(const uint8_t &ElementsPerLine,
   }
   FILE.close();
 }
-void BDO::SaveToDisk(const uint8_t &ElementsPerLine,
+void DRW::SaveToDisk(const uint8_t &ElementsPerLine,
                      const std::string &FileName,
                      const std::vector<std::vector<std::string>> &Data) {
   std::ofstream FILE(FileName);
@@ -60,4 +60,4 @@ void BDO::SaveToDisk(const uint8_t &ElementsPerLine,
   }
   FILE.close();
 }
-#endif  // BACKEND_CONTACTSYSTEM_DISKRW_CPP_
+#endif  // BACKEND_DISKRW_DISKRW_CPP_

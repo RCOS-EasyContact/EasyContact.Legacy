@@ -1,18 +1,18 @@
 /**
  * RCOS-EasyContact
- * EasyContact/Backend/ContactSystem
+ * EasyContact/Backend/DiskRW
  * DiskRW.hpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_CONTACTSYSTEM_DISKRW_HPP_
-#define BACKEND_CONTACTSYSTEM_DISKRW_HPP_
+#ifndef BACKEND_DISKRW_DISKRW_HPP_
+#define BACKEND_DISKRW_DISKRW_HPP_
 // C++ Standard Library
 #include <fstream>
 #include <iostream>
 #include <string>
 // Standard Template Library
 #include <vector>
-namespace BDO {
+namespace DRW {
 /**
  * Load Data From Hard Disk
  * Data Stored in ".csv" Format
@@ -31,5 +31,5 @@ void LoadFromDisk(const uint8_t &ElementsPerLine, const std::string &FileName,
  */
 void SaveToDisk(const uint8_t &ElementsPerLine, const std::string &FileName,
                 const std::vector < std::vector < std::string >>> &Data);
-}  // namespace BDO
-#endif  // BACKEND_CONTACTSYSTEM_DISKRW_HPP_
+}  // namespace DRW
+#endif  // BACKEND_DISKRW_DISKRW_HPP_
