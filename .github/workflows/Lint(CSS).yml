@@ -20,5 +20,5 @@ jobs:
       - name: Install Lint
         run: npm install --save-dev stylelint stylelint-config-standard
 
-      - name: Run Lint
+      - name: Run Lint & Auto-Fix
         run: npx stylelint "**/*.css" --fix
