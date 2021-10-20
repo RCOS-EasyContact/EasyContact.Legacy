@@ -5,9 +5,9 @@
 ## Badges
 | Language | CodeQL | Lint |
 | -------- | ------ | ---- |
-| C++ | [![CodeQL(CPP)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/CodeQL(CPP).yml/badge.svg?branch=R-MAIN)](.github/workflows/CodeQL(CPP).yml) | [![Lint(CPP)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/Lint(CPP).yml/badge.svg?branch=R-MAIN)]((.github/workflows/Lint(CPP).yml)) |
-| JavaScript | [![CodeQL(JavaScript)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/CodeQL(JavaScript).yml/badge.svg?branch=R-MAIN)]((.github/workflows/CodeQL(JavaScript).yml)) | Not Available :no_entry_sign: |
-| CSS | Not Available :no_entry_sign: | [![Lint(CSS)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/Lint(CSS).yml/badge.svg?branch=R-MAIN)]((.github/workflows/Lint(CSS).yml)) |
+| C++ | [![CodeQL(CPP)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/CodeQL(CPP).yml/badge.svg?branch=R-MAIN)](.github/workflows/CodeQL(CPP).yml) | [![Lint(CPP)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/Lint(CPP).yml/badge.svg?branch=R-MAIN)](.github/workflows/Lint(CPP).yml) |
+| JavaScript | [![CodeQL(JavaScript)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/CodeQL(JavaScript).yml/badge.svg?branch=R-MAIN)](.github/workflows/CodeQL(JavaScript).yml) | Not Available :no_entry_sign: |
+| CSS | Not Available :no_entry_sign: | [![Lint(CSS)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/Lint(CSS).yml/badge.svg?branch=R-MAIN)](.github/workflows/Lint(CSS).yml) |
 
 <!--
 [![Github All Releases](https://img.shields.io/github/downloads/RCOS-EasyContact/EasyContact/total.svg)]()
