@@ -1,11 +1,11 @@
 /**
  * RCOS-EasyContact
  * EasyContact/Backend/DiskRW
- * DiskRW.cpp
+ * DataReadWrite.cpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_DISKRW_DISKRW_CPP_
-#define BACKEND_DISKRW_DISKRW_CPP_
+#ifndef BACKEND_DISKRW_DATAREADWRITE_CPP_
+#define BACKEND_DISKRW_DATAREADWRITE_CPP_
 #include "DiskRW.hpp"
 void DRW::LoadFromDisk(const uint8_t &ElementsPerLine,
                        const std::string &FileName,
@@ -60,4 +60,4 @@ void DRW::SaveToDisk(const uint8_t &ElementsPerLine,
   }
   FILE.close();
 }
-#endif  // BACKEND_DISKRW_DISKRW_CPP_
+#endif  // BACKEND_DISKRW_DATAREADWRITE_CPP_
