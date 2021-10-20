@@ -9,6 +9,7 @@
 // C++ Standard Library
 #include <fstream>
 #include <iostream>
+#include <sstream>
 #include <string>
 // Standard Template Library
 #include <vector>

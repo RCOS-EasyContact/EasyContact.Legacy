@@ -17,26 +17,15 @@ void DRW::LoadFromDisk(const std::string &FileName,
               << "File Not Exist" << std::endl;
     return;
   }
-  std::string line;
-  while (getline(FILE, line)) {
-    std::vector<std::string> OneLine;
-    int start = 0;
-    int end = 0;
-    for (size_t i = 0; i < line.length() - 1; ++i) {
-      char tmp1 = line[i];
-      if (tmp1 != ',' && start == 0) {
-        start = i;
-      } else if ((tmp1 == ',' || tmp1 == '\n') && end == 0) {
-        end = i - start;
-      }
-      if (start != 0 && end != 0) {
-        std::string info = line.substr(start, end);
-        start = 0;
-        end = 0;
-        OneLine.push_back(info);
-      }
+  std::string LineBuffer;
+  while (getline(FILE, LineBuffer)) {
+    std::vector<std::string> DataOneLine;
+    std::stringstream SS(LineBuffer);
+    std::string BUFFER;
+    while (getline(SS, BUFFER, ',')) {
+      DataOneLine.push_back(BUFFER);
     }
-    Data->push_back(OneLine);
+    Data->push_back(DataOneLine);
   }
   FILE.close();
 }
