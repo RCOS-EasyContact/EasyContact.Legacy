@@ -9,7 +9,7 @@ on:
 jobs:
   cpplint:
     if: ${{!startsWith(github.event.head_commit.message,'[SKIP]')}}
-    name: Lint
+    name: Lint (CPP)
     runs-on: ubuntu-latest
     
     steps:
