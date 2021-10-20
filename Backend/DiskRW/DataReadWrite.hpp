@@ -30,6 +30,6 @@ void LoadFromDisk(const uint8_t &ElementsPerLine, const std::string &FileName,
  * @param <std::vector<std::vector<std::string>>> : Data to be Saved
  */
 void SaveToDisk(const uint8_t &ElementsPerLine, const std::string &FileName,
-                const std::vector < std::vector < std::string >>> &Data);
+                const std::vector < std::vector < std::string >> &Data);
 }  // namespace DRW
 #endif  // BACKEND_DISKRW_DATAREADWRITE_HPP_

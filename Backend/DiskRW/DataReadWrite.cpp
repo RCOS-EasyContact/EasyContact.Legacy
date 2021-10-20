@@ -6,7 +6,7 @@
  */
 #ifndef BACKEND_DISKRW_DATAREADWRITE_CPP_
 #define BACKEND_DISKRW_DATAREADWRITE_CPP_
-#include "DiskRW.hpp"
+#include "DataReadWrite.hpp"
 void DRW::LoadFromDisk(const uint8_t &ElementsPerLine,
                        const std::string &FileName,
                        std::vector<std::vector<std::string>> &Data) {
@@ -15,7 +15,7 @@ void DRW::LoadFromDisk(const uint8_t &ElementsPerLine,
   if (!FILE.is_open()) {
     std::cerr << "Run-time Warning: " << std::endl
               << "LoadFromDisk:"
-              << "File Not Exist" << std : endl;
+              << "File Not Exist" << std::endl;
     return;
   }
   std::string line;
@@ -47,14 +47,14 @@ void DRW::SaveToDisk(const uint8_t &ElementsPerLine,
   std::ofstream FILE(FileName);
   if (!FILE.is_open()) {
     std::cerr << "Run-time Warning: " << std::endl
-              << "LoadFromDisk:"
-              << "File Not Exist" << std : endl;
+              << "SaveFromDisk:"
+              << "File Could Not Be Created" << std::endl;
     return;
   }
   for (size_t i = 0; i < Data.size(); ++i) {
     for (size_t j = 0; j < Data[i].size(); ++j) {
       for (size_t k = 0; k < Data[i][j].size(); ++k) {
-        FILE << Data[i][j][k] << k == Data[i][j].size() - 1 ? '\n' : ',';
+        FILE << Data[i][j][k] << (k == Data[i][j].size() - 1) ? "\n" : ",";
       }
     }
   }
