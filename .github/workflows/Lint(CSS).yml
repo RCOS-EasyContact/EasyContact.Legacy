@@ -10,7 +10,7 @@ on:
 jobs:
   run-linters:
     if: ${{!startsWith(github.event.head_commit.message,'[SKIP]')}}
-    name: Lint
+    name: Lint (CSS)
     runs-on: ubuntu-latest
 
     steps:
