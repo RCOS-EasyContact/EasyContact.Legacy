@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/RCOS-EasyContact/EasyContact/blob/R-MAIN/.FILES/LOGO_NEW_SVG.svg" width="50%" title="Easy Contact Logo">
+  <img src="https://github.com/RCOS-EasyContact/EasyContact/blob/R-MAIN/.FILES/LOGO/LOGO_NEW_SVG.svg" width="50%" title="Easy Contact Logo">
 </p>
 
 ![CodeQL(JavaScript)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/CodeQL(JavaScript).yml/badge.svg?branch=R-MAIN)
