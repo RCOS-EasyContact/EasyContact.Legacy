@@ -1,0 +1,24 @@
+name: "Lint-CSS"
+
+on:
+  push:
+    branches: [ R-MAIN ]
+  pull_request:
+    branches: [ R-MAIN ]
+
+
+jobs:
+  run-linters:
+    if: ${{!startsWith(github.event.head_commit.message,'[SKIP]')}}
+    name: Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install Lint
+        run: npm install --save-dev stylelint stylelint-config-standard
+
+      - name: Run Lint & Auto-Fix
+        run: npx stylelint "**/*.css" --fix
