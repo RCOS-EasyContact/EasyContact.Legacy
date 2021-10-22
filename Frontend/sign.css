@@ -48,7 +48,6 @@
      font-size: 14px;
 }
  .rpi_font {
-     selector-class-pattern: "^[a-z][a-zA-Z0-9]+$"
      font-size: large;
      font-family: 'Courier New', Courier, monospace;
 }
