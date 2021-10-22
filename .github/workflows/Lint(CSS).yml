@@ -21,4 +21,4 @@ jobs:
         run: npm install --save-dev stylelint stylelint-config-standard
 
       - name: Run Lint & Auto-Fix
-        run: npx stylelint "**/*.css" --config .FILES/CONFIG/.stylelintrc.json --formatter string --fix
+        run: npx stylelint "**/*.css" --config .FILES/CONFIG/.stylelintrc.json --formatter json --fix
