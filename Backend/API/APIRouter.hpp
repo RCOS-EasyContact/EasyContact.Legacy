@@ -50,7 +50,7 @@ class APIRouter {
                      return 400;
                    }
                    std::string email = req->GetString("email");
-                   if (newContact(new Key(contactName, email))) {
+                   if (newContact(new BCS::Key(contactName, email))) {
                      return 200;
                    }
                    return 406;
