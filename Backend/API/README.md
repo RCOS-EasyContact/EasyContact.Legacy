@@ -6,7 +6,7 @@
 
 ## `/login`
 ### `POST /login/:userName/:password`
-create (and encrypt?) login information
+Create (and encrypt?) login information
 
 #### Parameters
 All two parameters (`userName`, `password`) should be provided.
@@ -18,48 +18,74 @@ All two parameters (`userName`, `password`) should be provided.
 
 
 
-## `/keys`
-### `GET /keys/:contactName`
-Get key’s information based on name 
-
-#### Return Body
-```json
-application/json: 
-{ "name": "string", "email": "string", ["tag": "string", ...] }
-```
-#### Return Values
-- `200` OK
-- `400` Bad Request
-- `404` Not Found
-
-
-### `POST|PUT /keys/:contactName`
-Create/Modify a key.
+## `/contacts`
+### `POST /contacts/:contactName`
+Create a contact with given `contactName`
 
 #### Parameters
-All two parameters (`contactName`, `email`) should be provided.
+`contactName` should be provided.
+
+#### Data Payload
+`email`: string
 
 #### Return Values
-- `200` OK (`PUT`)
-- `201` Created (`POST`)
+- `200` Created
 - `400` Bad Request
-- `404` Not Found: The key cannot be updated since it does not exist. (`PUT`)
-- `406` Not Acceptable: Key is not created.
-- `410` Conflict: This will be returned when the key is conflicted with name.
-- `500` Internal Error: The API cannot perform remove and add contact. (`PUT`)
+- `406` Not Acceptable: Tag is not created.
 
 
+### `DELETE /contacts/:contactName`
+Delete a contact with given `contactName`
 
-### `DELETE /keys/:contactName`
-Delete a key.
-
-#### Parameters
-Only `contactName`
+#### Parameter
+`contactName` should be provided.
 
 #### Return Values
 - `200` OK
 - `400` Bad Request: empty parameter
-- `404` Not Found: no specific contact
+- `404` Not Found: no specific contactName
+
+
+### `GET /contacts/all`
+Get all contact informations
+
+#### Return Body
+```json
+application/json: 
+[{"name": "string", "email": "string"}, /*...*/]
+```
+
+#### Return Values
+- `200` OK
+- `404` Not Found (empty)
+
+
+### `GET /contacts/tag/:contactName`
+Get all tags associate with given `contactName`
+
+#### Parameter
+`contactName` must be provided.
+
+#### Return Body
+```json
+application/json: 
+[{"tag": "string"}, /*...*/]
+```
+
+#### Return Values
+- `200` OK
+- `400` Bad Request
+
+
+### `DELETE /contacts/tag/:contactName`
+Delete all tags associate with given `contactName`
+
+#### Parameter
+`contactName` must be provided.
+
+#### Return Values
+- `200` OK
+- `400` Bad Request
 
 
 
@@ -70,12 +96,20 @@ Get tag’s information based on `tagName`
 #### Return Body
 ```json
 application/json: 
-[{"name": "string"}, ...]
+[{"name": "string"}, /*...*/]
 ```
 
 #### Return Values
 - `200` OK
 - `400` Bad Request
+- `404` Not Found
+
+
+### `GET /tags/exist/:tagName`
+Get if tag exist based on `tagName`
+
+#### Return Values
+- `200` Exist
 - `404` Not Found
 
 
@@ -105,19 +139,16 @@ Delete a tag.
 
 
 ## `/books`
-### `POST|PUT /books/:contactName/:tagName`
-Create a tag for the contactName.
+### `PUT /books/:contactName/:tagName`
+Assign a tag for the contactName.
 
 #### Parameters
 - Both `contactName` and `tagName` must be provided.
 
 #### Return Values
 - `200` tag `contactName` with existing tag
-- `201` created a new tag and tag `contactName` with it
 - `400` Bad Request
-- `404` Not Found: no specific `contactName`
-- `406` Not Acceptable: Tag is not created.
-- `500` Internal Error: The API cannot perform remove and add tag. (`PUT`)
+- `404` Not Found: no specific `tagName`
 
 
 ### `DELETE /books/:contactName/:tagName`
@@ -129,5 +160,4 @@ Delete a tag for given `contactName`.
 #### Return Values
 - `200` OK
 - `400` Bad Request: empty parameter
-- `404` Not Found: no specific contactName
-- `405` Not Found: no specific tagName for given contactName
+- `404` Not Found: no specific tagName for given contactName
