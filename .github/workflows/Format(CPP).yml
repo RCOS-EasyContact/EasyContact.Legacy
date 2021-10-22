@@ -1,1 +1,33 @@
+name: "Format-CPP"
 
+on:
+  pull_request:
+    branches: [ R-MAIN ]
+
+jobs:
+  build:
+    if: ${{!startsWith(github.event.head_commit.message,'[SKIP]')}}
+    name: Format (CPP)
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+      
+    - name: Clang-Format --Style=Google
+    - uses: DoozyX/clang-format-lint-action@v0.12
+      with:
+        source: '.'
+        extensions: 'h,c,hpp,cpp'
+        clangFormatVersion: 12
+        inplace: True
+        style: Google
+    
+    - name: Commit Changes
+    - uses: EndBug/add-and-commit@v4
+      with:
+        author_name: EasyContact-RCOS
+        author_email: 92967192+EasyContact-RCOS@users.noreply.github.com
+        message: 'Clang-Format --Style=Google'
+      env:
+        GITHUB_TOKEN: ${{ secrets.COMMIT_TOKEN }}
