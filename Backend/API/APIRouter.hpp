@@ -74,13 +74,13 @@ class APIRouter {
       if (contacts.empty()) {
         return 404;
       }
-      for(BCS::Key& k : contacts) {
+      for (BCS::Key& k : contacts) {
         resp->json.push_back({{"name", k.Name}, {"email", k.Email}})
       }
       return 200;
     });
 
-    router->GET("/contacts/tag/:contactName", 
+    router->GET("/contacts/tag/:contactName",
       [](HttpRequest *req, HttpResponse *resp) {
         std::string contactName = req->GetParam("contactName");
         if (contactName == "") {
@@ -120,7 +120,7 @@ class APIRouter {
       return 400;
     });
 
-    router->GET("/tags/exist/:tagName", 
+    router->GET("/tags/exist/:tagName",
       [](HttpRequest *req, HttpResponse *resp) {
         std::string tagName = req->GetParam("tagName");
         if (getAllTags().find(tagName)) {
@@ -152,7 +152,7 @@ class APIRouter {
     });
 
     // books
-    router->PUT("/books/:contactName/:tagName", 
+    router->PUT("/books/:contactName/:tagName",
       [](HttpRequest *req, HttpResponse *resp) {
         std::string contactName = req->GetParam("contactName");
         std::string tagName = req->GetParam("tagName");
