@@ -1,5 +1,8 @@
 import React from 'react';
 import './App.css';
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+
 import ChatShell from './chat/shell/Chat-Shell';
 
 class App extends React.Component {
