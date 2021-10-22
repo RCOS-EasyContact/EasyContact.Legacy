@@ -3,11 +3,11 @@
 </p>
 
 ## Badges
-| Language | CodeQL | Lint |
-| -------- | ------ | ---- |
-| C++ | [![CodeQL(CPP)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/CodeQL(CPP).yml/badge.svg?branch=R-MAIN)](.github/workflows/CodeQL(CPP).yml) | [![Lint(CPP)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/Lint(CPP).yml/badge.svg?branch=R-MAIN)](.github/workflows/Lint(CPP).yml) |
-| JavaScript | [![CodeQL(JavaScript)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/CodeQL(JavaScript).yml/badge.svg?branch=R-MAIN)](.github/workflows/CodeQL(JavaScript).yml) | Not Available :no_entry_sign: |
-| CSS | Not Available :no_entry_sign: | [![Lint(CSS)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/Lint(CSS).yml/badge.svg?branch=R-MAIN)](.github/workflows/Lint(CSS).yml) |
+| Language | CodeQL | Lint | Language-Specific |
+| -------- | ------ | ---- | ----------------- |
+| C++ | [![CodeQL-CPP](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/CodeQL(CPP).yml/badge.svg)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/CodeQL(CPP).yml) | [![Lint-CPP](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/Lint(CPP).yml/badge.svg)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/Lint(CPP).yml) | [![Format-CPP](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/Format(CPP).yml/badge.svg)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/Format(CPP).yml) |
+| JavaScript | [![CodeQL-JavaScript](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/CodeQL(JavaScript).yml/badge.svg)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/CodeQL(JavaScript).yml) | Not Available :no_entry_sign: | Not Available :no_entry_sign: |
+| CSS | Not Available :no_entry_sign: | [![Lint-CSS](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/Lint(CSS).yml/badge.svg)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/Lint(CSS).yml) | Not Available :no_entry_sign: |
 
 <!--
 [![Github All Releases](https://img.shields.io/github/downloads/RCOS-EasyContact/EasyContact/total.svg)]()

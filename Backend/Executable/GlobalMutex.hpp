@@ -19,7 +19,8 @@ namespace GM {
  * One Type <T> Data Block Stored on Heap,
  * Paired With A Mutex Lock
  */
-template <typename T> class GlobalMutex {
+template <typename T>
+class GlobalMutex {
   T *pDATA;
 
  public:

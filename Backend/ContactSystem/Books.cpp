@@ -51,8 +51,8 @@ void BCS::Books::clearTagFor(const std::string &ContactName) {
   }
 }
 
-std::unordered_set<std::string>
-BCS::Books::getTagContains(const std::string &TagName) {
+std::unordered_set<std::string> BCS::Books::getTagContains(
+    const std::string &TagName) {
   std::unordered_set<std::string> Result;
   const std::unordered_set<std::string> &T = _TAGS[TagName];
   for (std::unordered_set<std::string>::const_iterator i = T.begin();
@@ -61,8 +61,8 @@ BCS::Books::getTagContains(const std::string &TagName) {
   }
   return Result;
 }
-std::unordered_set<std::string>
-BCS::Books::getNameInTags(const std::string &ContactName) {
+std::unordered_set<std::string> BCS::Books::getNameInTags(
+    const std::string &ContactName) {
   std::unordered_set<std::string> Result;
   for (std::unordered_map<std::string,
                           std::unordered_set<std::string>>::const_iterator i =
