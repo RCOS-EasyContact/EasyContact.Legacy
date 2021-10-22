@@ -28,6 +28,6 @@ jobs:
       with:
         author_name: EasyContact-RCOS
         author_email: 92967192+EasyContact-RCOS@users.noreply.github.com
-        message: 'Clang-Format --Style=Google'
+        message: '[BOT] Clang-Format --Style=Google'
       env:
         GITHUB_TOKEN: ${{ secrets.COMMIT_TOKEN }}
