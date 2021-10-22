@@ -2,11 +2,9 @@ name: "CodeQL-JavaScript"
 
 on:
   push:
-    branches: [ R-NONE ]
-    # branches: [ R-MAIN ]
+    branches: [ R-MAIN ]
   pull_request:
-    branches: [ R-NONE ]
-    # branches: [ R-MAIN ]
+    branches: [ R-MAIN ]
 
 jobs:
   analyze:
