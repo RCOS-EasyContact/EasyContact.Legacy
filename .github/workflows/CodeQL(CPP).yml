@@ -31,7 +31,7 @@ jobs:
         languages: ${{ matrix.language }}
 
     - name: Build C++
-      run: cd Backend/ && make CodeQL
+      run: cd Backend/ && make Release
 
     - name: CodeQL Analysis
       uses: github/codeql-action/analyze@v1
