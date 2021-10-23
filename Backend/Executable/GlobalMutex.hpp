@@ -21,9 +21,10 @@ class GlobalMutex {
 
  public:
   explicit GlobalMutex(T *pValue) : pDATA(pValue) {}
-  ~GlobalMutex() { delete pDATA; }
-  T &operator*() { Mutex.lock();return *pDATA; }
-  T *operator->() { Mutex.lock();return pDATA; }
+  void Free() { Mutex.lock();delete pDATA;pDATA=nullptr;Mutex.unlock(); }
+  T &operator*() { return *pDATA; }
+  T *operator->() { return pDATA; }
+  void Lock(){Mutex.lock();}
   void Unlock(){Mutex.unlock();}
 };
 #endif  // BACKEND_EXECUTABLE_GLOBALMUTEX_HPP_
