@@ -42,7 +42,7 @@ void DRW::Write_UserContacts(const GlobalMutex<BCS::Books>& ContactBook) {
         std::cerr << "--> Run-time Error: " << std::endl
                   << "Write_UserContacts:"
                   << "Data Corrupted" << std::endl;
-        exit(EXIT_FAILURE);
+        exit(EXIT_FAILURE);}
         Data.push_back(std::vector<std::string>());
         Data[Index].push_back(i->Name);
         Data[Index].push_back(i->Email);
