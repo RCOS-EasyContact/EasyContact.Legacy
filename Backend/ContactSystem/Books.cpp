@@ -23,7 +23,9 @@ bool BCS::Books::removeContact(const std::string &ExistContact) {
 bool BCS::Books::removeTag(const std::string &TagName) {
   return _TAGS.erase(TagName);
 }
-const std::unordered_set<BCS::Key> &BCS::Books::getAllContacts() const { return _DB; }
+const std::unordered_set<BCS::Key> &BCS::Books::getAllContacts() const {
+  return _DB;
+}
 std::unordered_set<std::string> BCS::Books::getAllTags() const {
   std::unordered_set<std::string> Result;
   for (std::unordered_map<std::string,
@@ -62,7 +64,7 @@ std::unordered_set<std::string> BCS::Books::getTagContains(
   return Result;
 }
 std::unordered_set<std::string> BCS::Books::getNameInTags(
-    const std::string &ContactName)const {
+    const std::string &ContactName) const {
   std::unordered_set<std::string> Result;
   for (std::unordered_map<std::string,
                           std::unordered_set<std::string>>::const_iterator i =
