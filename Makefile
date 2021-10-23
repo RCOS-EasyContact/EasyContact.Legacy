@@ -14,4 +14,4 @@ Release:
 
 Clean:
 	@rm -rf BuildTemp/ || true
-	@rm -f EasyContact.so || true
+	@rm -f Executable/EasyContact.so || true
