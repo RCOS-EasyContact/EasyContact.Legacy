@@ -8,7 +8,7 @@ Release:
 	@rm -rf BuildTemp/ && mkdir BuildTemp
 	@$(Compiler) $(FullCheckingFlags) -c -o BuildTemp/Books.o Backend/ContactSystem/Books.cpp
 	@$(Compiler) $(FullCheckingFlags) -c -o BuildTemp/CSVReadWrite.o Backend/DiskRW/CSVReadWrite.cpp
-	@$(Compiler) $(FullCheckingFlags) -o Exetuable/EasyContact.so BuildTemp/*.o Backend/Executable/Main.cpp
+	@$(Compiler) $(FullCheckingFlags) -o Executable/EasyContact.so BuildTemp/*.o Backend/Executable/Main.cpp
 	@rm -rf BuildTemp/
 
 Clean:
