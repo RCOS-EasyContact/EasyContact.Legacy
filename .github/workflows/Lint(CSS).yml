@@ -1,8 +1,6 @@
 name: "Lint-CSS"
 
 on:
-  push:
-    branches: [ R-MAIN ]
   pull_request:
     branches: [ R-MAIN ]
 
