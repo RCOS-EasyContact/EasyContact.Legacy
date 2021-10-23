@@ -69,12 +69,12 @@ class Books {
    * Get All the Contacts
    * @return <std::unordered_set<BCS::Key>> : All Contacts
    */
-  const std::unordered_set<BCS::Key> &getAllContacts();
+  const std::unordered_set<BCS::Key> &getAllContacts() const;
   /**
    * Get All Tag Names
    * @return <std::unordered_set<std::string>> : All Tag Names
    */
-  std::unordered_set<std::string> getAllTags();
+  std::unordered_set<std::string> getAllTags() const;
   /**
    * Assign A Existing Tag to One Contact
    * @param <std::string> : Tag Name
@@ -97,13 +97,13 @@ class Books {
    * @param <std::string> : Tag Name
    * @return <std::unordered_set<std::string>> : All Contacts With This Tag
    */
-  std::unordered_set<std::string> getTagContains(const std::string &TagName);
+  std::unordered_set<std::string> getTagContains(const std::string &TagName) const;
   /**
    * Get All Tags Associated with one Contact
    * @param <std::string> : Contact Name
    * @return <std::unordered_set<std::string>> : All Tags Associated
    */
-  std::unordered_set<std::string> getNameInTags(const std::string &ContactName);
+  std::unordered_set<std::string> getNameInTags(const std::string &ContactName)const;
 };
 }  // namespace BCS
 #endif  // BACKEND_CONTACTSYSTEM_BOOKS_HPP_

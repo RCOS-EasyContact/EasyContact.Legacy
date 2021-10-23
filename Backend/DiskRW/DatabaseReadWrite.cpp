@@ -9,9 +9,9 @@
 #include "DatabaseReadWrite.hpp"
 void DRW::Read_UserContacts(GlobalMutex<BCS::Books>* ContactBook) {
   std::vector<std::vector<std::string>> Data;
-  LoadFromDisk("DATABASE/UserContacts.csv", &DATA);
+  LoadFromDisk("DATABASE/UserContacts.csv", &Data);
   {  // Critical Section
-    ContactBook.Lock();
+    ContactBook->Lock();
     for (std::vector<std::vector<std::string>>::const_iterator A = Data.begin();
          A != Data.end(); ++A) {
       if (A->size() != 2) {
@@ -20,25 +20,29 @@ void DRW::Read_UserContacts(GlobalMutex<BCS::Books>* ContactBook) {
                   << "Data Corrupted" << std::endl;
         exit(EXIT_FAILURE);
       }
-      if (ContactBook->newContact(BCS::Key(A->front(), A->back())) == false) {
+      if ((*ContactBook)->newContact(BCS::Key(A->front(), A->back())) == false) {
         std::cerr << "--> Run-time Warning: " << std::endl
                   << "Read_UserContacts:"
                   << "Contact Already Exist" << std::endl;
       }
     }
-    ContactBook.Unlock();
+    ContactBook->Unlock();
   }  // End Critical Section
 }
 void DRW::Write_UserContacts(const GlobalMutex<BCS::Books>& ContactBook) {
+    std::vector<std::vector<std::string>> Data;
   {  // Critical Section
     ContactBook.Lock();
-    std::vector<std::vector<std::string>> Data;
-    for (std::unordered_set<BCS::Key>::const_iterator i = ContactBook->begin();
-         i != ContactBook->end(); ++i) {
-      Data.push_back(i->Name, i->Email);
+    unsigned int Index=0;
+    const std::unordered_set<BCS::Key> Result = ContactBook->getAllContacts();
+    for (std::unordered_set<BCS::Key>::const_iterator i = Result.begin();
+         i != Result.end(); ++i,++Index) {
+           Data.push_back(std::vector<std::string>());
+      Data[Index].push_back(i->Name);
+      Data[Index].push_back( i->Email);
     }
     ContactBook.Unlock();
   }  // End Critical Section
-  SaveToDisk("DATABASE/UserContacts.csv", DATA);
+  SaveToDisk("DATABASE/UserContacts.csv", Data);
 }
 #endif  // BACKEND_DISKRW_DATABASEREADWRITE_CPP_
