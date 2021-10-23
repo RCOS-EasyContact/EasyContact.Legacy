@@ -22,7 +22,7 @@
 #include "../DiskRW/CSVReadWrite.hpp"
 #include "GlobalMutex.hpp"
 // Global Representation
-GM::GlobalMutex<BCS::Books> ContactBook(new BCS::Books);
+GlobalMutex<BCS::Books> ContactBook(new BCS::Books);
 /**
  * Handles Different Signals
  */

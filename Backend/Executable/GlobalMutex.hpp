@@ -9,11 +9,6 @@
 // C++ Standard Library
 #include <mutex>
 /**
- * EasyContact Custom Namespace
- * GM : GlobalMutex Template Class
- */
-namespace GM {
-/**
  * Template<T> Mutable Class
  * <GlobalMutex> Repersents
  * One Type <T> Data Block Stored on Heap,
@@ -22,13 +17,13 @@ namespace GM {
 template <typename T>
 class GlobalMutex {
   T *pDATA;
+  std::mutex Mutex;
 
  public:
-  std::mutex Mutex;
   explicit GlobalMutex(T *pValue) : pDATA(pValue) {}
   ~GlobalMutex() { delete pDATA; }
-  T &operator*() { return *pDATA; }
-  T *operator->() { return pDATA; }
+  T &operator*() { Mutex.lock();return *pDATA; }
+  T *operator->() { Mutex.lock();return pDATA; }
+  void Unlock(){Mutex.unlock();}
 };
-}  // namespace GM
 #endif  // BACKEND_EXECUTABLE_GLOBALMUTEX_HPP_
