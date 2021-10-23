@@ -37,17 +37,18 @@ void DRW::Write_UserContacts(const GlobalMutex<BCS::Books>& ContactBook) {
     unsigned int Index = 0;
     const std::unordered_set<BCS::Key> Result = ContactBook->getAllContacts();
     for (std::unordered_set<BCS::Key>::const_iterator i = Result.begin();
-         i != Result.end(); ++i, ++Index) { if (i->Name.empty()||i->Email.empty()) {
+         i != Result.end(); ++i, ++Index) {
+      if (i->Name.empty() || i->Email.empty()) {
         std::cerr << "--> Run-time Error: " << std::endl
                   << "Write_UserContacts:"
                   << "Data Corrupted" << std::endl;
         exit(EXIT_FAILURE);
-      Data.push_back(std::vector<std::string>());
-      Data[Index].push_back(i->Name);
-      Data[Index].push_back(i->Email);
-    }
-    ContactBook.Unlock();
-  }  // End Critical Section
-  SaveToDisk("DATABASE/UserContacts.csv", Data);
-}
+        Data.push_back(std::vector<std::string>());
+        Data[Index].push_back(i->Name);
+        Data[Index].push_back(i->Email);
+      }
+      ContactBook.Unlock();
+    }  // End Critical Section
+    SaveToDisk("DATABASE/UserContacts.csv", Data);
+  }
 #endif  // BACKEND_DISKRW_DATABASEREADWRITE_CPP_
