@@ -12,7 +12,7 @@ void DRW::LoadFromDisk(const std::string &FileName,
   std::ifstream FILE;
   FILE.open(FileName);
   if (!FILE.is_open()) {
-    std::cerr << "Run-time Warning: " << std::endl
+    std::cerr << "--> Run-time Warning: " << std::endl
               << "LoadFromDisk:"
               << "File Not Exist" << std::endl;
     return;
@@ -33,7 +33,7 @@ void DRW::SaveToDisk(const std::string &FileName,
                      const std::vector<std::vector<std::string>> &Data) {
   std::ofstream FILE(FileName);
   if (!FILE.is_open()) {
-    std::cerr << "Run-time Warning: " << std::endl
+    std::cerr << "--> Run-time Warning: " << std::endl
               << "SaveFromDisk:"
               << "File Could Not Be Created" << std::endl;
     return;

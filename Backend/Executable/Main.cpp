@@ -20,9 +20,10 @@
 #include "../ContactSystem/Books.hpp"
 #include "../ContactSystem/Key.hpp"
 #include "../DiskRW/CSVReadWrite.hpp"
+#include "../DiskRW/DatabaseReadWrite.hpp"
 #include "GlobalMutex.hpp"
 // Global Representation
-GM::GlobalMutex<BCS::Books> ContactBook(new BCS::Books);
+GlobalMutex<BCS::Books> ContactBook(new BCS::Books);
 /**
  * Handles Different Signals
  */
@@ -71,6 +72,9 @@ void REG_SIGACTION() {
 int main() {
   // Reg Sigactions
   REG_SIGACTION();
+  // Restore Database
+  DRW::Read_UserContacts(&ContactBook);
+  DRW::Write_UserContacts(ContactBook);
   // Create Pthreads for Each Function
   // std::thread();
   // Main Executable Waits for Signal
