@@ -9,7 +9,7 @@ on:
 jobs:
   cpplint:
     if: ${{!startsWith(github.event.head_commit.message,'[SKIP]')}}
-    name: Lint
+    name: Lint (CPP)
     runs-on: ubuntu-latest
     
     steps:
@@ -23,4 +23,4 @@ jobs:
       run: pip install cpplint
       
     - name: Run Lint
-      run: cpplint --recursive .
+      run: cpplint --filter=-build/c++11 --recursive .

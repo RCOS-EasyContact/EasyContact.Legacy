@@ -1,10 +1,13 @@
 <p align="center">
-  <img src="https://github.com/RCOS-EasyContact/EasyContact/blob/R-MAIN/.FILES/LOGO_NEW_SVG.svg" width="50%" title="Easy Contact Logo">
+  <img src="https://github.com/RCOS-EasyContact/EasyContact/blob/R-MAIN/.FILES/LOGO/LOGO_NEW_SVG.svg" width="50%" title="Easy Contact Logo">
 </p>
 
-![CodeQL(JavaScript)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/CodeQL(JavaScript).yml/badge.svg?branch=R-MAIN)
-![CodeQL(CPP)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/CodeQL(CPP).yml/badge.svg?branch=R-MAIN)
-![Lint(CPP)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/Lint(CPP).yml/badge.svg?branch=R-MAIN)
+## Badges
+| Language | CodeQL | Lint | Language-Specific |
+| -------- | ------ | ---- | ----------------- |
+| C++ | [![CodeQL-CPP](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/CodeQL(CPP).yml/badge.svg)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/CodeQL(CPP).yml) | [![Lint-CPP](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/Lint(CPP).yml/badge.svg)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/Lint(CPP).yml) | [![Format-CPP](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/Format(CPP).yml/badge.svg)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/Format(CPP).yml) |
+| JavaScript | [![CodeQL-JavaScript](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/CodeQL(JavaScript).yml/badge.svg)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/CodeQL(JavaScript).yml) | Not Available :no_entry_sign: | Not Available :no_entry_sign: |
+| CSS | Not Available :no_entry_sign: | [![Lint-CSS](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/Lint(CSS).yml/badge.svg)](https://github.com/RCOS-EasyContact/EasyContact/actions/workflows/Lint(CSS).yml) | Not Available :no_entry_sign: |
 
 <!--
 [![Github All Releases](https://img.shields.io/github/downloads/RCOS-EasyContact/EasyContact/total.svg)]()
