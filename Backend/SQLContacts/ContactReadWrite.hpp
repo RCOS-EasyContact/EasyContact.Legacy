@@ -12,6 +12,9 @@
 #include <string>
 // Standard Template Library
 #include <vector>
+// SQL Lite Library
+#include <SQLiteCpp.h>
+#include <VariadicBind.h>
 namespace BCS{
   
 }

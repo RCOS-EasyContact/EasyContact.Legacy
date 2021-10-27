@@ -17,10 +17,6 @@
 #include <thread>
 // EasyContact Header Files
 // #include "../API/APIRouter.hpp"
-#include "../ContactSystem/Books.hpp"
-#include "../ContactSystem/Key.hpp"
-#include "../DiskRW/CSVReadWrite.hpp"
-#include "../DiskRW/DatabaseReadWrite.hpp"
 #include "GlobalMutex.hpp"
 // Global Representation
 std::string Global_CurrentUserRCSID{"Empty"};
@@ -31,8 +27,8 @@ int main() {
     // Wait For A User Login
     pause();
   }
-  DRW::Read_UserContacts(&ContactBook);
-  DRW::Write_UserContacts(ContactBook);
+  // DRW::Read_UserContacts(&ContactBook);
+  // DRW::Write_UserContacts(ContactBook);
   exit(EXIT_FAILURE);
 }
 #endif  // BACKEND_EXECUTABLE_MULTICLIENTMAIN_CPP_
