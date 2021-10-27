@@ -25,7 +25,12 @@ include_directories(${PROJECT_SOURCE_DIR}/${SQLITE}/include/SQLiteCpp)
 add_executable(EasyContact ${SOURCE})
 set(THREADS_PREFER_PTHREAD_FLAG on)
 find_package(Threads REQUIRED)
-target_link_libraries(EasyContact PUBLIC m Threads::Threads SQLiteCpp hv)
+target_link_libraries(EasyContact PUBLIC
+  m
+  Threads::Threads
+  SQLiteCpp
+  hv
+)
 
 add_dependencies(EasyContact hv SQLiteCpp)
 set_target_properties(EasyContact PROPERTIES CMAKE_CXX_FLAGS "-Og")
