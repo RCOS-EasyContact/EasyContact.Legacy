@@ -1,6 +1,6 @@
 [submodule "Backend/API/libhv"]
 	path = Backend/API/libhv
 	url = https://github.com/ithewei/libhv.git
-[submodule "Backend/Contacts/SQLiteCpp"]
-	path = Backend/Contacts/SQLiteCpp
+[submodule "Backend/SQLContacts/SQLite"]
+	path = Backend/SQLContacts/SQLite
 	url = https://github.com/SRombauts/SQLiteCpp.git
