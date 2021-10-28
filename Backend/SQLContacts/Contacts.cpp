@@ -21,6 +21,14 @@ bool BCS::Contacts::newContact(const std::string& Name,
   }
 }
 void BCS::Contacts::newTag(const std::string &TagName){
-
+  SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3",
+                       SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
+  try{
+    DB3.exec("CREATE TABLE tag_"+TagName+"(RCSID TEXT PRIMARY KEY)"); 
+  } catch (std::exception& Err) {
+    std::cerr << "Run-Time Exception <SQLite> :" << std::endl;
+    std::cerr << Err.what() << std::endl;
+    return false;
+  }
 }
 #endif  // BACKEND_SQLCONTACTS_CONTACTS_CPP_
