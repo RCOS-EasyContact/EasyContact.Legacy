@@ -7,6 +7,7 @@
 #ifndef BACKEND_SQLCONTACTS_CONTACTS_HPP_
 #define BACKEND_SQLCONTACTS_CONTACTS_HPP_
 // C++ Standard Library
+#include <exception>
 #include <filesystem>
 #include <iostream>
 #include <string>
