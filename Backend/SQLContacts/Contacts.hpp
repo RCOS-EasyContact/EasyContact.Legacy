@@ -23,16 +23,11 @@
  */
 namespace BCS {
 class Contacts {
+ void CreateDirectory();
  public:
   const std::string RCSID;
   explicit Contacts(const std::string& newRCSID) : RCSID(newRCSID) {
-    if (!std::filesystem::directory_entry("UserData/" + RCSID).is_directory()) {
-      std::filesystem::create_directory("UserData/" + RCSID);
-      copy_file(
-          std::filesystem::directory_entry("UserData/.DEFAULT/Contacts.db3"),
-          std::filesystem::directory_entry("UserData/" + RCSID +
-                                           "/Contacts.db3"));
-    }
+    CreateDirectory();
   }
   /**
    * Add New Contact
