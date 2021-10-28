@@ -1,34 +1,45 @@
 /**
  * RCOS-EasyContact
- * EasyContact/Backend/Contacts
- * ContactReadWrite.hpp
+ * EasyContact/Backend/SQLContacts
+ * Contacts.hpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_DISKRW_CONTACTREADWRITE_HPP_
-#define BACKEND_DISKRW_CONTACTREADWRITE_HPP_
+#ifndef BACKEND_SQLCONTACTS_CONTACTS_HPP_
+#define BACKEND_SQLCONTACTS_CONTACTS_HPP_
 // C++ Standard Library
-#include <iostream>
-#include <sstream>
-#include <string>
 #include <filesystem>
+#include <iostream>
+#include <string>
 // Standard Template Library
 #include <memory>
 #include <vector>
 // SQL Lite Library
 #include <SQLiteCpp.h>
 #include <VariadicBind.h>
-namespace BCS{
-  class Contacts{
-    public:
-    const std::string RCSID;
-    explicit Contacts(const std::string& newRCSID): RCSID(newRCSID){
-       if(!std::filesystem::directory_entry("UserData/"+RCSID).is_directory()){
-       std::filesystem::create_directory("UserData/"+RCSID);
-       copy_file( std::filesystem::directory_entry("UserData/.DEFAULT/Contacts.db3"),
-                std::filesystem::directory_entry("UserData/"+RCSID+"/Contacts.db3"));
-       }
+/**
+ * EasyContact Custom Namespace
+ * BCS : Backend Contact System
+ */
+namespace BCS {
+class Contacts {
+ public:
+  const std::string RCSID;
+  explicit Contacts(const std::string& newRCSID) : RCSID(newRCSID) {
+    if (!std::filesystem::directory_entry("UserData/" + RCSID).is_directory()) {
+      std::filesystem::create_directory("UserData/" + RCSID);
+      copy_file(
+          std::filesystem::directory_entry("UserData/.DEFAULT/Contacts.db3"),
+          std::filesystem::directory_entry("UserData/" + RCSID +
+                                           "/Contacts.db3"));
     }
-
-  };
-}
-#endif // BACKEND_DISKRW_CONTACTREADWRITE_HPP_
+  }
+  /**
+   * Add New Contact
+   * Duplicate Contacts Are Not Allowed
+   * @param <BCS::Key> : Contact Name
+   * @return <bool> : Success or Failed (Existing Contact)
+   */
+  bool newContact(const std::string& Name, const std::string& Email);
+};
+}  // namespace BCS
+#endif  // BACKEND_SQLCONTACTS_CONTACTS_HPP_

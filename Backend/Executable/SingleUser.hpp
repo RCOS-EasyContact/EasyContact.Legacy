@@ -1,7 +1,9 @@
 #include "../SQLContacts/Contacts.hpp"
 namespace MCS{
-  typedef  struct{
-    BCS::Contacts Contacts;
-
-  } SingleUser;
+  class SingleUser{
+    public:
+    mutable BCS::Contacts Contacts;
+    explicit SingleUser(std::string RCSID):Contacts(RCSID){
+    }
+  };
 }

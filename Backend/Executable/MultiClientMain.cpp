@@ -24,12 +24,10 @@
 // Global Representation
 std::unordered_map<std::string,MCS::SingleUser> ActiveUsers;
 int main(){
-  std::string RCSID="gongz3";
-if(!std::filesystem::directory_entry("UserData/"+RCSID).is_directory()){
-       std::filesystem::create_directory("UserData/"+RCSID);
-       copy_file( std::filesystem::directory_entry("UserData/.DEFAULT/Contacts.db3"),
-                std::filesystem::directory_entry("UserData/"+RCSID+"/Contacts.db3"));
-       }
+  SQLite::Database    DB3("UserData/.DEFAULT/Contacts.db3",SQLite::OPEN_READWRITE|SQLite::OPEN_CREATE);
+  DB3.exec("DROP TABLE emailadres");
+DB3.exec("CREATE TABLE emailadres(RCSID TEXT PRIMARY KEY, EMAIL TEXT NOT NULL)");  
+// DB3.exec("INSERT INTO emailadres VALUES('gongz3','gongz3@rpi.edu')");
 }
 #if 0
 int main() {
