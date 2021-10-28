@@ -23,7 +23,8 @@
  */
 namespace BCS {
 class Contacts {
- void CreateDirectory();
+  void CreateDirectory();
+
  public:
   const std::string RCSID;
   explicit Contacts(const std::string& newRCSID) : RCSID(newRCSID) {
