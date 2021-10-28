@@ -29,5 +29,14 @@ void BCS::Contacts::newTag(const std::string& TagName) {
     std::cerr << "Run-Time Exception <SQLite> :" << std::endl;
     std::cerr << Err.what() << std::endl;
   }
+  std::vector<std::string> BCS::Contacts::getAllTags()const{
+    std::vector<std::string> Result;
+    SQLite::Database DB3("UserData/"+RCSID+"Contacts.db3");
+SQLite::Statement Query(DB3, "SELECT TABLE_NAME FROM PUBLIC.TABLES WHERE TABLE_TYPE='BASE TABLE'");
+while(Query.executeSetp()){
+  Result.push_back(Query.getColumn(0));
+  }
+  return Result;
+  }
 }
 #endif  // BACKEND_SQLCONTACTS_CONTACTS_CPP_
