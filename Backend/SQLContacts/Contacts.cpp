@@ -28,7 +28,6 @@ void BCS::Contacts::newTag(const std::string &TagName){
   } catch (std::exception& Err) {
     std::cerr << "Run-Time Exception <SQLite> :" << std::endl;
     std::cerr << Err.what() << std::endl;
-    return false;
   }
 }
 #endif  // BACKEND_SQLCONTACTS_CONTACTS_CPP_
