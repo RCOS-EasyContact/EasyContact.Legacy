@@ -15,9 +15,12 @@ bool BCS::Contacts::newContact(const std::string& Name,
     DB3.exec("INSERT INTO emailadres SELECT '" + Name + "','" + Email + "'");
     return true;
   } catch (std::exception& Err) {
-    std::cerr << "Run-Time Exception: SQLite" << std::endl;
+    std::cerr << "Run-Time Exception <SQLite> :" << std::endl;
     std::cerr << Err.what() << std::endl;
     return false;
   }
+}
+void BCS::Contacts::newTag(const std::string &TagName){
+
 }
 #endif  // BACKEND_SQLCONTACTS_CONTACTS_CPP_
