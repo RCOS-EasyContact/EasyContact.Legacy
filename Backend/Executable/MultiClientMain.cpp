@@ -22,18 +22,19 @@
 #include "GlobalMutex.hpp"
 #include "SingleUser.hpp"
 // Global Representation
-std::unordered_map<std::string,MCS::SingleUser> ActiveUsers;
-int main(){
-  std::string RCSID="gongz2";
+std::unordered_map<std::string, MCS::SingleUser> ActiveUsers;
+int main() {
+  std::string RCSID = "gongz2";
   std::string Name = "gongz4";
-  std::string Email="gongz3@rpi.edu";
-  SQLite::Database    DB3("UserData/"+RCSID+"/Contacts.db3",SQLite::OPEN_READWRITE|SQLite::OPEN_CREATE);
-try{
-  DB3.exec( "INSERT INTO emailadres SELECT '"+Name+"','"+Email+"'");
-  return true;
-  }catch (std::exception& Err){
-    std::cerr<<"Run-Time Exception: SQLite"<<std::endl;
-    std::cerr <<Err.what()<<std::endl;
+  std::string Email = "gongz3@rpi.edu";
+  SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3",
+                       SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
+  try {
+    DB3.exec("INSERT INTO emailadres SELECT '" + Name + "','" + Email + "'");
+    return true;
+  } catch (std::exception& Err) {
+    std::cerr << "Run-Time Exception: SQLite" << std::endl;
+    std::cerr << Err.what() << std::endl;
     return false;
   }
 }

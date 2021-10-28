@@ -41,7 +41,7 @@ class Contacts {
    * @return <bool> : Success or Failed (Existing Contact)
    */
   bool newContact(const std::string& Name, const std::string& Email);
-  void newTag(const std::string &TagName);
+  void newTag(const std::string& TagName);
 };
 }  // namespace BCS
 #endif  // BACKEND_SQLCONTACTS_CONTACTS_HPP_
