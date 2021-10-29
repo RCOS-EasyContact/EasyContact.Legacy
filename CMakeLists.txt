@@ -6,7 +6,7 @@ project(RCOS-EasyContact)
 
 set(LIBHVR Backend/API/libhv)
 set(SQLITE Backend/SQLContacts/SQLite)
-set(SOURCE Backend/Executable/MultiClientMain.cpp)
+file(GLOB SOURCE Backend/**/*.cpp)
 
 # Libhv
 set(BUILD_STATIC OFF CACHE BOOL "" FORCE)
@@ -25,11 +25,11 @@ include_directories(${PROJECT_SOURCE_DIR}/${SQLITE}/include/SQLiteCpp)
 add_executable(EasyContact ${SOURCE})
 set(THREADS_PREFER_PTHREAD_FLAG on)
 find_package(Threads REQUIRED)
-target_link_libraries(EasyContact PUBLIC
-  m
-  Threads::Threads
-  SQLiteCpp
-  hv
+target_link_libraries(EasyContact
+  PUBLIC m
+  PUBLIC Threads::Threads
+  PUBLIC SQLiteCpp
+  PUBLIC hv
 )
 
 add_dependencies(EasyContact hv SQLiteCpp)
