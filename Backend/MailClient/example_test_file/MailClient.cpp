@@ -4,17 +4,16 @@
  * MailClient.cpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_MAILCLIENT_EXAMPLE_TEST_FILE_MAILCLIENT_CPP_ 
-#define BACKEND_MAILCLIENT_EXAMPLE_TEST_FILE_MAILCLIENT_CPP_ 
+#ifndef BACKEND_MAILCLIENT_EXAMPLE_TEST_FILE_MAILCLIENT_CPP_
+#define BACKEND_MAILCLIENT_EXAMPLE_TEST_FILE_MAILCLIENT_CPP_
 #include "MailClient.h"
 
 #include <algorithm>
 #include <iostream>
-#include <string>
-
 #include <mailio/imap.hpp>
 #include <mailio/message.hpp>
 #include <mailio/smtp.hpp>
+#include <string>
 
 using mailio::codec;
 using mailio::dialog_error;
