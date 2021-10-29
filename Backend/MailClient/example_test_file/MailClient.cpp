@@ -2,10 +2,10 @@
 
 #include <algorithm>
 #include <iostream>
+#include <string>
 #include <mailio/imap.hpp>
 #include <mailio/message.hpp>
 #include <mailio/smtp.hpp>
-#include <string>
 using mailio::codec;
 using mailio::dialog_error;
 using mailio::imap_error;
