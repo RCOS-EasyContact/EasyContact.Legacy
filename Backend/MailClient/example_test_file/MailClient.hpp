@@ -19,20 +19,21 @@ using std::ifstream;
 using std::list;
 using std::make_tuple;
 using std::string;
-class MailClient{
-public:
-	//constructor
-	MailClient(const string& RCSID, const string& Password,
-		const string& usr_name,const string& usr_email);
-	//recv email, if no error, the return should be the a message;
-	int recv(message& mesg);
-	int remove_first();
-	int inbox_status();
-	int sent_message(const string& name_to, const string& to_mail,
-                 const string& subjects, const string& mesg);
-private:
-	string RCSID;
-	string Password;
-	string usr_name;
-	string usr_email;
+class MailClient {
+ public:
+  // constructor
+  MailClient(const string& RCSID, const string& Password,
+             const string& usr_name, const string& usr_email);
+  // recv email, if no error, the return should be the a message;
+  int recv(message& mesg);
+  int remove_first();
+  int inbox_status();
+  int sent_message(const string& name_to, const string& to_mail,
+                   const string& subjects, const string& mesg);
+
+ private:
+  string RCSID;
+  string Password;
+  string usr_name;
+  string usr_email;
 }
