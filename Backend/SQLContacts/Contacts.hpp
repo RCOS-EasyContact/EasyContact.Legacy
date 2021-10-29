@@ -22,15 +22,15 @@
  * BCS : Backend Contact System
  */
 namespace BCS {
-void CreateDirectory(const std::string& DirName);
+void CreateDirectory(const std::string &DirName);
 class Contacts {
  public:
   const std::string RCSID;
-  explicit Contacts(const std::string& newRCSID) : RCSID(newRCSID) {
+  explicit Contacts(const std::string &newRCSID) : RCSID(newRCSID) {
     CreateDirectory(RCSID);
   }
-  bool newContact(const std::string& Name, const std::string& Email);
-  void newTag(const std::string& TagName);
+  bool newContact(const std::string &Name, const std::string &Email);
+  void newTag(const std::string &TagName);
   bool removeContact(const std::string &ExistContact);
   bool removeTag(const std::string &TagName);
   std::vector<std::string> getAllContacts() const;
