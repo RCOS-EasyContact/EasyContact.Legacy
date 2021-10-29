@@ -23,29 +23,5 @@
 #include "GlobalMutex.hpp"
 // Global Representation
 std::unordered_map<std::string, BCS::Contacts> ActiveUsers;
-int main() {
-  const std::string RCSID = "gongz2";
-
-  // MAIN
-}
-
-#if 0
-SQLite::Database    DB3("UserData/.DEFAULT/Contacts.db3",SQLite::OPEN_READWRITE|SQLite::OPEN_CREATE);
-DB3.exec("CREATE TABLE tags(NAME TEXT PRIMARY KEY NOT NULL)");
-#endif
-
-#if 0
-int main() {
-  // Start API Thread
-  // std::thread();
-  while(true){
-    // The Main Process Does Not Do Much
-    // It Monitors Child Threads Activity
-    pause();
-  }
-  // DRW::Read_UserContacts(&ContactBook);
-  // DRW::Write_UserContacts(ContactBook);
-  exit(EXIT_FAILURE);
-}
-#endif
+int main() {}
 #endif  // BACKEND_EXECUTABLE_MULTICLIENTMAIN_CPP_
