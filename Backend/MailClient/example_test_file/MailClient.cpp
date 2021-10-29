@@ -1,11 +1,21 @@
+/**
+ * RCOS-EasyContact
+ * EasyContact/Backend/MailClient
+ * MailClient.cpp
+ * Copyright [2021] <RCOS-EasyContact>
+ */
+#ifndef BACKEND_MAILCLIENT_EXAMPLE_TEST_FILE_MAILCLIENT_CPP_ 
+#define BACKEND_MAILCLIENT_EXAMPLE_TEST_FILE_MAILCLIENT_CPP_ 
 #include "MailClient.h"
 
 #include <algorithm>
 #include <iostream>
 #include <string>
+
 #include <mailio/imap.hpp>
 #include <mailio/message.hpp>
 #include <mailio/smtp.hpp>
+
 using mailio::codec;
 using mailio::dialog_error;
 using mailio::imap_error;
@@ -13,6 +23,7 @@ using mailio::imaps;
 using mailio::message;
 using mailio::smtp_error;
 using mailio::smtps;
+
 using std::cerr;
 using std::cout;
 using std::endl;
@@ -21,6 +32,7 @@ using std::ifstream;
 using std::list;
 using std::make_tuple;
 using std::string;
+
 MailClient::MailClient(const string& _RCSID, const string& _Password,
                        const string& _usr_name, const string& _usr_email) {
   RCSID = _RCSID;
@@ -106,3 +118,4 @@ int MailClient::sent_message(const string& name_to, const string& to_mail,
   }
   return EXIT_SUCCESS;
 }
+#endif
