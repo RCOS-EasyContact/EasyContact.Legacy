@@ -5,11 +5,11 @@
 
 
 ## `/login`
-### `POST /login/:userName/:password`
+### `POST /login/:rcsID/:name/:password`
 Create (and encrypt?) login information
 
 #### Parameters
-All two parameters (`userName`, `password`) should be provided.
+All three parameters (`name`, `password`, `rcsID`) should be provided.
 
 #### Return Values
 - `200` Succeed login

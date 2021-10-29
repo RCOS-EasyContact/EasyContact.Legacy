@@ -13,6 +13,7 @@
 // Local Headers
 #include "../ContactSystem/Books.hpp"
 #include "hv/HttpService.h"
+#include "../MailClient/MailClient.hpp"
 
 class APIRouter {
  public:
@@ -29,14 +30,17 @@ class APIRouter {
     router->postprocessor = post;
 
     // login
-    router->POST("/login/:userName/:password",
+    router->POST("/login/:rcsID/:name/:password",
                  [](HttpRequest *req, HttpResponse *resp) {
-                   std::string userName = req->GetParam("userName");
+                   std::string name = req->GetParam("name");
                    std::string password = req->GetParam("password");
-                   if (userName == "" || password == "") {
+                   std::string rcsID = req->GetParam("rcsID");
+
+                   if (name == "" || password == "" || rcsID == "") {
                      return 400;
                    }
-                   if (true) {
+                   if (AuthenticateLogin(userName, password)) {
+                     MailClient mc = new MailClient(rcsID, password, name, rcsID+"@rpi.edu");
                      return 200;
                    }
                    return 505;
