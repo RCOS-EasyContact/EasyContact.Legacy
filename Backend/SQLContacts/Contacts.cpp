@@ -37,18 +37,18 @@ void BCS::Contacts::newTag(const std::string& TagName) {
   } catch (std::exception& Err) {
     std::cerr << "Run-Time Exception <SQLite> : " << Err.what() << std::endl;
   }
-  std::vector<std::string> BCS::Contacts::getAllTags() const {
-    std::vector<std::string> Result;
-    SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3");
-    try {
-      SQLite::Statement Query(DB3, "SELECT * FROM tags");
-      while (Query.executeStep()) {
-        Result.push_back(Query.getColumn(0));
-      }
-    } catch (std::exception& Err) {
-      std::cerr << "Run-Time Exception <SQLite> : " << Err.what() << std::endl;
+}
+std::vector<std::string> BCS::Contacts::getAllTags() const {
+  std::vector<std::string> Result;
+  SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3");
+  try {
+    SQLite::Statement Query(DB3, "SELECT * FROM tags");
+    while (Query.executeStep()) {
+      Result.push_back(Query.getColumn(0));
     }
-    return Result;
+  } catch (std::exception& Err) {
+    std::cerr << "Run-Time Exception <SQLite> : " << Err.what() << std::endl;
   }
+  return Result;
 }
 #endif  // BACKEND_SQLCONTACTS_CONTACTS_CPP_
