@@ -6,6 +6,7 @@ project(RCOS-EasyContact)
 
 set(LIBHVR Backend/API/libhv)
 set(SQLITE Backend/SQLContacts/SQLite)
+set(MAILIO Backend/MailClient/mailio)
 file(GLOB SOURCE Backend/**/*.cpp)
 
 # Libhv
@@ -17,10 +18,16 @@ set(WITH_HTTP_CLIENT OFF CACHE BOOL "" FORCE)
 set(SQLITECPP_RUN_CPPCHECK OFF CACHE BOOL "" FORCE)
 set(SQLITECPP_RUN_CPPLINT OFF CACHE BOOL "" FORCE)
 
+# mailio
+set(MAILIO_BUILD_DOCUMENTATION OFF CACHE BOOL "" FORCE)
+set(MAILIO_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+
 add_subdirectory(${SQLITE})
 add_subdirectory(${LIBHVR})
+add_subdirectory(${MAILIO})
 include_directories(${PROJECT_SOURCE_DIR}/${LIBHVR}/include)
-include_directories(${PROJECT_SOURCE_DIR}/${SQLITE}/include/SQLiteCpp)
+include_directories(${PROJECT_SOURCE_DIR}/${SQLITE}/include)
+include_directories(${PROJECT_SOURCE_DIR}/${MAILIO}/include)
 
 add_executable(EasyContact ${SOURCE})
 set(THREADS_PREFER_PTHREAD_FLAG on)
@@ -30,6 +37,7 @@ target_link_libraries(EasyContact
   PUBLIC Threads::Threads
   PUBLIC SQLiteCpp
   PUBLIC hv
+  PUBLIC mailio
 )
 
 add_dependencies(EasyContact hv SQLiteCpp)
