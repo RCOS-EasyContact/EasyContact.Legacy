@@ -9,8 +9,8 @@
 // C++ Standard Library
 #include <algorithm>
 #include <iostream>
-#include <string>
 #include <list>
+#include <string>
 // MailIO Header Files
 #include <mailio/imap.hpp>
 #include <mailio/message.hpp>
