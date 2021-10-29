@@ -35,8 +35,10 @@ class Contacts {
   bool removeTag(const std::string &TagName);
   [[nodiscard]] std::vector<std::string> getAllContacts() const;
   [[nodiscard]] std::vector<std::string> getAllTags() const;
-  [[nodiscard]] std::vector<std::string> getTagContains(const std::string &TagName) const;
-  [[nodiscard]] std::vector<std::string> getNameInTags(const std::string &ContactName) const;
+  [[nodiscard]] std::vector<std::string> getTagContains(
+      const std::string &TagName) const;
+  [[nodiscard]] std::vector<std::string> getNameInTags(
+      const std::string &ContactName) const;
   void assignTagTo(const std::string &TagName, const std::string &ContactName);
   void removeTagFor(const std::string &TagName, const std::string &ContactName);
   void clearTagFor(const std::string &ContactName);
