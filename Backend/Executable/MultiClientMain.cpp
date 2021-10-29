@@ -24,24 +24,15 @@
 // Global Representation
 std::unordered_map<std::string, MCS::SingleUser> ActiveUsers;
 int main() {
-
-const std::string RCSID="gongz2";
-
-
-
+  const std::string RCSID = "gongz2";
 
   // MAIN
 }
 
-
-
 #if 0
 SQLite::Database    DB3("UserData/.DEFAULT/Contacts.db3",SQLite::OPEN_READWRITE|SQLite::OPEN_CREATE);
-DB3.exec("CREATE TABLE tags(NAME TEXT PRIMARY KEY NOT NULL)");  
-#endif 
-
-
-
+DB3.exec("CREATE TABLE tags(NAME TEXT PRIMARY KEY NOT NULL)");
+#endif
 
 #if 0
 int main() {

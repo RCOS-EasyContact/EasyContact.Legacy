@@ -22,7 +22,7 @@
  * BCS : Backend Contact System
  */
 namespace BCS {
-  void CreateDirectory(const std::string &DirName);
+void CreateDirectory(const std::string& DirName);
 class Contacts {
  public:
   const std::string RCSID;
@@ -32,7 +32,6 @@ class Contacts {
   bool newContact(const std::string& Name, const std::string& Email);
   void newTag(const std::string& TagName);
   std::vector<std::string> getAllTags() const;
-
 };
 }  // namespace BCS
 #endif  // BACKEND_SQLCONTACTS_CONTACTS_HPP_
