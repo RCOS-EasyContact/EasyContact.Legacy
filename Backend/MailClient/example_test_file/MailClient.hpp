@@ -22,14 +22,14 @@ using std::string;
 class MailClient{
 public:
 	//constructor
-	MailClient(string& RCSID, string& Password,string& usr_name,string& usr_email);
+	MailClient(const string& RCSID, const string& Password,
+		const string& usr_name,const string& usr_email);
 	//recv email, if no error, the return should be the a message;
-	int recv(string& RCSID, string& password,message& mesg);
-	int remove_first(string& RCSID, string& password);
-	int inbox_status(string& RCSID, string& password);
-	int sent_message(string& RCSID, string& password, string& name,
-                 string& usr_email, string& name_to, string& to_mail,
-                 string& subjects, string& mesg);
+	int recv(message& mesg);
+	int remove_first();
+	int inbox_status();
+	int sent_message(const string& name_to, const string& to_mail,
+                 const string& subjects, const string& mesg);
 private:
 	string RCSID;
 	string Password;

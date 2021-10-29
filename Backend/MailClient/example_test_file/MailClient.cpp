@@ -20,20 +20,21 @@ using std::ifstream;
 using std::list;
 using std::make_tuple;
 using std::string;
-MailClient::MailClient(string& _RCSID, string& _Password,string& _usr_name,string& _usr_email){
+MailClient::MailClient(const string& _RCSID, const string& _Password,const string& _usr_name,const string& _usr_email){
 	RCSID = _RCSID; 
 	Password =  _Password;
 	usr_name =  _usr_name;
 	usr_email =  _usr_email;
 }
-int MailClient::recv(string& RCSID, string& password,message& msg){
+int MailClient::recv(message* msg){
+  //message &new_msg = *msg;
   try {
     imaps conn("mail.rpi.edu", 993);
-    conn.authenticate(RCSID, password, imaps::auth_method_t::LOGIN);
+    conn.authenticate(RCSID, Password, imaps::auth_method_t::LOGIN);
     imaps::mailbox_stat_t ret = conn.select(list<string>({"Inbox"}));
     msg.line_policy(codec::line_len_policy_t::VERYLARGE,
                     codec::line_len_policy_t::VERYLARGE);
-    conn.fetch(ret.messages_no, msg);
+    conn.fetch(ret.messages_no, *msg);
     /*
             cout<<msg.subject()<<endl;
             cout<<msg.content()<<endl;
@@ -46,12 +47,12 @@ int MailClient::recv(string& RCSID, string& password,message& msg){
     cerr << exc.what() << endl;
     return EXIT_FAILURE;
   }
-  return ExIT_SUCCESS;
+  return EXIT_SUCCESS;
 }
-int MailClient::remove_first(string& RCSID, string& password){
+int MailClient::remove_first(){
 	try {
 	    imap conn("mail.rpi.edu", 143);
-	    conn.authenticate(RCSID, password, imap::auth_method_t::LOGIN);
+	    conn.authenticate(RCSID, Password, imap::auth_method_t::LOGIN);
 	    conn.remove("inbox", 1);
 	  } 
 	  catch (imap_error& exc) {
@@ -62,9 +63,9 @@ int MailClient::remove_first(string& RCSID, string& password){
 	    cerr << exc.what() << endl;
 	    return EXIT_FAILURE
 	  }
-	  return ExIT_SUCCESS;
+	  return EXIT_SUCCESS;
 }
-int MailClient::inbox_status(string& RCSID, string& password){
+int MailClient::inbox_status(){
 	int ret = 0;
   	try {
 	    // connect to server
@@ -85,19 +86,18 @@ int MailClient::inbox_status(string& RCSID, string& password){
   	}
   return ret;
 }
-int MailClient::sent_message(string& RCSID, string& password, string& name,
-                 string& usr_email, string& name_to, string& to_mail,
-                 string& subjects, string& mesg){
+int MailClient::sent_message(const string& name_to, const string& to_mail,
+                 const string& subjects, const string& mesg){
 	try {
 	    message msg;
 	    msg.from(
-	        mail_address(name, usr_email));  // mail_adddress(name,xxx@xxx.edu(com))
+	        mail_address(usr_name, usr_email));  // mail_adddress(name,xxx@xxx.edu(com))
 	    msg.add_recipient(mail_address(name_to, to_mail));
 	    msg.subject(subjects);
 	    msg.content(mesg);
 
 	    smtps conn("mail.rpi.edu", 587);
-	    conn.authenticate(RCSID, password, smtps::auth_method_t::START_TLS);
+	    conn.authenticate(RCSID, Password, smtps::auth_method_t::START_TLS);
 	    conn.submit(msg);
 	  } 
 	  catch (smtp_error& exc) {
