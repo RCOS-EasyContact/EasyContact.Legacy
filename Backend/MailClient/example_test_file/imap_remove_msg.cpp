@@ -2,7 +2,7 @@
 
 imap_remove_msg.cpp
 -------------------
-  
+
 Connects to IMAP server and removes a message in mailbox.
 
 
@@ -13,37 +13,29 @@ copy at http://www.freebsd.org/copyright/freebsd-license.html.
 
 */
 
-
 #include <iostream>
 #include <mailio/imap.hpp>
 
-
+using mailio::dialog_error;
 using mailio::imap;
 using mailio::imap_error;
-using mailio::dialog_error;
 using std::cout;
 using std::endl;
 
+int main() {
+  try {
+    // use a server with plain (non-SSL) connectivity
+    imap conn("imap.mailserver.com", 143);
+    // modify to use real account
+    conn.authenticate("mailio@mailserver.com", "mailiopass",
+                      imap::auth_method_t::LOGIN);
+    // remove first message from mailbox
+    conn.remove("inbox", 1);
+  } catch (imap_error& exc) {
+    cout << exc.what() << endl;
+  } catch (dialog_error& exc) {
+    cout << exc.what() << endl;
+  }
 
-int main()
-{
-    try
-    {
-        // use a server with plain (non-SSL) connectivity
-        imap conn("imap.mailserver.com", 143);
-        // modify to use real account
-        conn.authenticate("mailio@mailserver.com", "mailiopass", imap::auth_method_t::LOGIN);
-        // remove first message from mailbox
-        conn.remove("inbox", 1);
-    }
-    catch (imap_error& exc)
-    {
-        cout << exc.what() << endl;
-    }
-    catch (dialog_error& exc)
-    {
-        cout << exc.what() << endl;
-    }
-
-    return EXIT_SUCCESS;
+  return EXIT_SUCCESS;
 }

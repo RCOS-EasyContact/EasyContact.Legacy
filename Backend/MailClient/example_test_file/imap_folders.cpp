@@ -13,52 +13,40 @@ copy at http://www.freebsd.org/copyright/freebsd-license.html.
 
 */
 
-
 #include <algorithm>
 #include <iostream>
-#include <string>
 #include <mailio/imap.hpp>
+#include <string>
 
-
-using mailio::imaps;
-using mailio::imap_error;
 using mailio::dialog_error;
-using std::for_each;
+using mailio::imap_error;
+using mailio::imaps;
 using std::cout;
 using std::endl;
+using std::for_each;
 using std::string;
 
-
-void print_folders(unsigned tabs, const imaps::mailbox_folder_t& folder)
-{
-    string indent(tabs, '\t');
-    for (auto& f : folder.folders)
-    {
-        cout << indent << f.first << endl;
-        if (!f.second.folders.empty())
-            print_folders(++tabs, f.second);
-    }
+void print_folders(unsigned tabs, const imaps::mailbox_folder_t& folder) {
+  string indent(tabs, '\t');
+  for (auto& f : folder.folders) {
+    cout << indent << f.first << endl;
+    if (!f.second.folders.empty()) print_folders(++tabs, f.second);
+  }
 }
 
+int main() {
+  try {
+    imaps conn("mail.rpi.edu", 993);
+    // modify username/password to use real credentials
+    conn.authenticate("yangx18", "Aoyamamegumi811@gmail.com",
+                      imaps::auth_method_t::LOGIN);
+    imaps::mailbox_folder_t fld = conn.list_folders("");
+    print_folders(0, fld);
+  } catch (imap_error& exc) {
+    cout << exc.what() << endl;
+  } catch (dialog_error& exc) {
+    cout << exc.what() << endl;
+  }
 
-int main()
-{
-    try
-    {
-        imaps conn("mail.rpi.edu", 993);
-        // modify username/password to use real credentials
-        conn.authenticate("yangx18", "Aoyamamegumi811@gmail.com", imaps::auth_method_t::LOGIN);
-        imaps::mailbox_folder_t fld = conn.list_folders("");
-        print_folders(0, fld);
-    }
-    catch (imap_error& exc)
-    {
-        cout << exc.what() << endl;
-    }
-    catch (dialog_error& exc)
-    {
-        cout << exc.what() << endl;
-    }
-
-    return EXIT_SUCCESS;
+  return EXIT_SUCCESS;
 }
