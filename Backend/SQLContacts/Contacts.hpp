@@ -6,8 +6,9 @@
  */
 #ifndef BACKEND_SQLCONTACTS_CONTACTS_HPP_
 #define BACKEND_SQLCONTACTS_CONTACTS_HPP_
-// C Standard Library
-#include <string.h>
+// SQL Lite Library
+#include <SQLiteCpp/SQLiteCpp.h>
+#include <SQLiteCpp/VariadicBind.h>
 // C++ Standard Library
 #include <exception>
 #include <filesystem>
@@ -15,9 +16,6 @@
 #include <string>
 // Standard Template Library
 #include <vector>
-// SQL Lite Library
-#include <SQLiteCpp/SQLiteCpp.h>
-#include <SQLiteCpp/VariadicBind.h>
 /**
  * EasyContact Custom Namespace
  * BCS : Backend Contact System
