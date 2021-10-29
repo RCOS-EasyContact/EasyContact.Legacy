@@ -32,6 +32,8 @@ using std::list;
 using std::make_tuple;
 using std::string;
 
+namespace BMC{
+bool AuthenticateLogin(const std::string& RCSID, const std::string& Password);
 class MailClient {
  public:
   // constructor
@@ -49,5 +51,6 @@ class MailClient {
   string Password;
   string usr_name;
   string usr_email;
+};
 }
 #endif  // BACKEND_MAILCLIENT_EXAMPLE_TEST_FILE_MAILCLIENT_HPP_
