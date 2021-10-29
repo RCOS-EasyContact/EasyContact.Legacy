@@ -6,13 +6,14 @@
  */
 #ifndef BACKEND_MAILCLIENT_EXAMPLE_TEST_FILE_MAILCLIENT_HPP_
 #define BACKEND_MAILCLIENT_EXAMPLE_TEST_FILE_MAILCLIENT_HPP_
-
+//C++ standard lib
 #include <algorithm>
 #include <iostream>
+#include <string>
+//mailio lib
 #include <mailio/imap.hpp>
 #include <mailio/message.hpp>
 #include <mailio/smtp.hpp>
-#include <string>
 
 using mailio::codec;
 using mailio::dialog_error;
