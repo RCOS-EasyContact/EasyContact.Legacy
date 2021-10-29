@@ -33,7 +33,7 @@ jobs:
     - name: Build C++
       run: git submodule update --init --recursive &&
            cmake . &&
-           cmake --build .
+           cmake --build . -j 4
 
     - name: CodeQL Analysis
       uses: github/codeql-action/analyze@v1
