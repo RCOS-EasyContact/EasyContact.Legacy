@@ -20,9 +20,9 @@
 // EasyContact Header Files
 // #include "../API/APIRouter.hpp"
 #include "GlobalMutex.hpp"
-#include "SingleUser.hpp"
+#include "../SQLContacts/Contacts.hpp"
 // Global Representation
-std::unordered_map<std::string, MCS::SingleUser> ActiveUsers;
+std::unordered_map<std::string, BCS::Contacts> ActiveUsers;
 int main() {
   const std::string RCSID = "gongz2";
 

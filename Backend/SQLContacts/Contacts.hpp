@@ -31,7 +31,15 @@ class Contacts {
   }
   bool newContact(const std::string& Name, const std::string& Email);
   void newTag(const std::string& TagName);
+  bool removeContact(const std::string &ExistContact);
+  bool removeTag(const std::string &TagName);
+  std::vector<std::string> getAllContacts() const;
   std::vector<std::string> getAllTags() const;
+  std::vector<std::string> getTagContains(const std::string &TagName) const;
+  std::vector<std::string> getNameInTags(const std::string &ContactName) const;
+  void assignTagTo(const std::string &TagName, const std::string &ContactName);
+  void removeTagFor(const std::string &TagName, const std::string &ContactName);
+  void clearTagFor(const std::string &ContactName);
 };
 }  // namespace BCS
 #endif  // BACKEND_SQLCONTACTS_CONTACTS_HPP_
