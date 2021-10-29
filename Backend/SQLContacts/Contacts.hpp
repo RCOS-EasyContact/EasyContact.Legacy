@@ -14,8 +14,8 @@
 // Standard Template Library
 #include <vector>
 // SQL Lite Library
-#include <SQLiteCpp.h>
-#include <VariadicBind.h>
+#include <SQLiteCpp/SQLiteCpp.h>
+#include <SQLiteCpp/VariadicBind.h>
 /**
  * EasyContact Custom Namespace
  * BCS : Backend Contact System
