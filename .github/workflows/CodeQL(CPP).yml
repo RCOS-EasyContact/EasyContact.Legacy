@@ -25,7 +25,7 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Installing Dependencies
+    - name: Install Dependencies
       run: sudo apt-get install -y openssl libboost-all-dev
 
     - name: Initialize CodeQL
