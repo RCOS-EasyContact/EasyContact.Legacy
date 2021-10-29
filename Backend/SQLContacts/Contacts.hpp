@@ -12,7 +12,6 @@
 #include <iostream>
 #include <string>
 // Standard Template Library
-#include <memory>
 #include <vector>
 // SQL Lite Library
 #include <SQLiteCpp.h>
