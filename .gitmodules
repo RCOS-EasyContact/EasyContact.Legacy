@@ -1,6 +1,9 @@
 [submodule "Backend/API/libhv"]
 	path = Backend/API/libhv
 	url = https://github.com/ithewei/libhv.git
+[submodule "Backend/MailClient/mailio"]
+	path = Backend/MailClient/mailio
+	url = https://github.com/karastojko/mailio.git
 [submodule "Backend/SQLContacts/SQLite"]
 	path = Backend/SQLContacts/SQLite
 	url = https://github.com/SRombauts/SQLiteCpp.git
