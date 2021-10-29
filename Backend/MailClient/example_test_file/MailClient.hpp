@@ -36,4 +36,3 @@ private:
 	string usr_name;
 	string usr_email;
 }
-
