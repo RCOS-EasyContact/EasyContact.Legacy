@@ -10,7 +10,8 @@
 #include <algorithm>
 #include <iostream>
 #include <string>
-// mailio Header Files
+#include <list>
+// MailIO Header Files
 #include <mailio/imap.hpp>
 #include <mailio/message.hpp>
 #include <mailio/smtp.hpp>
