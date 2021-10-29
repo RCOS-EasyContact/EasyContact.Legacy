@@ -117,4 +117,4 @@ int MailClient::sent_message(const string& name_to, const string& to_mail,
   }
   return EXIT_SUCCESS;
 }
-#endif
+#endif //BACKEND_MAILCLIENT_EXAMPLE_TEST_FILE_MAILCLIENT_CPP_
