@@ -25,6 +25,8 @@
 std::unordered_map<std::string, BCS::Contacts> ActiveUsers;
 int main() {
   BCS::Contacts T("gongz3");
-  T.newContact("Friend 2","fnd2@noreply.com");
+  T.newTag("tag1");
+  T.newTag("tag1");
+  T.newTag("tag2");
 }
 #endif  // BACKEND_EXECUTABLE_MULTICLIENTMAIN_CPP_

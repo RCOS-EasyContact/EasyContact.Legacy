@@ -26,19 +26,25 @@ bool BCS::Contacts::newContact(const std::string& Name,
     Query.bind(2, Email);
     Query.exec();
   } catch (std::exception& Err) {
-    std::cerr << "Run-Time Exception <SQLite> : " << Err.what() << std::endl;
+    std::cerr << "Run-Time Exception <SQLite> := " << Err.what() << std::endl;
     return false;
   }
   return true;
 }
 void BCS::Contacts::newTag(const std::string& TagName) {
-  SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3",
-                       SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
   try {
-    DB3.exec("CREATE TABLE tag_" + TagName + "(RCSID TEXT PRIMARY KEY)");
-    DB3.exec("INSERT INTO tags SELECT '" + TagName + "'");
+    SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3",
+                         SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
+    {
+      SQLite::Statement Query(DB3, "INSERT INTO tags SELECT ?");
+      Query.bind(1, TagName);
+      Query.exec();
+    }
+    SQLite::Statement Query(DB3, "CREATE TABLE tag_?(RCSID TEXT PRIMARY KEY)");
+    Query.bind(1, TagName);
+    Query.exec();
   } catch (std::exception& Err) {
-    std::cerr << "Run-Time Exception <SQLite> : " << Err.what() << std::endl;
+    std::cerr << "Run-Time Exception <SQLite> := " << Err.what() << std::endl;
   }
 }
 std::vector<std::string> BCS::Contacts::getAllTags() const {
@@ -50,7 +56,7 @@ std::vector<std::string> BCS::Contacts::getAllTags() const {
       Result.push_back(Query.getColumn(0));
     }
   } catch (std::exception& Err) {
-    std::cerr << "Run-Time Exception <SQLite> : " << Err.what() << std::endl;
+    std::cerr << "Run-Time Exception <SQLite> := " << Err.what() << std::endl;
   }
   return Result;
 }
