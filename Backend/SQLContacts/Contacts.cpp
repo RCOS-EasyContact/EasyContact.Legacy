@@ -21,7 +21,7 @@ bool BCS::Contacts::newContact(const std::string& Name,
   try {
     SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3",
                          SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
-    SQLite::Statement Query(DB3, "INSERT INTO emailadres SELECT '?','?'");
+    SQLite::Statement Query(DB3, "INSERT INTO emailadres SELECT ?,?");
     Query.bind(1, Name);
     Query.bind(2, Email);
     Query.exec();
