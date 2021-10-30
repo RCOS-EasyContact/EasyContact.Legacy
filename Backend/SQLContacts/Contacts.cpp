@@ -31,7 +31,7 @@ bool BCS::Contacts::newContact(const std::string& Name,
   }
   return true;
 }
-void BCS::Contacts::newTag(const std::string& TagName) {
+bool BCS::Contacts::newTag(const std::string& TagName) {
   try {
     SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3",
                          SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
@@ -40,17 +40,33 @@ void BCS::Contacts::newTag(const std::string& TagName) {
       Query.bind(1, TagName);
       Query.exec();
     }
-    const std::string NewTableName="tag_"+TagName;
-    SQLite::Statement Query(DB3, "CREATE TABLE "+NewTableName+" (RCSID TEXT NOT NULL PRIMARY KEY)");
+    const std::string NewTableName = "tag_" + TagName;
+    SQLite::Statement Query(DB3, "CREATE TABLE " + NewTableName +
+                                     " (RCSID TEXT NOT NULL PRIMARY KEY REFERENCES emailadres(RCSID) ON DELETE CASCADE)");
     Query.exec();
   } catch (std::exception& Err) {
     std::cerr << "Run-Time Exception <SQLite> := " << Err.what() << std::endl;
+    return false;
   }
+  return true;
+}
+bool BCS::Contacts::removeContact(const std::string& Name) {
+  try {
+    SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3",
+                         SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
+    SQLite::Statement Query(DB3, "DELETE FROM emailadres WHERE  RCSID=?");
+    Query.bind(1, Name);
+    Query.exec();
+  } catch (std::exception& Err) {
+    std::cerr << "Run-Time Exception <SQLite> := " << Err.what() << std::endl;
+    return false;
+  }
+  return true;
 }
 std::vector<std::string> BCS::Contacts::getAllTags() const {
   std::vector<std::string> Result;
-  SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3");
   try {
+    SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3");
     SQLite::Statement Query(DB3, "SELECT * FROM tags");
     while (Query.executeStep()) {
       Result.push_back(Query.getColumn(0));
