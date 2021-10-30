@@ -77,7 +77,7 @@ bool BCS::Contacts::removeTag(const std::string& TagName) {
   }
   return true;
 }
-std::vector<std::string> getAllNames() const {
+std::vector<std::string> BCS::Contacts::getAllNames() const {
   std::vector<std::string> Result;
   try {
     SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3");
@@ -103,7 +103,7 @@ std::vector<std::string> BCS::Contacts::getAllTags() const {
   }
   return Result;
 }
-std::vector<std::string> getTagContains(const std::string& TagName) const {
+std::vector<std::string> BCS::Contacts::getTagContains(const std::string& TagName) const {
   std::vector<std::string> Result;
   try {
     SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3");
@@ -116,5 +116,33 @@ std::vector<std::string> getTagContains(const std::string& TagName) const {
     std::cerr << "Run-Time Exception <SQLite> := " << Err.what() << std::endl;
   }
   return Result;
+}
+  void BCS::Contacts::assignTagTo(const std::string &TagName, const std::string &ContactName){
+    try {
+    SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3",
+                         SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
+    const std::string TableTagName = "tag_" + TagName;
+    SQLite::Statement Query(DB3,"INSERT INTO "+TableTagName+" SELECT ?");
+    Query.bind(1,ContactName);
+    Query.exec();
+  } catch (std::exception& Err) {
+    std::cerr << "Run-Time Exception <SQLite> := " << Err.what() << std::endl;
+  }
+  }
+  void BCS::Contacts::removeTagFor(const std::string &TagName, const std::string &ContactName){
+try {
+    SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3",
+                         SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
+    const std::string TableTagName = "tag_" + TagName;
+    SQLite::Statement Query(DB3,"DELETE FROM "+TableTagName+" WHERE RCSID=?");
+    Query.bind(1,ContactName);
+    Query.exec();
+  } catch (std::exception& Err) {
+    std::cerr << "Run-Time Exception <SQLite> := " << Err.what() << std::endl;
+  }
+  }
+  void clearTagFor(const std::string &ContactName){
+    
+  }
 }
 #endif  // BACKEND_SQLCONTACTS_CONTACTS_CPP_
