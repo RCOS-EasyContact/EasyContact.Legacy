@@ -25,7 +25,6 @@
 std::unordered_map<std::string, BCS::Contacts> ActiveUsers;
 int main() {
   BCS::Contacts T("gongz3");
-  BCS::CreateDirectory("gongz3");
   T.newContact("Friend 1","fnd1@noreply.com");
 }
 #endif  // BACKEND_EXECUTABLE_MULTICLIENTMAIN_CPP_
