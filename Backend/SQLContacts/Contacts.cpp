@@ -40,8 +40,8 @@ void BCS::Contacts::newTag(const std::string& TagName) {
       Query.bind(1, TagName);
       Query.exec();
     }
-    SQLite::Statement Query(DB3, "CREATE TABLE tag_?(RCSID TEXT PRIMARY KEY)");
-    Query.bind(1, TagName);
+    SQLite::Statement Query(DB3, "CREATE TABLE ? (RCSID TEXT PRIMARY KEY)");
+    Query.bind(1, "tag_"+TagName);
     Query.exec();
   } catch (std::exception& Err) {
     std::cerr << "Run-Time Exception <SQLite> := " << Err.what() << std::endl;
