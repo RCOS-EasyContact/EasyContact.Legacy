@@ -15,7 +15,7 @@
 // Standard Template Library
 #include <unordered_map>
 // EasyContact Header Files
-#include "../API/APIRouter.hpp"
+// #include "../API/APIRouter.hpp"
 #include "../SQLContacts/Contacts.hpp"
 #include "GlobalMutex.hpp"
 // Global Representation
