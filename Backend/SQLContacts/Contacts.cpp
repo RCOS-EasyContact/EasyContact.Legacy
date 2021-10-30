@@ -19,18 +19,17 @@ void BCS::CreateDirectory(const std::string& DirName) {
 bool BCS::Contacts::newContact(const std::string& Name,
                                const std::string& Email) {
   try {
-  SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3",
-                       SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
-   SQLite::Statement Query(DB3,"INSERT INTO emailadres SELECT '?','?'");
-   Query.bind(1,Name,Name.size());
-   Query.bind(2,Email,Email.size());
-   Query.exec();
-
+    SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3",
+                         SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
+    SQLite::Statement Query(DB3, "INSERT INTO emailadres SELECT '?','?'");
+    Query.bind(1, Name);
+    Query.bind(2, Email);
+    Query.exec();
   } catch (std::exception& Err) {
     std::cerr << "Run-Time Exception <SQLite> : " << Err.what() << std::endl;
     return false;
   }
-    return true;
+  return true;
 }
 void BCS::Contacts::newTag(const std::string& TagName) {
   SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3",
