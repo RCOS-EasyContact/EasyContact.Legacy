@@ -35,12 +35,12 @@ void BCS::Contacts::newTag(const std::string& TagName) {
   try {
     SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3",
                          SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
-    {
-      SQLite::Statement Query(DB3, "INSERT INTO tags SELECT ?");
-      Query.bind(1, TagName);
-      Query.exec();
-    }
-    SQLite::Statement Query(DB3, "CREATE TABLE ? (RCSID TEXT PRIMARY KEY)");
+    // {
+    //   SQLite::Statement Query(DB3, "INSERT INTO tags SELECT ?");
+    //   Query.bind(1, TagName);
+    //   Query.exec();
+    // }
+    SQLite::Statement Query(DB3, "CREATE TABLE ? (RCSID TEXT NOT NULL PRIMARY KEY)");
     Query.bind(1, "tag_"+TagName);
     Query.exec();
   } catch (std::exception& Err) {
