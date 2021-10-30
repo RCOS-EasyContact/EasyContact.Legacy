@@ -77,11 +77,38 @@ bool BCS::Contacts::removeTag(const std::string& TagName) {
   }
   return true;
 }
+std::vector<std::string> getAllNames() const {
+  std::vector<std::string> Result;
+  try {
+    SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3");
+    SQLite::Statement Query(DB3, "SELECT RCSID FROM emailadres");
+    while (Query.executeStep()) {
+      Result.push_back(Query.getColumn(0));
+    }
+  } catch (std::exception& Err) {
+    std::cerr << "Run-Time Exception <SQLite> := " << Err.what() << std::endl;
+  }
+  return Result;
+}
 std::vector<std::string> BCS::Contacts::getAllTags() const {
   std::vector<std::string> Result;
   try {
     SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3");
     SQLite::Statement Query(DB3, "SELECT * FROM tags");
+    while (Query.executeStep()) {
+      Result.push_back(Query.getColumn(0));
+    }
+  } catch (std::exception& Err) {
+    std::cerr << "Run-Time Exception <SQLite> := " << Err.what() << std::endl;
+  }
+  return Result;
+}
+std::vector<std::string> getTagContains(const std::string& TagName) const {
+  std::vector<std::string> Result;
+  try {
+    SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3");
+    const std::string TableTagName = "tag_" + TagName;
+    SQLite::Statement Query(DB3, "SELECT * FROM " + TableTagName);
     while (Query.executeStep()) {
       Result.push_back(Query.getColumn(0));
     }
