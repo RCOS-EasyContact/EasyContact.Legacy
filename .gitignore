@@ -1,6 +1,17 @@
 ### Sub-Modules ###
-Backend/API/libhv
-Backend/MailClient/mailio
+Backend/API/libhv/*
+Backend/MailClient/mailio/*
+Backend/SQLContacts/SQLite/*
+
+### CMake ###
+CMakeFiles/*
+*.cmake
+CMakeCache.txt
+EasyContact
+Makefile
+
+### User Data ###
+UserData/*
 
 # Created by https://www.toptal.com/developers/gitignore/api/macos,windows,linux,c++,visualstudio,visualstudiocode,xcode,sublimetext,clion
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos,windows,linux,c++,visualstudio,visualstudiocode,xcode,sublimetext,clion
