@@ -32,13 +32,13 @@ using std::list;
 using std::make_tuple;
 using std::string;
 
-namespace BMC{
+namespace BMC {
 bool AuthenticateLogin(const std::string& RCSID, const std::string& Password);
 class MailClient {
  public:
   // constructor
   explict MailClient(const string& RCSID, const string& Password,
-             const string& usr_name, const string& usr_email);
+                     const string& usr_name, const string& usr_email);
   // recv email, if no error, the return should be the a message;
   int recv(message* mesg);
   int remove_first();
@@ -52,5 +52,5 @@ class MailClient {
   string usr_name;
   string usr_email;
 };
-}
+}  // namespace BMC
 #endif  // BACKEND_MAILCLIENT_EXAMPLE_TEST_FILE_MAILCLIENT_HPP_

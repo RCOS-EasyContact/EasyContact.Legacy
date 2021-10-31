@@ -7,16 +7,16 @@
 #ifndef BACKEND_MAILCLIENT_EXAMPLE_TEST_FILE_MAILCLIENT_CPP_
 #define BACKEND_MAILCLIENT_EXAMPLE_TEST_FILE_MAILCLIENT_CPP_
 #include "MailClient.hpp"
-bool BMC::AuthenticateLogin(const std::string& RCSID, const std::string& Password){
-  try{
-        imaps conn("mail.rpi.edu", 993);
-        conn.authenticate(RCSID, Password, imaps::auth_method_t::LOGIN);
-    }
-    catch (imap_error& exc){
-        cerr << exc.what() << endl;
-        return false;
-    }
-    return true;
+bool BMC::AuthenticateLogin(const std::string& RCSID,
+                            const std::string& Password) {
+  try {
+    imaps conn("mail.rpi.edu", 993);
+    conn.authenticate(RCSID, Password, imaps::auth_method_t::LOGIN);
+  } catch (imap_error& exc) {
+    cerr << exc.what() << endl;
+    return false;
+  }
+  return true;
 }
 MailClient::MailClient(const string& _RCSID, const string& _Password,
                        const string& _usr_name, const string& _usr_email) {

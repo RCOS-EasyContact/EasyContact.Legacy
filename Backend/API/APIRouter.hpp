@@ -11,9 +11,9 @@
 // Standard Template Library
 #include <unordered_set>
 // Local Headers
+#include "../MailClient/MailClient.hpp"
 #include "../SQLContacts/Contacts.hpp"
 #include "hv/HttpService.h"
-#include "../MailClient/MailClient.hpp"
 
 class APIRouter {
  public:
@@ -40,7 +40,8 @@ class APIRouter {
                      return 400;
                    }
                    if (AuthenticateLogin(userName, password)) {
-                     MailClient mc = new MailClient(rcsID, password, name, rcsID+"@rpi.edu");
+                     MailClient mc = new MailClient(rcsID, password, name,
+                                                    rcsID + "@rpi.edu");
                      return 200;
                    }
                    return 505;
