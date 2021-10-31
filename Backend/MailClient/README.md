@@ -16,5 +16,5 @@ Example test files from [mailio](https://github.com/karastojko/mailio)
 
 ## Contributors
 - Fall 2021
-  - [reC4P7CH4](https://github.com/reC4PCH4)
+  - [reC4P7CH4](https://github.com/reC4P7CH4/)
   - [hayTambourineMan](https://github.com/hayTambourineMan/)
