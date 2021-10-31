@@ -16,21 +16,8 @@
 #include <mailio/message.hpp>
 #include <mailio/smtp.hpp>
 
-using mailio::codec;
-using mailio::dialog_error;
-using mailio::imap_error;
-using mailio::imaps;
-using mailio::message;
-using mailio::smtp_error;
-using mailio::smtps;
-
-using std::cout;
-using std::endl;
-using std::for_each;
-using std::ifstream;
-using std::list;
-using std::make_tuple;
-using std::string;
+using namespace std;
+using namespace mailio;
 
 namespace BMC {
 bool AuthenticateLogin(const std::string& RCSID, const std::string& Password);
