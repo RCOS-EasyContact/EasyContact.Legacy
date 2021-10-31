@@ -28,7 +28,8 @@ class MailClient {
  public:
   // constructor
   explicit MailClient(const std::string& RCSID, const std::string& Password,
-                      const std::string& usr_name, const std::string& usr_email);
+                      const std::string& usr_name,
+                      const std::string& usr_email);
   // recv email, if no error, the return should be the a message;
   int recv(message* mesg);
   int remove_first();
