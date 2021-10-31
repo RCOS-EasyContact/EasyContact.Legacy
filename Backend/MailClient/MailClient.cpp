@@ -4,8 +4,8 @@
  * MailClient.cpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_MAILCLIENT_EXAMPLE_TEST_FILE_MAILCLIENT_CPP_
-#define BACKEND_MAILCLIENT_EXAMPLE_TEST_FILE_MAILCLIENT_CPP_
+#ifndef BACKEND_MAILCLIENT_MAILCLIENT_CPP_
+#define BACKEND_MAILCLIENT_MAILCLIENT_CPP_
 #include "MailClient.hpp"
 bool BMC::AuthenticateLogin(const std::string& RCSID,
                             const std::string& Password) {
@@ -103,4 +103,4 @@ int MailClient::sent_message(const string& name_to, const string& to_mail,
   }
   return EXIT_SUCCESS;
 }
-#endif  // BACKEND_MAILCLIENT_EXAMPLE_TEST_FILE_MAILCLIENT_CPP_
+#endif  // BACKEND_MAILCLIENT_MAILCLIENT_CPP_

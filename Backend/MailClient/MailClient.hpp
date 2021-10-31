@@ -4,8 +4,8 @@
  * MailClient.hpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_MAILCLIENT_EXAMPLE_TEST_FILE_MAILCLIENT_HPP_
-#define BACKEND_MAILCLIENT_EXAMPLE_TEST_FILE_MAILCLIENT_HPP_
+#ifndef BACKEND_MAILCLIENT_MAILCLIENT_HPP_
+#define BACKEND_MAILCLIENT_MAILCLIENT_HPP_
 // C++ Standard Library
 #include <algorithm>
 #include <iostream>
@@ -53,4 +53,4 @@ class MailClient {
   string usr_email;
 };
 }  // namespace BMC
-#endif  // BACKEND_MAILCLIENT_EXAMPLE_TEST_FILE_MAILCLIENT_HPP_
+#endif  // BACKEND_MAILCLIENT_MAILCLIENT_HPP_
