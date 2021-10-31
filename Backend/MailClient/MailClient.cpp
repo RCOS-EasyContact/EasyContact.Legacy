@@ -52,12 +52,12 @@ int BMC::MailClient::recv(message* msg) {
     */
   } catch (imap_error& exc) {
     std::cerr << exc.what() << std::endl;
-    return EXIT_FAILURE;
+    return false;
   } catch (dialog_error& exc) {
     std::cerr << exc.what() << std::endl;
-    return EXIT_FAILURE;
+    return false;
   }
-  return EXIT_SUCCESS;
+  return true;
 }
 int BMC::MailClient::remove_first() {
   try {
@@ -66,12 +66,12 @@ int BMC::MailClient::remove_first() {
     conn.remove("inbox", 1);
   } catch (imap_error& exc) {
     std::cerr << exc.what() << std::endl;
-    return EXIT_FAILURE;
+    return false;
   } catch (dialog_error& exc) {
     std::cerr << exc.what() << std::endl;
-    return EXIT_FAILURE;
+    return false;
   }
-  return EXIT_SUCCESS;
+  return true;
 }
 int BMC::MailClient::inbox_status() {
   int ret = 0;
@@ -85,10 +85,10 @@ int BMC::MailClient::inbox_status() {
     ret = stat.messages_no;
   } catch (imap_error& exc) {
     std::cerr << exc.what() << std::endl;
-    return EXIT_FAILURE;
+    return false;
   } catch (dialog_error& exc) {
     std::cerr << exc.what() << std::endl;
-    return EXIT_FAILURE;
+    return false;
   }
   return ret;
 }
@@ -109,11 +109,11 @@ int BMC::MailClient::sent_message(const std::string& name_to,
     conn.submit(msg);
   } catch (smtp_error& exc) {
     std::cerr << exc.what() << std::endl;
-    return EXIT_FAILURE;
+    return false;
   } catch (dialog_error& exc) {
     std::cerr << exc.what() << std::endl;
-    return EXIT_FAILURE;
+    return false;
   }
-  return EXIT_SUCCESS;
+  return true;
 }
 #endif  // BACKEND_MAILCLIENT_MAILCLIENT_CPP_
