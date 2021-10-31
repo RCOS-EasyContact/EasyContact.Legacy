@@ -7,10 +7,10 @@ Example test files from [mailio](https://github.com/karastojko/mailio)
 - [MailClient.hpp](example_test_file/MailClient.hpp)
   - Backend mail client example test
   - Contains:
-    - MailClient ID ""RCSID""
-    - MailClient Password ""Password""
-    - MailClient Username ""usr_name""
-    - MailClient Email address ""usr_email""
+    - MailClient ID **RCSID**
+    - MailClient Password **Password**
+    - MailClient Username **usr_name**
+    - MailClient Email address **usr_email**
 - [MailClient.cpp](example_test_file/MailClient.cpp)
   - Implementation for [MailClient.hpp](example_test_file/MailClient.hpp)
 
