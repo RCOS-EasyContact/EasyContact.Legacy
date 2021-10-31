@@ -7,7 +7,15 @@
 #ifndef BACKEND_MAILCLIENT_MAILCLIENT_CPP_
 #define BACKEND_MAILCLIENT_MAILCLIENT_CPP_
 #include "MailClient.hpp"
-using namespace mailio;
+using mailio::codec;
+using mailio::dialog_error;
+using mailio::imap_error;
+using mailio::imap;
+using mailio::imaps;
+using mailio::message;
+using mailio::mail_address;
+using mailio::smtp_error;
+using mailio::smtps;
 bool BMC::AuthenticateLogin(const std::string& RCSID,
                             const std::string& Password) {
   try {

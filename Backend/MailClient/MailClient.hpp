@@ -15,7 +15,6 @@
 #include <mailio/imap.hpp>
 #include <mailio/message.hpp>
 #include <mailio/smtp.hpp>
-using namespace mailio;
 namespace BMC {
 bool AuthenticateLogin(const std::string& RCSID, const std::string& Password);
 class MailClient {
@@ -31,7 +30,7 @@ class MailClient {
                       const std::string& usr_name,
                       const std::string& usr_email);
   // recv email, if no error, the return should be the a message;
-  int recv(message* mesg);
+  int recv(mailio::message* mesg);
   int remove_first();
   int inbox_status();
   int sent_message(const std::string& name_to, const std::string& to_mail,
