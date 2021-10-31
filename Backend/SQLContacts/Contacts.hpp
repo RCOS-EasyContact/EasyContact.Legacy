@@ -39,7 +39,6 @@ class Contacts {
   std::vector<std::string> getNameInTags(const std::string &ContactName) const;
   void assignTagTo(const std::string &TagName, const std::string &ContactName);
   void removeTagFor(const std::string &TagName, const std::string &ContactName);
-  void clearTagFor(const std::string &ContactName);
 };
 }  // namespace BCS
 #endif  // BACKEND_SQLCONTACTS_CONTACTS_HPP_
