@@ -7,7 +7,6 @@
 #ifndef BACKEND_MAILCLIENT_MAILCLIENT_CPP_
 #define BACKEND_MAILCLIENT_MAILCLIENT_CPP_
 #include "MailClient.hpp"
-using namespace std;
 using namespace mailio;
 bool BMC::AuthenticateLogin(const std::string& RCSID,
                             const std::string& Password) {
@@ -20,8 +19,8 @@ bool BMC::AuthenticateLogin(const std::string& RCSID,
   }
   return true;
 }
-BMC::MailClient::MailClient(const string& _RCSID, const string& _Password,
-                            const string& _usr_name, const string& _usr_email) {
+BMC::MailClient::MailClient(const std::string& _RCSID, const std::string& _Password,
+                            const std::string& _usr_name, const std::string& _usr_email) {
   RCSID = _RCSID;
   Password = _Password;
   usr_name = _usr_name;
@@ -32,7 +31,7 @@ int BMC::MailClient::recv(message* msg) {
   try {
     imaps conn("mail.rpi.edu", 993);
     conn.authenticate(RCSID, Password, imaps::auth_method_t::LOGIN);
-    imaps::mailbox_stat_t ret = conn.select(list<string>({"Inbox"}));
+    imaps::mailbox_stat_t ret = conn.select(std::list<std::string>({"Inbox"}));
     msg->line_policy(codec::line_len_policy_t::VERYLARGE,
                      codec::line_len_policy_t::VERYLARGE);
     conn.fetch(ret.messages_no, *msg);
@@ -83,8 +82,8 @@ int BMC::MailClient::inbox_status() {
   }
   return ret;
 }
-int BMC::MailClient::sent_message(const string& name_to, const string& to_mail,
-                                  const string& subjects, const string& mesg) {
+int BMC::MailClient::sent_message(const std::string& name_to, const std::string& to_mail,
+                                  const std::string& subjects, const std::string& mesg) {
   try {
     message msg;
     msg.from(mail_address(usr_name,
