@@ -1,6 +1,7 @@
 # EasyContact/Backend/SQLContacts
 Contact Book System Stores All Contact Informations in SQL Database
-[SQLiteC++](SQLite @ 4e3d36a): a C++ SQLite3 Wrapper
+
+[SQLiteC++](https://github.com/SRombauts/SQLiteCpp/tree/4e3d36af2d4a612d548f5959532a7b97c9724e6b): A C++ SQLite3 Wrapper
 - [Representation](#representation)
 - [Contribution](#contribution)
 
