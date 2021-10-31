@@ -35,7 +35,7 @@ using std::string;
 namespace BMC {
 bool AuthenticateLogin(const std::string& RCSID, const std::string& Password);
 class MailClient {
-   private:
+ private:
   string RCSID;
   string Password;
   string usr_name;
@@ -44,7 +44,7 @@ class MailClient {
  public:
   // constructor
   explicit MailClient(const string& RCSID, const string& Password,
-                     const string& usr_name, const string& usr_email);
+                      const string& usr_name, const string& usr_email);
   // recv email, if no error, the return should be the a message;
   int recv(message* mesg);
   int remove_first();

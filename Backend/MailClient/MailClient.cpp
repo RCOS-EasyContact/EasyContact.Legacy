@@ -19,7 +19,7 @@ bool BMC::AuthenticateLogin(const std::string& RCSID,
   return true;
 }
 BMC::MailClient::MailClient(const string& _RCSID, const string& _Password,
-                       const string& _usr_name, const string& _usr_email) {
+                            const string& _usr_name, const string& _usr_email) {
   RCSID = _RCSID;
   Password = _Password;
   usr_name = _usr_name;
@@ -82,7 +82,7 @@ int BMC::MailClient::inbox_status() {
   return ret;
 }
 int BMC::MailClient::sent_message(const string& name_to, const string& to_mail,
-                             const string& subjects, const string& mesg) {
+                                  const string& subjects, const string& mesg) {
   try {
     message msg;
     msg.from(mail_address(usr_name,
