@@ -37,7 +37,7 @@ bool AuthenticateLogin(const std::string& RCSID, const std::string& Password);
 class MailClient {
  public:
   // constructor
-  MailClient(const string& RCSID, const string& Password,
+  explict MailClient(const string& RCSID, const string& Password,
              const string& usr_name, const string& usr_email);
   // recv email, if no error, the return should be the a message;
   int recv(message* mesg);
