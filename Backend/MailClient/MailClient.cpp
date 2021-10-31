@@ -34,7 +34,7 @@ int BMC::MailClient::recv(message* msg) {
     conn.authenticate(RCSID, Password, imaps::auth_method_t::LOGIN);
     imaps::mailbox_stat_t ret = conn.select(list<string>({"Inbox"}));
     msg->line_policy(codec::line_len_policy_t::VERYLARGE,
-                    codec::line_len_policy_t::VERYLARGE);
+                     codec::line_len_policy_t::VERYLARGE);
     conn.fetch(ret.messages_no, *msg);
     /*
             std::cout<<msg.subject()<<std::endl;
