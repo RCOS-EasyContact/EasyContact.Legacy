@@ -9,11 +9,11 @@
 #include "MailClient.hpp"
 using mailio::codec;
 using mailio::dialog_error;
-using mailio::imap_error;
 using mailio::imap;
+using mailio::imap_error;
 using mailio::imaps;
-using mailio::message;
 using mailio::mail_address;
+using mailio::message;
 using mailio::smtp_error;
 using mailio::smtps;
 bool BMC::AuthenticateLogin(const std::string& RCSID,
