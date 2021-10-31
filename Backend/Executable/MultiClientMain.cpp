@@ -16,6 +16,7 @@
 #include <unordered_map>
 // EasyContact Header Files
 // #include "../API/APIRouter.hpp"
+#include "../MailClient/MailClient.hpp"
 #include "../SQLContacts/Contacts.hpp"
 #include "GlobalMutex.hpp"
 // Global Representation
