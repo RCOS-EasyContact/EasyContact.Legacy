@@ -18,14 +18,14 @@ bool BMC::AuthenticateLogin(const std::string& RCSID,
   }
   return true;
 }
-MailClient::MailClient(const string& _RCSID, const string& _Password,
+BMC::MailClient::MailClient(const string& _RCSID, const string& _Password,
                        const string& _usr_name, const string& _usr_email) {
   RCSID = _RCSID;
   Password = _Password;
   usr_name = _usr_name;
   usr_email = _usr_email;
 }
-int MailClient::recv(message* msg) {
+int BMC::MailClient::recv(message* msg) {
   // message &new_msg = *msg;
   try {
     imaps conn("mail.rpi.edu", 993);
@@ -48,7 +48,7 @@ int MailClient::recv(message* msg) {
   }
   return EXIT_SUCCESS;
 }
-int MailClient::remove_first() {
+int BMC::MailClient::remove_first() {
   try {
     imap conn("mail.rpi.edu", 143);
     conn.authenticate(RCSID, Password, imap::auth_method_t::LOGIN);
@@ -62,7 +62,7 @@ int MailClient::remove_first() {
   }
   return EXIT_SUCCESS;
 }
-int MailClient::inbox_status() {
+int BMC::MailClient::inbox_status() {
   int ret = 0;
   try {
     // connect to server
@@ -81,7 +81,7 @@ int MailClient::inbox_status() {
   }
   return ret;
 }
-int MailClient::sent_message(const string& name_to, const string& to_mail,
+int BMC::MailClient::sent_message(const string& name_to, const string& to_mail,
                              const string& subjects, const string& mesg) {
   try {
     message msg;

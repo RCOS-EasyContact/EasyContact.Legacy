@@ -145,6 +145,4 @@ void BCS::Contacts::removeTagFor(const std::string& TagName,
     std::cerr << "Run-Time Exception <SQLite> := " << Err.what() << std::endl;
   }
 }
-void clearTagFor(const std::string& ContactName) {}
-}
 #endif  // BACKEND_SQLCONTACTS_CONTACTS_CPP_
