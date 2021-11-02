@@ -9,8 +9,8 @@
 // C++ Standard Library
 #include <string>
 // Standard Template Library
-#include <unordered_set>
-// Local Headers
+#include <vector>
+// EasyContact Header Files
 #include "../MailClient/MailClient.hpp"
 #include "../SQLContacts/Contacts.hpp"
 #include "hv/HttpService.h"
@@ -22,26 +22,24 @@ class APIRouter {
     req->ParseBody();
     return 0;
   }
-
   static int post(HttpRequest *req, HttpResponse *resp) { return 0; }
-
   static void register_router(HttpService *router) {
     router->preprocessor = pre;
     router->postprocessor = post;
 
-    // login
-    router->POST("/login/:rcsID/:name/:password",
+    // Login
+    router->POST("/login/:RCSID/:Name/:Password",
                  [](HttpRequest *req, HttpResponse *resp) {
-                   std::string name = req->GetParam("name");
-                   std::string password = req->GetParam("password");
-                   std::string rcsID = req->GetParam("rcsID");
-
-                   if (name == "" || password == "" || rcsID == "") {
+                   const std::string Name = req->GetParam("Name");
+                   const std::string Password = req->GetParam("Password");
+                   const std::string RCSID = req->GetParam("RCSID");
+                   // Sanity Check
+                   if (Name == "" || Password == "" || RCSID == "") {
                      return 400;
                    }
-                   if (AuthenticateLogin(userName, password)) {
-                     MailClient mc = new MailClient(rcsID, password, name,
-                                                    rcsID + "@rpi.edu");
+                   if (BMC::AuthenticateLogin(Name, Password)==true) {
+                     BMC::MailClient mc = new BSC::MailClient(RCSID, Password, Name,
+                                                    RCSID + "@rpi.edu");
                      return 200;
                    }
                    return 505;

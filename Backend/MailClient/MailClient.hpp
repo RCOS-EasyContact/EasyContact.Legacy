@@ -16,7 +16,7 @@
 #include <mailio/message.hpp>
 #include <mailio/smtp.hpp>
 namespace BMC {
-bool AuthenticateLogin(const std::string& RCSID, const std::string& Password);
+static bool AuthenticateLogin(const std::string& RCSID, const std::string& Password);
 class MailClient {
  private:
   std::string RCSID;
