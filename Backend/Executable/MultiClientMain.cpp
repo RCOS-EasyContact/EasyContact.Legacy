@@ -19,7 +19,7 @@
 #include "SingleUser.hpp"
 #include "GlobalMutex.hpp"
 // Global Representation
-std::unordered_map<std::string, BCS::Contacts> ActiveUsers;
+std::unordered_map<std::string, SingleUser> ActiveUsers;
 int main() {
   BCS::Contacts T("gongz3");
   T.newTag("tag1");

@@ -11,10 +11,9 @@
 // Standard Template Library
 #include <vector>
 // EasyContact Header Files
-#include "../MailClient/MailClient.hpp"
-#include "../SQLContacts/Contacts.hpp"
+#include "../Executable/SingleUser.hpp"
 #include "hv/HttpService.h"
-
+extern std::unordered_map<std::string, SingleUser> ActiveUsers;
 class APIRouter {
  public:
   static int pre(HttpRequest *req, HttpResponse *resp) {
@@ -28,7 +27,7 @@ class APIRouter {
     router->postprocessor = post;
 
     // Login
-    router->POST("/login/:RCSID/:Name/:Password",
+    router->POST("/login/:RCSID/:Password",
                  [](HttpRequest *req, HttpResponse *resp) {
                    const std::string Name = req->GetParam("Name");
                    const std::string Password = req->GetParam("Password");
@@ -38,8 +37,7 @@ class APIRouter {
                      return 400;
                    }
                    if (BMC::AuthenticateLogin(Name, Password)==true) {
-                     BMC::MailClient mc = new BSC::MailClient(RCSID, Password, Name,
-                                                    RCSID + "@rpi.edu");
+                    ActiveUsers.insert(std::pair<std::string,SingleUser>(RCSID,SingleUser(Name,Password)));
                      return 200;
                    }
                    return 505;
