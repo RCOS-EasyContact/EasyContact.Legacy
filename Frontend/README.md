@@ -11,6 +11,10 @@ get 2 js file - package-loc.json and package.json. Do not change anything in it.
 But please check package and see if "scripts" contents in it and have sever commmands such as "start", "build",etc
 If yes, then you are good to go
 
+### `npm install --save react-redux`
+
+install redux and use this package and grape the exist started code in the website : https://redux.js.org/tutorials/fundamentals/part-5-ui-react
+
 ### `npm start`
 
 Runs the app in the development mode.
