@@ -19,10 +19,10 @@ namespace BMC {
 static bool AuthenticateLogin(const std::string& RCSID, const std::string& Password);
 class MailClient {
  private:
-  std::string RCSID;
-  std::string Password;
+  const std::string RCSID;
+  const std::string Password;
+  const std::string usr_email;
   std::string usr_name;
-  std::string usr_email;
 
  public:
   // constructor
