@@ -27,15 +27,6 @@ static bool BMC::AuthenticateLogin(const std::string& RCSID,
   }
   return true;
 }
-BMC::MailClient::MailClient(const std::string& _RCSID,
-                            const std::string& _Password,
-                            const std::string& _usr_name,
-                            const std::string& _usr_email) {
-  RCSID = _RCSID;
-  Password = _Password;
-  usr_name = _usr_name;
-  usr_email = _usr_email;
-}
 int BMC::MailClient::recv(message* msg) {
   // message &new_msg = *msg;
   try {

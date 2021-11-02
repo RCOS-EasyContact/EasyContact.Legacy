@@ -16,8 +16,7 @@
 #include <unordered_map>
 // EasyContact Header Files
 // #include "../API/APIRouter.hpp"
-#include "../MailClient/MailClient.hpp"
-#include "../SQLContacts/Contacts.hpp"
+#include "SingleUser.hpp"
 #include "GlobalMutex.hpp"
 // Global Representation
 std::unordered_map<std::string, BCS::Contacts> ActiveUsers;
