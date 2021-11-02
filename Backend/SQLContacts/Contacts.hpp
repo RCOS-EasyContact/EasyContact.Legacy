@@ -30,18 +30,15 @@ class Contacts {
     CreateDirectory(RCSID);
   }
   bool newContact(const std::string &Name, const std::string &Email);
-  void newTag(const std::string &TagName);
-  bool removeContact(const std::string &ExistContact);
+  bool newTag(const std::string &TagName);
+  bool removeContact(const std::string &Name);
   bool removeTag(const std::string &TagName);
-  [[nodiscard]] std::vector<std::string> getAllContacts() const;
-  [[nodiscard]] std::vector<std::string> getAllTags() const;
-  [[nodiscard]] std::vector<std::string> getTagContains(
-      const std::string &TagName) const;
-  [[nodiscard]] std::vector<std::string> getNameInTags(
-      const std::string &ContactName) const;
+  std::vector<std::string> getAllNames() const;
+  std::vector<std::string> getAllTags() const;
+  std::vector<std::string> getTagContains(const std::string &TagName) const;
+  std::vector<std::string> getNameInTags(const std::string &ContactName) const;
   void assignTagTo(const std::string &TagName, const std::string &ContactName);
   void removeTagFor(const std::string &TagName, const std::string &ContactName);
-  void clearTagFor(const std::string &ContactName);
 };
 }  // namespace BCS
 #endif  // BACKEND_SQLCONTACTS_CONTACTS_HPP_

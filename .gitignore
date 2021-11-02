@@ -5,10 +5,11 @@ Backend/SQLContacts/SQLite/*
 
 ### CMake ###
 CMakeFiles/*
-*.cmake
 CMakeCache.txt
 EasyContact
 Makefile
+*.cmake
+*.pc
 
 ### User Data ###
 UserData/*
