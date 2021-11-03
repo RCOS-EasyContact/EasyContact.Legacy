@@ -29,11 +29,10 @@ class APIRouter {
     // Login
     router->POST("/login/:RCSID/:Password",
                  [](HttpRequest *req, HttpResponse *resp) {
-                   const std::string Name = req->GetParam("Name");
                    const std::string Password = req->GetParam("Password");
                    const std::string RCSID = req->GetParam("RCSID");
                    // Sanity Check
-                   if (Name == "" || Password == "" || RCSID == "") {
+                   if (Password == "" || RCSID == "") {
                      return 400;
                    }
                    if (BMC::AuthenticateLogin(Name, Password)==true) {
