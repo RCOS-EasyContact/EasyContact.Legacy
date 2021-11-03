@@ -41,4 +41,4 @@ target_link_libraries(EasyContact
 )
 
 add_dependencies(EasyContact hv SQLiteCpp)
-set_target_properties(EasyContact PROPERTIES CMAKE_CXX_FLAGS "-O2 -Wall -Wextra -g")
+set_target_properties(EasyContact PROPERTIES CMAKE_CXX_FLAGS "-Wall -Wextra -g")
