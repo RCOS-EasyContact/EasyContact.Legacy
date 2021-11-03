@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-project(RCOS-EasyContact)
+project(EasyContact)
 
 set(LIBHVR Backend/API/libhv)
 set(SQLITE Backend/SQLContacts/SQLite)
