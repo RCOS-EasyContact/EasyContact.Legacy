@@ -21,12 +21,6 @@
 // Global Representation
 std::unordered_map<std::string, SingleUser> ActiveUsers;
 int main() {
-  BCS::Contacts T("gongz3");
-  T.newTag("tag1");
-  T.newContact("Friend 01", "frd01@noreply.io");
-  T.newContact("Friend 02", "frd02@noreply.io");
-  T.newContact("Friend 03", "frd03@noreply.io");
-  T.removeContact("Friend 02");
-  T.removeContact("Friend 03");
+while(true){pause();}
 }
 #endif  // BACKEND_EXECUTABLE_MULTICLIENTMAIN_CPP_
