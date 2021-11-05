@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
+
+import './index.css';
+import rootReducer from './reducers/Conversations';
+import App from './App';
 
 
 //for future login page connet pipe
@@ -16,3 +18,4 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('root'));
 //serviceWorker.unregister();
+export default concersations;

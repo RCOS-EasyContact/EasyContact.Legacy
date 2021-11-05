@@ -9,12 +9,17 @@ import { conversations, selectedConversation } from '../../data/conversations';
 import { messages } from '../../data/messages';
 
 import './Chat-Shell.css';
+import { useState } from 'react';
 
-const ChatShell = () => {
+const ChatShell = ({ conversations }) => {
+    const [selectedConvo] = useState(selectedConversation);
     return (
         <div id="chat-container">
             <ConversationSearch />
-            <ConversationList conversations={conversations} />
+            <ConversationList
+                conversations={conversations}
+                selectedConversationId={selectedConvo.id}
+            />
             <NewConversation />
             <ChatTitle selectedConversation={selectedConversation} />
             <MessageList messages={messages} />
