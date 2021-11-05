@@ -36,7 +36,7 @@ class APIRouter {
                      return 400;
                    }
                    if (BMC::AuthenticateLogin(RCSID, Password)==true) {
-                    ActiveUsers.insert(std::pair<std::string,SingleUser>(RCSID,SingleUser(Name,Password)));
+                    ActiveUsers.insert(std::pair<std::string,SingleUser>(RCSID,SingleUser(RCSID,Password)));
                      return 200;
                    }
                    return 505;
