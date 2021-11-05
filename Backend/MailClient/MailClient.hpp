@@ -25,9 +25,7 @@ class MailClient {
   std::string usr_name;
 
  public:
-explicit MailClient(const std::string &_RCSID,const std::string& _Password):RCSID(_RCSID),Password(_Password){
-usr_email=RCSID+"@rpi.edu";
-usr_name=RCSID;
+explicit MailClient(const std::string &_RCSID,const std::string& _Password):RCSID(_RCSID),Password(_Password),usr_email(_RCSID+"@rpi.edu"),usr_name(_RCSID){
 };
   explicit MailClient(const std::string& _RCSID, const std::string& _Password,
                       const std::string& _Nickname,

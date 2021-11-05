@@ -41,7 +41,7 @@ class APIRouter {
                    }
                    return 505;
                  });
-
+#if 0
     // contacts
     router->POST("/contacts/:contactName",
                  [](HttpRequest *req, HttpResponse *resp) {
@@ -188,6 +188,7 @@ class APIRouter {
                    [](HttpRequest *req, HttpResponse *resp) { return 404; });
 
     router->PATCH("", [](HttpRequest *req, HttpResponse *resp) { return 404; });
+    #endif
   }
 };
 #endif  // BACKEND_API_APIROUTER_HPP_

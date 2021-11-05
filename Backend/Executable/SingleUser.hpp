@@ -14,7 +14,7 @@ class SingleUser{
 public:
 BMC::MailClient MailClient;
 BCS::Contacts SQLContacts;
-explicit SignleUser(const std::string &RCSID,const std::string& Password):MailClient(RCSID,Password),SQLContacts(RCSID){}
+explicit SingleUser(const std::string &RCSID,const std::string& Password):MailClient(RCSID,Password),SQLContacts(RCSID){}
 
 };
 #endif // BACKEND_EXECUTABLE_SINGLEUSER_HPP
