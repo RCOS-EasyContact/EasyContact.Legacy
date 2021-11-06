@@ -33,20 +33,20 @@ class APIRouter {
 
     // Login
     router->POST("/login/:RCSID/:Password",
-                [](HttpRequest *req, HttpResponse *resp) {
-                  const std::string Password = req->GetParam("Password");
-                  const std::string RCSID = req->GetParam("RCSID");
-                  // Sanity Check
-                  if (Password == "" || RCSID == "") {
-                    return 400;
-                  }
-                  if (BMC::AuthenticateLogin(RCSID, Password) == true) {
-                    g_ActiveUsers.insert(std::pair<std::string, SingleUser>(
-                        RCSID, SingleUser(RCSID, Password)));
-                    return 200;
-                  }
-                  return 505;
-                });
+                 [](HttpRequest *req, HttpResponse *resp) {
+                   const std::string Password = req->GetParam("Password");
+                   const std::string RCSID = req->GetParam("RCSID");
+                   // Sanity Check
+                   if (Password == "" || RCSID == "") {
+                     return 400;
+                   }
+                   if (BMC::AuthenticateLogin(RCSID, Password) == true) {
+                     g_ActiveUsers.insert(std::pair<std::string, SingleUser>(
+                         RCSID, SingleUser(RCSID, Password)));
+                     return 200;
+                   }
+                   return 505;
+                 });
 #if 0
     // contacts
     router->POST("/contacts/:contactName",
