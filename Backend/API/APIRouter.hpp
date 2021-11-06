@@ -14,10 +14,11 @@
 #include <unordered_map>
 #include <utility>
 #include <vector>
+// libhv Library
+#include "hv/HttpService.h"
 // EasyContact Header Files
 #include "../Executable/SingleUser.hpp"
 #include "../Executable/SysLogs.hpp"
-#include "hv/HttpService.h"
 // Global Representation
 extern std::unordered_map<std::string, SingleUser> g_ActiveUsers;
 class APIRouter {
