@@ -17,6 +17,7 @@
 // libhv Library
 #include "hv/HttpService.h"
 // EasyContact Header Files
+#include "UserToken.hpp"
 #include "../Executable/SingleUser.hpp"
 #include "../Executable/SysLogs.hpp"
 // Global Representation
@@ -39,8 +40,10 @@ class APIRouter {
         const std::string RCSID = req->json["RCSID"];
         const std::string Password = req->json["Password"];
         if (BMC::AuthenticateLogin(RCSID, Password) == true) {
+          const std::string Token=AUT::GenerateToken();
           g_ActiveUsers.insert(std::pair<std::string, SingleUser>(
-              RCSID, SingleUser(RCSID, Password)));
+              Token, SingleUser(RCSID, Password)));
+          resp->json["Token"]=Token;
           return 200;  // OK
         } else {
           return 511;  // Network Authentication Required
