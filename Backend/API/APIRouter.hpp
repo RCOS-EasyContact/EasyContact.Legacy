@@ -16,8 +16,8 @@
 #include <vector>
 // EasyContact Header Files
 #include "../Executable/SingleUser.hpp"
-#include "hv/HttpService.h"
 #include "../Executable/SysLogs.hpp"
+#include "hv/HttpService.h"
 // Global Representation
 extern std::unordered_map<std::string, SingleUser> g_ActiveUsers;
 class APIRouter {

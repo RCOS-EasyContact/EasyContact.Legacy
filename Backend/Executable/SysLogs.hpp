@@ -10,15 +10,15 @@
 #include <ctime>
 #include <exception>
 #include <iostream>
-namespace SYSLOG{
-static void PrintException(const std::exception &Err){
-time_t _TT;
-        struct tm *_TI;
-        time(&_TT);
-        _TI = localtime(&_TT);
-        std::cerr << asctime(_TI) << "Run-Time Exception: " << Err.what()
-                  << std::endl;
+namespace SYSLOG {
+static void PrintException(const std::exception &Err) {
+  time_t _TT;
+  struct tm *_TI;
+  time(&_TT);
+  _TI = localtime(&_TT);
+  std::cerr << asctime(_TI) << "Run-Time Exception: " << Err.what()
+            << std::endl;
 }
 
-}
-#endif // BACKEND_EXECUTABLE_SYSLOGS_HPP_
+}  // namespace SYSLOG
+#endif  // BACKEND_EXECUTABLE_SYSLOGS_HPP_
