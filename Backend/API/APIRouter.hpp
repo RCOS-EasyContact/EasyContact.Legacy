@@ -60,13 +60,13 @@ class APIRouter {
             g_ActiveUsers.find(Token);
         // Verify User Is Current Active
         if (User == g_ActiveUsers.end()) {
-          return 401  // Unauthorized
+          return 401;  // Unauthorized
         }
-        const std::vecotr<std::string> &AllNames = User->second.getAllNames();
+        const std::vector<std::string> &AllNames = User->second.SQLContacts.getAllNames();
         for (const std::string &i : AllNames) {
           resp->json.push_back(i);
         }
-        return 200  // OK
+        return 200;  // OK
       } catch (const std::exception &Err) {
         SYSLOG::PrintException(Err);
       }
