@@ -29,7 +29,7 @@ class MailClient {
       : RCSID(_RCSID),
         Password(_Password),
         usr_email(_RCSID + "@rpi.edu"),
-        usr_name(_RCSID){}
+        usr_name(_RCSID) {}
   explicit MailClient(const std::string& _RCSID, const std::string& _Password,
                       const std::string& _Nickname, const std::string& _Email)
       : RCSID(_RCSID),
