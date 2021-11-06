@@ -8,26 +8,42 @@
 #define BACKEND_EXECUTABLE_MULTICLIENTMAIN_CPP_
 // C Standard Library
 #include <signal.h>
+#include <stdlib.h>
 // C++ Standard Library
 #include <iostream>
 #include <mutex>
 #include <thread>
 // Standard Template Library
 #include <unordered_map>
+#include <utility>
+// Libhv Library
+#include "hv/HttpServer.h"
+#include "hv/hv.h"
 // EasyContact Header Files
-// #include "../API/APIRouter.hpp"
-#include "../MailClient/MailClient.hpp"
-#include "../SQLContacts/Contacts.hpp"
+#include "../API/APIRouter.hpp"
 #include "GlobalMutex.hpp"
+#include "SingleUser.hpp"
 // Global Representation
-std::unordered_map<std::string, BCS::Contacts> ActiveUsers;
+std::unordered_map<std::string, SingleUser> g_ActiveUsers;
+http_server_t g_Http_Server;
+HttpService g_Http_Service;
+void Reg_APIServer() {
+  try {
+    g_Http_Server.port = 3126;
+    g_Http_Service.base_url = "";
+    APIRouter::register_router(&g_Http_Service);
+    g_Http_Server.service = &g_Http_Service;
+    http_server_run(&g_Http_Server, 0);
+  } catch (std::exception& Err) {
+    std::cerr << "Run-Time Exception <APIRouter> := " << Err.what()
+              << std::endl;
+    exit(EXIT_FAILURE);
+  }
+}
 int main() {
-  BCS::Contacts T("gongz3");
-  T.newTag("tag1");
-  T.newContact("Friend 01", "frd01@noreply.io");
-  T.newContact("Friend 02", "frd02@noreply.io");
-  T.newContact("Friend 03", "frd03@noreply.io");
-  T.removeContact("Friend 02");
-  T.removeContact("Friend 03");
+  Reg_APIServer();
+  while (true) {
+    pause();
+  }
 }
 #endif  // BACKEND_EXECUTABLE_MULTICLIENTMAIN_CPP_

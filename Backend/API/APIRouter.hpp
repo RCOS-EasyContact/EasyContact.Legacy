@@ -6,15 +6,22 @@
  */
 #ifndef BACKEND_API_APIROUTER_HPP_
 #define BACKEND_API_APIROUTER_HPP_
+// Resolve Conflict with Libboost
+#undef defer
 // C++ Standard Library
 #include <string>
 // Standard Template Library
-#include <unordered_set>
-// Local Headers
-#include "../MailClient/MailClient.hpp"
-#include "../SQLContacts/Contacts.hpp"
+#include <unordered_map>
+#include <utility>
+#include <vector>
+// Libhv Library
 #include "hv/HttpService.h"
-
+// EasyContact Header Files
+#include "../Executable/SingleUser.hpp"
+#include "../Executable/SysLogs.hpp"
+#include "UserToken.hpp"
+// Global Representation
+extern std::unordered_map<std::string, SingleUser> g_ActiveUsers;
 class APIRouter {
  public:
   static int pre(HttpRequest *req, HttpResponse *resp) {
@@ -22,31 +29,31 @@ class APIRouter {
     req->ParseBody();
     return 0;
   }
-
   static int post(HttpRequest *req, HttpResponse *resp) { return 0; }
-
   static void register_router(HttpService *router) {
     router->preprocessor = pre;
     router->postprocessor = post;
 
-    // login
-    router->POST("/login/:rcsID/:name/:password",
-                 [](HttpRequest *req, HttpResponse *resp) {
-                   std::string name = req->GetParam("name");
-                   std::string password = req->GetParam("password");
-                   std::string rcsID = req->GetParam("rcsID");
-
-                   if (name == "" || password == "" || rcsID == "") {
-                     return 400;
-                   }
-                   if (AuthenticateLogin(userName, password)) {
-                     MailClient mc = new MailClient(rcsID, password, name,
-                                                    rcsID + "@rpi.edu");
-                     return 200;
-                   }
-                   return 505;
-                 });
-
+    // Login
+    router->POST("/login", [](HttpRequest *req, HttpResponse *resp) {
+      try {
+        const std::string RCSID = req->json["RCSID"];
+        const std::string Password = req->json["Password"];
+        if (BMC::AuthenticateLogin(RCSID, Password) == true) {
+          const std::string Token = AUT::GenerateToken();
+          g_ActiveUsers.insert(std::pair<std::string, SingleUser>(
+              Token, SingleUser(RCSID, Password)));
+          resp->json["Token"] = Token;
+          return 200;  // OK
+        } else {
+          return 511;  // Network Authentication Required
+        }
+      } catch (const std::exception &Err) {
+        SYSLOG::PrintException(Err);
+      }
+      return 500;  // Internal Server Error
+    });
+#if 0
     // contacts
     router->POST("/contacts/:contactName",
                  [](HttpRequest *req, HttpResponse *resp) {
@@ -74,7 +81,7 @@ class APIRouter {
                    });
 
     router->GET("/contacts/all", [](HttpRequest *req, HttpResponse *resp) {
-      std::unordered_set<BCS::Key> &contacts = getAllContacts();
+      std::vector<BCS::Key> &contacts = getAllContacts();
       if (contacts.empty()) {
         return 404;
       }
@@ -112,7 +119,7 @@ class APIRouter {
       if (tagName == "") {
         return 400;
       }
-      std::unordered_set<std::string> contacts = getTagContains(tagName);
+      std::vector<std::string> contacts = getTagContains(tagName);
       if (contacts.empty()) {
         return 404;
       }
@@ -193,6 +200,7 @@ class APIRouter {
                    [](HttpRequest *req, HttpResponse *resp) { return 404; });
 
     router->PATCH("", [](HttpRequest *req, HttpResponse *resp) { return 404; });
+#endif
   }
 };
 #endif  // BACKEND_API_APIROUTER_HPP_

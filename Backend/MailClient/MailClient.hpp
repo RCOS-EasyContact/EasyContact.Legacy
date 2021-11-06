@@ -15,20 +15,29 @@
 #include <mailio/imap.hpp>
 #include <mailio/message.hpp>
 #include <mailio/smtp.hpp>
+// EasyContact Header Files
+#include "../Executable/SysLogs.hpp"
 namespace BMC {
 bool AuthenticateLogin(const std::string& RCSID, const std::string& Password);
 class MailClient {
  private:
-  std::string RCSID;
-  std::string Password;
+  const std::string RCSID;
+  const std::string Password;
+  const std::string usr_email;
   std::string usr_name;
-  std::string usr_email;
 
  public:
-  // constructor
-  explicit MailClient(const std::string& RCSID, const std::string& Password,
-                      const std::string& usr_name,
-                      const std::string& usr_email);
+  explicit MailClient(const std::string& _RCSID, const std::string& _Password)
+      : RCSID(_RCSID),
+        Password(_Password),
+        usr_email(_RCSID + "@rpi.edu"),
+        usr_name(_RCSID) {}
+  explicit MailClient(const std::string& _RCSID, const std::string& _Password,
+                      const std::string& _Nickname, const std::string& _Email)
+      : RCSID(_RCSID),
+        Password(_Password),
+        usr_name(_Nickname),
+        usr_email(_Email) {}
   // recv email, if no error, the return should be the a message;
   int recv(mailio::message* mesg);
   int remove_first();

@@ -10,12 +10,12 @@
 #include <SQLiteCpp/SQLiteCpp.h>
 #include <SQLiteCpp/VariadicBind.h>
 // C++ Standard Library
-#include <exception>
 #include <filesystem>
-#include <iostream>
 #include <string>
 // Standard Template Library
 #include <vector>
+// EasyContact Header Files
+#include "../Executable/SysLogs.hpp"
 /**
  * EasyContact Custom Namespace
  * BCS : Backend Contact System

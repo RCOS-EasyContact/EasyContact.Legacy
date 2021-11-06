@@ -7,3 +7,4 @@
 [submodule "Backend/SQLContacts/SQLite"]
 	path = Backend/SQLContacts/SQLite
 	url = https://github.com/SRombauts/SQLiteCpp.git
+

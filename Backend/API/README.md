@@ -1,22 +1,18 @@
 # EasyContact/Backend/API
 ## Easy Contact API Specifications
 - This API is based on libhv in C++ and will be initialized as the backend database starts, and serves as an interface between node.js and database.  The API creates an HTTP server as a RESTful API.  
-- Current state: Working
-
-
-## `/login`
-### `POST /login/:rcsID/:name/:password`
-Create (and encrypt?) login information
-
-#### Parameters
-All three parameters (`name`, `password`, `rcsID`) should be provided.
-
-#### Return Values
-- `200` Succeed login
-- `400` Bad Request
-- `505` Invalid information
-
-
+## Routes
+### **POST** `/login`
+- Authenticate User's RCSID and Password with RPI's Email Server
+- Request Body:
+  - RCSID
+  - Password
+- On Success:
+  - Status: `200 OK`
+  - Body: User Access Token
+- On Failure: 
+  - Status: `511` Network Authentication Required
+  - Status: `500` Internal Server Error
 
 ## `/contacts`
 ### `POST /contacts/:contactName`

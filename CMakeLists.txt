@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-project(RCOS-EasyContact)
+project(EasyContact)
 
 set(LIBHVR Backend/API/libhv)
 set(SQLITE Backend/SQLContacts/SQLite)
@@ -41,4 +41,4 @@ target_link_libraries(EasyContact
 )
 
 add_dependencies(EasyContact hv SQLiteCpp)
-set_target_properties(EasyContact PROPERTIES CMAKE_CXX_FLAGS "-O2 -Wall -Wextra -g")
+set_target_properties(EasyContact PROPERTIES CMAKE_CXX_FLAGS "-Wall -Wextra -g")
