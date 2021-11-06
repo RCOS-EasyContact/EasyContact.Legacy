@@ -27,12 +27,12 @@ class APIRouter {
     return 0;
   }
   static int post(HttpRequest *req, HttpResponse *resp) { return 0; }
-  static void register_router(HttpService &router) {
-    router.preprocessor = pre;
-    router.postprocessor = post;
+  static void register_router(HttpService *router) {
+    router->preprocessor = pre;
+    router->postprocessor = post;
 
     // Login
-    router.POST("/login/:RCSID/:Password",
+    router->POST("/login/:RCSID/:Password",
                 [](HttpRequest *req, HttpResponse *resp) {
                   const std::string Password = req->GetParam("Password");
                   const std::string RCSID = req->GetParam("RCSID");
@@ -75,7 +75,7 @@ class APIRouter {
                    });
 
     router->GET("/contacts/all", [](HttpRequest *req, HttpResponse *resp) {
-      std::unordered_set<BCS::Key> &contacts = getAllContacts();
+      std::vector<BCS::Key> &contacts = getAllContacts();
       if (contacts.empty()) {
         return 404;
       }
