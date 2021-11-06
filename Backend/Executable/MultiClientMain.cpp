@@ -22,16 +22,16 @@
 #include "hv/HttpServer.h"
 #include "hv/hv.h"
 // Global Representation
-std::unordered_map<std::string, SingleUser> ActiveUsers;
+std::unordered_map<std::string, SingleUser> g_ActiveUsers;
+http_server_t g_Http_Server;
+HttpService g_Http_Service;
 void Reg_APIServer() {
   try {
-    http_server_t g_http_server;
-    HttpService g_http_service;
-    g_http_server.port = 3126;
-    g_http_service.base_url = "";
-    APIRouter::register_router(g_http_service);
-    g_http_server.service = &g_http_service;
-    http_server_run(&g_http_server, 0);
+    g_Http_Server.port = 3126;
+    g_Http_Service.base_url = "";
+    APIRouter::register_router(g_Http_Service);
+    g_Http_Server.service = &g_Http_Service;
+    http_server_run(&g_Http_Server, 0);
   } catch (std::exception& Err) {
     std::cerr << "Run-Time Exception <APIRouter> := " << Err.what()
               << std::endl;

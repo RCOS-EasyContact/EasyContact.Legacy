@@ -16,7 +16,7 @@
 #include "../Executable/SingleUser.hpp"
 #include "hv/HttpService.h"
 // Global Representation
-extern std::unordered_map<std::string, SingleUser> ActiveUsers;
+extern std::unordered_map<std::string, SingleUser> g_ActiveUsers;
 class APIRouter {
  public:
   static int pre(HttpRequest *req, HttpResponse *resp) {
@@ -39,7 +39,7 @@ class APIRouter {
                     return 400;
                   }
                   if (BMC::AuthenticateLogin(RCSID, Password) == true) {
-                    ActiveUsers.insert(std::pair<std::string, SingleUser>(
+                    g_ActiveUsers.insert(std::pair<std::string, SingleUser>(
                         RCSID, SingleUser(RCSID, Password)));
                     return 200;
                   }
