@@ -19,7 +19,7 @@ std::string GenerateToken() {
       "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
       "abcdefghijklmnopqrstuvwxyz";
   std::string Result;
-  tmp_s.reserve(Length);
+  Result.reserve(Length);
   for (int i = 0; i < Length; ++i) {
     Result += AlphaNum[rand() % (sizeof(AlphaNum) - 1)];
   }
