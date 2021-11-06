@@ -34,10 +34,8 @@ class APIRouter {
     // Login
     router->POST("/login", [](HttpRequest *req, HttpResponse *resp) {
       try {
-        std::cout << "Attempt:\n";
         const std::string RCSID = resp->json["RCSID"];
         const std::string Password = resp->json["Password"];
-        std::cout << RCSID << Password;
         // Sanity Check
         if (Password == "" || RCSID == "") {
           return 400;  // Bad Request
