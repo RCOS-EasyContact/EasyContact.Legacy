@@ -1,7 +1,7 @@
 /**
  * RCOS-EasyContact
  * EasyContact/Backend/Executable
- * SingleUser.cpp
+ * SingleUser.hpp
  * Copyright [2021] <RCOS-EasyContact>
  */
 #ifndef BACKEND_EXECUTABLE_SINGLEUSER_HPP_

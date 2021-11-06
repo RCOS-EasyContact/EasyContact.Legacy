@@ -46,7 +46,7 @@ class APIRouter {
           return 200;  // OK
         }
       } catch (std::exception &Err) {
-        std::cerr << "Run-Time Exception <API> := " << Err.what() << std::endl;
+        std::cerr << "Run-Time Exception: " << Err.what() << std::endl;
       }
       return 500;  // Internal Server Error
     });
