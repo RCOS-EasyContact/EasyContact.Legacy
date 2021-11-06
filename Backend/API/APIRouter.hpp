@@ -45,8 +45,8 @@ class APIRouter {
           g_ActiveUsers.insert(std::pair<std::string, SingleUser>(
               RCSID, SingleUser(RCSID, Password)));
           return 200;  // OK
-        }else{
-          return 511; // Network Authentication Required
+        } else {
+          return 511;  // Network Authentication Required
         }
       } catch (std::exception &Err) {
         time_t _TT;
