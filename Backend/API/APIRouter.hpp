@@ -9,7 +9,6 @@
 // Resolve Conflict with Libboost
 #undef defer
 // C++ Standard Library
-#include <chrono>
 #include <ctime>
 #include <string>
 // Standard Template Library
@@ -48,8 +47,11 @@ class APIRouter {
           return 200;  // OK
         }
       } catch (std::exception &Err) {
-        std::cerr << ctime(chrono::system_clock::to_time_t(
-                         chrono::system_clock::now()))
+        time_t _TT;
+        struct tm* _TI;
+        time(&_TT);
+        _TI=localtime(&_TT);
+        std::cerr << asctime(_TI)
                   << "Run-Time Exception: " << Err.what() << std::endl;
       }
       return 500;  // Internal Server Error
