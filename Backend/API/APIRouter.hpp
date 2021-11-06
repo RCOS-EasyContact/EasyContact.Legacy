@@ -48,11 +48,11 @@ class APIRouter {
         }
       } catch (std::exception &Err) {
         time_t _TT;
-        struct tm* _TI;
+        struct tm *_TI;
         time(&_TT);
-        _TI=localtime(&_TT);
-        std::cerr << asctime(_TI)
-                  << "Run-Time Exception: " << Err.what() << std::endl;
+        _TI = localtime(&_TT);
+        std::cerr << asctime(_TI) << "Run-Time Exception: " << Err.what()
+                  << std::endl;
       }
       return 500;  // Internal Server Error
     });
