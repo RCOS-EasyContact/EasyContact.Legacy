@@ -23,11 +23,11 @@ bool BMC::AuthenticateLogin(const std::string& RCSID,
     conn.authenticate(RCSID, Password, imaps::auth_method_t::LOGIN);
   } catch (imap_error& exc) {
     time_t _TT;
-        struct tm *_TI;
-        time(&_TT);
-        _TI = localtime(&_TT);
-        std::cerr << asctime(_TI) << "Run-Time Exception: " << Err.what()
-                  << std::endl;
+    struct tm* _TI;
+    time(&_TT);
+    _TI = localtime(&_TT);
+    std::cerr << asctime(_TI) << "Run-Time Exception: " << Err.what()
+              << std::endl;
     return false;
   }
   return true;
