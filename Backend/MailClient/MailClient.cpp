@@ -21,7 +21,7 @@ bool BMC::AuthenticateLogin(const std::string& RCSID,
   try {
     imaps conn("mail.rpi.edu", 993);
     conn.authenticate(RCSID, Password, imaps::auth_method_t::LOGIN);
-  } catch (imap_error& exc) {
+  } catch (imap_error& Err) {
     time_t _TT;
     struct tm* _TI;
     time(&_TT);

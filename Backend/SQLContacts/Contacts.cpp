@@ -26,7 +26,12 @@ bool BCS::Contacts::newContact(const std::string& Name,
     Query.bind(2, Email);
     Query.exec();
   } catch (std::exception& Err) {
-    std::cerr << "Run-Time Exception: " << Err.what() << std::endl;
+    time_t _TT;
+        struct tm *_TI;
+        time(&_TT);
+        _TI = localtime(&_TT);
+        std::cerr << asctime(_TI) << "Run-Time Exception: " << Err.what()
+                  << std::endl;
     return false;
   }
   return true;
@@ -47,7 +52,12 @@ bool BCS::Contacts::newTag(const std::string& TagName) {
                                 "emailadres(RCSID) ON DELETE CASCADE)");
     Query.exec();
   } catch (std::exception& Err) {
-    std::cerr << "Run-Time Exception: " << Err.what() << std::endl;
+    time_t _TT;
+        struct tm *_TI;
+        time(&_TT);
+        _TI = localtime(&_TT);
+        std::cerr << asctime(_TI) << "Run-Time Exception: " << Err.what()
+                  << std::endl;
     return false;
   }
   return true;
@@ -60,7 +70,12 @@ bool BCS::Contacts::removeContact(const std::string& Name) {
     Query.bind(1, Name);
     Query.exec();
   } catch (std::exception& Err) {
-    std::cerr << "Run-Time Exception: " << Err.what() << std::endl;
+    time_t _TT;
+        struct tm *_TI;
+        time(&_TT);
+        _TI = localtime(&_TT);
+        std::cerr << asctime(_TI) << "Run-Time Exception: " << Err.what()
+                  << std::endl;
     return false;
   }
   return true;
@@ -72,7 +87,12 @@ bool BCS::Contacts::removeTag(const std::string& TagName) {
     SQLite::Statement Query(DB3, "DROP TABLE " + TagName);
     Query.exec();
   } catch (std::exception& Err) {
-    std::cerr << "Run-Time Exception: " << Err.what() << std::endl;
+    time_t _TT;
+        struct tm *_TI;
+        time(&_TT);
+        _TI = localtime(&_TT);
+        std::cerr << asctime(_TI) << "Run-Time Exception: " << Err.what()
+                  << std::endl;
     return false;
   }
   return true;
@@ -86,7 +106,12 @@ std::vector<std::string> BCS::Contacts::getAllNames() const {
       Result.push_back(Query.getColumn(0));
     }
   } catch (std::exception& Err) {
-    std::cerr << "Run-Time Exception: " << Err.what() << std::endl;
+    time_t _TT;
+        struct tm *_TI;
+        time(&_TT);
+        _TI = localtime(&_TT);
+        std::cerr << asctime(_TI) << "Run-Time Exception: " << Err.what()
+                  << std::endl;
   }
   return Result;
 }
@@ -99,7 +124,12 @@ std::vector<std::string> BCS::Contacts::getAllTags() const {
       Result.push_back(Query.getColumn(0));
     }
   } catch (std::exception& Err) {
-    std::cerr << "Run-Time Exception: " << Err.what() << std::endl;
+    time_t _TT;
+        struct tm *_TI;
+        time(&_TT);
+        _TI = localtime(&_TT);
+        std::cerr << asctime(_TI) << "Run-Time Exception: " << Err.what()
+                  << std::endl;
   }
   return Result;
 }
@@ -114,7 +144,12 @@ std::vector<std::string> BCS::Contacts::getTagContains(
       Result.push_back(Query.getColumn(0));
     }
   } catch (std::exception& Err) {
-    std::cerr << "Run-Time Exception: " << Err.what() << std::endl;
+    time_t _TT;
+        struct tm *_TI;
+        time(&_TT);
+        _TI = localtime(&_TT);
+        std::cerr << asctime(_TI) << "Run-Time Exception: " << Err.what()
+                  << std::endl;
   }
   return Result;
 }
@@ -128,7 +163,12 @@ void BCS::Contacts::assignTagTo(const std::string& TagName,
     Query.bind(1, ContactName);
     Query.exec();
   } catch (std::exception& Err) {
-    std::cerr << "Run-Time Exception: " << Err.what() << std::endl;
+    time_t _TT;
+        struct tm *_TI;
+        time(&_TT);
+        _TI = localtime(&_TT);
+        std::cerr << asctime(_TI) << "Run-Time Exception: " << Err.what()
+                  << std::endl;
   }
 }
 void BCS::Contacts::removeTagFor(const std::string& TagName,
@@ -142,7 +182,12 @@ void BCS::Contacts::removeTagFor(const std::string& TagName,
     Query.bind(1, ContactName);
     Query.exec();
   } catch (std::exception& Err) {
-    std::cerr << "Run-Time Exception: " << Err.what() << std::endl;
+    time_t _TT;
+        struct tm *_TI;
+        time(&_TT);
+        _TI = localtime(&_TT);
+        std::cerr << asctime(_TI) << "Run-Time Exception: " << Err.what()
+                  << std::endl;
   }
 }
 #endif  // BACKEND_SQLCONTACTS_CONTACTS_CPP_
