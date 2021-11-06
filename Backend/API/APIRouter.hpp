@@ -11,8 +11,9 @@
 // Standard Template Library
 #include <vector>
 // EasyContact Header Files
-#include "../Executable/SingleUser.hpp"
 #include "hv/HttpService.h"
+#undef defer
+#include "../Executable/SingleUser.hpp"
 extern std::unordered_map<std::string, SingleUser> ActiveUsers;
 class APIRouter {
  public:
@@ -22,12 +23,12 @@ class APIRouter {
     return 0;
   }
   static int post(HttpRequest *req, HttpResponse *resp) { return 0; }
-  static void register_router(HttpService *router) {
-    router->preprocessor = pre;
-    router->postprocessor = post;
+  static void register_router(HttpService &router) {
+    router.preprocessor = pre;
+    router.postprocessor = post;
 
     // Login
-    router->POST("/login/:RCSID/:Password",
+    router.POST("/login/:RCSID/:Password",
                  [](HttpRequest *req, HttpResponse *resp) {
                    const std::string Password = req->GetParam("Password");
                    const std::string RCSID = req->GetParam("RCSID");
