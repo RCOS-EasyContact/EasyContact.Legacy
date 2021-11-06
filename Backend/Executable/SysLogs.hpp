@@ -19,6 +19,5 @@ static void PrintException(const std::exception &Err) {
   std::cerr << asctime(_TI) << "Run-Time Exception: " << Err.what()
             << std::endl;
 }
-
 }  // namespace SYSLOG
 #endif  // BACKEND_EXECUTABLE_SYSLOGS_HPP_

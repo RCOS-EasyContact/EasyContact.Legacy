@@ -21,13 +21,8 @@ bool BMC::AuthenticateLogin(const std::string& RCSID,
   try {
     imaps conn("mail.rpi.edu", 993);
     conn.authenticate(RCSID, Password, imaps::auth_method_t::LOGIN);
-  } catch (imap_error& Err) {
-    time_t _TT;
-    struct tm* _TI;
-    time(&_TT);
-    _TI = localtime(&_TT);
-    std::cerr << asctime(_TI) << "Run-Time Exception: " << Err.what()
-              << std::endl;
+  } catch (const imap_error& Err) {
+        SYSLOG::PrintException(Err);
     return false;
   }
   return true;
@@ -46,11 +41,11 @@ int BMC::MailClient::recv(message* msg) {
             std::cout<<msg.content()<<std::endl;
             std::cout<<msg.from_to_string()<<std::endl;from who
     */
-  } catch (imap_error& exc) {
-    std::cerr << exc.what() << std::endl;
+  } catch (const imap_error& Err) {
+        SYSLOG::PrintException(Err);
     return false;
-  } catch (dialog_error& exc) {
-    std::cerr << exc.what() << std::endl;
+  } catch (const dialog_error& Err) {
+        SYSLOG::PrintException(Err);
     return false;
   }
   return true;
@@ -60,11 +55,11 @@ int BMC::MailClient::remove_first() {
     imap conn("mail.rpi.edu", 143);
     conn.authenticate(RCSID, Password, imap::auth_method_t::LOGIN);
     conn.remove("inbox", 1);
-  } catch (imap_error& exc) {
-    std::cerr << exc.what() << std::endl;
+  } catch (const imap_error& Err) {
+        SYSLOG::PrintException(Err);
     return false;
-  } catch (dialog_error& exc) {
-    std::cerr << exc.what() << std::endl;
+  } catch (const dialog_error& Err) {
+        SYSLOG::PrintException(Err);
     return false;
   }
   return true;
@@ -79,11 +74,11 @@ int BMC::MailClient::inbox_status() {
     // query inbox statistics
     imaps::mailbox_stat_t stat = conn.statistics("inbox");
     ret = stat.messages_no;
-  } catch (imap_error& exc) {
-    std::cerr << exc.what() << std::endl;
+  } catch (const imap_error& Err) {
+        SYSLOG::PrintException(Err);
     return false;
-  } catch (dialog_error& exc) {
-    std::cerr << exc.what() << std::endl;
+  } catch (const dialog_error& Err) {
+        SYSLOG::PrintException(Err);
     return false;
   }
   return ret;
@@ -103,11 +98,11 @@ int BMC::MailClient::sent_message(const std::string& name_to,
     smtps conn("mail.rpi.edu", 587);
     conn.authenticate(RCSID, Password, smtps::auth_method_t::START_TLS);
     conn.submit(msg);
-  } catch (smtp_error& exc) {
-    std::cerr << exc.what() << std::endl;
+  } catch (const smtp_error& Err) {
+        SYSLOG::PrintException(Err);
     return false;
-  } catch (dialog_error& exc) {
-    std::cerr << exc.what() << std::endl;
+  } catch (const dialog_error& Err) {
+        SYSLOG::PrintException(Err);
     return false;
   }
   return true;
