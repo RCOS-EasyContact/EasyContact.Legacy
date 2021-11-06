@@ -7,6 +7,7 @@
 #ifndef BACKEND_EXECUTABLE_SINGLEUSER_HPP_
 #define BACKEND_EXECUTABLE_SINGLEUSER_HPP_
 // C++ Standard Library
+#include <string>
 // EasyContact Header Files
 #include "../MailClient/MailClient.hpp"
 #include "../SQLContacts/Contacts.hpp"

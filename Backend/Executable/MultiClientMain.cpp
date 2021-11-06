@@ -14,6 +14,7 @@
 #include <mutex>
 #include <thread>
 // Standard Template Library
+#include <utility>
 #include <unordered_map>
 // EasyContact Header Files
 #include "../API/APIRouter.hpp"

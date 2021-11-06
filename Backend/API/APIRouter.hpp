@@ -11,6 +11,8 @@
 // C++ Standard Library
 #include <string>
 // Standard Template Library
+#include <unordered_map>
+#include <utility>
 #include <vector>
 // EasyContact Header Files
 #include "../Executable/SingleUser.hpp"
@@ -111,7 +113,7 @@ class APIRouter {
       if (tagName == "") {
         return 400;
       }
-      std::unordered_set<std::string> contacts = getTagContains(tagName);
+      std::vector<std::string> contacts = getTagContains(tagName);
       if (contacts.empty()) {
         return 404;
       }
