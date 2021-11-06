@@ -30,7 +30,7 @@ void Reg_APIServer() {
   try {
     g_Http_Server.port = 3126;
     g_Http_Service.base_url = "";
-    APIRouter::register_router(g_Http_Service);
+    APIRouter::register_router(&g_Http_Service);
     g_Http_Server.service = &g_Http_Service;
     http_server_run(&g_Http_Server, 0);
   } catch (std::exception& Err) {
