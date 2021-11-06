@@ -16,12 +16,13 @@
 // Standard Template Library
 #include <unordered_map>
 #include <utility>
+// Libhv Library
+#include "hv/HttpServer.h"
+#include "hv/hv.h"
 // EasyContact Header Files
 #include "../API/APIRouter.hpp"
 #include "GlobalMutex.hpp"
 #include "SingleUser.hpp"
-#include "hv/HttpServer.h"
-#include "hv/hv.h"
 // Global Representation
 std::unordered_map<std::string, SingleUser> g_ActiveUsers;
 http_server_t g_Http_Server;
