@@ -6,14 +6,16 @@
  */
 #ifndef BACKEND_API_APIROUTER_HPP_
 #define BACKEND_API_APIROUTER_HPP_
+// Resolve Conflict with Libboost
+#undef defer
 // C++ Standard Library
 #include <string>
 // Standard Template Library
 #include <vector>
 // EasyContact Header Files
-#include "hv/HttpService.h"
-#undef defer
 #include "../Executable/SingleUser.hpp"
+#include "hv/HttpService.h"
+// Global Representation
 extern std::unordered_map<std::string, SingleUser> ActiveUsers;
 class APIRouter {
  public:
@@ -29,19 +31,20 @@ class APIRouter {
 
     // Login
     router.POST("/login/:RCSID/:Password",
-                 [](HttpRequest *req, HttpResponse *resp) {
-                   const std::string Password = req->GetParam("Password");
-                   const std::string RCSID = req->GetParam("RCSID");
-                   // Sanity Check
-                   if (Password == "" || RCSID == "") {
-                     return 400;
-                   }
-                   if (BMC::AuthenticateLogin(RCSID, Password)==true) {
-                    ActiveUsers.insert(std::pair<std::string,SingleUser>(RCSID,SingleUser(RCSID,Password)));
-                     return 200;
-                   }
-                   return 505;
-                 });
+                [](HttpRequest *req, HttpResponse *resp) {
+                  const std::string Password = req->GetParam("Password");
+                  const std::string RCSID = req->GetParam("RCSID");
+                  // Sanity Check
+                  if (Password == "" || RCSID == "") {
+                    return 400;
+                  }
+                  if (BMC::AuthenticateLogin(RCSID, Password) == true) {
+                    ActiveUsers.insert(std::pair<std::string, SingleUser>(
+                        RCSID, SingleUser(RCSID, Password)));
+                    return 200;
+                  }
+                  return 505;
+                });
 #if 0
     // contacts
     router->POST("/contacts/:contactName",
@@ -189,7 +192,7 @@ class APIRouter {
                    [](HttpRequest *req, HttpResponse *resp) { return 404; });
 
     router->PATCH("", [](HttpRequest *req, HttpResponse *resp) { return 404; });
-    #endif
+#endif
   }
 };
 #endif  // BACKEND_API_APIROUTER_HPP_
