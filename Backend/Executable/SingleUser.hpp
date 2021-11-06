@@ -4,8 +4,8 @@
  * SingleUser.cpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_EXECUTABLE_SINGLEUSER_HPP
-#define BACKEND_EXECUTABLE_SINGLEUSER_HPP
+#ifndef BACKEND_EXECUTABLE_SINGLEUSER_HPP_
+#define BACKEND_EXECUTABLE_SINGLEUSER_HPP_
 // C++ Standard Library
 // EasyContact Header Files
 #include "../MailClient/MailClient.hpp"
@@ -17,4 +17,4 @@ class SingleUser {
   explicit SingleUser(const std::string& RCSID, const std::string& Password)
       : MailClient(RCSID, Password), SQLContacts(RCSID) {}
 };
-#endif  // BACKEND_EXECUTABLE_SINGLEUSER_HPP
+#endif  // BACKEND_EXECUTABLE_SINGLEUSER_HPP_
