@@ -32,26 +32,26 @@ class APIRouter {
     router->postprocessor = post;
 
     // Login
-    router->POST("/login",
-                 [](HttpRequest *req, HttpResponse *resp) {
-                   try{
-                   std::cout<<"Attempt:\n";
-                   const std::string RCSID = resp->json["RCSID"];
-                   const std::string Password = resp->json["Password"];
-                   std::cout<<RCSID<<Password;
-                   // Sanity Check
-                   if (Password == "" || RCSID == "") {
-                     return 400; // Bad Request
-                   }
-                   if (BMC::AuthenticateLogin(RCSID, Password) == true) {
-                     g_ActiveUsers.insert(std::pair<std::string, SingleUser>(
-                         RCSID, SingleUser(RCSID, Password)));
-                     return 200; // OK
-                   }
-  } catch (std::exception& Err) {
-    std::cerr << "Run-Time Exception <API> := " << Err.what() << std::endl;
-                     }                   return 500; // Internal Server Error
-                 });
+    router->POST("/login", [](HttpRequest *req, HttpResponse *resp) {
+      try {
+        std::cout << "Attempt:\n";
+        const std::string RCSID = resp->json["RCSID"];
+        const std::string Password = resp->json["Password"];
+        std::cout << RCSID << Password;
+        // Sanity Check
+        if (Password == "" || RCSID == "") {
+          return 400;  // Bad Request
+        }
+        if (BMC::AuthenticateLogin(RCSID, Password) == true) {
+          g_ActiveUsers.insert(std::pair<std::string, SingleUser>(
+              RCSID, SingleUser(RCSID, Password)));
+          return 200;  // OK
+        }
+      } catch (std::exception &Err) {
+        std::cerr << "Run-Time Exception <API> := " << Err.what() << std::endl;
+      }
+      return 500;  // Internal Server Error
+    });
 #if 0
     // contacts
     router->POST("/contacts/:contactName",
