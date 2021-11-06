@@ -37,10 +37,6 @@ class APIRouter {
       try {
         const std::string RCSID = req->json["RCSID"];
         const std::string Password = req->json["Password"];
-        // Sanity Check
-        if (Password == "" || RCSID == "") {
-          return 400;  // Bad Request
-        }
         if (BMC::AuthenticateLogin(RCSID, Password) == true) {
           g_ActiveUsers.insert(std::pair<std::string, SingleUser>(
               RCSID, SingleUser(RCSID, Password)));
