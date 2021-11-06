@@ -11,6 +11,9 @@ Makefile
 *.cmake
 *.pc
 
+### Deployment ##
+RCOS-EasyContact
+
 ### User Data ###
 UserData/*
 
