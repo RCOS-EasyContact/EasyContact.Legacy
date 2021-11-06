@@ -33,12 +33,11 @@ class APIRouter {
   static void register_router(HttpService *router) {
     router->preprocessor = pre;
     router->postprocessor = post;
-
-    // Login
+    // Attempt Sign In To RPI's Email Server
     router->POST("/login", [](HttpRequest *req, HttpResponse *resp) {
       try {
-        const std::string RCSID = req->json["RCSID"];
-        const std::string Password = req->json["Password"];
+        const std::string &RCSID = req->json["RCSID"];
+        const std::string &Password = req->json["Password"];
         if (BMC::AuthenticateLogin(RCSID, Password) == true) {
           const std::string Token = AUT::GenerateToken();
           g_ActiveUsers.insert(std::pair<std::string, SingleUser>(
@@ -48,6 +47,26 @@ class APIRouter {
         } else {
           return 511;  // Network Authentication Required
         }
+      } catch (const std::exception &Err) {
+        SYSLOG::PrintException(Err);
+      }
+      return 500;  // Internal Server Error
+    });
+    // Retrive All Contact Names
+    router->GET("/contacts/all", [](HttpRequest *req, HttpResponse *resp) {
+      try {
+        const std::string Token = req->json["Token"];
+        std::unordered_map<std::string, SingleUser>::const_iterator User =
+            g_ActiveUsers.find(Token);
+        // Verify User Is Current Active
+        if (User == g_ActiveUsers.end()) {
+          return 401  // Unauthorized
+        }
+        const std::vecotr<std::string> &AllNames = User->second.getAllNames();
+        for (const std::string &i : AllNames) {
+          resp->json.push_back(i);
+        }
+        return 200  // OK
       } catch (const std::exception &Err) {
         SYSLOG::PrintException(Err);
       }
@@ -80,16 +99,7 @@ class APIRouter {
                      return 404;
                    });
 
-    router->GET("/contacts/all", [](HttpRequest *req, HttpResponse *resp) {
-      std::vector<BCS::Key> &contacts = getAllContacts();
-      if (contacts.empty()) {
-        return 404;
-      }
-      for (BCS::Key &k : contacts) {
-        resp->json.push_back({{"name", k.Name}, {"email", k.Email}})
-      }
-      return 200;
-    });
+    
 
     router->GET("/contacts/tag/:contactName",
                 [](HttpRequest *req, HttpResponse *resp) {
