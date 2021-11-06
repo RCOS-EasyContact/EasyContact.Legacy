@@ -32,10 +32,10 @@ class APIRouter {
     router->postprocessor = post;
 
     // Login
-    router->POST("/login/:RCSID/:Password",
+    router->POST("/login",
                  [](HttpRequest *req, HttpResponse *resp) {
-                   const std::string Password = req->GetParam("Password");
-                   const std::string RCSID = req->GetParam("RCSID");
+                   const std::string RCSID = resp->json["RCSID"];
+                   const std::string Password = resp->json["Password"];
                    // Sanity Check
                    if (Password == "" || RCSID == "") {
                      return 400;
