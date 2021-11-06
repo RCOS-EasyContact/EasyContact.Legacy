@@ -9,7 +9,6 @@
 // Resolve Conflict with Libboost
 #undef defer
 // C++ Standard Library
-#include <ctime>
 #include <string>
 // Standard Template Library
 #include <unordered_map>
@@ -18,6 +17,7 @@
 // EasyContact Header Files
 #include "../Executable/SingleUser.hpp"
 #include "hv/HttpService.h"
+#include "../Executable/SysLogs.hpp"
 // Global Representation
 extern std::unordered_map<std::string, SingleUser> g_ActiveUsers;
 class APIRouter {
@@ -44,13 +44,8 @@ class APIRouter {
         } else {
           return 511;  // Network Authentication Required
         }
-      } catch (std::exception &Err) {
-        time_t _TT;
-        struct tm *_TI;
-        time(&_TT);
-        _TI = localtime(&_TT);
-        std::cerr << asctime(_TI) << "Run-Time Exception: " << Err.what()
-                  << std::endl;
+      } catch (const std::exception &Err) {
+        SYSLOG::PrintException(Err);
       }
       return 500;  // Internal Server Error
     });
