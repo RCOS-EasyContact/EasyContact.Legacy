@@ -15,8 +15,8 @@ static void PrintException(const std::exception &Err) {
   time_t _TT;
   struct tm *_TI;
   time(&_TT);
-  _TI = localtime(&_TT);
-  std::cerr << asctime(_TI) << "Run-Time Exception: " << Err.what()
+  _TI = localtime_r(&_TT);
+  std::cerr << asctime_r(_TI) << "Run-Time Exception: " << Err.what()
             << std::endl;
 }
 }  // namespace SYSLOG
