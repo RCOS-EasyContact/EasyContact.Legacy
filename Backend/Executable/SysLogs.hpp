@@ -21,7 +21,7 @@ void PrintException(const std::exception &Err) {
             << std::endl;
 }
 template <typename... Args>
-void PrintRequest(Args &&... A) {
+void PrintRequest(Args &&...A) {
   std::stringstream BUFFER;
   (BUFFER << ... << A);
   std::time_t timenow =
