@@ -21,13 +21,7 @@ Easy Contact is an interactive platform with customizable grouping and communica
 
 ## Run Application
 
-**Make Sure ALL [Required Softwares](.FILES/WIKI/INSTALL-GUIDE.md#required-softwares) is Installed**
-- Automatic Installation
-  - **Tested on Arch Linux**
-  - Run [Installation Script](.FILES/INSTALL.sh) Once
-  - Run [Start Application](.FILES/STARTUP.sh) to Start EasyContact
-- Manual Compilation
-  - Follow [Install Guide](.FILES/WIKI/INSTALL-GUIDE.md)
+- Follow [Deployment](https://github.com/RCOS-EasyContact/Deployment) Guide
 
 ## Team Collaboration
 
