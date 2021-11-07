@@ -7,15 +7,6 @@
 #ifndef BACKEND_SQLCONTACTS_CONTACTS_CPP_
 #define BACKEND_SQLCONTACTS_CONTACTS_CPP_
 #include "Contacts.hpp"
-void BCS::CreateDirectory(const std::string& DirName) {
-  if (!std::filesystem::directory_entry("UserData/" + DirName).is_directory()) {
-    std::filesystem::create_directory("UserData/" + DirName);
-    copy_file(
-        std::filesystem::directory_entry("UserData/.DEFAULT/Contacts.db3"),
-        std::filesystem::directory_entry("UserData/" + DirName +
-                                         "/Contacts.db3"));
-  }
-}
 bool BCS::Contacts::newContact(const std::string& Name,
                                const std::string& Email) {
   try {

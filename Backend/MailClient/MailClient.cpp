@@ -16,17 +16,6 @@ using mailio::mail_address;
 using mailio::message;
 using mailio::smtp_error;
 using mailio::smtps;
-bool BMC::AuthenticateLogin(const std::string& RCSID,
-                            const std::string& Password) {
-  try {
-    imaps conn("mail.rpi.edu", 993);
-    conn.authenticate(RCSID, Password, imaps::auth_method_t::LOGIN);
-  } catch (const imap_error& Err) {
-    SYSLOG::PrintException(Err);
-    return false;
-  }
-  return true;
-}
 int BMC::MailClient::recv(message* msg) {
   // message &new_msg = *msg;
   try {
