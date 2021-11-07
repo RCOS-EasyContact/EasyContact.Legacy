@@ -23,21 +23,21 @@ class MailClient {
  private:
   const std::string RCSID;
   const std::string Password;
-  const std::string usr_email;
-  mutable std::string usr_name;
+  const std::string EmailAddress;
+  mutable std::string Nickname;
 
  public:
   explicit MailClient(const std::string& _RCSID, const std::string& _Password)
       : RCSID(_RCSID),
         Password(_Password),
-        usr_email(_RCSID + "@rpi.edu"),
-        usr_name(_RCSID) {}
+        EmailAddress(_RCSID + "@rpi.edu"),
+        Nickname(_RCSID) {}
   explicit MailClient(const std::string& _RCSID, const std::string& _Password,
                       const std::string& _Nickname, const std::string& _Email)
       : RCSID(_RCSID),
         Password(_Password),
-        usr_name(_Nickname),
-        usr_email(_Email) {}
+        Nickname(_Nickname),
+        EmailAddress(_Email) {}
   // recv email, if no error, the return should be the a message;
   int recv(mailio::message* mesg);
   int remove_first();

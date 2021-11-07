@@ -23,6 +23,7 @@
 namespace BCS {
 void CreateDirectory(const std::string &DirName);
 class Contacts {
+ private:
   const std::string RCSID;
 
  public:
