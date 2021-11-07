@@ -18,8 +18,7 @@
 // EasyContact Header Files
 #include "../Executable/SysLogs.hpp"
 namespace BMC {
-bool AuthenticateLogin(const std::string& RCSID,
-                              const std::string& Password);
+bool AuthenticateLogin(const std::string& RCSID, const std::string& Password);
 class MailClient {
  private:
   const std::string RCSID;

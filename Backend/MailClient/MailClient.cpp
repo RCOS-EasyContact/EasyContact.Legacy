@@ -17,7 +17,7 @@ using mailio::message;
 using mailio::smtp_error;
 using mailio::smtps;
 bool BCS::AuthenticateLogin(const std::string& RCSID,
-                              const std::string& Password) {
+                            const std::string& Password) {
   try {
     mailio::imaps conn("mail.rpi.edu", 993);
     conn.authenticate(RCSID, Password, mailio::imaps::auth_method_t::LOGIN);
