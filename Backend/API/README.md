@@ -27,7 +27,7 @@ curl -X POST \
 - On Failure: 
   - Status: `511` Network Authentication Required
   - Status: `500` Internal Server Error
-### **GET** `/Contacts/Retrieve/AllNames`
+### **GET** `/Contacts/AllNames`
 - Retrieve All Contact Names
 - Request Body:
   - Token
