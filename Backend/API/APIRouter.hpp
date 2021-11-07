@@ -186,30 +186,31 @@ class APIRouter {
           return 500;  // Internal Server Error
         });
     // Assign Tag to One Existing Contact
-    router->PUT("/Contacts/Assign", [](HttpRequest *req, HttpResponse *resp) {
-      try {
-        const std::string &Token = req->json["Token"];
-        const std::string &TagName = req->json["TagName"];
-        const std::string &Name = req->json["Name"];
-        const std::unordered_map<std::string, SingleUser>::iterator User =
-            g_ActiveUsers.find(Token);
-        // Verify User Is Current Active
-        if (User == g_ActiveUsers.end()) {
-          return 401;  // Unauthorized
-        }
-        if (User->second.SQLContacts.assignTagTo(TagName, Name) == true) {
-          return 200;  // OK
-        } else {
-          return 409;  // Conflict
-        }
-      } catch (const std::exception &Err) {
-        SYSLOG::PrintException(Err);
-      }
-      return 500;  // Internal Server Error
-    });
+    router->PUT(
+        "/Contacts/Assign/Contact", [](HttpRequest *req, HttpResponse *resp) {
+          try {
+            const std::string &Token = req->json["Token"];
+            const std::string &TagName = req->json["TagName"];
+            const std::string &Name = req->json["Name"];
+            const std::unordered_map<std::string, SingleUser>::iterator User =
+                g_ActiveUsers.find(Token);
+            // Verify User Is Current Active
+            if (User == g_ActiveUsers.end()) {
+              return 401;  // Unauthorized
+            }
+            if (User->second.SQLContacts.assignTagTo(TagName, Name) == true) {
+              return 200;  // OK
+            } else {
+              return 409;  // Conflict
+            }
+          } catch (const std::exception &Err) {
+            SYSLOG::PrintException(Err);
+          }
+          return 500;  // Internal Server Error
+        });
     // Remove Tag For One Existing Contact
     router->Delete(
-        "/Contacts/Unassign", [](HttpRequest *req, HttpResponse *resp) {
+        "/Contacts/Unassign/Contact", [](HttpRequest *req, HttpResponse *resp) {
           try {
             const std::string &Token = req->json["Token"];
             const std::string &TagName = req->json["TagName"];
@@ -230,131 +231,50 @@ class APIRouter {
           }
           return 500;  // Internal Server Error
         });
-#if 0
-    router->Delete("/contacts/:contactName",
-                   [](HttpRequest *req, HttpResponse *resp) {
-                     std::string contactName = req->GetParam("contactName");
-                     if (contactName == "") {
-                       return 400;
-                     }
-                     if (removeContact(contactName)) {
-                       return 200;
-                     }
-                     return 404;
-                   });
-
-    
-
-    router->GET("/contacts/tag/:contactName",
-                [](HttpRequest *req, HttpResponse *resp) {
-                  std::string contactName = req->GetParam("contactName");
-                  if (contactName == "") {
-                    return 400;
-                  }
-                  for (std::string &tag : getNameInTags(contactName)) {
-                    resp->json.push_back({"tag", tag});
-                  }
-                  return 200;
-                });
-
-    router->Delete("/contacts/tag/:contactName",
-                   [](HttpRequest *req, HttpResponse *resp) {
-                     std::string contactName = req->GetParam("contactName");
-                     if (contactName == "") {
-                       return 400;
-                     }
-                     clearTagFor(contactName);
-                     return 200;
-                   });
-
-    // tags
-    router->GET("/tags/:tagName", [](HttpRequest *req, HttpResponse *resp) {
-      std::string tagName = req->GetParam("tagName");
-      if (tagName == "") {
-        return 400;
-      }
-      std::vector<std::string> contacts = getTagContains(tagName);
-      if (contacts.empty()) {
-        return 404;
-      }
-      for (std::string &name : contacts) {
-        resp->json.push_back({"name", name});
-        return 200;
-      }
-      return 400;
-    });
-
-    router->GET("/tags/exist/:tagName",
-                [](HttpRequest *req, HttpResponse *resp) {
-                  std::string tagName = req->GetParam("tagName");
-                  if (getAllTags().find(tagName)) {
-                    return 200;
-                  }
-                  return 404;
-                });
-
-    router->POST("/tags/:tagName", [](HttpRequest *req, HttpResponse *resp) {
-      std::string tagName = req->GetParam("tagName");
-      if (tagName == "") {
-        return 400;
-      }
-      if (newTag(tagName)) {
-        return 200;
-      }
-      return 406;
-    });
-
-    router->Delete("/tags/:tagName", [](HttpRequest *req, HttpResponse *resp) {
-      std::string tagName = req->GetParam("tagName");
-      if (tagName == "") {
-        return 400;
-      }
-      if (removeTag(tagName)) {
-        return 200;
-      }
-      return 404;
-    });
-
-    // books
-    router->PUT("/books/:contactName/:tagName",
-                [](HttpRequest *req, HttpResponse *resp) {
-                  std::string contactName = req->GetParam("contactName");
-                  std::string tagName = req->GetParam("tagName");
-                  if (contactName == "" || tagName == "") {
-                    return 400;
-                  }
-                  if (!getAllTags.find(tagName)) {
-                    return 404;
-                  }
-                  assignTagTo(tagName, contactName);
-                  return 200;
-                });
-
-    router->Delete("", [](HttpRequest *req, HttpResponse *resp) {
-      std::string contactName = req->GetParam("contactName");
-      std::string tagName = req->GetParam("tagName");
-      if (contactName == "" || tagName == "") {
-        return 400;
-      }
-      if (!getNameInTags(contactName).find(tagName)) {
-        return 404;
-      }
-      removeTagFor(tagName, contactName);
-      return 200;
-    });
-
-    // templates [delete after finish]
-    router->GET("", [](HttpRequest *req, HttpResponse *resp) { return 404; });
-
-    router->POST("", [](HttpRequest *req, HttpResponse *resp) { return 404; });
-
-    router->PUT("", [](HttpRequest *req, HttpResponse *resp) { return 404; });
-
-    router->Delete("",
-                   [](HttpRequest *req, HttpResponse *resp) { return 404; });
-
-    router->PATCH("", [](HttpRequest *req, HttpResponse *resp) { return 404; });
-#endif
+    // Remove Existing Contact
+    router->Delete(
+        "/Contacts/Remove/Contact", [](HttpRequest *req, HttpResponse *resp) {
+          try {
+            const std::string &Token = req->json["Token"];
+            const std::string &Name = req->json["Name"];
+            const std::unordered_map<std::string, SingleUser>::iterator User =
+                g_ActiveUsers.find(Token);
+            // Verify User Is Current Active
+            if (User == g_ActiveUsers.end()) {
+              return 401;  // Unauthorized
+            }
+            if (User->second.SQLContacts.removeContact(Name) == true) {
+              return 200;  // OK
+            } else {
+              return 409;  // Conflict
+            }
+          } catch (const std::exception &Err) {
+            SYSLOG::PrintException(Err);
+          }
+          return 500;  // Internal Server Error
+        });
+    // Remove Existing Tag
+    router->Delete(
+        "/Contacts/Remove/Tag", [](HttpRequest *req, HttpResponse *resp) {
+          try {
+            const std::string &Token = req->json["Token"];
+            const std::string &TagName = req->json["TagName"];
+            const std::unordered_map<std::string, SingleUser>::iterator User =
+                g_ActiveUsers.find(Token);
+            // Verify User Is Current Active
+            if (User == g_ActiveUsers.end()) {
+              return 401;  // Unauthorized
+            }
+            if (User->second.SQLContacts.removeTag(TagName) == true) {
+              return 200;  // OK
+            } else {
+              return 409;  // Conflict
+            }
+          } catch (const std::exception &Err) {
+            SYSLOG::PrintException(Err);
+          }
+          return 500;  // Internal Server Error
+        });
   }
 };
 #endif  // BACKEND_API_APIROUTER_HPP_
