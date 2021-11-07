@@ -21,7 +21,7 @@ inline static void PrintException(const std::exception &Err) {
             << std::endl;
 }
 template <typename... Args>
-inline static void PrintRequest(Args &&... A) {
+inline static void PrintRequest(Args &&...A) {
   std::stringstream BUFFER;
   (BUFFER << ... << A);
   std::time_t timenow =
