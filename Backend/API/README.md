@@ -1,6 +1,22 @@
 # EasyContact/Backend/API
 ## Easy Contact API Specifications
-- This API is based on libhv in C++ and will be initialized as the backend database starts, and serves as an interface between node.js and database.  The API creates an HTTP server as a RESTful API.  
+- This API is based on libhv in C++ and will be initialized as the backend database starts, and serves as an interface between node.js and database.  The API creates an HTTP server as a RESTful API.
+## Testing With CURL
+### GET
+```
+curl -X GET \
+  -H "Content-type: application/json" \
+  -H "Accept: application/json" \
+  -d '{"param0":"pradeep"}' \
+  "localhost:3126/a/c/getName"
+```
+### POST
+```
+curl -X POST \
+  -H "Content-type: application/json" \
+  -d '{"param0":"pradeep"}' \
+  "localhost:3126/Login"
+```
 ## Routes
 ### **POST** `/login`
 - Authenticate User's RCSID and Password with RPI's Email Server
