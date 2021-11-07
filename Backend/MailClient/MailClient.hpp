@@ -18,17 +18,8 @@
 // EasyContact Header Files
 #include "../Executable/SysLogs.hpp"
 namespace BMC {
-static bool AuthenticateLogin(const std::string& RCSID,
-                              const std::string& Password) {
-  try {
-    mailio::imaps conn("mail.rpi.edu", 993);
-    conn.authenticate(RCSID, Password, mailio::imaps::auth_method_t::LOGIN);
-  } catch (const mailio::imap_error& Err) {
-    SYSLOG::PrintException(Err);
-    return false;
-  }
-  return true;
-}
+bool AuthenticateLogin(const std::string& RCSID,
+                              const std::string& Password);
 class MailClient {
  private:
   const std::string RCSID;
