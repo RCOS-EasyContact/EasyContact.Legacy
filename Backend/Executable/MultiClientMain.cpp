@@ -41,7 +41,11 @@ void Reg_APIServer() {
   }
 }
 int main() {
+  // Generate Random Seed
+  srand (time(0));
+  // Start API Server
   Reg_APIServer();
+  // Wait
   while (true) {
     pause();
   }
