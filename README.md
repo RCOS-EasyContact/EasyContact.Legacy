@@ -21,7 +21,10 @@ Easy Contact is an interactive platform with customizable grouping and communica
 
 ## Run Application
 
-- Follow [Deployment](https://github.com/RCOS-EasyContact/Deployment) Guide
+- Automatic Install: Follow [Deployment](https://github.com/RCOS-EasyContact/Deployment) Guide
+- Manual Install:
+  - Dependency: `boost`, `openssl`
+  - Build: `cmake . && cmake --build . -j 2`
 
 ## Team Collaboration
 
