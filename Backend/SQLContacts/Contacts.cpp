@@ -68,21 +68,22 @@ bool BCS::Contacts::removeTag(const std::string& TagName) {
   }
   return true;
 }
-std::string BCS::Contacts::getEmailAddress(const std::string &Name) const{
+std::string BCS::Contacts::getEmailAddress(const std::string& Name) const {
   std::string Result;
-try{
-  std::vector<std::string> Buffer;
-SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3");
-    SQLite::Statement Query(DB3, "SELECT Email FROM emailadres WHERE RCSID="+Name);
-    while(Query.executeStep()){
+  try {
+    std::vector<std::string> Buffer;
+    SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3");
+    SQLite::Statement Query(DB3,
+                            "SELECT Email FROM emailadres WHERE RCSID=" + Name);
+    while (Query.executeStep()) {
       Buffer.push_back(Query.getColumn(1));
     }
     Result = Buffer[0];
-}catch (const std::exception& Err) {
+  } catch (const std::exception& Err) {
     SYSLOG::PrintException(Err);
   }
   return Result;
-  }
+}
 std::vector<std::string> BCS::Contacts::getAllNames() const {
   std::vector<std::string> Result;
   try {

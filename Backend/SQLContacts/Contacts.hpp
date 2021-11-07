@@ -21,8 +21,8 @@
  * BCS : Backend Contact System
  */
 namespace BCS {
-static void CreateDirectory(const std::string &DirName){
-   if (!std::filesystem::directory_entry("UserData/" + DirName).is_directory()) {
+static void CreateDirectory(const std::string &DirName) {
+  if (!std::filesystem::directory_entry("UserData/" + DirName).is_directory()) {
     std::filesystem::create_directory("UserData/" + DirName);
     copy_file(
         std::filesystem::directory_entry("UserData/.DEFAULT/Contacts.db3"),
