@@ -23,6 +23,7 @@
 namespace BCS {
 void CreateDirectory(const std::string &DirName);
 class Contacts {
+ private:
   const std::string RCSID;
 
  public:
@@ -33,12 +34,12 @@ class Contacts {
   bool newTag(const std::string &TagName);
   bool removeContact(const std::string &Name);
   bool removeTag(const std::string &TagName);
+  std::string getEmailAddress(const std::string &Name) const;
   std::vector<std::string> getAllNames() const;
   std::vector<std::string> getAllTags() const;
   std::vector<std::string> getTagContains(const std::string &TagName) const;
-  std::vector<std::string> getNameInTags(const std::string &ContactName) const;
-  void assignTagTo(const std::string &TagName, const std::string &ContactName);
-  void removeTagFor(const std::string &TagName, const std::string &ContactName);
+  bool assignTagTo(const std::string &TagName, const std::string &ContactName);
+  bool removeTagFor(const std::string &TagName, const std::string &ContactName);
 };
 }  // namespace BCS
 #endif  // BACKEND_SQLCONTACTS_CONTACTS_HPP_

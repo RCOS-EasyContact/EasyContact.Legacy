@@ -9,6 +9,7 @@
 // C Standard Library
 #include <signal.h>
 #include <stdlib.h>
+#include <time.h>
 // C++ Standard Library
 #include <iostream>
 #include <mutex>
@@ -41,7 +42,11 @@ void Reg_APIServer() {
   }
 }
 int main() {
+  // Generate Random Seed
+  srand(time(0));
+  // Start API Server
   Reg_APIServer();
+  // Wait
   while (true) {
     pause();
   }

@@ -77,6 +77,22 @@ bool BCS::Contacts::removeTag(const std::string& TagName) {
   }
   return true;
 }
+std::string BCS::Contacts::getEmailAddress(const std::string& Name) const {
+  std::string Result;
+  try {
+    std::vector<std::string> Buffer;
+    SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3");
+    SQLite::Statement Query(DB3, "SELECT Email FROM emailadres WHERE RCSID=?");
+    Query.bind(1, Name);
+    while (Query.executeStep()) {
+      Buffer.push_back(Query.getColumn(0));
+    }
+    Result = Buffer.front();
+  } catch (const std::exception& Err) {
+    SYSLOG::PrintException(Err);
+  }
+  return Result;
+}
 std::vector<std::string> BCS::Contacts::getAllNames() const {
   std::vector<std::string> Result;
   try {
@@ -118,7 +134,7 @@ std::vector<std::string> BCS::Contacts::getTagContains(
   }
   return Result;
 }
-void BCS::Contacts::assignTagTo(const std::string& TagName,
+bool BCS::Contacts::assignTagTo(const std::string& TagName,
                                 const std::string& ContactName) {
   try {
     SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3",
@@ -129,9 +145,11 @@ void BCS::Contacts::assignTagTo(const std::string& TagName,
     Query.exec();
   } catch (const std::exception& Err) {
     SYSLOG::PrintException(Err);
+    return false;
   }
+  return true;
 }
-void BCS::Contacts::removeTagFor(const std::string& TagName,
+bool BCS::Contacts::removeTagFor(const std::string& TagName,
                                  const std::string& ContactName) {
   try {
     SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3",
@@ -143,6 +161,8 @@ void BCS::Contacts::removeTagFor(const std::string& TagName,
     Query.exec();
   } catch (const std::exception& Err) {
     SYSLOG::PrintException(Err);
+    return false;
   }
+  return true;
 }
 #endif  // BACKEND_SQLCONTACTS_CONTACTS_CPP_

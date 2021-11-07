@@ -17,10 +17,11 @@ std::string GenerateToken() {
   static const char AlphaNum[] =
       "0123456789"
       "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-      "abcdefghijklmnopqrstuvwxyz";
+      "abcdefghijklmnopqrstuvwxyz"
+      "!@#$%&";
   std::string Result;
   Result.reserve(Length);
-  for (int i = 0; i < Length; ++i) {
+  for (size_t i = 0; i < Length; ++i) {
     Result += AlphaNum[rand() % (sizeof(AlphaNum) - 1)];
   }
   return Result;

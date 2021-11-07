@@ -11,11 +11,22 @@
 #include <ctime>
 #include <exception>
 #include <iostream>
+#include <sstream>
+#include <string>
 namespace SYSLOG {
-static void PrintException(const std::exception &Err) {
+inline static void PrintException(const std::exception &Err) {
   std::time_t timenow =
       std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
   std::cerr << std::ctime(&timenow) << "Run-Time Exception: " << Err.what()
+            << std::endl;
+}
+template <typename... Args>
+inline static void PrintRequest(Args &&...A) {
+  std::stringstream BUFFER;
+  (BUFFER << ... << A);
+  std::time_t timenow =
+      std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+  std::cout << std::ctime(&timenow) << "User Request: " << BUFFER.str()
             << std::endl;
 }
 }  // namespace SYSLOG
