@@ -85,9 +85,9 @@ std::string BCS::Contacts::getEmailAddress(const std::string& Name) const {
     SQLite::Statement Query(DB3,
                             "SELECT Email FROM emailadres WHERE RCSID=" + Name);
     while (Query.executeStep()) {
-      Buffer.push_back(Query.getColumn(1));
+      Buffer.push_back(Query.getColumn(0));
     }
-    Result = Buffer[0];
+    Result = Buffer.front();
   } catch (const std::exception& Err) {
     SYSLOG::PrintException(Err);
   }
