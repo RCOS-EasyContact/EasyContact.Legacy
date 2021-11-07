@@ -35,6 +35,7 @@ class APIRouter {
     router->postprocessor = post;
     // Attempt Sign In To RPI's Email Server
     router->POST("/Login", [](HttpRequest *req, HttpResponse *resp) {
+      SYSLOG::PrintRequest("POST\t", "/Login");
       try {
         const std::string &RCSID = req->json["RCSID"];
         const std::string &Password = req->json["Password"];
@@ -55,6 +56,7 @@ class APIRouter {
     // Retrieve All Contact Names
     router->GET("/Contacts/Retrieve/AllNames", [](HttpRequest *req,
                                                   HttpResponse *resp) {
+      SYSLOG::PrintRequest("GET\t", "/Contacts/Retrieve/AllNames");
       try {
         const std::string &Token = req->json["Token"];
         const std::unordered_map<std::string, SingleUser>::const_iterator User =
@@ -77,6 +79,7 @@ class APIRouter {
     // Retrieve All Tags
     router->GET("/Contacts/Retrieve/AllTags", [](HttpRequest *req,
                                                  HttpResponse *resp) {
+      SYSLOG::PrintRequest("GET\t", "/Contacts/Retrieve/AllTags");
       try {
         const std::string &Token = req->json["Token"];
         const std::unordered_map<std::string, SingleUser>::const_iterator User =
