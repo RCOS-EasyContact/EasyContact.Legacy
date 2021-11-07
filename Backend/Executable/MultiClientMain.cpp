@@ -9,6 +9,7 @@
 // C Standard Library
 #include <signal.h>
 #include <stdlib.h>
+#include <time.h>
 // C++ Standard Library
 #include <iostream>
 #include <mutex>
