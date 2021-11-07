@@ -33,7 +33,7 @@ class MailClient {
   const std::string RCSID;
   const std::string Password;
   const std::string usr_email;
-  std::string usr_name;
+  mutable std::string usr_name;
 
  public:
   explicit MailClient(const std::string& _RCSID, const std::string& _Password)
