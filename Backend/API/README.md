@@ -1,6 +1,4 @@
 # EasyContact/Backend/API
-## Easy Contact API Specifications
-- This API is based on libhv in C++ and will be initialized as the backend database starts, and serves as an interface between node.js and database.  The API creates an HTTP server as a RESTful API.
 ## Testing With CURL
 ### GET
 ```
