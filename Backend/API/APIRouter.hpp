@@ -52,8 +52,9 @@ class APIRouter {
       }
       return 500;  // Internal Server Error
     });
-    // Retrive All Contact Names
-    router->GET("/Contacts/AllNames", [](HttpRequest *req, HttpResponse *resp) {
+    // Retrieve All Contact Names
+    router->GET("/Contacts/Retrieve/AllNames", [](HttpRequest *req,
+                                                  HttpResponse *resp) {
       try {
         const std::string &Token = req->json["Token"];
         const std::unordered_map<std::string, SingleUser>::const_iterator User =
@@ -73,8 +74,9 @@ class APIRouter {
       }
       return 500;  // Internal Server Error
     });
-    // Retrive All Tags
-    router->GET("/Contacts/AllTags", [](HttpRequest *req, HttpResponse *resp) {
+    // Retrieve All Tags
+    router->GET("/Contacts/Retrieve/AllTags", [](HttpRequest *req,
+                                                 HttpResponse *resp) {
       try {
         const std::string &Token = req->json["Token"];
         const std::unordered_map<std::string, SingleUser>::const_iterator User =
@@ -94,12 +96,12 @@ class APIRouter {
       }
       return 500;  // Internal Server Error
     });
-    // Retrive All Contacts Within One Tag
-    router->GET("/Contacts/TagContacts/:Name", [](HttpRequest *req,
-                                                  HttpResponse *resp) {
+    // Retrieve All Contacts Within One Tag
+    router->GET("/Contacts/Retrieve/TagContains", [](HttpRequest *req,
+                                                     HttpResponse *resp) {
       try {
         const std::string &Token = req->json["Token"];
-        const std::string &Name = req->GetParam("Name");
+        const std::string &Name = req->json["Name"];
         const std::unordered_map<std::string, SingleUser>::const_iterator User =
             g_ActiveUsers.find(Token);
         // Verify User Is Current Active
@@ -117,12 +119,12 @@ class APIRouter {
       }
       return 500;  // Internal Server Error
     });
-    // Retrive Email Address For One Contact
-    router->GET("/Contacts/Email/:Name", [](HttpRequest *req,
-                                            HttpResponse *resp) {
+    // Retrieve Email Address For One Contact
+    router->GET("/Contacts/Retrieve/Email", [](HttpRequest *req,
+                                               HttpResponse *resp) {
       try {
         const std::string &Token = req->json["Token"];
-        const std::string &Name = req->GetParam("Name");
+        const std::string &Name = req->json["Name"];
         const std::unordered_map<std::string, SingleUser>::const_iterator User =
             g_ActiveUsers.find(Token);
         // Verify User Is Current Active
@@ -138,19 +140,64 @@ class APIRouter {
       }
       return 500;  // Internal Server Error
     });
-    // Add New Contact
-    router->POST("/Contacts/New", [](HttpRequest *req, HttpResponse *resp) {
+    // Create New Contact
+    router->POST(
+        "/Contacts/Create/Contact", [](HttpRequest *req, HttpResponse *resp) {
+          try {
+            const std::string &Token = req->json["Token"];
+            const std::string &Name = req->json["Name"];
+            const std::string &Email = req->json["Email"];
+            const std::unordered_map<std::string, SingleUser>::iterator User =
+                g_ActiveUsers.find(Token);
+            // Verify User Is Current Active
+            if (User == g_ActiveUsers.end()) {
+              return 401;  // Unauthorized
+            }
+            if (User->second.SQLContacts.newContact(Name, Email) == true) {
+              return 200;  // OK
+            } else {
+              return 409;  // Conflict
+            }
+          } catch (const std::exception &Err) {
+            SYSLOG::PrintException(Err);
+          }
+          return 500;  // Internal Server Error
+        });
+    // Create New Tag
+    router->POST(
+        "/Contacts/Create/Tag", [](HttpRequest *req, HttpResponse *resp) {
+          try {
+            const std::string &Token = req->json["Token"];
+            const std::string &TagName = req->json["TagName"];
+            const std::unordered_map<std::string, SingleUser>::iterator User =
+                g_ActiveUsers.find(Token);
+            // Verify User Is Current Active
+            if (User == g_ActiveUsers.end()) {
+              return 401;  // Unauthorized
+            }
+            if (User->second.SQLContacts.newTag(TagNmae) == true) {
+              return 200;  // OK
+            } else {
+              return 409;  // Conflict
+            }
+          } catch (const std::exception &Err) {
+            SYSLOG::PrintException(Err);
+          }
+          return 500;  // Internal Server Error
+        });
+    // Assign Tag to One Existing Contact
+    router->PUT("/Contacts/Assign", [](HttpRequest *req, HttpResponse *resp) {
       try {
         const std::string &Token = req->json["Token"];
+        const std::string &TagName = req->json["TagName"];
         const std::string &Name = req->json["Name"];
-        const std::string &Email = req->json["Email"];
         const std::unordered_map<std::string, SingleUser>::iterator User =
             g_ActiveUsers.find(Token);
         // Verify User Is Current Active
         if (User == g_ActiveUsers.end()) {
           return 401;  // Unauthorized
         }
-        if (User->second.SQLContacts.newContact(Name, Email) == true) {
+        if (User->second.SQLContacts.assignTagTo(TagNmae, Name) == true) {
           return 200;  // OK
         } else {
           return 409;  // Conflict
@@ -160,21 +207,30 @@ class APIRouter {
       }
       return 500;  // Internal Server Error
     });
+    // Remove Tag For One Existing Contact
+    router->Delete(
+        "/Contacts/Unassign", [](HttpRequest *req, HttpResponse *resp) {
+          try {
+            const std::string &Token = req->json["Token"];
+            const std::string &TagName = req->json["TagName"];
+            const std::string &Name = req->json["Name"];
+            const std::unordered_map<std::string, SingleUser>::iterator User =
+                g_ActiveUsers.find(Token);
+            // Verify User Is Current Active
+            if (User == g_ActiveUsers.end()) {
+              return 401;  // Unauthorized
+            }
+            if (User->second.SQLContacts.removeTagFor(TagNmae, Name) == true) {
+              return 200;  // OK
+            } else {
+              return 409;  // Conflict
+            }
+          } catch (const std::exception &Err) {
+            SYSLOG::PrintException(Err);
+          }
+          return 500;  // Internal Server Error
+        });
 #if 0
-    // contacts
-    router->POST("/contacts/:contactName",
-                 [](HttpRequest *req, HttpResponse *resp) {
-                   std::string contactName = req->GetParam("contactName");
-                   if (contactName == "") {
-                     return 400;
-                   }
-                   std::string email = req->GetString("email");
-                   if (newContact(new BCS::Key(contactName, email))) {
-                     return 200;
-                   }
-                   return 406;
-                 });
-
     router->Delete("/contacts/:contactName",
                    [](HttpRequest *req, HttpResponse *resp) {
                      std::string contactName = req->GetParam("contactName");
