@@ -34,7 +34,7 @@ class APIRouter {
     router->preprocessor = pre;
     router->postprocessor = post;
     // Attempt Sign In To RPI's Email Server
-    router->POST("/login", [](HttpRequest *req, HttpResponse *resp) {
+    router->POST("/Login", [](HttpRequest *req, HttpResponse *resp) {
       try {
         const std::string &RCSID = req->json["RCSID"];
         const std::string &Password = req->json["Password"];
@@ -53,17 +53,62 @@ class APIRouter {
       return 500;  // Internal Server Error
     });
     // Retrive All Contact Names
-    router->GET("/contacts/all", [](HttpRequest *req, HttpResponse *resp) {
+    router->GET("/Contacts/AllNames", [](HttpRequest *req, HttpResponse *resp) {
       try {
-        const std::string Token = req->json["Token"];
+        const std::string &Token = req->json["Token"];
         std::unordered_map<std::string, SingleUser>::const_iterator User =
             g_ActiveUsers.find(Token);
         // Verify User Is Current Active
         if (User == g_ActiveUsers.end()) {
           return 401;  // Unauthorized
         }
-        const std::vector<std::string> &AllNames = User->second.SQLContacts.getAllNames();
+        const std::vector<std::string> &AllNames =
+            User->second.SQLContacts.getAllNames();
         for (const std::string &i : AllNames) {
+          resp->json.push_back(i);
+        }
+        return 200;  // OK
+      } catch (const std::exception &Err) {
+        SYSLOG::PrintException(Err);
+      }
+      return 500;  // Internal Server Error
+    });
+    // Retrive All Tags
+    router->GET("/Contacts/AllTags", [](HttpRequest *req, HttpResponse *resp) {
+      try {
+        const std::string &Token = req->json["Token"];
+        std::unordered_map<std::string, SingleUser>::const_iterator User =
+            g_ActiveUsers.find(Token);
+        // Verify User Is Current Active
+        if (User == g_ActiveUsers.end()) {
+          return 401;  // Unauthorized
+        }
+        const std::vector<std::string> &TagContains =
+            User->second.SQLContacts.getAllTags();
+        for (const std::string &i : TagContains) {
+          resp->json.push_back(i);
+        }
+        return 200;  // OK
+      } catch (const std::exception &Err) {
+        SYSLOG::PrintException(Err);
+      }
+      return 500;  // Internal Server Error
+    });
+    // Retrive All Contacts Within One Tag
+    router->GET("/Contacts/TagContacts/:Name", [](HttpRequest *req,
+                                                  HttpResponse *resp) {
+      try {
+        const std::string &Token = req->json["Token"];
+        const std::string &Name = req->GetParam("Name");
+        std::unordered_map<std::string, SingleUser>::const_iterator User =
+            g_ActiveUsers.find(Token);
+        // Verify User Is Current Active
+        if (User == g_ActiveUsers.end()) {
+          return 401;  // Unauthorized
+        }
+        const std::vector<std::string> &AllTags =
+            User->second.SQLContacts.getTagContains(Name);
+        for (const std::string &i : AllTags) {
           resp->json.push_back(i);
         }
         return 200;  // OK
