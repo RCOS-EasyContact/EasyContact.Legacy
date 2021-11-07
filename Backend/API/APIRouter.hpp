@@ -117,6 +117,27 @@ class APIRouter {
       }
       return 500;  // Internal Server Error
     });
+    // Retrive Email Address For One Contact
+    router->GET(
+        "/Contacts/Email/:Name", [](HttpRequest *req, HttpResponse *resp) {
+          try {
+            const std::string &Token = req->json["Token"];
+            const std::string &Name = req->GetParam("Name");
+            std::unordered_map<std::string, SingleUser>::const_iterator User =
+                g_ActiveUsers.find(Token);
+            // Verify User Is Current Active
+            if (User == g_ActiveUsers.end()) {
+              return 401;  // Unauthorized
+            }
+            const std::string &EmailAddress =
+                User->second.SQLContacts.getEmailAddress(Name);
+            resp->json.push_back(EmailAddress);
+            return 200;  // OK
+          } catch (const std::exception &Err) {
+            SYSLOG::PrintException(Err);
+          }
+          return 500;  // Internal Server Error
+        });
 #if 0
     // contacts
     router->POST("/contacts/:contactName",
