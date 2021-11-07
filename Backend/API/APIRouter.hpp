@@ -175,7 +175,7 @@ class APIRouter {
             if (User == g_ActiveUsers.end()) {
               return 401;  // Unauthorized
             }
-            if (User->second.SQLContacts.newTag(TagNmae) == true) {
+            if (User->second.SQLContacts.newTag(TagName) == true) {
               return 200;  // OK
             } else {
               return 409;  // Conflict
@@ -197,7 +197,7 @@ class APIRouter {
         if (User == g_ActiveUsers.end()) {
           return 401;  // Unauthorized
         }
-        if (User->second.SQLContacts.assignTagTo(TagNmae, Name) == true) {
+        if (User->second.SQLContacts.assignTagTo(TagName, Name) == true) {
           return 200;  // OK
         } else {
           return 409;  // Conflict
@@ -220,7 +220,7 @@ class APIRouter {
             if (User == g_ActiveUsers.end()) {
               return 401;  // Unauthorized
             }
-            if (User->second.SQLContacts.removeTagFor(TagNmae, Name) == true) {
+            if (User->second.SQLContacts.removeTagFor(TagName, Name) == true) {
               return 200;  // OK
             } else {
               return 409;  // Conflict

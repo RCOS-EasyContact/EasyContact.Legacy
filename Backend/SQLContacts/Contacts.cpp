@@ -124,7 +124,7 @@ std::vector<std::string> BCS::Contacts::getTagContains(
   }
   return Result;
 }
-void BCS::Contacts::assignTagTo(const std::string& TagName,
+bool BCS::Contacts::assignTagTo(const std::string& TagName,
                                 const std::string& ContactName) {
   try {
     SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3",
@@ -135,9 +135,11 @@ void BCS::Contacts::assignTagTo(const std::string& TagName,
     Query.exec();
   } catch (const std::exception& Err) {
     SYSLOG::PrintException(Err);
+    return false;
   }
+  return true;
 }
-void BCS::Contacts::removeTagFor(const std::string& TagName,
+bool BCS::Contacts::removeTagFor(const std::string& TagName,
                                  const std::string& ContactName) {
   try {
     SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3",
@@ -149,6 +151,8 @@ void BCS::Contacts::removeTagFor(const std::string& TagName,
     Query.exec();
   } catch (const std::exception& Err) {
     SYSLOG::PrintException(Err);
+    return false;
   }
+  return true;
 }
 #endif  // BACKEND_SQLCONTACTS_CONTACTS_CPP_

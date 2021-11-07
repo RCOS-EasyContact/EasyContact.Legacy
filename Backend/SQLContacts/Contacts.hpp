@@ -45,8 +45,8 @@ class Contacts {
   std::vector<std::string> getAllNames() const;
   std::vector<std::string> getAllTags() const;
   std::vector<std::string> getTagContains(const std::string &TagName) const;
-  void assignTagTo(const std::string &TagName, const std::string &ContactName);
-  void removeTagFor(const std::string &TagName, const std::string &ContactName);
+  bool assignTagTo(const std::string &TagName, const std::string &ContactName);
+  bool removeTagFor(const std::string &TagName, const std::string &ContactName);
 };
 }  // namespace BCS
 #endif  // BACKEND_SQLCONTACTS_CONTACTS_HPP_
