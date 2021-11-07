@@ -35,7 +35,7 @@ class APIRouter {
     router->postprocessor = post;
     // Attempt Sign In To RPI's Email Server
     router->POST("/Login", [](HttpRequest *req, HttpResponse *resp) {
-      SYSLOG::PrintRequest("POST\t", "/Login");
+      SYSLOG::PrintRequest("POST->", "/Login");
       try {
         const std::string &RCSID = req->json["RCSID"];
         const std::string &Password = req->json["Password"];
@@ -56,7 +56,7 @@ class APIRouter {
     // Retrieve All Contact Names
     router->GET("/Contacts/Retrieve/AllNames", [](HttpRequest *req,
                                                   HttpResponse *resp) {
-      SYSLOG::PrintRequest("GET\t", "/Contacts/Retrieve/AllNames");
+      SYSLOG::PrintRequest("GET->", "/Contacts/Retrieve/AllNames");
       try {
         const std::string &Token = req->json["Token"];
         const std::unordered_map<std::string, SingleUser>::const_iterator User =
@@ -79,7 +79,7 @@ class APIRouter {
     // Retrieve All Tags
     router->GET("/Contacts/Retrieve/AllTags", [](HttpRequest *req,
                                                  HttpResponse *resp) {
-      SYSLOG::PrintRequest("GET\t", "/Contacts/Retrieve/AllTags");
+      SYSLOG::PrintRequest("GET->", "/Contacts/Retrieve/AllTags");
       try {
         const std::string &Token = req->json["Token"];
         const std::unordered_map<std::string, SingleUser>::const_iterator User =
@@ -102,6 +102,7 @@ class APIRouter {
     // Retrieve All Contacts Within One Tag
     router->GET("/Contacts/Retrieve/TagContains", [](HttpRequest *req,
                                                      HttpResponse *resp) {
+      SYSLOG::PrintRequest("GET->", "/Contacts/Retrieve/TagContains");
       try {
         const std::string &Token = req->json["Token"];
         const std::string &Name = req->json["Name"];
@@ -125,6 +126,7 @@ class APIRouter {
     // Retrieve Email Address For One Contact
     router->GET("/Contacts/Retrieve/Email", [](HttpRequest *req,
                                                HttpResponse *resp) {
+      SYSLOG::PrintRequest("GET->", "/Contacts/Retrieve/Email");
       try {
         const std::string &Token = req->json["Token"];
         const std::string &Name = req->json["Name"];
@@ -146,6 +148,7 @@ class APIRouter {
     // Create New Contact
     router->POST(
         "/Contacts/Create/Contact", [](HttpRequest *req, HttpResponse *resp) {
+          SYSLOG::PrintRequest("POST->", "/Contacts/Create/Contact");
           try {
             const std::string &Token = req->json["Token"];
             const std::string &Name = req->json["Name"];
@@ -169,6 +172,7 @@ class APIRouter {
     // Create New Tag
     router->POST(
         "/Contacts/Create/Tag", [](HttpRequest *req, HttpResponse *resp) {
+          SYSLOG::PrintRequest("POST->", "/Contacts/Create/Tag");
           try {
             const std::string &Token = req->json["Token"];
             const std::string &TagName = req->json["TagName"];
@@ -191,6 +195,7 @@ class APIRouter {
     // Assign Tag to One Existing Contact
     router->PUT(
         "/Contacts/Assign/Contact", [](HttpRequest *req, HttpResponse *resp) {
+          SYSLOG::PrintRequest("PUT->", "/Contacts/Assign/Contact");
           try {
             const std::string &Token = req->json["Token"];
             const std::string &TagName = req->json["TagName"];
@@ -214,6 +219,7 @@ class APIRouter {
     // Remove Tag For One Existing Contact
     router->Delete(
         "/Contacts/Unassign/Contact", [](HttpRequest *req, HttpResponse *resp) {
+          SYSLOG::PrintRequest("Delete->", "/Contacts/Unassign/Contact");
           try {
             const std::string &Token = req->json["Token"];
             const std::string &TagName = req->json["TagName"];
@@ -237,6 +243,7 @@ class APIRouter {
     // Remove Existing Contact
     router->Delete(
         "/Contacts/Remove/Contact", [](HttpRequest *req, HttpResponse *resp) {
+          SYSLOG::PrintRequest("Delete->", "/Contacts/Remove/Contact");
           try {
             const std::string &Token = req->json["Token"];
             const std::string &Name = req->json["Name"];
@@ -259,6 +266,7 @@ class APIRouter {
     // Remove Existing Tag
     router->Delete(
         "/Contacts/Remove/Tag", [](HttpRequest *req, HttpResponse *resp) {
+          SYSLOG::PrintRequest("Delete->", "/Contacts/Remove/Tag");
           try {
             const std::string &Token = req->json["Token"];
             const std::string &TagName = req->json["TagName"];
