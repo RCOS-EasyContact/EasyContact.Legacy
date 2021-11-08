@@ -26,7 +26,9 @@
 #include "GlobalMutex.hpp"
 #include "SingleUser.hpp"
 #include "StreamProcessor.hpp"
+#include "SysLogs.hpp"
 // Project Defines
+#define LISTEN_PORT 3126
 #define MAX_PROCESSORS 2
 // Global Representation
 std::unordered_map<std::string, SingleUser> g_ActiveUsers;
@@ -38,14 +40,13 @@ void Reg_Processor(){
 }
 void Reg_APIServer() {
   try {
-    g_Http_Server.port = 3126;
+    g_Http_Server.port = LISTEN_PORT;
     g_Http_Service.base_url = "";
     APIRouter::register_router(&g_Http_Service);
     g_Http_Server.service = &g_Http_Service;
     http_server_run(&g_Http_Server, 0);
   } catch (std::exception& Err) {
-    std::cerr << "Run-Time Exception <APIRouter> := " << Err.what()
-              << std::endl;
+        SYSLOG::PrintException(Err);
     exit(EXIT_FAILURE);
   }
 }
