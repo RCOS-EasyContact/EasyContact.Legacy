@@ -37,3 +37,103 @@ curl -X POST \
 - On Failure: 
   - Status: `401` Unauthorized
   - Status: `500` Internal Server Error
+### **GET** `/Contacts/AllTags`
+- Retrieve All Tags
+- Request Body:
+  - Token
+- On Success:
+  - Status: `200 OK`
+  - Body: All Existing Tags
+- On Failure: 
+  - Status: `401` Unauthorized
+  - Status: `500` Internal Server Error
+### **GET** `/Contacts/TagContains`
+- Retrieve All Contacts Within One Tag
+- Request Body:
+  - Token
+  - Name
+- On Success:
+  - Status: `200 OK`
+  - Body: All Contacts of This Tag
+- On Failure: 
+  - Status: `401` Unauthorized
+  - Status: `500` Internal Server Error
+### **GET** `/Contacts/Email`
+- Retrieve Email Address For One Contact
+- Request Body:
+  - Token
+  - Name
+- On Success:
+  - Status: `200 OK`
+  - Body: Email Address for This Contact
+- On Failure: 
+  - Status: `401` Unauthorized
+  - Status: `500` Internal Server Error
+### **POST** `/Contacts/New`
+- Create New Contact
+- Request Body:
+  - Token
+  - Name
+- On Success:
+  - Status: `200 OK`
+- On Failure: 
+  - Status: `401` Unauthorized
+  - Status: `409` Conflict
+  - Status: `500` Internal Server Error
+### **POST** `/Contacts/Tag`
+- Create New Tag
+- Request Body:
+  - Token
+  - TagName
+- On Success:
+  - Status: `200 OK`
+- On Failure: 
+  - Status: `401` Unauthorized
+  - Status: `409` Conflict
+  - Status: `500` Internal Server Error
+### **PUT** `/Contacts/Assign`
+- Assign Tag to One Existing Contact
+- Request Body:
+  - Token
+  - TagName
+  - Name
+- On Success:
+  - Status: `200 OK`
+- On Failure: 
+  - Status: `401` Unauthorized
+  - Status: `409` Conflict
+  - Status: `500` Internal Server Error
+### **DELETE** `/Contacts/Unassign`
+- Remove Tag For One Existing Contact
+- Request Body:
+  - Token
+  - TagName
+  - Name
+- On Success:
+  - Status: `200 OK`
+- On Failure: 
+  - Status: `401` Unauthorized
+  - Status: `409` Conflict
+  - Status: `500` Internal Server Error
+### **DELETE** `/Contacts/Remove`
+- Remove Existing Contact
+- Request Body:
+  - Token
+  - Name
+- On Success:
+  - Status: `200 OK`
+- On Failure: 
+  - Status: `401` Unauthorized
+  - Status: `409` Conflict
+  - Status: `500` Internal Server Error
+### **DELETE** `/Contacts/RemoveTag`
+- Remove Existing Tag
+- Request Body:
+  - Token
+  - TagName
+- On Success:
+  - Status: `200 OK`
+- On Failure: 
+  - Status: `401` Unauthorized
+  - Status: `409` Conflict
+  - Status: `500` Internal Server Error
