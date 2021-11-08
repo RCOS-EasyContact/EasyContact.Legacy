@@ -10,23 +10,39 @@ import MessageList from '../../components/message/Message-List';
 import ChatForm from '../../components/chat-form/Chat-Form';
 
 import './Chat-Shell.css';
-import { useState } from 'react';
-
-const ChatShell = ({ conversations }) => {
-    const [selectedConvo] = useState(selectedConversation);
+const ChatShell = (
+    {
+        conversations,
+        selectedConversation,
+        conversationChanged
+    }) => {
     return (
         <div id="chat-container">
             <ConversationSearch />
             <ConversationList
+                onConversationItemSelected={conversationChanged}
                 conversations={conversations}
-                selectedConversationId={selectedConvo.id}
-            />
+                selectedConversationId={selectedConversation.id} />
             <NewConversation />
             <ChatTitle selectedConversation={selectedConversation} />
-            <MessageList messages={messages} />
+            <MessageList messages={selectedConversation.messages} />
             <ChatForm />
         </div>
     );
 }
 
-export default ChatShell;
+const mapStateToProps = state => {
+    return {
+        conversations: state.conversationState.conversations,
+        selectedConversation: state.conversationState.selectedConversation
+    };
+};
+
+const mapDispatchToProps = dispatch => ({
+    conversationChanged: conversationId => dispatch(conversationChanged(conversationId))
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ChatShell);
