@@ -17,6 +17,7 @@
 // Standard Template Library
 #include <unordered_map>
 #include <utility>
+#include <queue>
 // Libhv Library
 #include "hv/HttpServer.h"
 #include "hv/hv.h"
@@ -24,10 +25,17 @@
 #include "../API/APIRouter.hpp"
 #include "GlobalMutex.hpp"
 #include "SingleUser.hpp"
+#include "StreamProcessor.hpp"
+// Project Defines
+#define MAX_PROCESSORS 2
 // Global Representation
 std::unordered_map<std::string, SingleUser> g_ActiveUsers;
+GlobalMutex<std::queue<std::string>> g_TaskQueue(new std::queue<std::string>);
 http_server_t g_Http_Server;
 HttpService g_Http_Service;
+void Reg_Processor(){
+
+}
 void Reg_APIServer() {
   try {
     g_Http_Server.port = 3126;
@@ -44,6 +52,8 @@ void Reg_APIServer() {
 int main() {
   // Generate Random Seed
   srand(time(0));
+  // Start Stream Processors
+  Reg_Processor();
   // Start API Server
   Reg_APIServer();
   // Wait
