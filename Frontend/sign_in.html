@@ -44,7 +44,8 @@
       var info = {"RCSID": RCSID, "Password": password};
       alert(RCSID, passwrd);
       $.ajax({
-        type: "POST",
+        type: "POST", 
+        processData : false,
         url : "localhost:3126/Login",
         data : info,
         beforeSend: function(){
