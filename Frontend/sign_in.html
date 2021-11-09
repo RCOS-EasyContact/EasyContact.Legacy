@@ -40,11 +40,12 @@
   <script>
     $("#signin_butt").click(function(){
       var RCSID = $("#RCSID").val();
+      RCSID = RCSID.substring(0, RCSID.length-18)
       var password = $("#password").val();
+      password = password.substring(0, password.length-18)
       var info = {"RCSID": RCSID, "Password": password};
       alert(RCSID);
       alert(password);
-      alert(info);
       $.ajax({
         type: "POST",
         url : "http://localhost:3126/Login",
