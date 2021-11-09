@@ -48,7 +48,7 @@ void DispatchQueue::Dispatch_Hander(void) {
       auto Operation = std::move(Queue.front());
       Queue.pop();
       u_Lock.unlock();
-      Operation(SingleUser);
+      Operation();
       u_Lock.lock();
     }
   }

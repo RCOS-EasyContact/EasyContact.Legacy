@@ -20,8 +20,10 @@
 #include "../Executable/SingleUser.hpp"
 #include "../Executable/SysLogs.hpp"
 #include "UserToken.hpp"
+#include "../Executable/DispatchQueue.hpp"
 // Global Representation
 extern std::unordered_map<std::string, SingleUser> g_ActiveUsers;
+extern DispatchQueue g_DispatchQueue;
 class APIRouter {
  public:
   static int pre(HttpRequest *req, HttpResponse *resp) {
@@ -206,6 +208,29 @@ class APIRouter {
           return 409;  // Conflict
         }
       } catch (const std::exception &Err) {
+        SYSLOG::PrintException(Err);
+      }
+      return 500;  // Internal Server Error
+    });
+    // Download Lastest X Emails
+    router->PUT("/Email/Fetch/:Num",[](HttpRequest *req, HttpResponse *resp) {
+      SYSLOG::PrintRequest("PUT->", "/Email/Fetch/:Num");
+      try {
+        const std::string &Token=req->json["Token"];
+        const std::string& Num=req->GetParam("Num");
+        const std::unordered_map<std::string, SingleUser>::iterator User =
+            g_ActiveUsers.find(Token);
+        // Verify User Is Current Active
+        if (User == g_ActiveUsers.end()) {
+          return 401;  // Unauthorized
+        }
+        size_t* DQ_param=new size_t;
+        g_DispatchQueue.Dispatch([*(User)](size_t* Num){
+          User.MailClient.Fetch(*Num);
+          delete Num;
+        });
+        return 202; // Accepted
+ } catch (const std::exception &Err) {
         SYSLOG::PrintException(Err);
       }
       return 500;  // Internal Server Error

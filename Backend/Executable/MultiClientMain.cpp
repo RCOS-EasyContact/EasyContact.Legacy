@@ -49,10 +49,6 @@ void Reg_APIServer() {
 int main(void) {
   // Generate Random Seed
   srand(time(0));
-  // Start Dispatch Queue
-  for (size_t i = 0; i < 8; ++i) {
-    g_DispatchQueue.Dispatch([] { std::cout << "Dispatch!" << std::endl; });
-  }
   // Start API Server
   // Reg_APIServer();
   // Wait
