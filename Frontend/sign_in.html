@@ -24,12 +24,12 @@
         <form method="post" action="sign_in.html" method="post">
           <!-- /*<h1>Welcome<br>to<br>EasyContact!</h1> -->
           <div class="form-group">
-            <pre><input class="boxx1" type = "text" id = "username" name = "username" placeholder="  Enter RCS ID" required><a class="rpifont">    @rpi.edu</a></pre>
+            <pre><input class="boxx1" type = "text" id = "RCSID" name = "username" placeholder="  Enter RCS ID" required><a class="rpifont">    @rpi.edu</a></pre>
           </div>
           <div class="form-group">
             <input class="boxx" type = "password" id = "password" name = "password" placeholder="  Enter Password" required>
           </div>
-          <a href=""><button>Sign In</button></a>
+          <button>Sign In</button>
         </form>    
         <pre><a href = "https://itssc.rpi.edu/hc/en-us/articles/360001113412-Changing-Your-RCS-Account-Password-or-Obtaining-a-New-Password-">                Forget Password?</a></pre>
       </div>
@@ -40,7 +40,7 @@
   <script>
     var RCSID = $("#RCSID").val()
     var passwrd = $("#password").val()
-    var info = {"RCSID": RCSID, "Password": passwrd}
+    var info = {"RCSID": RCSID, "Password": passward}
     $(document).ready(function(){
       $("button").click(function(){
         $.ajax({
