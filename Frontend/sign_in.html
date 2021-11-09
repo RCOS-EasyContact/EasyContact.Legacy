@@ -41,7 +41,6 @@
     var RCSID = $("#RCSID").val()
     var passwrd = $("#password").val()
     var info = {"RCSID": RCSID, "Password": password}
-    $(document).ready(function(){
       $("button").click(function(){
         $.ajax({
           type: "POST",
@@ -63,6 +62,5 @@
             }
           }
         })
-      });
     });
   </script>
