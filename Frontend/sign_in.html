@@ -42,7 +42,8 @@
       var RCSID = $("#RCSID").val();
       var password = $("#password").val();
       var info = {"RCSID": RCSID, "Password": password};
-      alert(RCSID, password);
+      alert(RCSID);
+      alert(password);
       $.ajax({
         type: "POST",
         url : "http://localhost:3126/Login",
