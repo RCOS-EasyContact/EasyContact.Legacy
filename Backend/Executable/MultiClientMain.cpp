@@ -15,17 +15,17 @@
 #include <mutex>
 #include <thread>
 // Standard Template Library
+#include <queue>
 #include <unordered_map>
 #include <utility>
-#include <queue>
 // Libhv Library
 #include "hv/HttpServer.h"
 #include "hv/hv.h"
 // EasyContact Header Files
 #include "../API/APIRouter.hpp"
+#include "DispatchQueue.hpp"
 #include "GlobalMutex.hpp"
 #include "SingleUser.hpp"
-#include "DispatchQueue.hpp"
 #include "SysLogs.hpp"
 // Project Defines
 #define LISTEN_PORT 3126
@@ -42,7 +42,7 @@ void Reg_APIServer() {
     g_Http_Server.service = &g_Http_Service;
     http_server_run(&g_Http_Server, 0);
   } catch (std::exception& Err) {
-        SYSLOG::PrintException(Err);
+    SYSLOG::PrintException(Err);
     exit(EXIT_FAILURE);
   }
 }
@@ -50,10 +50,8 @@ int main(void) {
   // Generate Random Seed
   srand(time(0));
   // Start Dispatch Queue
-  for(size_t i=0;i<8;++i){
-  g_DispatchQueue.Dispatch([]{
-    std::cout<<"Dispatch!"<<std::endl;
-  });
+  for (size_t i = 0; i < 8; ++i) {
+    g_DispatchQueue.Dispatch([] { std::cout << "Dispatch!" << std::endl; });
   }
   // Start API Server
   // Reg_APIServer();
