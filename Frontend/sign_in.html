@@ -42,8 +42,7 @@
       var RCSID = $("#RCSID").val();
       var password = $("#password").val();
       var info = {"RCSID": RCSID, "Password": password};
-      alert(RCSID);
-      alert(password);
+      console.log(info);
       $.ajax({
         type: "POST", 
         processData : false,
