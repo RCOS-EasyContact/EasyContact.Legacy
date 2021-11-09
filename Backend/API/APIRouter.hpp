@@ -225,9 +225,9 @@ class APIRouter {
           return 401;  // Unauthorized
         }
         size_t *DQ_param = new size_t;
-        *DQ_param=stoi(Num);
-        g_DispatchQueue.Dispatch([*(User)]((void*)size_t *DQ_param) {
-          User.MailClient.Fetch(*(size_t*)DQ_param);
+        *DQ_param = stoi(Num);
+        g_DispatchQueue.Dispatch([*(User)]((void *)size_t *DQ_param) {
+          User.MailClient.Fetch(*(size_t *)DQ_param);
           delete DQ_param;
         });
         return 202;  // Accepted
