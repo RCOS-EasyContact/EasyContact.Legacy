@@ -25,19 +25,15 @@
 #include "../API/APIRouter.hpp"
 #include "GlobalMutex.hpp"
 #include "SingleUser.hpp"
-#include "StreamProcessor.hpp"
+#include "DispatchQueue.hpp"
 #include "SysLogs.hpp"
 // Project Defines
 #define LISTEN_PORT 3126
-#define MAX_PROCESSORS 2
 // Global Representation
 std::unordered_map<std::string, SingleUser> g_ActiveUsers;
-GlobalMutex<std::queue<std::string>> g_TaskQueue(new std::queue<std::string>);
+DispatchQueue g_DispatchQueue(2);
 http_server_t g_Http_Server;
 HttpService g_Http_Service;
-void Reg_Processor(){
-
-}
 void Reg_APIServer() {
   try {
     g_Http_Server.port = LISTEN_PORT;
@@ -50,13 +46,17 @@ void Reg_APIServer() {
     exit(EXIT_FAILURE);
   }
 }
-int main() {
+int main(void) {
   // Generate Random Seed
   srand(time(0));
-  // Start Stream Processors
-  Reg_Processor();
+  // Start Dispatch Queue
+  for(size_t i=0;i<8;++i){
+  g_DispatchQueue.Dispatch([]{
+    std::cout<<"Dispatch!"<<std::endl;
+  });
+  }
   // Start API Server
-  Reg_APIServer();
+  // Reg_APIServer();
   // Wait
   while (true) {
     pause();

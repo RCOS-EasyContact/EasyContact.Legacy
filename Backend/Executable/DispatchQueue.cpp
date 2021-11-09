@@ -7,7 +7,7 @@
 #ifndef BACKEND_EXECUTABLE_DISPATCHQUEUE_CPP_
 #define BACKEND_EXECUTABLE_DISPATCHQUEUE_CPP_
 #include "DispatchQueue.hpp"
-DispatchQueue::DispatchQueue(const std::string&newName,const size_t &NumThreads ):Name(newName),Threads(NumThreads){
+DispatchQueue::DispatchQueue(const size_t &NumThreads ):Threads(NumThreads){
   for(size_t i=0;i<Threads.size();++i){
     Threads[i]=std::thread(&DispatchQueue::Dispatch_Hander,this);
   }
@@ -53,25 +53,4 @@ u_Lock.lock();
   }
   }
 }
-int main(void)
-{
-	int r = 0;
-	DispatchQueue q("Phillip's Demo Dispatch Queue", 4);
-
-	q.Dispatch([] {
-		std::cerr<<"Dispatch 1!\n";
-	});
-	q.Dispatch([] {
-		std::cerr<<"Dispatch 2!\n";
-	});
-	q.Dispatch([] {
-		std::cerr<<"Dispatch 3!\n";
-	});
-	q.Dispatch([] {
-		std::cerr<<"Dispatch 4!\n";
-	});
-
-	return r;
-}
-
 #endif // BACKEND_EXECUTABLE_DISPATCHQUEUE_CPP_

@@ -20,7 +20,6 @@
 class DispatchQueue{
   typedef std::function<void(void)> fp_t;
   private:
-  std::string Name;
   std::mutex Lock;
   std::vector<std::thread> Threads;
 std::queue<fp_t> Queue;
@@ -29,7 +28,7 @@ bool inServices=true;
 void Dispatch_Hander(void);
 
 public:
-explicit DispatchQueue(const std::string&newName,const size_t & NumThreads=2 );
+explicit DispatchQueue(const size_t & NumThreads );
 ~DispatchQueue();
   void Dispatch(const fp_t& Operation);
   void Dispatch(fp_t&& Operation);

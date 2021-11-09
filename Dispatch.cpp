@@ -1,3 +1,4 @@
+#if 0
 #include <thread>
 #include <functional>
 #include <vector>
@@ -113,7 +114,7 @@ void dispatch_queue::dispatch_thread_handler(void)
 			// unlock now that we're done messing with the queue
 			lock.unlock();
 
-			op();
+			// op();
 
 			lock.lock();
 		}
@@ -140,3 +141,4 @@ int main(void)
 
 	return r;
 }
+#endif
