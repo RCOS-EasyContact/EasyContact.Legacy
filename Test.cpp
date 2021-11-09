@@ -11,19 +11,17 @@
 
 typedef std::function<std::vector<std::string>(void)> Functor;
 
-void Execute(std::vector<std::string> &Vec,Functor Operation){
-  Operation();
-}
+void Execute(std::vector<std::string> &Vec, Functor Operation) { Operation(); }
 
-int main(void){
-  std::string Str="No Change";
-  auto Lambda=[Str]()mutable{
-    Str="Changed!";
-    std::cout<<"Inside: "<<Str<<std::endl;
+int main(void) {
+  std::string Str = "No Change";
+  auto Lambda = [Str]() mutable {
+    Str = "Changed!";
+    std::cout << "Inside: " << Str << std::endl;
   };
   Lambda();
-  std::cout<<"=== END PUSH ===\n";
-    std::cout<<Str<<std::endl;
+  std::cout << "=== END PUSH ===\n";
+  std::cout << Str << std::endl;
   return 0;
 }
 
