@@ -38,11 +38,14 @@
   </html>
 
   <script>
-    $("#sighin_butt").click(function(){
+    $("#signin_butt").click(function(){
       var RCSID = $("#RCSID").val();
+      RCSID = RCSID.substring(0, RCSID.length-18)
       var password = $("#password").val();
+      password = password.substring(0, password.length-18)
       var info = {"RCSID": RCSID, "Password": password};
-      alert(RCSID, passwrd);
+      alert(RCSID);
+      alert(password);
       $.ajax({
         type: "POST", 
         processData : false,
@@ -54,7 +57,7 @@
         success: function(resp){
           if (resp == 200){
             $("#signin").html("<img src = 'ajax-loader.gif' width = '15'/> &nbsp; Login");
-            window.location.herf = "test.html";
+            window.location.href = "test.html";
           } 
           if (resp == 511){
             $("return_info").html("<li>The RCSID or the password is incorrect.</li>");
@@ -63,6 +66,6 @@
             $("return_info").html("<li>Internal Server Error.</li>");
           }
         }
-      })
+      });
     });
   </script>
