@@ -17,7 +17,9 @@ namespace SYSLOG {
 inline static void PrintException(const std::exception &Err) {
   std::time_t timenow =
       std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-  std::cerr << std::ctime(&timenow) << "Run-Time Exception: " << Err.what()
+      std::string Buffer=std::move(std::ctime(&timenow));
+      Buffer[Buffer.size()]=0;
+  std::cerr << "<"<<Buffer << "> Run-Time Exception: " << Err.what()
             << std::endl;
 }
 template <typename... Args>
