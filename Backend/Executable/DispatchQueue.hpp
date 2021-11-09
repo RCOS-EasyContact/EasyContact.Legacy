@@ -18,6 +18,8 @@
 // Standard Template Library
 #include <queue>
 #include <vector>
+// EasyContact Header Files
+#include "SingleUser.hpp"
 class DispatchQueue {
   typedef std::function<void(SingleUser)> Functor;
 
