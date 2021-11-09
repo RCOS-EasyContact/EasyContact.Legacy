@@ -38,30 +38,30 @@
   </html>
 
   <script>
-      $("button").click(function(){
-        var RCSID = $("#RCSID").val()
-        var passwrd = $("#password").val()
-        var info = {"RCSID": RCSID, "Password": password}
-        alert(RCSID, passwrd)
-        $.ajax({
-          type: "POST",
-          url : "localhost:3126/Login",
-          data : info,
-          beforeSend: function(){
-            $("#signin_butt").html("sending...");
-          },
-          success: function(resp){
-            if (resp == 200){
-              $("#signin").html("<img src = 'ajax-loader.gif' width = '15'/> &nbsp; Login");
-              window.location.herf = "test.html";
-            } 
-            if (resp == 511){
-              $("return_info").html("<li>The RCSID or the password is incorrect.</li>")
-            }
-            if (resp == 500){
-              $("return_info").html("<li>Internal Server Error.</li>")
-            }
+    $("#sighin_butt").click(function(){
+      var RCSID = $("#RCSID").val();
+      var passwrd = $("#password").val();
+      var info = {"RCSID": RCSID, "Password": password};
+      alert(RCSID, passwrd);
+      $.ajax({
+        type: "POST",
+        url : "localhost:3126/Login",
+        data : info,
+        beforeSend: function(){
+          $("#signin_butt").html("sending...");
+        },
+        success: function(resp){
+          if (resp == 200){
+            $("#signin").html("<img src = 'ajax-loader.gif' width = '15'/> &nbsp; Login");
+            window.location.herf = "test.html";
+          } 
+          if (resp == 511){
+            $("return_info").html("<li>The RCSID or the password is incorrect.</li>");
           }
-        })
+          if (resp == 500){
+            $("return_info").html("<li>Internal Server Error.</li>");
+          }
+        }
+      })
     });
   </script>
