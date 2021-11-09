@@ -6,6 +6,7 @@
    <link rel="stylesheet" type= "text/css" href="sign.css">
    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@600&display=swap" rel="stylesheet">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body>
     <div class="animation-area">
@@ -35,3 +36,33 @@
       
   </body>
   </html>
+
+  <script>
+    var RCSID = $("#RCSID").val()
+    var passwrd = $("#password").val()
+    var info = {"RCSID": RCSID, "Password": passwrd}
+    $(document).ready(function(){
+      $("button").click(function(){
+        $.ajax({
+          type: "POST",
+          url : "localhost:3126/Login",
+          data : info,
+          beforeSend: function(){
+            $("#signin").html("sending...");
+          },
+          success: function(resp){
+            if (resp == 200){
+              $("#signin").html("<img src = 'ajax-loader.gif' width = '15'/> &nbsp; Login");
+              window.location.herf = "test.html";
+            } 
+            if (resp == 511){
+              $("return_info").html("<li>The RCSID or the password is incorrect.</li>")
+            }
+            if (resp == 500){
+              $("return_info").html("<li>Internal Server Error.</li>")
+            }
+          }
+        })
+      });
+    });
+  </script>
