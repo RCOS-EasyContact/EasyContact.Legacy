@@ -24,7 +24,7 @@
         <form method="post" action="sign_in.html" method="post">
           <!-- /*<h1>Welcome<br>to<br>EasyContact!</h1> -->
           <div class="form-group">
-            <pre><input class="boxx1" type = "text" id = "RCSID" placeholder="  Enter RCS ID" required><a class="rpifont">    @rpi.edu</a></pre>
+            <input class="boxx1" type = "text" id = "RCSID" placeholder="  Enter RCS ID" required><a class="rpifont">    @rpi.edu</a>
           </div>
           <div class="form-group">
             <input class="boxx" type = "password" id = "password" placeholder="  Enter Password" required>
@@ -40,7 +40,7 @@
   <script>
     $("#sighin_butt").click(function(){
       var RCSID = $("#RCSID").val();
-      var passwrd = $("#password").val();
+      var password = $("#password").val();
       var info = {"RCSID": RCSID, "Password": password};
       alert(RCSID, passwrd);
       $.ajax({
