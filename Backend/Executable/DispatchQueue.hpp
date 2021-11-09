@@ -19,12 +19,12 @@
 #include <queue>
 #include <vector>
 class DispatchQueue {
-  typedef std::function<void(void)> fp_t;
+  typedef std::function<void(SingleUser)> Functor;
 
  private:
   std::mutex Lock;
   std::vector<std::thread> Threads;
-  std::queue<fp_t> Queue;
+  std::queue<Functor> Queue;
   std::condition_variable CV;
   bool inServices = true;
   void Dispatch_Hander(void);
@@ -32,8 +32,8 @@ class DispatchQueue {
  public:
   explicit DispatchQueue(const size_t& NumThreads);
   ~DispatchQueue();
-  void Dispatch(const fp_t& Operation);
-  void Dispatch(fp_t&& Operation);
+  void Dispatch(const Functor& Operation);
+  void Dispatch(Functor&& Operation);
   DispatchQueue(const DispatchQueue& RHS) = delete;
   DispatchQueue& operator=(const DispatchQueue& RHS) = delete;
   DispatchQueue(DispatchQueue&& RHS) = delete;

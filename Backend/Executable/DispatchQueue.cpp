@@ -26,13 +26,13 @@ DispatchQueue::~DispatchQueue() {
     }
   }
 }
-void DispatchQueue::Dispatch(const fp_t& Operation) {
+void DispatchQueue::Dispatch(const Functor& Operation) {
   std::unique_lock<std::mutex> u_Lock(Lock);
   Queue.push(Operation);
   u_Lock.unlock();
   CV.notify_one();
 }
-void DispatchQueue::Dispatch(fp_t&& Operation) {
+void DispatchQueue::Dispatch(Functor&& Operation) {
   std::unique_lock<std::mutex> u_Lock(Lock);
   Queue.push(std::move(Operation));
   u_Lock.unlock();
