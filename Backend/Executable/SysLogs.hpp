@@ -13,6 +13,8 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+// Standard Template Library
+#include <utility>
 namespace SYSLOG {
 inline static void PrintException(const std::exception &Err) {
   std::time_t timenow =
