@@ -27,20 +27,21 @@ bool BMC::AuthenticateLogin(const std::string& RCSID,
   }
   return true;
 }
-BMC::MailClient::MailClient(const std::string& _RCSID, const std::string& _Password)
-      : RCSID(_RCSID),
-        Password(_Password),
-        EmailAddress(_RCSID + "@rpi.edu"),
-        Nickname(_RCSID) {}
-        BMC::MailClient::MailClient(const std::string& _RCSID, const std::string& _Password,
-                      const std::string& _Nickname, const std::string& _Email)
-      : RCSID(_RCSID),
-        Password(_Password),
-        Nickname(_Nickname),
-        EmailAddress(_Email) {}
-  bool BMC::MailClient::Fetch(const size_t& NumEmails){
-    return false;
-  }
+BMC::MailClient::MailClient(const std::string& _RCSID,
+                            const std::string& _Password)
+    : RCSID(_RCSID),
+      Password(_Password),
+      EmailAddress(_RCSID + "@rpi.edu"),
+      Nickname(_RCSID) {}
+BMC::MailClient::MailClient(const std::string& _RCSID,
+                            const std::string& _Password,
+                            const std::string& _Nickname,
+                            const std::string& _Email)
+    : RCSID(_RCSID),
+      Password(_Password),
+      Nickname(_Nickname),
+      EmailAddress(_Email) {}
+bool BMC::MailClient::Fetch(const size_t& NumEmails) { return false; }
 bool BMC::MailClient::recv(message* msg) {
   // message &new_msg = *msg;
   try {
@@ -74,7 +75,7 @@ bool BMC::MailClient::remove_first() {
   } catch (const dialog_error& Err) {
     SYSLOG::PrintException(Err);
   }
-    return false;
+  return false;
 }
 int BMC::MailClient::inbox_status() {
   int ret = 0;
