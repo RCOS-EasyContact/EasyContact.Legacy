@@ -38,7 +38,11 @@
   </html>
 
   <script>
+    
     $("#signin_butt").click(function(){
+      $.ajaxSetup({
+        contentType: "application/json; charset=utf-8"
+      });
       var RCSID = $("#RCSID").val().toString();
       var password = $("#password").val().toString();
       var info = {RCSID: RCSID, Password: password};
