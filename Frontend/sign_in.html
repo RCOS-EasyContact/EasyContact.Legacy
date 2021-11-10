@@ -42,6 +42,7 @@
       var RCSID = $("#RCSID").val();
       var password = $("#password").val();
       var info = {"RCSID": RCSID, "Password": password};
+      const data = JSON.stringify(info);
       alert(RCSID);
       alert(password);
       $.ajax({
@@ -49,7 +50,7 @@
         processData: false,
         contentType: 'application/json',
         url : "http://localhost:3126/Login",
-        data : info,
+        data : data,
         beforeSend: function(){
           $("#signin_butt").html("sending...");
         },
