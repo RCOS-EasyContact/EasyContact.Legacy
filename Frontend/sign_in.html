@@ -42,8 +42,8 @@
       var RCSID = $("#RCSID").val().toString();
       var password = $("#password").val().toString();
       var info = {RCSID: RCSID, Password: password};
-      console.log(info);
-      //const data = JSON.stringify(info);
+      const data = JSON.stringify(info);
+      console.log(data);
       alert(RCSID);
       alert(password);
       $.ajax({
