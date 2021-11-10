@@ -35,7 +35,7 @@ class DispatchQueue {
  public:
   explicit DispatchQueue(const size_t& NumThreads);
   ~DispatchQueue();
-  void Dispatch( const Functor& Operation);
+  void Dispatch(const Functor& Operation);
   void Dispatch(Functor&& Operation);
   DispatchQueue(const DispatchQueue& RHS) = delete;
   DispatchQueue& operator=(const DispatchQueue& RHS) = delete;

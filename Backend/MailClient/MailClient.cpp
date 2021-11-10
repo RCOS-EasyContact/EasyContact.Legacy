@@ -64,7 +64,7 @@ bool BMC::MailClient::recv(message* msg) const {
   }
   return false;
 }
-bool BMC::MailClient::remove_first()const {
+bool BMC::MailClient::remove_first() const {
   try {
     imap conn("mail.rpi.edu", 143);
     conn.authenticate(RCSID, Password, imap::auth_method_t::LOGIN);
@@ -99,7 +99,7 @@ int BMC::MailClient::inbox_status() const {
 int BMC::MailClient::sent_message(const std::string& name_to,
                                   const std::string& to_mail,
                                   const std::string& subjects,
-                                  const std::string& mesg)const {
+                                  const std::string& mesg) const {
   try {
     message msg;
     msg.from(
