@@ -21,7 +21,7 @@
 // EasyContact Header Files
 #include "SingleUser.hpp"
 class DispatchQueue {
-  typedef std::function<SingleUser(void*)> Functor;
+  typedef std::function<SingleUser(void)> Functor;
 
  private:
   std::mutex Lock;
