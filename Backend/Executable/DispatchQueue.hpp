@@ -29,7 +29,7 @@ class DispatchQueue {
  private:
   std::mutex Lock;
   std::vector<std::thread> Threads;
-  std::queue<std::pair<ParamType, Functor>> Queue;
+  std::queue<DQPair> Queue;
   std::condition_variable CV;
   bool inServices = true;
   void Dispatch_Hander(void);
