@@ -17,19 +17,19 @@
 #include <thread>
 // Standard Template Library
 #include <queue>
-#include <vector>
 #include <utility>
+#include <vector>
 // EasyContact Header Files
 #include "../Executable/SingleUser.hpp"
 class DispatchQueue {
   typedef SingleUser ParamType;
   typedef std::function<void(ParamType)> Functor;
-  typedef std::pair<ParamType,Functor> DQPair;
+  typedef std::pair<ParamType, Functor> DQPair;
 
  private:
   std::mutex Lock;
   std::vector<std::thread> Threads;
-  std::queue<std::pair<ParamType,Functor>> Queue;
+  std::queue<std::pair<ParamType, Functor>> Queue;
   std::condition_variable CV;
   bool inServices = true;
   void Dispatch_Hander(void);
@@ -37,8 +37,8 @@ class DispatchQueue {
  public:
   explicit DispatchQueue(const size_t& NumThreads);
   ~DispatchQueue();
-  void Dispatch(const ParamType& Param,const Functor& Operation);
-  void Dispatch(ParamType&& Param,Functor&& Operation);
+  void Dispatch(const ParamType& Param, const Functor& Operation);
+  void Dispatch(ParamType&& Param, Functor&& Operation);
   DispatchQueue(const DispatchQueue& RHS) = delete;
   DispatchQueue& operator=(const DispatchQueue& RHS) = delete;
   DispatchQueue(DispatchQueue&& RHS) = delete;

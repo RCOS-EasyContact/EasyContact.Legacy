@@ -26,16 +26,16 @@ DispatchQueue::~DispatchQueue() {
     }
   }
 }
-  void DispatchQueue::Dispatch(const ParamType& Param,const Functor& Operation){
+void DispatchQueue::Dispatch(const ParamType& Param, const Functor& Operation) {
   std::unique_lock<std::mutex> u_Lock(Lock);
-  Queue.push(DQPair(Param,Operation));
+  Queue.push(DQPair(Param, Operation));
   u_Lock.unlock();
   CV.notify_one();
 }
 
-  void DispatchQueue::Dispatch(ParamType&& Param,Functor&& Operation){
+void DispatchQueue::Dispatch(ParamType&& Param, Functor&& Operation) {
   std::unique_lock<std::mutex> u_Lock(Lock);
-  Queue.push(DQPair(std::move(Param),std::move(Operation)));
+  Queue.push(DQPair(std::move(Param), std::move(Operation)));
   u_Lock.unlock();
   CV.notify_one();
 }
