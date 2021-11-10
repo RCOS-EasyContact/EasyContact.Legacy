@@ -6,19 +6,20 @@
 #include <string>
 #include <thread>
 // Standard Template Library
-#include <queue>
-#include <vector>
-
 #include <iostream>
+#include <queue>
 #include <string>
+#include <vector>
 
 using namespace std;
 
-int main(int argc,char **argv)   {
-    auto i=5;
-    auto f = [i](int j) {cout<<"capture i="<<i<<", passing i as j="<<j<< endl; };
-    while (i<30) {
-        i += 10;
-        f(i);
-    }
+int main(int argc, char **argv) {
+  auto i = 5;
+  auto f = [i](int j) {
+    cout << "capture i=" << i << ", passing i as j=" << j << endl;
+  };
+  while (i < 30) {
+    i += 10;
+    f(i);
+  }
 }
