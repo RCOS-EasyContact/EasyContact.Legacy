@@ -26,10 +26,14 @@ class APIRouter {
  public:
   static int pre(HttpRequest *req, HttpResponse *resp) {
     if (req->method == HTTP_OPTIONS) {
-        resp->headers["Access-Control-Allow-Origin"] = req->GetHeader("Origin", "*");
-        resp->headers["Access-Control-Allow-Methods"] = req->GetHeader("Access-Control-Request-Method", "OPTIONS, HEAD, GET, POST, PUT, DELETE, PATCH");
-        resp->headers["Access-Control-Allow-Headers"] = req->GetHeader("Access-Control-Request-Headers", "Content-Type");
-        return HTTP_STATUS_NO_CONTENT;
+      resp->headers["Access-Control-Allow-Origin"] =
+          req->GetHeader("Origin", "*");
+      resp->headers["Access-Control-Allow-Methods"] =
+          req->GetHeader("Access-Control-Request-Method",
+                         "OPTIONS, HEAD, GET, POST, PUT, DELETE, PATCH");
+      resp->headers["Access-Control-Allow-Headers"] =
+          req->GetHeader("Access-Control-Request-Headers", "Content-Type");
+      return HTTP_STATUS_NO_CONTENT;
     }
     resp->content_type = APPLICATION_JSON;
     std::cout << req->Dump(true, true).c_str() << std::endl;
