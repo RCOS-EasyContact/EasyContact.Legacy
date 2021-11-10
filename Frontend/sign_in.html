@@ -39,10 +39,10 @@
 
   <script>
     $("#signin_butt").click(function(){
-      var RCSID = string($("#RCSID").val());
-      var password = string($("#password").val());
+      var RCSID = $("#RCSID").val().toString();
+      var password = $("#password").val().toString();
       var info = {"RCSID": RCSID, "Password": password};
-      // const data = JSON.stringify(info);
+      //const data = JSON.stringify(info);
       alert(RCSID);
       alert(password);
       $.ajax({
