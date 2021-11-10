@@ -12,5 +12,5 @@ fs.readFile('sign_in.html', function (err, html) {
         response.write(html);  
         response.end();  
     }).listen(PORT);
-    console.log('server on' + port);
+    console.log('server on' + PORT);
 });
