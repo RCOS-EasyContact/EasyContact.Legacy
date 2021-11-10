@@ -49,11 +49,11 @@
       //alert(password);
       $.ajax({
         type: "POST", 
-        processData: false,
-        dataType: "json",
+        // processData: false,
         //contentType: 'application/json;charset=utf-8',
         url : "http://localhost:3126/Login",
         data : data,
+        dataType: "json",
         beforeSend: function(){
           $("#signin_butt").html("sending...");
         },
