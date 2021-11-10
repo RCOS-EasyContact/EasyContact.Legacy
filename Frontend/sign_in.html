@@ -6,7 +6,7 @@
    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@600&display=swap" rel="stylesheet">
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-   <meta http-equiv="Content-type" content="application/json;charset=utf-8"/>
+   <meta http-equiv="Content-type" content="application/json"/>
   </head>
   <body>
     <div class="animation-area">
@@ -40,9 +40,6 @@
   <script>
     
     $("#signin_butt").click(function(){
-      $.ajaxSetup({
-        contentType: "application/json; charset=utf-8"
-      });
       var RCSID = $("#RCSID").val().toString();
       var password = $("#password").val().toString();
       var info = {RCSID: RCSID, Password: password};
