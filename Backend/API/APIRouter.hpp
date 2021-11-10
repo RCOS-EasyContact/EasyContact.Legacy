@@ -25,6 +25,7 @@ extern std::unordered_map<std::string, SingleUser> g_ActiveUsers;
 class APIRouter {
  public:
   static int pre(HttpRequest *req, HttpResponse *resp) {
+    resp->headers["Access-Control-Allow-Origin"] = "*";
     if (req->method == HTTP_OPTIONS) {
       resp->headers["Access-Control-Allow-Origin"] =
           req->GetHeader("Origin", "*");
