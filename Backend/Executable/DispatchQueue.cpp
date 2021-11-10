@@ -26,15 +26,16 @@ DispatchQueue::~DispatchQueue() {
     }
   }
 }
-void DispatchQueue::Dispatch(const Functor& Operation) {
+  void DispatchQueue::Dispatch(const ParamType& Param,const Functor& Operation){
   std::unique_lock<std::mutex> u_Lock(Lock);
-  Queue.push(Operation);
+  Queue.push(DQPair(Param,Operation));
   u_Lock.unlock();
   CV.notify_one();
 }
-void DispatchQueue::Dispatch(Functor&& Operation) {
+
+  void DispatchQueue::Dispatch(ParamType&& Param,Functor&& Operation){
   std::unique_lock<std::mutex> u_Lock(Lock);
-  Queue.push(std::move(Operation));
+  Queue.push(DQPair(std::move(Param),std::move(Operation)));
   u_Lock.unlock();
   CV.notify_one();
 }
@@ -45,10 +46,10 @@ void DispatchQueue::Dispatch_Hander(void) {
     CV.wait(u_Lock, [this] { return Queue.size() || !inServices; });
     //  After Wait, We Own the Lock
     if (inServices && Queue.size()) {
-      auto Operation = std::move(Queue.front());
+      DQPair Job = std::move(Queue.front());
       Queue.pop();
       u_Lock.unlock();
-      Operation();
+      Job.second(Job.first);
       u_Lock.lock();
     }
   }
