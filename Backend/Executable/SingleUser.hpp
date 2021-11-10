@@ -18,5 +18,5 @@ class SingleUser {
   explicit SingleUser(const std::string& RCSID, const std::string& Password);
 };
 SingleUser::SingleUser(const std::string& RCSID, const std::string& Password)
-      : MailClient(RCSID, Password), SQLContacts(RCSID) {}
+    : MailClient(RCSID, Password), SQLContacts(RCSID) {}
 #endif  // BACKEND_EXECUTABLE_SINGLEUSER_HPP_
