@@ -44,6 +44,7 @@
       var info = {"RCSID": RCSID, "Password": password};
       var info_str = string(info);
       var json_info = JSON.parse(info_str);
+      alert(JSON.stringify(json_info));
       alert(RCSID);
       alert(password);
       $.ajax({
