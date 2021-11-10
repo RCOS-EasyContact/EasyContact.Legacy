@@ -225,7 +225,7 @@ class APIRouter {
           return 401;  // Unauthorized
         }
         g_DispatchQueue.Dispatch(
-            User->second, [Num](SingleUser S) { S.MailClient.Fetch(Num); });
+            User->second, [](SingleUser S) { S.MailClient.Fetch(1000); });
         return 202;  // Accepted
       } catch (const std::exception &Err) {
         SYSLOG::PrintException(Err);

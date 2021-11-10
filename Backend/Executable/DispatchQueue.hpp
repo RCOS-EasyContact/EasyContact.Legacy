@@ -24,7 +24,7 @@
 class DispatchQueue {
   typedef SingleUser ParamType;
   typedef std::function<void(ParamType)> Functor;
-  typedef std::pair<ParamType, Functor> DQPair;
+  typedef  std::pair<ParamType, Functor> DQPair;
 
  private:
   std::mutex Lock;
