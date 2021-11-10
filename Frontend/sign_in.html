@@ -51,13 +51,9 @@
         type: "POST", 
         url : "http://localhost:3126/Login",
         processData: false,
-        //contentType: 'application/json',
+        contentType: 'application/json',
         data : data,
         dataType: "json",
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'text/plain',
-        },
         beforeSend: function(){
           $("#signin_butt").html("sending...");
         },
