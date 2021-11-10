@@ -46,8 +46,8 @@
       alert(password);
       $.ajax({
         type: "POST", 
-        contentType: 'application/json',
-        url : "localhost:3126/Login",
+        dataType: 'jsonp',
+        url : "http://localhost:3126/Login",
         data : info,
         beforeSend: function(){
           $("#signin_butt").html("sending...");
