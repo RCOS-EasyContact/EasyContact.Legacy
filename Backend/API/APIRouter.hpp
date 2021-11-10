@@ -217,18 +217,15 @@ class APIRouter {
       SYSLOG::PrintRequest("PUT->", "/Email/Fetch/:Num");
       try {
         const std::string &Token = req->json["Token"];
-        const std::string &Num = req->GetParam("Num");
+        const size_t Num = std::move(stol(req->GetParam("Num")));
         const std::unordered_map<std::string, SingleUser>::iterator User =
             g_ActiveUsers.find(Token);
         // Verify User Is Current Active
         if (User == g_ActiveUsers.end()) {
           return 401;  // Unauthorized
         }
-        size_t *DQ_param = new size_t;
-        *DQ_param = stoi(Num);
-        g_DispatchQueue.Dispatch([*(User)]((void *)size_t *DQ_param) {
-          User.MailClient.Fetch(*(size_t *)DQ_param);
-          delete DQ_param;
+        g_DispatchQueue.Dispatch(User->second,[Num](SingleUser S) {
+          S.MailClient.Fetch(Num);
         });
         return 202;  // Accepted
       } catch (const std::exception &Err) {

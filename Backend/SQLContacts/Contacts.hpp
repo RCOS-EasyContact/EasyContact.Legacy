@@ -27,9 +27,7 @@ class Contacts {
   const std::string RCSID;
 
  public:
-  explicit Contacts(const std::string &newRCSID) : RCSID(newRCSID) {
-    CreateDirectory(RCSID);
-  }
+  explicit Contacts(const std::string &newRCSID);
   bool newContact(const std::string &Name, const std::string &Email);
   bool newTag(const std::string &TagName);
   bool removeContact(const std::string &Name);
