@@ -50,9 +50,9 @@
       $.ajax({
         type: "POST", 
         // processData: false,
-        //contentType: 'application/json;charset=utf-8',
+        contentType: 'application/json',
         url : "http://localhost:3126/Login",
-        data : data,
+        data : info,
         dataType: "json",
         beforeSend: function(){
           $("#signin_butt").html("sending...");
