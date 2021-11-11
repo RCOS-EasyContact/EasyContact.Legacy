@@ -1,26 +1,31 @@
+# CMake Flags
 cmake_minimum_required(VERSION 3.5)
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
+SET(CMAKE_CXX_STANDARD 17)
+SET(CMAKE_CXX_STANDARD_REQUIRED True)
+SET(CMAKE_CXX_FLAGS "-w -O3 -DNDEBUG")
+# SET(CMAKE_CXX_FLAGS_DEBUG "-O0 -g -Wall -Wextra")
+# SET(CMAKE_CXX_FLAGS_RELEASE "-w -O3 -DNDEBUG")
 
-project(EasyContact)
+PROJECT(EasyContact)
 
-set(LIBHVR Backend/API/libhv)
-set(SQLITE Backend/SQLContacts/SQLite)
-set(MAILIO Backend/MailClient/mailio)
+# Library
+SET(LIBHVR Backend/API/libhv)
+SET(SQLITE Backend/SQLContacts/SQLite)
+SET(MAILIO Backend/MailClient/mailio)
 file(GLOB SOURCE Backend/**/*.cpp)
 
 # Libhv
-set(BUILD_STATIC OFF CACHE BOOL "" FORCE)
-set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
-set(WITH_HTTP_CLIENT OFF CACHE BOOL "" FORCE)
+SET(BUILD_STATIC OFF CACHE BOOL "" FORCE)
+SET(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+SET(WITH_HTTP_CLIENT OFF CACHE BOOL "" FORCE)
 
 # SQLiteCpp
-set(SQLITECPP_RUN_CPPCHECK OFF CACHE BOOL "" FORCE)
-set(SQLITECPP_RUN_CPPLINT OFF CACHE BOOL "" FORCE)
+SET(SQLITECPP_RUN_CPPCHECK OFF CACHE BOOL "" FORCE)
+SET(SQLITECPP_RUN_CPPLINT OFF CACHE BOOL "" FORCE)
 
-# mailio
-set(MAILIO_BUILD_DOCUMENTATION OFF CACHE BOOL "" FORCE)
-set(MAILIO_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+# Mailio
+SET(MAILIO_BUILD_DOCUMENTATION OFF CACHE BOOL "" FORCE)
+SET(MAILIO_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
 add_subdirectory(${SQLITE})
 add_subdirectory(${LIBHVR})
@@ -29,8 +34,9 @@ include_directories(${PROJECT_SOURCE_DIR}/${LIBHVR}/include)
 include_directories(${PROJECT_SOURCE_DIR}/${SQLITE}/include)
 include_directories(${PROJECT_SOURCE_DIR}/${MAILIO}/include)
 
+# Compile
 add_executable(EasyContact ${SOURCE})
-set(THREADS_PREFER_PTHREAD_FLAG on)
+SET(THREADS_PREFER_PTHREAD_FLAG on)
 find_package(Threads REQUIRED)
 target_link_libraries(EasyContact
   PUBLIC m
@@ -39,6 +45,4 @@ target_link_libraries(EasyContact
   PUBLIC hv
   PUBLIC mailio
 )
-
 add_dependencies(EasyContact hv SQLiteCpp)
-set_target_properties(EasyContact PROPERTIES CMAKE_CXX_FLAGS "-Wall -Wextra -g")
