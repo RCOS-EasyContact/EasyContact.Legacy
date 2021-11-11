@@ -8,5 +8,5 @@
 #define BACKEND_EXECUTABLE_SINGLEUSER_CPP_
 #include "SingleUser.hpp"
 SingleUser::SingleUser(const std::string& RCSID, const std::string& Password)
-      : MailClient(RCSID, Password), SQLContacts(RCSID) {}
-#endif // BACKEND_EXECUTABLE_SINGLEUSER_CPP_
+    : MailClient(RCSID, Password), SQLContacts(RCSID) {}
+#endif  // BACKEND_EXECUTABLE_SINGLEUSER_CPP_
