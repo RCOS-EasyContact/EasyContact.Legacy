@@ -50,7 +50,7 @@ int main(void) {
   // Generate Random Seed
   srand(time(0));
   // Start API Server
-  // Reg_APIServer();
+  Reg_APIServer();
   // Wait
   while (true) {
     pause();
