@@ -13,7 +13,10 @@ PROJECT(EasyContact)
 SET(LIBHVR lib/libhv)
 SET(SQLITE lib/SQLite)
 SET(MAILIO lib/mailio)
-file(GLOB SOURCE src/*.cpp)
+FILE(GLOB SOURCE
+  "${PROJECT_SOURCE_DIR}/include/EasyContact/*.hpp"
+  "${PROJECT_SOURCE_DIR}/src/*.cpp"
+)
 
 # Libhv
 SET(BUILD_STATIC OFF CACHE BOOL "" FORCE)
@@ -35,7 +38,6 @@ add_subdirectory(${MAILIO})
 include_directories(${PROJECT_SOURCE_DIR}/${LIBHVR}/include)
 include_directories(${PROJECT_SOURCE_DIR}/${SQLITE}/include)
 include_directories(${PROJECT_SOURCE_DIR}/${MAILIO}/include)
-include_directories(${PROJECT_SOURCE_DIR}/include)
 
 # Compile
 add_executable(EasyContact ${SOURCE})
