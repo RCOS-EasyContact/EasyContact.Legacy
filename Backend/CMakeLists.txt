@@ -28,12 +28,14 @@ SET(SQLITECPP_RUN_CPPLINT OFF CACHE BOOL "" FORCE)
 SET(MAILIO_BUILD_DOCUMENTATION OFF CACHE BOOL "" FORCE)
 SET(MAILIO_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
+# SubModules Directory
 add_subdirectory(${SQLITE})
 add_subdirectory(${LIBHVR})
 add_subdirectory(${MAILIO})
 include_directories(${PROJECT_SOURCE_DIR}/${LIBHVR}/include)
 include_directories(${PROJECT_SOURCE_DIR}/${SQLITE}/include)
 include_directories(${PROJECT_SOURCE_DIR}/${MAILIO}/include)
+include_directories(${PROJECT_SOURCE_DIR}/Backend/include)
 
 # Compile
 add_executable(EasyContact ${SOURCE})

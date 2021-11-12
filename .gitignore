@@ -1,10 +1,6 @@
-### Sub-Modules ###
-Backend/API/libhv/*
-Backend/MailClient/mailio/*
-Backend/SQLContacts/SQLite/*
-
 ### CMake ###
-CMakeFiles/*
+Backend/CMakeFiles/*
+Backend/lib/*
 CMakeCache.txt
 EasyContact
 Makefile
