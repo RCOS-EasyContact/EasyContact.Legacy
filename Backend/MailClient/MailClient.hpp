@@ -27,23 +27,16 @@ class MailClient {
   mutable std::string Nickname;
 
  public:
-  explicit MailClient(const std::string& _RCSID, const std::string& _Password)
-      : RCSID(_RCSID),
-        Password(_Password),
-        EmailAddress(_RCSID + "@rpi.edu"),
-        Nickname(_RCSID) {}
+  explicit MailClient(const std::string& _RCSID, const std::string& _Password);
   explicit MailClient(const std::string& _RCSID, const std::string& _Password,
-                      const std::string& _Nickname, const std::string& _Email)
-      : RCSID(_RCSID),
-        Password(_Password),
-        Nickname(_Nickname),
-        EmailAddress(_Email) {}
+                      const std::string& _Nickname, const std::string& _Email);
   // recv email, if no error, the return should be the a message;
-  int recv(mailio::message* mesg);
-  int remove_first();
-  int inbox_status();
+  bool Fetch(const size_t& NumEmails) const;
+  bool recv(mailio::message* mesg) const;
+  bool remove_first() const;
+  int inbox_status() const;
   int sent_message(const std::string& name_to, const std::string& to_mail,
-                   const std::string& subjects, const std::string& mesg);
+                   const std::string& subjects, const std::string& mesg) const;
 };
 }  // namespace BMC
 #endif  // BACKEND_MAILCLIENT_MAILCLIENT_HPP_

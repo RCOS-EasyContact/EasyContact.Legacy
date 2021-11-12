@@ -27,7 +27,22 @@ bool BMC::AuthenticateLogin(const std::string& RCSID,
   }
   return true;
 }
-int BMC::MailClient::recv(message* msg) {
+BMC::MailClient::MailClient(const std::string& _RCSID,
+                            const std::string& _Password)
+    : RCSID(_RCSID),
+      Password(_Password),
+      EmailAddress(_RCSID + "@rpi.edu"),
+      Nickname(_RCSID) {}
+BMC::MailClient::MailClient(const std::string& _RCSID,
+                            const std::string& _Password,
+                            const std::string& _Nickname,
+                            const std::string& _Email)
+    : RCSID(_RCSID),
+      Password(_Password),
+      Nickname(_Nickname),
+      EmailAddress(_Email) {}
+bool BMC::MailClient::Fetch(const size_t& NumEmails) const { return false; }
+bool BMC::MailClient::recv(message* msg) const {
   // message &new_msg = *msg;
   try {
     imaps conn("mail.rpi.edu", 993);
@@ -41,30 +56,28 @@ int BMC::MailClient::recv(message* msg) {
             std::cout<<msg.content()<<std::endl;
             std::cout<<msg.from_to_string()<<std::endl;from who
     */
+    return true;
   } catch (const imap_error& Err) {
     SYSLOG::PrintException(Err);
-    return false;
   } catch (const dialog_error& Err) {
     SYSLOG::PrintException(Err);
-    return false;
   }
-  return true;
+  return false;
 }
-int BMC::MailClient::remove_first() {
+bool BMC::MailClient::remove_first() const {
   try {
     imap conn("mail.rpi.edu", 143);
     conn.authenticate(RCSID, Password, imap::auth_method_t::LOGIN);
     conn.remove("inbox", 1);
+    return true;
   } catch (const imap_error& Err) {
     SYSLOG::PrintException(Err);
-    return false;
   } catch (const dialog_error& Err) {
     SYSLOG::PrintException(Err);
-    return false;
   }
-  return true;
+  return false;
 }
-int BMC::MailClient::inbox_status() {
+int BMC::MailClient::inbox_status() const {
   int ret = 0;
   try {
     // connect to server
@@ -86,7 +99,7 @@ int BMC::MailClient::inbox_status() {
 int BMC::MailClient::sent_message(const std::string& name_to,
                                   const std::string& to_mail,
                                   const std::string& subjects,
-                                  const std::string& mesg) {
+                                  const std::string& mesg) const {
   try {
     message msg;
     msg.from(

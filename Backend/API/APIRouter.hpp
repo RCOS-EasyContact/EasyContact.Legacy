@@ -17,11 +17,13 @@
 // Libhv Library
 #include "hv/HttpService.h"
 // EasyContact Header Files
+#include "../Executable/DispatchQueue.hpp"
 #include "../Executable/SingleUser.hpp"
 #include "../Executable/SysLogs.hpp"
 #include "UserToken.hpp"
 // Global Representation
 extern std::unordered_map<std::string, SingleUser> g_ActiveUsers;
+extern DispatchQueue g_DispatchQueue;
 class APIRouter {
  public:
   static int pre(HttpRequest *req, HttpResponse *resp) {
@@ -218,6 +220,26 @@ class APIRouter {
         } else {
           return 409;  // Conflict
         }
+      } catch (const std::exception &Err) {
+        SYSLOG::PrintException(Err);
+      }
+      return 500;  // Internal Server Error
+    });
+    // Download Lastest X Emails
+    router->PUT("/Email/Fetch/:Num", [](HttpRequest *req, HttpResponse *resp) {
+      SYSLOG::PrintRequest("PUT->", "/Email/Fetch/:Num");
+      try {
+        const std::string &Token = req->json["Token"];
+        const size_t Num = std::move(stol(req->GetParam("Num")));
+        const std::unordered_map<std::string, SingleUser>::iterator User =
+            g_ActiveUsers.find(Token);
+        // Verify User Is Current Active
+        if (User == g_ActiveUsers.end()) {
+          return 401;  // Unauthorized
+        }
+        const SingleUser &S = User->second;
+        g_DispatchQueue.Dispatch([S, Num]() { S.MailClient.Fetch(Num); });
+        return 202;  // Accepted
       } catch (const std::exception &Err) {
         SYSLOG::PrintException(Err);
       }

@@ -16,6 +16,9 @@ void BCS::CreateDirectory(const std::string& DirName) {
                                          "/Contacts.db3"));
   }
 }
+BCS::Contacts::Contacts(const std::string& newRCSID) : RCSID(newRCSID) {
+  CreateDirectory(RCSID);
+}
 bool BCS::Contacts::newContact(const std::string& Name,
                                const std::string& Email) {
   try {
