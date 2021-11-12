@@ -1,11 +1,12 @@
 <!DOCTYPE html>
  <html lang="en-us">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
    <title>Sign In</title>
    <link rel="stylesheet" type= "text/css" href="sign.css">
    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@600&display=swap" rel="stylesheet">
+   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+   <meta http-equiv="Content-type" content="application/json"/>
   </head>
   <body>
     <div class="animation-area">
@@ -23,15 +24,43 @@
         <form method="post" action="sign_in.html" method="post">
           <!-- /*<h1>Welcome<br>to<br>EasyContact!</h1> -->
           <div class="form-group">
-            <pre><input class="boxx1" type = "text" id = "username" name = "username" placeholder="  Enter RCS ID" required><a class="rpifont">    @rpi.edu</a></pre>
+            <input class="boxx1" type = "text" id = "RCSID" placeholder="  Enter RCS ID" required><a class="rpifont">    @rpi.edu</a>
           </div>
           <div class="form-group">
-            <input class="boxx" type = "password" id = "password" name = "password" placeholder="  Enter Password" required>
+            <input class="boxx" type = "password" id = "password" placeholder="  Enter Password" required>
           </div>
-          <a href=""><button>Sign In</button></a>
-        </form>    
+          <button id="signin_butt">Sign In</button>
+        </form>
         <pre><a href = "https://itssc.rpi.edu/hc/en-us/articles/360001113412-Changing-Your-RCS-Account-Password-or-Obtaining-a-New-Password-">                Forget Password?</a></pre>
       </div>
-      
+
   </body>
   </html>
+
+  <script>
+    document.getElementById("signin_butt").addEventListener('click', function() {
+      const RCSID = document.getElementById("RCSID").value;
+      const password = document.getElementById("password").value;
+      const req = {"RCSID": RCSID, "Password": password};
+      this.innerHTML = 'sending...';
+      fetch("http://localhost:3126/Login", {
+        method: "POST",
+        body: JSON.stringify(req),
+        headers: {'Content-Type': 'application/json'},
+      }).then(
+        response => {
+          if (response.status == 200) {
+            document.getElementById("signin").innerHTML = "<img src = 'ajax-loader.gif' width = '15'/> &nbsp; Login";
+            window.location.href = "test.html";
+          } else if (response.status == 511) {
+            document.getElementById("return_info").innerHTML = "<li>The RCSID or the password is incorrect.</li>";
+          } else if (response.status == 500) {
+            document.getElementById("return_info").innerHTML = "<li>Internal Server Error.</li>";
+          }
+        }
+      ).catch(
+        error => {
+          document.getElementById("return_info").innerHTML = "<li>" + error + "</li>";
+      });
+    }, false);
+  </script>
