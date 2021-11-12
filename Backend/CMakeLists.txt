@@ -14,9 +14,11 @@ SET(INCLUDE_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/include")
 SET(LIBHVR lib/libhv)
 SET(SQLITE lib/SQLite)
 SET(MAILIO lib/mailio)
-FILE(GLOB SOURCE
-  "${PROJECT_SOURCE_DIR}/include/EasyContact/*.hpp"
+file(GLOB SOURCE
   "${PROJECT_SOURCE_DIR}/src/*.cpp"
+)
+file(GLOB HEADERS
+  "${PROJECT_SOURCE_DIR}/include/EasyContact/*.hpp"
 )
 
 # Libhv
@@ -41,7 +43,11 @@ include_directories(${PROJECT_SOURCE_DIR}/${SQLITE}/include)
 include_directories(${PROJECT_SOURCE_DIR}/${MAILIO}/include)
 
 # Compile
-add_executable(EasyContact ${SOURCE})
+add_executable(EasyContact ${SOURCE} ${HEADERS})
+target_include_directories(EasyContact PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/EasyContact>
+  $<INSTALL_INTERFACE:include/EasyContact>
+)
 SET(THREADS_PREFER_PTHREAD_FLAG on)
 find_package(Threads REQUIRED)
 target_link_libraries(EasyContact
