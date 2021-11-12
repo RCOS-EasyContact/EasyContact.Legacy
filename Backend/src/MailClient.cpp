@@ -6,7 +6,7 @@
  */
 #ifndef BACKEND_MAILCLIENT_MAILCLIENT_CPP_
 #define BACKEND_MAILCLIENT_MAILCLIENT_CPP_
-#include "MailClient.hpp"
+#include "EasyContact/MailClient.hpp"
 using mailio::codec;
 using mailio::dialog_error;
 using mailio::imap;

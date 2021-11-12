@@ -10,10 +10,10 @@ SET(CMAKE_CXX_FLAGS_RELEASE "-w -O3 -DNDEBUG")
 PROJECT(EasyContact)
 
 # Library
-SET(LIBHVR Backend/API/libhv)
-SET(SQLITE Backend/SQLContacts/SQLite)
-SET(MAILIO Backend/MailClient/mailio)
-file(GLOB SOURCE Backend/**/*.cpp)
+SET(LIBHVR lib/libhv)
+SET(SQLITE lib/SQLite)
+SET(MAILIO lib/mailio)
+file(GLOB SOURCE src/*.cpp)
 
 # Libhv
 SET(BUILD_STATIC OFF CACHE BOOL "" FORCE)
