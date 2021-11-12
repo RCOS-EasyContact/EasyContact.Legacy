@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { conversationChanged } from '../../actions';
+import { conversationChanged, newMessageAdded, conversationDeleted } from '../../store/actions';
 import NewConversation from '../../components/conversation/new-conversation/New-Conversation';
 import ChatTitle from '../../components/chat-title/Chat-Title'
 import ConversationList from '../../components/conversation/conversation-list/Conversation-List'
@@ -15,7 +15,9 @@ const ChatShell = (
     {
         conversations,
         selectedConversation,
-        conversationChanged
+        conversationChanged,
+        onMessageSubmitted,
+        onDeleteConversation
     }) => {
     return (
         <div id="chat-container">
@@ -25,9 +27,11 @@ const ChatShell = (
                 conversations={conversations}
                 selectedConversationId={selectedConversation.id} />
             <NewConversation />
-            <ChatTitle selectedConversation={selectedConversation} />
+            <ChatTitle
+                selectedConversation={selectedConversation}
+                onDeleteConversation={onDeleteConversation} />
             <MessageList messages={selectedConversation.messages} />
-            <ChatForm />
+            <ChatForm onMessageSubmitted={onMessageSubmitted} />
         </div>
     );
 }
@@ -40,7 +44,9 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    conversationChanged: conversationId => dispatch(conversationChanged(conversationId))
+    conversationChanged: conversationId => dispatch(conversationChanged(conversationId)),
+    onMessageSubmitted: messageText => { console.log(messageText); },
+    onDeleteConversation: () => { dispatch(conversationDeleted()); }
 });
 
 export default connect(
