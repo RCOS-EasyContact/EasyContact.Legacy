@@ -21,7 +21,6 @@
  * BCS : Backend Contact System
  */
 namespace BCS {
-const char *UserDataLocation = "../data/";
 void CreateDirectory(const std::string &DirName);
 class Contacts {
  private:
