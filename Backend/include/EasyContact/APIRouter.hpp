@@ -8,7 +8,7 @@
 #define BACKEND_INCLUDE_EASYCONTACT_APIROUTER_HPP_
 // Resolve Conflict with Libboost
 #undef defer
-// Libhv Library
+// Libhv Library (C Library)
 #include <hv/HttpService.h>
 // C++ Standard Library
 #include <string>
