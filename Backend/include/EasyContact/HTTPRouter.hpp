@@ -7,7 +7,9 @@
 #ifndef BACKEND_INCLUDE_EASYCONTACT_HTTPROUTER_HPP_
 #define BACKEND_INCLUDE_EASYCONTACT_HTTPROUTER_HPP_
 // Resolve Conflict with LibBoost
+#ifdef defer
 #undef defer
+#endif
 // Libhv Library (C Library)
 #include <hv/HttpService.h>
 // C++ Standard Library
