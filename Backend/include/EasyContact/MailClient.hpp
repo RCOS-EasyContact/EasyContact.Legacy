@@ -1,6 +1,6 @@
 /**
  * RCOS-EasyContact
- * EasyContact/Backend/MailClient
+ * EasyContact/Backend/include/EasyContact
  * MailClient.hpp
  * Copyright [2021] <RCOS-EasyContact>
  */

@@ -1,12 +1,12 @@
 /**
  * RCOS-EasyContact
- * EasyContact/Backend/API
+ * EasyContact/Backend/include/EasyContact
  * APIRouter.hpp
  * Copyright [2021] <RCOS-EasyContact>
  */
 #ifndef BACKEND_INCLUDE_EASYCONTACT_APIROUTER_HPP_
 #define BACKEND_INCLUDE_EASYCONTACT_APIROUTER_HPP_
-// Resolve Conflict with Libboost
+// Resolve Conflict with LibBoost
 #undef defer
 // Libhv Library (C Library)
 #include <hv/HttpService.h>

@@ -1,6 +1,6 @@
 /**
  * RCOS-EasyContact
- * EasyContact/Backend/Executable
+ * EasyContact/Backend/include/EasyContact
  * SingleUser.hpp
  * Copyright [2021] <RCOS-EasyContact>
  */

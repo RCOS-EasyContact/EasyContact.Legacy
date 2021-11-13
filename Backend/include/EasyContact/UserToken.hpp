@@ -1,6 +1,6 @@
 /**
  * RCOS-EasyContact
- * EasyContact/Backend/API
+ * EasyContact/Backend/include/EasyContact
  * UserToken.hpp
  * Copyright [2021] <RCOS-EasyContact>
  */

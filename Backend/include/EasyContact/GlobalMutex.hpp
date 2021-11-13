@@ -1,6 +1,6 @@
 /**
  * RCOS-EasyContact
- * EasyContact/Backend/Executable
+ * EasyContact/Backend/include/EasyContact
  * GlobalMutex.hpp
  * Copyright [2021] <RCOS-EasyContact>
  */

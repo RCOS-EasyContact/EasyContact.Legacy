@@ -1,6 +1,6 @@
 /**
  * RCOS-EasyContact
- * EasyContact/Backend/Executable
+ * EasyContact/Backend/include/EasyContact
  * SysLogs.hpp
  * Copyright [2021] <RCOS-EasyContact>
  */
