@@ -20,7 +20,7 @@ class GlobalMutex {
   mutable std::mutex Mutex;
 
  public:
-  explicit GlobalMutex(T *pValue);
+  explicit GlobalMutex(T *pValue) : pDATA(pValue) {}
   ~GlobalMutex();
   T &operator*() { return *pDATA; }
   const T &operator*() const { return *pDATA; }
