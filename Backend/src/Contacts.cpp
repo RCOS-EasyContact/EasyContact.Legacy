@@ -13,8 +13,8 @@ void BCS::CreateDirectory(const std::string& DirName) {
     std::filesystem::create_directory(std::string(UserDataLocation) + DirName);
     copy_file(std::filesystem::directory_entry(std::string(UserDataLocation) +
                                                ".DEFAULT/Contacts.db3"),
-              std::filesystem::directory_entry(std::string(UserDataLocation) + DirName +
-                                               "/Contacts.db3"));
+              std::filesystem::directory_entry(std::string(UserDataLocation) +
+                                               DirName + "/Contacts.db3"));
   }
 }
 BCS::Contacts::Contacts(const std::string& newRCSID) : RCSID(newRCSID) {
