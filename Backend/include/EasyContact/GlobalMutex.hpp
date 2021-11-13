@@ -22,11 +22,11 @@ class GlobalMutex {
  public:
   explicit GlobalMutex(T *pValue) : pDATA(pValue) {}
   ~GlobalMutex() {
-  Mutex.lock();
-  delete pDATA;
-  pDATA = nullptr;
-  Mutex.unlock();
-}
+    Mutex.lock();
+    delete pDATA;
+    pDATA = nullptr;
+    Mutex.unlock();
+  }
   T &operator*() { return *pDATA; }
   const T &operator*() const { return *pDATA; }
   T *operator->() { return pDATA; }
