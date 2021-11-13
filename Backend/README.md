@@ -1,4 +1,4 @@
-# EasyContact/Backend
+# Backend Server
 EasyContact Backend Information Server
 - Implemented With `C++17`
 - [Representation](#representation)
