@@ -1,11 +1,11 @@
 /**
  * RCOS-EasyContact
  * EasyContact/Backend/include/EasyContact
- * APIRouter.hpp
+ * HTTPRouter.hpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_INCLUDE_EASYCONTACT_APIROUTER_HPP_
-#define BACKEND_INCLUDE_EASYCONTACT_APIROUTER_HPP_
+#ifndef BACKEND_INCLUDE_EASYCONTACT_HTTPROUTER_HPP_
+#define BACKEND_INCLUDE_EASYCONTACT_HTTPROUTER_HPP_
 // Resolve Conflict with LibBoost
 #undef defer
 // Libhv Library (C Library)
@@ -24,7 +24,7 @@
 // Global Representation
 extern std::unordered_map<std::string, SingleUser> g_ActiveUsers;
 extern DispatchQueue g_DispatchQueue;
-class APIRouter {
+class HTTPRouter {
  public:
   static int pre(HttpRequest *req, HttpResponse *resp) {
     resp->headers["Access-Control-Allow-Origin"] = "*";
@@ -317,4 +317,4 @@ class APIRouter {
         });
   }
 };
-#endif  // BACKEND_INCLUDE_EASYCONTACT_APIROUTER_HPP_
+#endif  // BACKEND_INCLUDE_EASYCONTACT_HTTPROUTER_HPP_
