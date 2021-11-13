@@ -8,10 +8,10 @@
 #define BACKEND_SRC_GLOBALMUTEX_CPP_
 #include <EasyContact/GlobalMutex.hpp>
 GlobalMutex::GlobalMutex(T *pValue) : pDATA(pValue) {}
-GlobalMutex::~GlobalMutex(){
-      Mutex.lock();
-    delete pDATA;
-    pDATA = nullptr;
-    Mutex.unlock();
+GlobalMutex::~GlobalMutex() {
+  Mutex.lock();
+  delete pDATA;
+  pDATA = nullptr;
+  Mutex.unlock();
 }
-#endif // BACKEND_SRC_GLOBALMUTEX_CPP_
+#endif  // BACKEND_SRC_GLOBALMUTEX_CPP_
