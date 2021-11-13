@@ -2,7 +2,6 @@
 Backend/CMakeFiles/*
 Backend/lib/*
 CMakeCache.txt
-EasyContact
 Makefile
 *.cmake
 *.pc
