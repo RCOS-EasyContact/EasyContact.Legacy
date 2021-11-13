@@ -22,7 +22,7 @@
 #include <unordered_map>
 #include <utility>
 // EasyContact Header Files
-#include <EasyContact/APIRouter.hpp>
+#include <EasyContact/HTTPRouter.hpp>
 #include <EasyContact/DispatchQueue.hpp>
 #include <EasyContact/GlobalMutex.hpp>
 #include <EasyContact/SingleUser.hpp>
@@ -34,11 +34,11 @@ std::unordered_map<std::string, SingleUser> g_ActiveUsers;
 DispatchQueue g_DispatchQueue(2);
 http_server_t g_Http_Server;
 HttpService g_Http_Service;
-void Reg_APIServer() {
+void Reg_HTTPServer() {
   try {
     g_Http_Server.port = LISTEN_PORT;
     g_Http_Service.base_url = "";
-    APIRouter::register_router(&g_Http_Service);
+    HTTPRouter::register_router(&g_Http_Service);
     g_Http_Server.service = &g_Http_Service;
     http_server_run(&g_Http_Server, 0);
   } catch (std::exception& Err) {
@@ -49,8 +49,8 @@ void Reg_APIServer() {
 int main(void) {
   // Generate Random Seed
   srand(time(0));
-  // Start API Server
-  Reg_APIServer();
+  // Start HTTP Server
+  Reg_HTTPServer();
   // Wait
   while (true) {
     pause();
