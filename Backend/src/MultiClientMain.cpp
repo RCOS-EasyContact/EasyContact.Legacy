@@ -6,6 +6,9 @@
  */
 #ifndef BACKEND_EXECUTABLE_MULTICLIENTMAIN_CPP_
 #define BACKEND_EXECUTABLE_MULTICLIENTMAIN_CPP_
+// Libhv Library
+#include <hv/HttpServer.h>
+#include <hv/hv.h>
 // C Standard Library
 #include <signal.h>
 #include <stdlib.h>
@@ -18,9 +21,6 @@
 #include <queue>
 #include <unordered_map>
 #include <utility>
-// Libhv Library
-#include <hv/HttpServer.h>
-#include <hv/hv.h>
 // EasyContact Header Files
 #include <EasyContact/APIRouter.hpp>
 #include <EasyContact/DispatchQueue.hpp>

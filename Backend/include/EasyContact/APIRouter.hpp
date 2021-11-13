@@ -8,14 +8,14 @@
 #define BACKEND_INCLUDE_EASYCONTACT_APIROUTER_HPP_
 // Resolve Conflict with Libboost
 #undef defer
+// Libhv Library
+#include <hv/HttpService.h>
 // C++ Standard Library
 #include <string>
 // Standard Template Library
 #include <unordered_map>
 #include <utility>
 #include <vector>
-// Libhv Library
-#include <hv/HttpService.h>
 // EasyContact Header Files
 #include <EasyContact/DispatchQueue.hpp>
 #include <EasyContact/SingleUser.hpp>
