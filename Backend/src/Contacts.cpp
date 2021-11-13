@@ -1,11 +1,11 @@
 /**
  * RCOS-EasyContact
- * EasyContact/Backend/SQLContacts
+ * EasyContact/Backend/src
  * Contacts.cpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_SQLCONTACTS_CONTACTS_CPP_
-#define BACKEND_SQLCONTACTS_CONTACTS_CPP_
+#ifndef BACKEND_SRC_CONTACTS_CPP_
+#define BACKEND_SRC_CONTACTS_CPP_
 #include <EasyContact/Contacts.hpp>
 void BCS::CreateDirectory(const std::string& DirName) {
   if (!std::filesystem::directory_entry("UserData/" + DirName).is_directory()) {
@@ -168,4 +168,4 @@ bool BCS::Contacts::removeTagFor(const std::string& TagName,
   }
   return true;
 }
-#endif  // BACKEND_SQLCONTACTS_CONTACTS_CPP_
+#endif  // BACKEND_SRC_CONTACTS_CPP_

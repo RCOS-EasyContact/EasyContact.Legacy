@@ -20,13 +20,8 @@ class GlobalMutex {
   mutable std::mutex Mutex;
 
  public:
-  explicit GlobalMutex(T *pValue) : pDATA(pValue) {}
-  void Free() {
-    Mutex.lock();
-    delete pDATA;
-    pDATA = nullptr;
-    Mutex.unlock();
-  }
+  explicit GlobalMutex(T *pValue);
+  ~GlobalMutex();
   T &operator*() { return *pDATA; }
   const T &operator*() const { return *pDATA; }
   T *operator->() { return pDATA; }

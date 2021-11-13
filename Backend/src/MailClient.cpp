@@ -1,11 +1,11 @@
 /**
  * RCOS-EasyContact
- * EasyContact/Backend/MailClient
+ * EasyContact/Backend/src
  * MailClient.cpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_MAILCLIENT_MAILCLIENT_CPP_
-#define BACKEND_MAILCLIENT_MAILCLIENT_CPP_
+#ifndef BACKEND_SRC_MAILCLIENT_CPP_
+#define BACKEND_SRC_MAILCLIENT_CPP_
 #include <EasyContact/MailClient.hpp>
 using mailio::codec;
 using mailio::dialog_error;
@@ -121,4 +121,4 @@ int BMC::MailClient::sent_message(const std::string& name_to,
   }
   return true;
 }
-#endif  // BACKEND_MAILCLIENT_MAILCLIENT_CPP_
+#endif  // BACKEND_SRC_MAILCLIENT_CPP_

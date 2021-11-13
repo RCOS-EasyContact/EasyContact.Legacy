@@ -1,11 +1,11 @@
 /**
  * RCOS-EasyContact
- * EasyContact/Backend/Executable
+ * EasyContact/Backend/src
  * MultiClientMain.cpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_EXECUTABLE_MULTICLIENTMAIN_CPP_
-#define BACKEND_EXECUTABLE_MULTICLIENTMAIN_CPP_
+#ifndef BACKEND_SRC_MULTICLIENTMAIN_CPP_
+#define BACKEND_SRC_MULTICLIENTMAIN_CPP_
 // C Standard Library
 #include <signal.h>
 #include <stdlib.h>
@@ -56,4 +56,4 @@ int main(void) {
     pause();
   }
 }
-#endif  // BACKEND_EXECUTABLE_MULTICLIENTMAIN_CPP_
+#endif  // BACKEND_SRC_MULTICLIENTMAIN_CPP_
