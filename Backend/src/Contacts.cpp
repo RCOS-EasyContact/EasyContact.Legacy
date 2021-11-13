@@ -8,12 +8,12 @@
 #define BACKEND_SRC_CONTACTS_CPP_
 #include <EasyContact/Contacts.hpp>
 void BCS::CreateDirectory(const std::string& DirName) {
-  if (!std::filesystem::directory_entry(UserDataLocation + DirName)
+  if (!std::filesystem::directory_entry(std::string(UserDataLocation) + DirName)
            .is_directory()) {
-    std::filesystem::create_directory(UserDataLocation + DirName);
-    copy_file(std::filesystem::directory_entry(UserDataLocation +
+    std::filesystem::create_directory(std::string(UserDataLocation) + DirName);
+    copy_file(std::filesystem::directory_entry(std::string(UserDataLocation) +
                                                ".DEFAULT/Contacts.db3"),
-              std::filesystem::directory_entry(UserDataLocation + DirName +
+              std::filesystem::directory_entry(std::string(UserDataLocation) + DirName +
                                                "/Contacts.db3"));
   }
 }
