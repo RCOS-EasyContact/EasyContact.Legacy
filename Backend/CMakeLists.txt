@@ -1,5 +1,5 @@
 # CMake Flags
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.13)
 PROJECT(EasyContact VERSION 0.43)
 CMAKE_POLICY(SET CMP0079 NEW)
 SET(CMAKE_CXX_STANDARD 17)
@@ -42,10 +42,10 @@ add_subdirectory(${MAILIO})
 include_directories(${PROJECT_SOURCE_DIR}/${LIBHVR}/include)
 include_directories(${PROJECT_SOURCE_DIR}/${SQLITE}/include)
 include_directories(${PROJECT_SOURCE_DIR}/${MAILIO}/include)
+include_directories(${PROJECT_SOURCE_DIR}/include)
 
 # Compile
 add_executable(EasyContact ${SOURCE} ${HEADERS})
-include_directories(include)
 SET(THREADS_PREFER_PTHREAD_FLAG on)
 find_package(Threads REQUIRED)
 target_link_libraries(EasyContact
