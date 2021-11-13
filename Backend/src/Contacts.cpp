@@ -9,12 +9,12 @@
 #include <EasyContact/Contacts.hpp>
 const static char* UserDataLocation = "data/";
 void BCS::CreateDirectory(const std::string& DirName) {
-  if (!std::filesystem::directory_entry(""+UserDataLocation + DirName)
+  if (!std::filesystem::directory_entry("" + UserDataLocation + DirName)
            .is_directory()) {
-    std::filesystem::create_directory(""+UserDataLocation + DirName);
-    copy_file(std::filesystem::directory_entry(""+UserDataLocation +
+    std::filesystem::create_directory("" + UserDataLocation + DirName);
+    copy_file(std::filesystem::directory_entry("" + UserDataLocation +
                                                ".DEFAULT/Contacts.db3"),
-              std::filesystem::directory_entry(""+UserDataLocation + DirName +
+              std::filesystem::directory_entry("" + UserDataLocation + DirName +
                                                "/Contacts.db3"));
   }
 }
