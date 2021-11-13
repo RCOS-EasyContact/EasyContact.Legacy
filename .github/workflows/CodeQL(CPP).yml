@@ -35,7 +35,7 @@ jobs:
 
     - name: Build C++
       run: git submodule update --init --recursive &&
-           cd Backend
+           cd Backend &&
            cmake -DCMAKE_BUILD_TYPE=Debug . &&
            cmake --build . -j 2
 
