@@ -9,8 +9,8 @@
 // C++ Standard Library
 #include <string>
 // EasyContact Header Files
-#include <EasyContact/MailClient.hpp>
 #include <EasyContact/Contacts.hpp>
+#include <EasyContact/MailClient.hpp>
 class SingleUser {
  public:
   BMC::MailClient MailClient;
