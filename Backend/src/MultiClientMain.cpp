@@ -22,9 +22,9 @@
 #include <unordered_map>
 #include <utility>
 // EasyContact Header Files
-#include <EasyContact/HTTPRouter.hpp>
 #include <EasyContact/DispatchQueue.hpp>
 #include <EasyContact/GlobalMutex.hpp>
+#include <EasyContact/HTTPRouter.hpp>
 #include <EasyContact/SingleUser.hpp>
 #include <EasyContact/SysLogs.hpp>
 // Project Defines
