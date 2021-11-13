@@ -6,10 +6,6 @@
  */
 #ifndef BACKEND_SRC_MULTICLIENTMAIN_CPP_
 #define BACKEND_SRC_MULTICLIENTMAIN_CPP_
-// Resolve Conflict with LibBoost
-#ifdef defer
-#undef defer
-#endif
 // C Standard Library
 #include <signal.h>
 #include <stdlib.h>
