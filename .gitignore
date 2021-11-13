@@ -1,11 +1,10 @@
 ### CMake ###
-Backend/CMakeFiles/*
-Backend/lib/*
-Backend/bin/*
+bin/*
 CMakeCache.txt
+CMakeFiles
 Makefile
 *.cmake
-*.pc
+mailio.pc
 
 ### Deployment ##
 RCOS-EasyContact
