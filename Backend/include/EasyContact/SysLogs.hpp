@@ -4,8 +4,8 @@
  * SysLogs.hpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_EXECUTABLE_SYSLOGS_HPP_
-#define BACKEND_EXECUTABLE_SYSLOGS_HPP_
+#ifndef BACKEND_INCLUDE_EASYCONTACT_SYSLOGS_HPP_
+#define BACKEND_INCLUDE_EASYCONTACT_SYSLOGS_HPP_
 // C++ Standard Library
 #include <chrono>
 #include <ctime>
@@ -34,4 +34,4 @@ inline static void PrintRequest(Args &&...A) {
             << std::endl;
 }
 }  // namespace SYSLOG
-#endif  // BACKEND_EXECUTABLE_SYSLOGS_HPP_
+#endif  // BACKEND_INCLUDE_EASYCONTACT_SYSLOGS_HPP_

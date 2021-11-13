@@ -4,8 +4,8 @@
  * GlobalMutex.hpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_EXECUTABLE_GLOBALMUTEX_HPP_
-#define BACKEND_EXECUTABLE_GLOBALMUTEX_HPP_
+#ifndef BACKEND_INCLUDE_EASYCONTACT_GLOBALMUTEX_HPP_
+#define BACKEND_INCLUDE_EASYCONTACT_GLOBALMUTEX_HPP_
 // C++ Standard Library
 #include <mutex>
 /**
@@ -34,4 +34,4 @@ class GlobalMutex {
   void Lock() const { Mutex.lock(); }
   void Unlock() const { Mutex.unlock(); }
 };
-#endif  // BACKEND_EXECUTABLE_GLOBALMUTEX_HPP_
+#endif  // BACKEND_INCLUDE_EASYCONTACT_GLOBALMUTEX_HPP_

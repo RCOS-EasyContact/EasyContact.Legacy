@@ -6,8 +6,8 @@
  * Reference:
  * https://embeddedartistry.com/blog/2017/02/08/implementing-an-asynchronous-dispatch-queue/
  */
-#ifndef BACKEND_EXECUTABLE_DISPATCHQUEUE_HPP_
-#define BACKEND_EXECUTABLE_DISPATCHQUEUE_HPP_
+#ifndef BACKEND_INCLUDE_EASYCONTACT_DISPATCHQUEUE_HPP_
+#define BACKEND_INCLUDE_EASYCONTACT_DISPATCHQUEUE_HPP_
 // C++ Standard Library
 #include <condition_variable>
 #include <functional>
@@ -42,4 +42,4 @@ class DispatchQueue {
   DispatchQueue(DispatchQueue&& RHS) = delete;
   DispatchQueue& operator=(DispatchQueue&& RHS) = delete;
 };
-#endif  // BACKEND_EXECUTABLE_DISPATCHQUEUE_HPP_
+#endif  // BACKEND_INCLUDE_EASYCONTACT_DISPATCHQUEUE_HPP_

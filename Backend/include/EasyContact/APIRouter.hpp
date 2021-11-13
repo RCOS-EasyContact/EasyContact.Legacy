@@ -4,8 +4,8 @@
  * APIRouter.hpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_API_APIROUTER_HPP_
-#define BACKEND_API_APIROUTER_HPP_
+#ifndef BACKEND_INCLUDE_EASYCONTACT_APIROUTER_HPP_
+#define BACKEND_INCLUDE_EASYCONTACT_APIROUTER_HPP_
 // Resolve Conflict with Libboost
 #undef defer
 // C++ Standard Library
@@ -317,4 +317,4 @@ class APIRouter {
         });
   }
 };
-#endif  // BACKEND_API_APIROUTER_HPP_
+#endif  // BACKEND_INCLUDE_EASYCONTACT_APIROUTER_HPP_

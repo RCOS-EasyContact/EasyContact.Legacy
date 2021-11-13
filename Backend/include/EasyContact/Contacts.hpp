@@ -4,8 +4,8 @@
  * Contacts.hpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_SQLCONTACTS_CONTACTS_HPP_
-#define BACKEND_SQLCONTACTS_CONTACTS_HPP_
+#ifndef BACKEND_INCLUDE_EASYCONTACT_CONTACTS_HPP_
+#define BACKEND_INCLUDE_EASYCONTACT_CONTACTS_HPP_
 // SQL Lite Library
 #include <SQLiteCpp/SQLiteCpp.h>
 #include <SQLiteCpp/VariadicBind.h>
@@ -40,4 +40,4 @@ class Contacts {
   bool removeTagFor(const std::string &TagName, const std::string &ContactName);
 };
 }  // namespace BCS
-#endif  // BACKEND_SQLCONTACTS_CONTACTS_HPP_
+#endif  // BACKEND_INCLUDE_EASYCONTACT_CONTACTS_HPP_
