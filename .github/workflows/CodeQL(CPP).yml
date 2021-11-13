@@ -35,8 +35,9 @@ jobs:
 
     - name: Build C++
       run: git submodule update --init --recursive &&
-           cmake -DCMAKE_BUILD_TYPE=Debug Backend &&
-           cmake --build Backend -j 2
+           cd Backend
+           cmake -DCMAKE_BUILD_TYPE=Debug . &&
+           cmake --build . -j 2
 
     - name: CodeQL Analysis
       uses: github/codeql-action/analyze@v1
