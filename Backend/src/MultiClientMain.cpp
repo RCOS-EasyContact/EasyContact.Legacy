@@ -22,11 +22,11 @@
 #include <hv/HttpServer.h>
 #include <hv/hv.h>
 // EasyContact Header Files
-#include "EasyContact/APIRouter.hpp"
-#include "EasyContact/DispatchQueue.hpp"
-#include "EasyContact/GlobalMutex.hpp"
-#include "EasyContact/SingleUser.hpp"
-#include "EasyContact/SysLogs.hpp"
+#include <EasyContact/APIRouter.hpp>
+#include <EasyContact/DispatchQueue.hpp>
+#include <EasyContact/GlobalMutex.hpp>
+#include <EasyContact/SingleUser.hpp>
+#include <EasyContact/SysLogs.hpp>
 // Project Defines
 #define LISTEN_PORT 3126
 // Global Representation

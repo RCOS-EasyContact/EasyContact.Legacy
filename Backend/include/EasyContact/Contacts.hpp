@@ -15,7 +15,7 @@
 // Standard Template Library
 #include <vector>
 // EasyContact Header Files
-#include "EasyContact/SysLogs.hpp"
+#include <EasyContact/SysLogs.hpp>
 /**
  * EasyContact Custom Namespace
  * BCS : Backend Contact System

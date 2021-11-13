@@ -16,7 +16,7 @@
 #include <mailio/message.hpp>
 #include <mailio/smtp.hpp>
 // EasyContact Header Files
-#include "EasyContact/SysLogs.hpp"
+#include <EasyContact/SysLogs.hpp>
 namespace BMC {
 bool AuthenticateLogin(const std::string& RCSID, const std::string& Password);
 class MailClient {

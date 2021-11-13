@@ -20,7 +20,7 @@
 #include <utility>
 #include <vector>
 // EasyContact Header Files
-#include "EasyContact/SingleUser.hpp"
+#include <EasyContact/SingleUser.hpp>
 class DispatchQueue {
   typedef std::function<void(void)> Functor;
 
