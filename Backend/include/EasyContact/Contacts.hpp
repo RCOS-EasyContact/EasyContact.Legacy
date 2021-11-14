@@ -1,11 +1,11 @@
 /**
  * RCOS-EasyContact
- * EasyContact/Backend/SQLContacts
+ * EasyContact/Backend/include/EasyContact
  * Contacts.hpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_SQLCONTACTS_CONTACTS_HPP_
-#define BACKEND_SQLCONTACTS_CONTACTS_HPP_
+#ifndef BACKEND_INCLUDE_EASYCONTACT_CONTACTS_HPP_
+#define BACKEND_INCLUDE_EASYCONTACT_CONTACTS_HPP_
 // SQL Lite Library
 #include <SQLiteCpp/SQLiteCpp.h>
 #include <SQLiteCpp/VariadicBind.h>
@@ -15,7 +15,7 @@
 // Standard Template Library
 #include <vector>
 // EasyContact Header Files
-#include "../Executable/SysLogs.hpp"
+#include <EasyContact/SysLogs.hpp>
 /**
  * EasyContact Custom Namespace
  * BCS : Backend Contact System
@@ -40,4 +40,4 @@ class Contacts {
   bool removeTagFor(const std::string &TagName, const std::string &ContactName);
 };
 }  // namespace BCS
-#endif  // BACKEND_SQLCONTACTS_CONTACTS_HPP_
+#endif  // BACKEND_INCLUDE_EASYCONTACT_CONTACTS_HPP_

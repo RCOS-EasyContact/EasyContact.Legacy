@@ -1,4 +1,4 @@
-# EasyContact/Backend/API
+# HTTP Server
 ## Testing With CURL
 ### GET
 ```

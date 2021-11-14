@@ -1,19 +1,21 @@
 /**
  * RCOS-EasyContact
- * EasyContact/Backend/SQLContacts
+ * EasyContact/Backend/src
  * Contacts.cpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_SQLCONTACTS_CONTACTS_CPP_
-#define BACKEND_SQLCONTACTS_CONTACTS_CPP_
-#include "Contacts.hpp"
+#ifndef BACKEND_SRC_CONTACTS_CPP_
+#define BACKEND_SRC_CONTACTS_CPP_
+#include <EasyContact/Contacts.hpp>
+static const char* const UserDataLocation = "data/";
 void BCS::CreateDirectory(const std::string& DirName) {
-  if (!std::filesystem::directory_entry("UserData/" + DirName).is_directory()) {
-    std::filesystem::create_directory("UserData/" + DirName);
-    copy_file(
-        std::filesystem::directory_entry("UserData/.DEFAULT/Contacts.db3"),
-        std::filesystem::directory_entry("UserData/" + DirName +
-                                         "/Contacts.db3"));
+  if (!std::filesystem::directory_entry(std::string(UserDataLocation) + DirName)
+           .is_directory()) {
+    std::filesystem::create_directory(std::string(UserDataLocation) + DirName);
+    copy_file(std::filesystem::directory_entry(std::string(UserDataLocation) +
+                                               ".DEFAULT/Contacts.db3"),
+              std::filesystem::directory_entry(std::string(UserDataLocation) +
+                                               DirName + "/Contacts.db3"));
   }
 }
 BCS::Contacts::Contacts(const std::string& newRCSID) : RCSID(newRCSID) {
@@ -22,8 +24,9 @@ BCS::Contacts::Contacts(const std::string& newRCSID) : RCSID(newRCSID) {
 bool BCS::Contacts::newContact(const std::string& Name,
                                const std::string& Email) {
   try {
-    SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3",
-                         SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
+    SQLite::Database DB3(
+        std::string(UserDataLocation) + RCSID + "/Contacts.db3",
+        SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
     SQLite::Statement Query(DB3, "INSERT INTO emailadres SELECT ?,?");
     Query.bind(1, Name);
     Query.bind(2, Email);
@@ -36,8 +39,9 @@ bool BCS::Contacts::newContact(const std::string& Name,
 }
 bool BCS::Contacts::newTag(const std::string& TagName) {
   try {
-    SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3",
-                         SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
+    SQLite::Database DB3(
+        std::string(UserDataLocation) + RCSID + "/Contacts.db3",
+        SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
     {
       SQLite::Statement Query(DB3, "INSERT INTO tags SELECT ?");
       Query.bind(1, TagName);
@@ -57,8 +61,9 @@ bool BCS::Contacts::newTag(const std::string& TagName) {
 }
 bool BCS::Contacts::removeContact(const std::string& Name) {
   try {
-    SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3",
-                         SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
+    SQLite::Database DB3(
+        std::string(UserDataLocation) + RCSID + "/Contacts.db3",
+        SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
     SQLite::Statement Query(DB3, "DELETE FROM emailadres WHERE RCSID=?");
     Query.bind(1, Name);
     Query.exec();
@@ -70,8 +75,9 @@ bool BCS::Contacts::removeContact(const std::string& Name) {
 }
 bool BCS::Contacts::removeTag(const std::string& TagName) {
   try {
-    SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3",
-                         SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
+    SQLite::Database DB3(
+        std::string(UserDataLocation) + RCSID + "/Contacts.db3",
+        SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
     SQLite::Statement Query(DB3, "DROP TABLE " + TagName);
     Query.exec();
   } catch (const std::exception& Err) {
@@ -84,7 +90,8 @@ std::string BCS::Contacts::getEmailAddress(const std::string& Name) const {
   std::string Result;
   try {
     std::vector<std::string> Buffer;
-    SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3");
+    SQLite::Database DB3(std::string(UserDataLocation) + RCSID +
+                         "/Contacts.db3");
     SQLite::Statement Query(DB3, "SELECT Email FROM emailadres WHERE RCSID=?");
     Query.bind(1, Name);
     while (Query.executeStep()) {
@@ -99,7 +106,8 @@ std::string BCS::Contacts::getEmailAddress(const std::string& Name) const {
 std::vector<std::string> BCS::Contacts::getAllNames() const {
   std::vector<std::string> Result;
   try {
-    SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3");
+    SQLite::Database DB3(std::string(UserDataLocation) + RCSID +
+                         "/Contacts.db3");
     SQLite::Statement Query(DB3, "SELECT RCSID FROM emailadres");
     while (Query.executeStep()) {
       Result.push_back(Query.getColumn(0));
@@ -112,7 +120,8 @@ std::vector<std::string> BCS::Contacts::getAllNames() const {
 std::vector<std::string> BCS::Contacts::getAllTags() const {
   std::vector<std::string> Result;
   try {
-    SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3");
+    SQLite::Database DB3(std::string(UserDataLocation) + RCSID +
+                         "/Contacts.db3");
     SQLite::Statement Query(DB3, "SELECT * FROM tags");
     while (Query.executeStep()) {
       Result.push_back(Query.getColumn(0));
@@ -126,7 +135,8 @@ std::vector<std::string> BCS::Contacts::getTagContains(
     const std::string& TagName) const {
   std::vector<std::string> Result;
   try {
-    SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3");
+    SQLite::Database DB3(std::string(UserDataLocation) + RCSID +
+                         "/Contacts.db3");
     const std::string TableTagName = "tag_" + TagName;
     SQLite::Statement Query(DB3, "SELECT * FROM " + TableTagName);
     while (Query.executeStep()) {
@@ -140,8 +150,9 @@ std::vector<std::string> BCS::Contacts::getTagContains(
 bool BCS::Contacts::assignTagTo(const std::string& TagName,
                                 const std::string& ContactName) {
   try {
-    SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3",
-                         SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
+    SQLite::Database DB3(
+        std::string(UserDataLocation) + RCSID + "/Contacts.db3",
+        SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
     const std::string TableTagName = "tag_" + TagName;
     SQLite::Statement Query(DB3, "INSERT INTO " + TableTagName + " SELECT ?");
     Query.bind(1, ContactName);
@@ -155,8 +166,9 @@ bool BCS::Contacts::assignTagTo(const std::string& TagName,
 bool BCS::Contacts::removeTagFor(const std::string& TagName,
                                  const std::string& ContactName) {
   try {
-    SQLite::Database DB3("UserData/" + RCSID + "/Contacts.db3",
-                         SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
+    SQLite::Database DB3(
+        std::string(UserDataLocation) + RCSID + "/Contacts.db3",
+        SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
     const std::string TableTagName = "tag_" + TagName;
     SQLite::Statement Query(DB3,
                             "DELETE FROM " + TableTagName + " WHERE RCSID=?");
@@ -168,4 +180,4 @@ bool BCS::Contacts::removeTagFor(const std::string& TagName,
   }
   return true;
 }
-#endif  // BACKEND_SQLCONTACTS_CONTACTS_CPP_
+#endif  // BACKEND_SRC_CONTACTS_CPP_

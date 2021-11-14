@@ -1,11 +1,11 @@
 /**
  * RCOS-EasyContact
- * EasyContact/Backend/API
+ * EasyContact/Backend/include/EasyContact
  * UserToken.hpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_API_USERTOKEN_HPP_
-#define BACKEND_API_USERTOKEN_HPP_
+#ifndef BACKEND_INCLUDE_EASYCONTACT_USERTOKEN_HPP_
+#define BACKEND_INCLUDE_EASYCONTACT_USERTOKEN_HPP_
 // C Standard Library
 #include <unistd.h>
 // C++ Standard Library
@@ -26,4 +26,4 @@ std::string GenerateToken() {
   return Result;
 }
 }  // namespace AUT
-#endif  // BACKEND_API_USERTOKEN_HPP_
+#endif  // BACKEND_INCLUDE_EASYCONTACT_USERTOKEN_HPP_

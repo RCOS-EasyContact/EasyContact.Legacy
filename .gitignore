@@ -1,15 +1,11 @@
-### Sub-Modules ###
-Backend/API/libhv/*
-Backend/MailClient/mailio/*
-Backend/SQLContacts/SQLite/*
-
 ### CMake ###
-CMakeFiles/*
+bin/*
+lib/*
 CMakeCache.txt
-EasyContact
+CMakeFiles
 Makefile
 *.cmake
-*.pc
+mailio.pc
 
 ### Deployment ##
 RCOS-EasyContact

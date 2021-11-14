@@ -1,30 +1,28 @@
 /**
  * RCOS-EasyContact
- * EasyContact/Backend/API
- * APIRouter.hpp
+ * EasyContact/Backend/include/EasyContact
+ * HTTPRouter.hpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_API_APIROUTER_HPP_
-#define BACKEND_API_APIROUTER_HPP_
-// Resolve Conflict with Libboost
-#undef defer
+#ifndef BACKEND_INCLUDE_EASYCONTACT_HTTPROUTER_HPP_
+#define BACKEND_INCLUDE_EASYCONTACT_HTTPROUTER_HPP_
+// Libhv Library (C Library)
+#include <hv/HttpService.h>
 // C++ Standard Library
 #include <string>
 // Standard Template Library
 #include <unordered_map>
 #include <utility>
 #include <vector>
-// Libhv Library
-#include "hv/HttpService.h"
 // EasyContact Header Files
-#include "../Executable/DispatchQueue.hpp"
-#include "../Executable/SingleUser.hpp"
-#include "../Executable/SysLogs.hpp"
-#include "UserToken.hpp"
+#include <EasyContact/DispatchQueue.hpp>
+#include <EasyContact/SingleUser.hpp>
+#include <EasyContact/SysLogs.hpp>
+#include <EasyContact/UserToken.hpp>
 // Global Representation
 extern std::unordered_map<std::string, SingleUser> g_ActiveUsers;
 extern DispatchQueue g_DispatchQueue;
-class APIRouter {
+class HTTPRouter {
  public:
   static int pre(HttpRequest *req, HttpResponse *resp) {
     resp->headers["Access-Control-Allow-Origin"] = "*";
@@ -317,4 +315,4 @@ class APIRouter {
         });
   }
 };
-#endif  // BACKEND_API_APIROUTER_HPP_
+#endif  // BACKEND_INCLUDE_EASYCONTACT_HTTPROUTER_HPP_

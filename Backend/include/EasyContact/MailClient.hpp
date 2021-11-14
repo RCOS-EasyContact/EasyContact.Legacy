@@ -1,11 +1,15 @@
 /**
  * RCOS-EasyContact
- * EasyContact/Backend/MailClient
+ * EasyContact/Backend/include/EasyContact
  * MailClient.hpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_MAILCLIENT_MAILCLIENT_HPP_
-#define BACKEND_MAILCLIENT_MAILCLIENT_HPP_
+#ifndef BACKEND_INCLUDE_EASYCONTACT_MAILCLIENT_HPP_
+#define BACKEND_INCLUDE_EASYCONTACT_MAILCLIENT_HPP_
+// Resolve Conflict with LibBoost
+#ifdef defer
+#undef defer
+#endif
 // C++ Standard Library
 #include <algorithm>
 #include <iostream>
@@ -16,7 +20,7 @@
 #include <mailio/message.hpp>
 #include <mailio/smtp.hpp>
 // EasyContact Header Files
-#include "../Executable/SysLogs.hpp"
+#include <EasyContact/SysLogs.hpp>
 namespace BMC {
 bool AuthenticateLogin(const std::string& RCSID, const std::string& Password);
 class MailClient {
@@ -39,4 +43,4 @@ class MailClient {
                    const std::string& subjects, const std::string& mesg) const;
 };
 }  // namespace BMC
-#endif  // BACKEND_MAILCLIENT_MAILCLIENT_HPP_
+#endif  // BACKEND_INCLUDE_EASYCONTACT_MAILCLIENT_HPP_

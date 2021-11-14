@@ -1,20 +1,20 @@
 /**
  * RCOS-EasyContact
- * EasyContact/Backend/Executable
+ * EasyContact/Backend/include/EasyContact
  * SingleUser.hpp
  * Copyright [2021] <RCOS-EasyContact>
  */
-#ifndef BACKEND_EXECUTABLE_SINGLEUSER_HPP_
-#define BACKEND_EXECUTABLE_SINGLEUSER_HPP_
+#ifndef BACKEND_INCLUDE_EASYCONTACT_SINGLEUSER_HPP_
+#define BACKEND_INCLUDE_EASYCONTACT_SINGLEUSER_HPP_
 // C++ Standard Library
 #include <string>
 // EasyContact Header Files
-#include "../MailClient/MailClient.hpp"
-#include "../SQLContacts/Contacts.hpp"
+#include <EasyContact/Contacts.hpp>
+#include <EasyContact/MailClient.hpp>
 class SingleUser {
  public:
   BMC::MailClient MailClient;
   BCS::Contacts SQLContacts;
   explicit SingleUser(const std::string& RCSID, const std::string& Password);
 };
-#endif  // BACKEND_EXECUTABLE_SINGLEUSER_HPP_
+#endif  // BACKEND_INCLUDE_EASYCONTACT_SINGLEUSER_HPP_
