@@ -8,6 +8,8 @@
 #define BACKEND_INCLUDE_EASYCONTACT_HTTPROUTER_HPP_
 // Libhv Library (C Library)
 #include <hv/HttpService.h>
+// Mailio Library (C Library)
+#include <mailio/message.hpp>
 // C++ Standard Library
 #include <string>
 // Standard Template Library
@@ -243,6 +245,30 @@ class HTTPRouter {
       }
       return 500;  // Internal Server Error
     });
+    // Send email
+    router->POST("Email/Send", [](HttpRequest *req, HttpResponse *resp){
+      SYSLOG::PrintRequest("POST->", "/Email/Send");
+      try{
+        const std::string &Token = req->json["Token"];
+        const std::string &Reciever = req->json["Reciever"];
+        const std::string &Subject = req->json["Subject"];
+        const std::string &Msg = req->json["Message"];
+        const std::unordered_map<std::string, SingleUser>::iterator User =
+            g_ActiveUsers.find(Token);
+        // Verify User Is Current Active
+        if (User == g_ActiveUsers.end()) {
+          return 401;  // Unauthorized
+        }
+        const SingleUser &S = User->second;
+        const std::string &REmail = S.SQLContacts.getEmailAddress(Reciever);
+        if(REmail == ''){ return 410; } // Undefined
+        g_DispatchQueue.Dispatch([S, Reciver, Subject, Msg]() { S.MailClient.sent_message(Reciver, REmail, Subject, Msg); });
+        return 200;   // Accept
+      } catch (const std::exception &Err) {
+        SYSLOG::PrintException(Err);
+      }
+      return 500;   // Internal Server Error
+    }
     // Remove Tag For One Existing Contact
     router->Delete(
         "/Contacts/Unassign", [](HttpRequest *req, HttpResponse *resp) {
