@@ -8,8 +8,6 @@
 #define BACKEND_INCLUDE_EASYCONTACT_HTTPROUTER_HPP_
 // Libhv Library (C Library)
 #include <hv/HttpService.h>
-// Mailio Library (C Library)
-#include <mailio/message.hpp>
 // C++ Standard Library
 #include <string>
 // Standard Template Library
@@ -245,29 +243,52 @@ class HTTPRouter {
       }
       return 500;  // Internal Server Error
     });
-    // Send email
-    router->POST("Email/Send", [](HttpRequest *req, HttpResponse *resp){
-      SYSLOG::PrintRequest("POST->", "/Email/Send");
+    // Send Email
+    router->POST("Email/SendToName", [](HttpRequest *req, HttpResponse *resp){
+      SYSLOG::PrintRequest("POST->", "/Email/SendToName");
       try{
         const std::string &Token = req->json["Token"];
         const std::string &Reciever = req->json["Reciever"];
         const std::string &Subject = req->json["Subject"];
-        const std::string &Msg = req->json["Message"];
-        const std::unordered_map<std::string, SingleUser>::iterator User =
+        const std::string &Message = req->json["Message"];
+        const std::unordered_map<std::string, SingleUser>::const_iterator User =
             g_ActiveUsers.find(Token);
         // Verify User Is Current Active
         if (User == g_ActiveUsers.end()) {
           return 401;  // Unauthorized
         }
-        const SingleUser &S = User->second;
-        const std::string &REmail = S.SQLContacts.getEmailAddress(Reciever);
-        if(REmail == ''){ return 410; } // Undefined
-        g_DispatchQueue.Dispatch([S, Reciver, Subject, Msg]() { S.MailClient.sent_message(Reciver, REmail, Subject, Msg); });
-        return 200;   // Accept
+        const std::string &RecieverEmail = User->second.SQLContacts.getEmailAddress(Reciever);
+        if(RecieverEmail.empty()){
+          return 412; // Precondition Failed
+        }
+        User->second.SendMessage(Reciever,RecieverEmail,Subject,Message);
+        return 200; // Accept
       } catch (const std::exception &Err) {
         SYSLOG::PrintException(Err);
       }
-      return 500;   // Internal Server Error
+      return 500; // Internal Server Error
+    }
+    // Send Email
+    router->POST("Email/SendToAddress", [](HttpRequest *req, HttpResponse *resp){
+      SYSLOG::PrintRequest("POST->", "/Email/SendToAddress");
+      try{
+        const std::string &Token = req->json["Token"];
+        const std::string &Reciever = req->json["Reciever"];
+        const std::string &Email=req->json["Email"];
+        const std::string &Subject = req->json["Subject"];
+        const std::string &Message = req->json["Message"];
+        const std::unordered_map<std::string, SingleUser>::const_iterator User =
+            g_ActiveUsers.find(Token);
+        // Verify User Is Current Active
+        if (User == g_ActiveUsers.end()) {
+          return 401;  // Unauthorized
+        }
+        User->second.SendMessage(Reciever,Email,Subject,Message);
+        return 200; // Accept
+      } catch (const std::exception &Err) {
+        SYSLOG::PrintException(Err);
+      }
+      return 500; // Internal Server Error
     }
     // Remove Tag For One Existing Contact
     router->Delete(

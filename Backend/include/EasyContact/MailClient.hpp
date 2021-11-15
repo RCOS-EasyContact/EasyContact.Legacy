@@ -40,7 +40,7 @@ class MailClient {
   bool recv(MessageObj* mesg) const;
   bool remove_first() const;
   int inbox_status() const;
-  int sent_message(const std::string& name_to, const std::string& to_mail,
+  int SendMessage(const std::string& name_to, const std::string& to_mail,
                    const std::string& subjects, const std::string& mesg) const;
 };
 }  // namespace BMC

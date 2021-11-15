@@ -95,7 +95,7 @@ int BMC::MailClient::inbox_status() const {
   }
   return ret;
 }
-int BMC::MailClient::sent_message(const std::string& name_to,
+int BMC::MailClient::SendMessage(const std::string& name_to,
                                   const std::string& to_mail,
                                   const std::string& subjects,
                                   const std::string& mesg) const {
