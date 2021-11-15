@@ -13,7 +13,6 @@ using mailio::imap;
 using mailio::imap_error;
 using mailio::imaps;
 using mailio::mail_address;
-using mailio::message;
 using mailio::smtp_error;
 using mailio::smtps;
 bool BMC::AuthenticateLogin(const std::string& RCSID,
@@ -42,8 +41,8 @@ BMC::MailClient::MailClient(const std::string& _RCSID,
       Nickname(_Nickname),
       EmailAddress(_Email) {}
 bool BMC::MailClient::Fetch(const size_t& NumEmails) const { return false; }
-bool BMC::MailClient::recv(message* msg) const {
-  // message &new_msg = *msg;
+bool BMC::MailClient::recv(MessageObj* msg) const {
+  // MessageObj &new_msg = *msg;
   try {
     imaps conn("mail.rpi.edu", 993);
     conn.authenticate(RCSID, Password, imaps::auth_method_t::LOGIN);
@@ -101,7 +100,7 @@ int BMC::MailClient::sent_message(const std::string& name_to,
                                   const std::string& subjects,
                                   const std::string& mesg) const {
   try {
-    message msg;
+    MessageObj msg;
     msg.from(
         mail_address(Nickname,
                      EmailAddress));  // mail_adddress(name,xxx@xxx.edu(com))
