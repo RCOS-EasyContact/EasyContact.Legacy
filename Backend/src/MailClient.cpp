@@ -40,6 +40,9 @@ BMC::MailClient::MailClient(const std::string& _RCSID,
       Password(_Password),
       Nickname(_Nickname),
       EmailAddress(_Email) {}
+  void BMC::MailClient::ChangeNickname(const std::string& _Nickname)const{
+Nickname=_Nickname;
+  }
 bool BMC::MailClient::Fetch(const size_t& NumEmails) const { return false; }
 bool BMC::MailClient::recv(MessageObj* msg) const {
   // MessageObj &new_msg = *msg;

@@ -35,8 +35,9 @@ class MailClient {
   explicit MailClient(const std::string& _RCSID, const std::string& _Password);
   explicit MailClient(const std::string& _RCSID, const std::string& _Password,
                       const std::string& _Nickname, const std::string& _Email);
-  // recv email, if no error, the return should be the a message;
+  void ChangeNickname(const std::string& _Nickname)const;
   bool Fetch(const size_t& NumEmails) const;
+  // recv email, if no error, the return should be the a message;
   bool recv(MessageObj* mesg) const;
   bool remove_first() const;
   int inbox_status() const;
