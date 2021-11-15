@@ -1,3 +1,3 @@
 # Index
-- [Http Router](HttpRouter.md)
+- [HTTP Router](HTTPRouter.md)
 - [WebSocket Router](WebSocketRouter.md)
