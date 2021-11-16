@@ -15,7 +15,7 @@ bool BMC::AuthenticateLogin(const std::string& RCSID,
                             const std::string& Password) {
   try {
     mailio::imaps Auth(EmailServerAddress, IMAP_PORT);
-    Auth.authenticate(RCSID, Password, mailio::imaps::auth_method_t::START_TLS);
+    Auth.authenticate(RCSID, Password, mailio::imaps::auth_method_t::LOGIN);
   } catch (const mailio::imap_error& Err) {
     SYSLOG::PrintException(Err);
     return false;
@@ -33,7 +33,7 @@ bool BMC::MailClient::RecvEmail(const size_t& ID, mailio::message* M) const {
     M->line_policy(mailio::codec::line_len_policy_t::RECOMMENDED,
                    mailio::codec::line_len_policy_t::RECOMMENDED);
     mailio::imaps IMAP(EmailServerAddress, IMAP_PORT);
-    IMAP.authenticate(RCSID, Password, mailio::imaps::auth_method_t::START_TLS);
+    IMAP.authenticate(RCSID, Password, mailio::imaps::auth_method_t::LOGIN);
     IMAP.fetch(ID, *M);
     return true;
   } catch (const mailio::imap_error& Err) {
@@ -48,7 +48,7 @@ void BMC::MailClient::ChangeNickname(const std::string& _Nickname) noexcept {
 }
 bool BMC::MailClient::Fetch(const size_t& NumEmails) const {
   mailio::imaps IMAP(EmailServerAddress, IMAP_PORT);
-  IMAP.authenticate(RCSID, Password, mailio::imaps::auth_method_t::START_TLS);
+  IMAP.authenticate(RCSID, Password, mailio::imaps::auth_method_t::LOGIN);
   const size_t TotalEmails =
       IMAP.select(std::list<std::string>({"Inbox"})).messages_no;
   size_t NumToFetch = TotalEmails;
@@ -74,7 +74,7 @@ bool BMC::MailClient::Fetch(const size_t& NumEmails) const {
 bool BMC::MailClient::RemoveEmail(const size_t& ID) {
   try {
     mailio::imaps IMAP(EmailServerAddress, IMAP_PORT);
-    IMAP.authenticate(RCSID, Password, mailio::imaps::auth_method_t::START_TLS);
+    IMAP.authenticate(RCSID, Password, mailio::imaps::auth_method_t::LOGIN);
     IMAP.remove("Inbox", ID);
     return true;
   } catch (const mailio::imap_error& Err) {
@@ -111,7 +111,7 @@ bool BMC::MailClient::SendMessage(const std::string& Recipient_Name,
                                   const std::string& Messagebody) const {
   try {
     mailio::smtps SMTP(EmailServerAddress, SMTP_PORT);
-    SMTP.authenticate(RCSID, Password, mailio::smtps::auth_method_t::START_TLS);
+    SMTP.authenticate(RCSID, Password, mailio::smtps::auth_method_t::LOGIN);
     mailio::message M;
     M.from(mailio::mail_address(Nickname, EmailAddress));
     M.add_recipient(mailio::mail_address(Recipient_Name, Recipient_Email));
