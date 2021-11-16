@@ -25,6 +25,7 @@ class DispatchQueue {
   typedef std::function<void(void)> Functor;
 
  private:
+ size_t JobID;
   std::mutex Lock;
   std::vector<std::thread> Threads;
   std::queue<Functor> Queue;
@@ -35,8 +36,8 @@ class DispatchQueue {
  public:
   explicit DispatchQueue(const size_t& NumThreads);
   ~DispatchQueue();
-  void Dispatch(const Functor& Operation)noexcept;
-  void Dispatch(Functor&& Operation)noexcept;
+  std::pair<size_t,size_t> Dispatch(const Functor& Operation)noexcept;
+  std::pair<size_t,size_t> Dispatch(Functor&& Operation)noexcept;
   DispatchQueue(const DispatchQueue& RHS) = delete;
   DispatchQueue& operator=(const DispatchQueue& RHS) = delete;
   DispatchQueue(DispatchQueue&& RHS) = delete;

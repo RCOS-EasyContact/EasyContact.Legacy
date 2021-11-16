@@ -8,5 +8,5 @@
 #define BACKEND_SRC_SINGLEUSER_CPP_
 #include <EasyContact/SingleUser.hpp>
 SingleUser::SingleUser(const std::string& RCSID, const std::string& Password)
-    : MailClient(RCSID, Password), Contacts(RCSID) {}
+    : Contacts(RCSID),MailClient(RCSID, Password) {}
 #endif  // BACKEND_SRC_SINGLEUSER_CPP_
