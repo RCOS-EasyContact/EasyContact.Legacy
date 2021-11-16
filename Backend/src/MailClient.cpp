@@ -11,6 +11,7 @@ static const char* const UserDataLocation = "data/";
 static const char* const EmailServerAddress = "mail.rpi.edu";
 static const uint16_t IMAP_PORT = 993;
 static const uint16_t SMTP_PORT = 587;
+static const uint16_t IMAP_NONSSL_PORT = 143;
 bool BMC::AuthenticateLogin(const std::string& RCSID,
                             const std::string& Password) {
   try {
@@ -30,8 +31,8 @@ BMC::MailClient::MailClient(const std::string& _RCSID,
       Nickname(_RCSID) {}
 bool BMC::MailClient::RecvEmail(const size_t& ID, mailio::message* M) const {
   try {
-    M->line_policy(mailio::codec::line_len_policy_t::RECOMMENDED,
-                   mailio::codec::line_len_policy_t::RECOMMENDED);
+    M->line_policy(mailio::codec::line_len_policy_t::VERYLARGE,
+                   mailio::codec::line_len_policy_t::VERYLARGE);
     mailio::imaps IMAP(EmailServerAddress, IMAP_PORT);
     IMAP.authenticate(RCSID, Password, mailio::imaps::auth_method_t::LOGIN);
     IMAP.fetch(ID, *M);
