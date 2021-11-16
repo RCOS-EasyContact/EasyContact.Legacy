@@ -36,15 +36,17 @@ class MailClient {
   mutable mailio::smtps SMTP;
 
  private:
-  [[nodiscard]] bool RecvEmail(const size_t& ID,MessageObj *M) const;
+  [[nodiscard]] bool RecvEmail(const size_t& ID, MessageObj* M) const;
   [[nodiscard]] bool RemoveEmail(const size_t& ID);
 
  public:
   explicit MailClient(const std::string& _RCSID, const std::string& _Password);
-  void ChangeNickname(const std::string& _Nickname) const noexcept;
+  void ChangeNickname(const std::string& _Nickname) noexcept;
   bool Fetch(const size_t& NumEmails) const;
-  bool SendMessage(const std::string& Recipient_Name, const std::string& Recipient_Email,
-                  const std::string& Subject, const std::string& MessageBody) const;
+  bool SendMessage(const std::string& Recipient_Name,
+                   const std::string& Recipient_Email,
+                   const std::string& Subject,
+                   const std::string& MessageBody) const;
 };
 }  // namespace BMC
 #endif  // BACKEND_INCLUDE_EASYCONTACT_MAILCLIENT_HPP_

@@ -29,10 +29,10 @@ BMC::MailClient::MailClient(const std::string& _RCSID,
   IMAP.authenticate(_RCSID, _Password, mailio::imaps::auth_method_t::START_TLS);
   SMTP.authenticate(_RCSID, _Password, mailio::smtps::auth_method_t::START_TLS);
 }
-bool BMC::MailClient::RecvEmail(const size_t& ID,MessageObj *M) const {
+bool BMC::MailClient::RecvEmail(const size_t& ID, MessageObj* M) const {
   try {
     M->line_policy(mailio::codec::line_len_policy_t::RECOMMENDED,
-                  mailio::codec::line_len_policy_t::RECOMMENDED);
+                   mailio::codec::line_len_policy_t::RECOMMENDED);
     IMAP.fetch(ID, *M);
     return true;
   } catch (const mailio::imap_error& Err) {
@@ -42,8 +42,7 @@ bool BMC::MailClient::RecvEmail(const size_t& ID,MessageObj *M) const {
   }
   return false;
 }
-void BMC::MailClient::ChangeNickname(
-    const std::string& _Nickname) const noexcept {
+void BMC::MailClient::ChangeNickname(const std::string& _Nickname) noexcept {
   Nickname = _Nickname;
 }
 bool BMC::MailClient::Fetch(const size_t& NumEmails) const {
@@ -56,7 +55,9 @@ bool BMC::MailClient::Fetch(const size_t& NumEmails) const {
   for (size_t i = 0; i < NumToFetch; ++i) {
     const size_t Current_ID = TotalEmails - i;
     MessageObj M;
-    if(RecvEmail(Current_ID,&M)==false){return false;}
+    if (RecvEmail(Current_ID, &M) == false) {
+      return false;
+    }
     std::ofstream FILE;
     FILE.open(std::string(UserDataLocation) + RCSID + "/" +
               std::to_string(Current_ID) + ".txt");
@@ -100,14 +101,12 @@ int BMC::MailClient::inbox_status() const {
 }
 #endif
 bool BMC::MailClient::SendMessage(const std::string& Recipient_Name,
-                                 const std::string& Recipient_Email,
-                                 const std::string& Subject,
-                                 const std::string& Messagebody) const {
+                                  const std::string& Recipient_Email,
+                                  const std::string& Subject,
+                                  const std::string& Messagebody) const {
   try {
     MessageObj M;
-    M.from(
-        mailio::mail_address(Nickname,
-                     EmailAddress));
+    M.from(mailio::mail_address(Nickname, EmailAddress));
     M.add_recipient(mailio::mail_address(Recipient_Name, Recipient_Email));
     M.subject(Subject);
     M.content(Messagebody);
@@ -118,6 +117,7 @@ bool BMC::MailClient::SendMessage(const std::string& Recipient_Name,
   } catch (const mailio::dialog_error& Err) {
     SYSLOG::PrintException(Err);
   }
-  return false;;
+  return false;
+  ;
 }
 #endif  // BACKEND_SRC_MAILCLIENT_CPP_
