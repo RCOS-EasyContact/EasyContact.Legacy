@@ -28,7 +28,7 @@ BMC::MailClient::MailClient(const std::string& _RCSID,
       Password(_Password),
       EmailAddress(_RCSID + "@rpi.edu"),
       Nickname(_RCSID) {}
-bool BMC::MailClient::RecvEmail(const size_t& ID, MessageObj* M) const {
+bool BMC::MailClient::RecvEmail(const size_t& ID, mailio::message* M) const {
   try {
     M->line_policy(mailio::codec::line_len_policy_t::RECOMMENDED,
                    mailio::codec::line_len_policy_t::RECOMMENDED);
@@ -57,7 +57,7 @@ bool BMC::MailClient::Fetch(const size_t& NumEmails) const {
   }
   for (size_t i = 0; i < NumToFetch; ++i) {
     const size_t Current_ID = TotalEmails - i;
-    MessageObj M;
+    mailio::message M;
     if (RecvEmail(Current_ID, &M) == false) {
       return false;
     }
@@ -112,7 +112,7 @@ bool BMC::MailClient::SendMessage(const std::string& Recipient_Name,
   try {
     mailio::smtps SMTP(EmailServerAddress, SMTP_PORT);
     SMTP.authenticate(RCSID, Password, mailio::smtps::auth_method_t::START_TLS);
-    MessageObj M;
+    mailio::message M;
     M.from(mailio::mail_address(Nickname, EmailAddress));
     M.add_recipient(mailio::mail_address(Recipient_Name, Recipient_Email));
     M.subject(Subject);
