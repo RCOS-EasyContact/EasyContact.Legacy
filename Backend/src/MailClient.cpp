@@ -99,19 +99,6 @@ bool BMC::MailClient::Fetch(const size_t& NumEmails) const {
   }
   return false;
 }
-bool BMC::MailClient::RemoveEmail(const size_t& ID) {
-  try {
-    mailio::imaps IMAP(EmailServerAddress, IMAP_PORT);
-    IMAP.authenticate(RCSID, Password, mailio::imaps::auth_method_t::LOGIN);
-    IMAP.remove("Inbox", ID);
-    return true;
-  } catch (const mailio::imap_error& Err) {
-    SYSLOG::PrintException(Err);
-  } catch (const mailio::dialog_error& Err) {
-    SYSLOG::PrintException(Err);
-  }
-  return false;
-}
 bool BMC::MailClient::SendMessage(const std::string& Recipient_Name,
                                   const std::string& Recipient_Email,
                                   const std::string& Subject,
