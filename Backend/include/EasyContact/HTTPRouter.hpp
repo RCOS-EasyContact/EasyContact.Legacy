@@ -225,7 +225,7 @@ class HTTPRouter {
       try {
         const std::string &Token = req->json["Token"];
         const size_t Num = std::move(stol(req->GetParam("Num")));
-        const std::unordered_map<std::string, SingleUser>::iterator User =
+        const std::unordered_map<std::string, SingleUser>::const_iterator User =
             g_ActiveUsers.find(Token);
         // Verify User Is Current Active
         if (User == g_ActiveUsers.end()) {

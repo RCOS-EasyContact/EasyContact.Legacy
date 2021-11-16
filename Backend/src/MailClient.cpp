@@ -25,7 +25,7 @@ BMC::MailClient::MailClient(const std::string& _RCSID,
       EmailAddress(_RCSID + "@rpi.edu"),
       Nickname(_RCSID),
       IMAP("mail.rpi.edu", 993),
-      SMTP("mail.rpi.edi", 587) {
+      SMTP("mail.rpi.edu", 587) {
   IMAP.authenticate(_RCSID, _Password, mailio::imaps::auth_method_t::START_TLS);
   SMTP.authenticate(_RCSID, _Password, mailio::smtps::auth_method_t::START_TLS);
 }
