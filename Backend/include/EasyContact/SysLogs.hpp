@@ -31,9 +31,22 @@ inline static void PrintRequest(Args &&...A) noexcept {
   (BUFFER << ... << A);
   std::time_t timenow =
       std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-  std::string Buffer = std::move(std::ctime(&timenow));
-  Buffer[Buffer.size() - 1] = 0;
-  std::cout << "<" << Buffer << "> User Request: " << BUFFER.str() << std::endl
+  std::string TimeBuffer = std::move(std::ctime(&timenow));
+  TimeBuffer[TimeBuffer.size() - 1] = 0;
+  std::cout << "<" << TimeBuffer << "> User Request: " << BUFFER.str()
+            << std::endl
+            << std::flush;
+}
+template <typename... Args>
+inline static void PrintDebugMessage(Args &&...A) noexcept {
+  std::stringstream BUFFER;
+  (BUFFER << ... << A);
+  std::time_t timenow =
+      std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+  std::string TimeBuffer = std::move(std::ctime(&timenow));
+  TimeBuffer[TimeBuffer.size() - 1] = 0;
+  std::cerr << "<" << TimeBuffer << "> Debug Output: " << BUFFER.str()
+            << std::endl
             << std::flush;
 }
 }  // namespace SYSLOG

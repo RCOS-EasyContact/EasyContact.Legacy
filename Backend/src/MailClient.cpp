@@ -51,12 +51,15 @@ bool BMC::MailClient::Fetch(const size_t& NumEmails) const {
   IMAP.authenticate(RCSID, Password, mailio::imaps::auth_method_t::LOGIN);
   const size_t TotalEmails =
       IMAP.select(std::list<std::string>({"Inbox"})).messages_no;
+  SYSLOG::PrintDebugMessage("TotalEmails: ", TotalEmails);
   size_t NumToFetch = TotalEmails;
   if (NumToFetch >= NumEmails) {
     NumToFetch = NumEmails;
   }
+  SYSLOG::PrintDebugMessage("NumToFetch: ", NumToFetch);
   for (size_t i = 0; i < NumToFetch; ++i) {
     const size_t Current_ID = TotalEmails - i;
+    SYSLOG::PrintDebugMessage("Current_ID: ", Current_ID);
     mailio::message M;
     if (RecvEmail(Current_ID, &M) == false) {
       return false;
