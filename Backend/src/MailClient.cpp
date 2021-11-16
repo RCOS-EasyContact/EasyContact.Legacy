@@ -34,12 +34,11 @@ BMC::MailClient::MailClient(const std::string& _RCSID,
       Nickname(_RCSID) {}
 BMC::MailClient::MailClient(const std::string& _RCSID,
                             const std::string& _Password,
-                            const std::string& _Nickname,
-                            const std::string& _Email)
+                            const std::string& _Email,const std::string& _Nickname)
     : RCSID(_RCSID),
       Password(_Password),
-      Nickname(_Nickname),
-      EmailAddress(_Email) {}
+      EmailAddress(_Email),
+      Nickname(_Nickname){}
   void BMC::MailClient::ChangeNickname(const std::string& _Nickname)const{
 Nickname=_Nickname;
   }

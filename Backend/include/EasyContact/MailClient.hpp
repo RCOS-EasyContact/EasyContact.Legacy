@@ -22,7 +22,7 @@
 // EasyContact Header Files
 #include <EasyContact/SysLogs.hpp>
 namespace BMC {
- typedef MessageObj mailio::message;
+ typedef  mailio::message MessageObj;
 bool AuthenticateLogin(const std::string& RCSID, const std::string& Password);
 class MailClient {
  private:
@@ -34,7 +34,7 @@ class MailClient {
  public:
   explicit MailClient(const std::string& _RCSID, const std::string& _Password);
   explicit MailClient(const std::string& _RCSID, const std::string& _Password,
-                      const std::string& _Nickname, const std::string& _Email);
+                       const std::string& _Email,const std::string& _Nickname);
   void ChangeNickname(const std::string& _Nickname)const;
   bool Fetch(const size_t& NumEmails) const;
   // recv email, if no error, the return should be the a message;

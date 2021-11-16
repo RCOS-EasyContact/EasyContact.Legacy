@@ -11,10 +11,8 @@
 // EasyContact Header Files
 #include <EasyContact/Contacts.hpp>
 #include <EasyContact/MailClient.hpp>
-class SingleUser {
+class SingleUser: public BCS::Contacts,public BMC::MailClient{
  public:
-  BMC::MailClient MailClient;
-  BCS::Contacts SQLContacts;
   explicit SingleUser(const std::string& RCSID, const std::string& Password);
 };
 #endif  // BACKEND_INCLUDE_EASYCONTACT_SINGLEUSER_HPP_

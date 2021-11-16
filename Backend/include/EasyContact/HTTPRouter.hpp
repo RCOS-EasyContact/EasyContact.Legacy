@@ -78,7 +78,7 @@ class HTTPRouter {
           return 401;  // Unauthorized
         }
         const std::vector<std::string> &AllNames =
-            User->second.SQLContacts.getAllNames();
+            User->second.getAllNames();
         for (const std::string &i : AllNames) {
           resp->json.push_back(i);
         }
@@ -100,7 +100,7 @@ class HTTPRouter {
           return 401;  // Unauthorized
         }
         const std::vector<std::string> &TagContains =
-            User->second.SQLContacts.getAllTags();
+            User->second.getAllTags();
         for (const std::string &i : TagContains) {
           resp->json.push_back(i);
         }
@@ -124,7 +124,7 @@ class HTTPRouter {
           return 401;  // Unauthorized
         }
         const std::vector<std::string> &AllTags =
-            User->second.SQLContacts.getTagContains(Name);
+            User->second.getTagContains(Name);
         for (const std::string &i : AllTags) {
           resp->json.push_back(i);
         }
@@ -147,7 +147,7 @@ class HTTPRouter {
           return 401;  // Unauthorized
         }
         const std::string &EmailAddress =
-            User->second.SQLContacts.getEmailAddress(Name);
+            User->second.getEmailAddress(Name);
         resp->json.push_back(EmailAddress);
         return 200;  // OK
       } catch (const std::exception &Err) {
@@ -168,7 +168,7 @@ class HTTPRouter {
         if (User == g_ActiveUsers.end()) {
           return 401;  // Unauthorized
         }
-        if (User->second.SQLContacts.newContact(Name, Email) == true) {
+        if (User->second.newContact(Name, Email) == true) {
           return 200;  // OK
         } else {
           return 409;  // Conflict
@@ -190,7 +190,7 @@ class HTTPRouter {
         if (User == g_ActiveUsers.end()) {
           return 401;  // Unauthorized
         }
-        if (User->second.SQLContacts.newTag(TagName) == true) {
+        if (User->second.newTag(TagName) == true) {
           return 200;  // OK
         } else {
           return 409;  // Conflict
@@ -213,7 +213,7 @@ class HTTPRouter {
         if (User == g_ActiveUsers.end()) {
           return 401;  // Unauthorized
         }
-        if (User->second.SQLContacts.assignTagTo(TagName, Name) == true) {
+        if (User->second.assignTagTo(TagName, Name) == true) {
           return 200;  // OK
         } else {
           return 409;  // Conflict
@@ -236,7 +236,7 @@ class HTTPRouter {
           return 401;  // Unauthorized
         }
         const SingleUser &S = User->second;
-        g_DispatchQueue.Dispatch([S, Num]() { S.MailClient.Fetch(Num); });
+        g_DispatchQueue.Dispatch([S, Num]() { S.Fetch(Num); });
         return 202;  // Accepted
       } catch (const std::exception &Err) {
         SYSLOG::PrintException(Err);
@@ -257,7 +257,7 @@ class HTTPRouter {
         if (User == g_ActiveUsers.end()) {
           return 401;  // Unauthorized
         }
-        const std::string &RecieverEmail = User->second.SQLContacts.getEmailAddress(Reciever);
+        const std::string &RecieverEmail = User->second.getEmailAddress(Reciever);
         if(RecieverEmail.empty()){
           return 412; // Precondition Failed
         }
@@ -267,7 +267,7 @@ class HTTPRouter {
         SYSLOG::PrintException(Err);
       }
       return 500; // Internal Server Error
-    }
+    });
     // Send Email
     router->POST("Email/SendToAddress", [](HttpRequest *req, HttpResponse *resp){
       SYSLOG::PrintRequest("POST->", "/Email/SendToAddress");
@@ -289,7 +289,7 @@ class HTTPRouter {
         SYSLOG::PrintException(Err);
       }
       return 500; // Internal Server Error
-    }
+    });
     // Remove Tag For One Existing Contact
     router->Delete(
         "/Contacts/Unassign", [](HttpRequest *req, HttpResponse *resp) {
@@ -304,7 +304,7 @@ class HTTPRouter {
             if (User == g_ActiveUsers.end()) {
               return 401;  // Unauthorized
             }
-            if (User->second.SQLContacts.removeTagFor(TagName, Name) == true) {
+            if (User->second.removeTagFor(TagName, Name) == true) {
               return 200;  // OK
             } else {
               return 409;  // Conflict
@@ -327,7 +327,7 @@ class HTTPRouter {
             if (User == g_ActiveUsers.end()) {
               return 401;  // Unauthorized
             }
-            if (User->second.SQLContacts.removeContact(Name) == true) {
+            if (User->second.removeContact(Name) == true) {
               return 200;  // OK
             } else {
               return 409;  // Conflict
@@ -350,7 +350,7 @@ class HTTPRouter {
             if (User == g_ActiveUsers.end()) {
               return 401;  // Unauthorized
             }
-            if (User->second.SQLContacts.removeTag(TagName) == true) {
+            if (User->second.removeTag(TagName) == true) {
               return 200;  // OK
             } else {
               return 409;  // Conflict
