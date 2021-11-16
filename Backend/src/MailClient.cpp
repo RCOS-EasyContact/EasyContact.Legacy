@@ -8,9 +8,9 @@
 #define BACKEND_SRC_MAILCLIENT_CPP_
 #include <EasyContact/MailClient.hpp>
 static const char* const UserDataLocation = "data/";
-static const char* const EmailServerAddress="mail.rpi.edu";
-static const uint16_t IMAP_PORT=993;
-static const uint16_t SMTP_PORT=587;
+static const char* const EmailServerAddress = "mail.rpi.edu";
+static const uint16_t IMAP_PORT = 993;
+static const uint16_t SMTP_PORT = 587;
 bool BMC::AuthenticateLogin(const std::string& RCSID,
                             const std::string& Password) {
   try {
@@ -25,16 +25,15 @@ bool BMC::AuthenticateLogin(const std::string& RCSID,
 BMC::MailClient::MailClient(const std::string& _RCSID,
                             const std::string& _Password)
     : RCSID(_RCSID),
-    Password(_Password),
+      Password(_Password),
       EmailAddress(_RCSID + "@rpi.edu"),
-      Nickname(_RCSID)
-{}
+      Nickname(_RCSID) {}
 bool BMC::MailClient::RecvEmail(const size_t& ID, MessageObj* M) const {
   try {
     M->line_policy(mailio::codec::line_len_policy_t::RECOMMENDED,
                    mailio::codec::line_len_policy_t::RECOMMENDED);
-                   mailio::imaps IMAP(EmailServerAddress,IMAP_PORT);
-                    IMAP.authenticate(RCSID, Password, mailio::imaps::auth_method_t::START_TLS);
+    mailio::imaps IMAP(EmailServerAddress, IMAP_PORT);
+    IMAP.authenticate(RCSID, Password, mailio::imaps::auth_method_t::START_TLS);
     IMAP.fetch(ID, *M);
     return true;
   } catch (const mailio::imap_error& Err) {
@@ -48,8 +47,8 @@ void BMC::MailClient::ChangeNickname(const std::string& _Nickname) noexcept {
   Nickname = _Nickname;
 }
 bool BMC::MailClient::Fetch(const size_t& NumEmails) const {
-  mailio::imaps IMAP(EmailServerAddress,IMAP_PORT);
-                    IMAP.authenticate(RCSID, Password, mailio::imaps::auth_method_t::START_TLS);
+  mailio::imaps IMAP(EmailServerAddress, IMAP_PORT);
+  IMAP.authenticate(RCSID, Password, mailio::imaps::auth_method_t::START_TLS);
   const size_t TotalEmails =
       IMAP.select(std::list<std::string>({"Inbox"})).messages_no;
   size_t NumToFetch = TotalEmails;
@@ -74,8 +73,8 @@ bool BMC::MailClient::Fetch(const size_t& NumEmails) const {
 }
 bool BMC::MailClient::RemoveEmail(const size_t& ID) {
   try {
-    mailio::imaps IMAP(EmailServerAddress,IMAP_PORT);
-                    IMAP.authenticate(RCSID, Password, mailio::imaps::auth_method_t::START_TLS);
+    mailio::imaps IMAP(EmailServerAddress, IMAP_PORT);
+    IMAP.authenticate(RCSID, Password, mailio::imaps::auth_method_t::START_TLS);
     IMAP.remove("Inbox", ID);
     return true;
   } catch (const mailio::imap_error& Err) {
@@ -111,8 +110,8 @@ bool BMC::MailClient::SendMessage(const std::string& Recipient_Name,
                                   const std::string& Subject,
                                   const std::string& Messagebody) const {
   try {
-mailio::smtps SMTP(EmailServerAddress,SMTP_PORT);
-                    SMTP.authenticate(RCSID, Password, mailio::smtps::auth_method_t::START_TLS);
+    mailio::smtps SMTP(EmailServerAddress, SMTP_PORT);
+    SMTP.authenticate(RCSID, Password, mailio::smtps::auth_method_t::START_TLS);
     MessageObj M;
     M.from(mailio::mail_address(Nickname, EmailAddress));
     M.add_recipient(mailio::mail_address(Recipient_Name, Recipient_Email));
