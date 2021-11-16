@@ -20,7 +20,7 @@ inline static void PrintException(const std::exception &Err) noexcept {
   std::time_t timenow =
       std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
   std::string Buffer = std::move(std::ctime(&timenow));
-  Buffer[Buffer.size()-1] = 0;
+  Buffer[Buffer.size() - 1] = 0;
   std::cerr << "<" << Buffer << "> Run-Time Exception: " << Err.what()
             << std::endl
             << std::flush;
@@ -32,7 +32,7 @@ inline static void PrintRequest(Args &&...A) noexcept {
   std::time_t timenow =
       std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
   std::string Buffer = std::move(std::ctime(&timenow));
-  Buffer[Buffer.size()-1] = 0;
+  Buffer[Buffer.size() - 1] = 0;
   std::cout << "<" << Buffer << "> User Request: " << BUFFER.str() << std::endl
             << std::flush;
 }

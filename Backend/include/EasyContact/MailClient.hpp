@@ -12,9 +12,12 @@
 #endif
 // C++ Standard Library
 #include <algorithm>
+#include <fstream>
 #include <iostream>
-#include <list>
 #include <string>
+// Standard Template Library
+#include <list>
+#include <utility>
 // MailIO Header Files
 #include <mailio/imap.hpp>
 #include <mailio/message.hpp>
@@ -27,18 +30,19 @@ bool AuthenticateLogin(const std::string& RCSID, const std::string& Password);
 class MailClient {
  private:
   const std::string RCSID;
-  const std::string Password;
   const std::string EmailAddress;
   mutable std::string Nickname;
+  mutable mailio::imaps IMAP;
+  mutable mailio::smtps SMTP;
+
+ private:
+  [[nodiscard]] bool RecvEmail(const size_t& ID,MessageObj *M) const;
+  [[nodiscard]] bool RemoveEmail(const size_t& ID);
 
  public:
   explicit MailClient(const std::string& _RCSID, const std::string& _Password);
-  explicit MailClient(const std::string& _RCSID, const std::string& _Password,
-                      const std::string& _Email, const std::string& _Nickname);
-  void ChangeNickname(const std::string& _Nickname) const;
+  void ChangeNickname(const std::string& _Nickname) const noexcept;
   bool Fetch(const size_t& NumEmails) const;
-  // recv email, if no error, the return should be the a message;
-  bool recv(MessageObj* mesg) const;
   bool remove_first() const;
   int inbox_status() const;
   int SendMessage(const std::string& name_to, const std::string& to_mail,

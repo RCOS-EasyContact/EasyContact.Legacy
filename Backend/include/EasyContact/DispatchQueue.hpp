@@ -36,8 +36,8 @@ class DispatchQueue {
  public:
   explicit DispatchQueue(const size_t& NumThreads);
   ~DispatchQueue();
-  std::pair<size_t, size_t> Dispatch(const Functor& Operation) noexcept;
-  std::pair<size_t, size_t> Dispatch(Functor&& Operation) noexcept;
+  std::pair<size_t, size_t> Dispatch(const Functor& Operation);
+  std::pair<size_t, size_t> Dispatch(Functor&& Operation);
   DispatchQueue(const DispatchQueue& RHS) = delete;
   DispatchQueue& operator=(const DispatchQueue& RHS) = delete;
   DispatchQueue(DispatchQueue&& RHS) = delete;

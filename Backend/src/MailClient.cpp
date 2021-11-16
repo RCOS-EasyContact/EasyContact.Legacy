@@ -7,19 +7,12 @@
 #ifndef BACKEND_SRC_MAILCLIENT_CPP_
 #define BACKEND_SRC_MAILCLIENT_CPP_
 #include <EasyContact/MailClient.hpp>
-using mailio::codec;
-using mailio::dialog_error;
-using mailio::imap;
-using mailio::imap_error;
-using mailio::imaps;
-using mailio::mail_address;
-using mailio::smtp_error;
-using mailio::smtps;
+static const char* const UserDataLocation = "data/";
 bool BMC::AuthenticateLogin(const std::string& RCSID,
                             const std::string& Password) {
   try {
-    mailio::imaps conn("mail.rpi.edu", 993);
-    conn.authenticate(RCSID, Password, mailio::imaps::auth_method_t::LOGIN);
+    mailio::imaps Auth("mail.rpi.edu", 993);
+    Auth.authenticate(RCSID, Password, mailio::imaps::auth_method_t::LOGIN);
   } catch (const mailio::imap_error& Err) {
     SYSLOG::PrintException(Err);
     return false;
@@ -29,56 +22,63 @@ bool BMC::AuthenticateLogin(const std::string& RCSID,
 BMC::MailClient::MailClient(const std::string& _RCSID,
                             const std::string& _Password)
     : RCSID(_RCSID),
-      Password(_Password),
       EmailAddress(_RCSID + "@rpi.edu"),
-      Nickname(_RCSID) {}
-BMC::MailClient::MailClient(const std::string& _RCSID,
-                            const std::string& _Password,
-                            const std::string& _Email,
-                            const std::string& _Nickname)
-    : RCSID(_RCSID),
-      Password(_Password),
-      EmailAddress(_Email),
-      Nickname(_Nickname) {}
-void BMC::MailClient::ChangeNickname(const std::string& _Nickname) const {
+      Nickname(_RCSID),
+      IMAP("mail.rpi.edu", 993),
+      SMTP("mail.rpi.edi", 587) {
+  IMAP.authenticate(_RCSID, _Password, mailio::imaps::auth_method_t::START_TLS);
+  SMTP.authenticate(_RCSID, _Password, mailio::smtps::auth_method_t::START_TLS);
+}
+bool BMC::MailClient::RecvEmail(const size_t& ID,MessageObj *M) const {
+  try {
+    M->line_policy(mailio::codec::line_len_policy_t::RECOMMENDED,
+                  mailio::codec::line_len_policy_t::RECOMMENDED);
+    IMAP.fetch(ID, *M);
+    return true;
+  } catch (const mailio::imap_error& Err) {
+    SYSLOG::PrintException(Err);
+  } catch (const mailio::dialog_error& Err) {
+    SYSLOG::PrintException(Err);
+  }
+  return false;
+}
+void BMC::MailClient::ChangeNickname(
+    const std::string& _Nickname) const noexcept {
   Nickname = _Nickname;
 }
-bool BMC::MailClient::Fetch(const size_t& NumEmails) const { return false; }
-bool BMC::MailClient::recv(MessageObj* msg) const {
-  // MessageObj &new_msg = *msg;
+bool BMC::MailClient::Fetch(const size_t& NumEmails) const {
+  const size_t TotalEmails =
+      IMAP.select(std::list<std::string>({"Inbox"})).messages_no;
+  size_t NumToFetch = TotalEmails;
+  if (NumToFetch >= NumEmails) {
+    NumToFetch = NumEmails;
+  }
+  for (size_t i = 0; i < NumToFetch; ++i) {
+    const size_t Current_ID = TotalEmails - i;
+    MessageObj M;
+    if(RecvEmail(Current_ID,&M)==false){return false;}
+    std::ofstream FILE;
+    FILE.open(std::string(UserDataLocation) + RCSID + "/" +
+              std::to_string(Current_ID) + ".txt");
+    FILE << "Subject: " << M.subject() << std::endl;
+    FILE << "From: " << M.from_to_string() << std::endl;
+    FILE << "Content: " << M.content() << std::endl;
+    FILE.close();
+  }
+  return false;
+}
+bool BMC::MailClient::RemoveEmail(const size_t& ID) {
   try {
-    imaps conn("mail.rpi.edu", 993);
-    conn.authenticate(RCSID, Password, imaps::auth_method_t::LOGIN);
-    imaps::mailbox_stat_t ret = conn.select(std::list<std::string>({"Inbox"}));
-    msg->line_policy(codec::line_len_policy_t::VERYLARGE,
-                     codec::line_len_policy_t::VERYLARGE);
-    conn.fetch(ret.messages_no, *msg);
-    /*
-            std::cout<<msg.subject()<<std::endl;
-            std::cout<<msg.content()<<std::endl;
-            std::cout<<msg.from_to_string()<<std::endl;from who
-    */
+    IMAP.remove("Inbox", ID);
     return true;
-  } catch (const imap_error& Err) {
+  } catch (const mailio::imap_error& Err) {
     SYSLOG::PrintException(Err);
-  } catch (const dialog_error& Err) {
+  } catch (const mailio::dialog_error& Err) {
     SYSLOG::PrintException(Err);
   }
   return false;
 }
-bool BMC::MailClient::remove_first() const {
-  try {
-    imap conn("mail.rpi.edu", 143);
-    conn.authenticate(RCSID, Password, imap::auth_method_t::LOGIN);
-    conn.remove("inbox", 1);
-    return true;
-  } catch (const imap_error& Err) {
-    SYSLOG::PrintException(Err);
-  } catch (const dialog_error& Err) {
-    SYSLOG::PrintException(Err);
-  }
-  return false;
-}
+#if 0
 int BMC::MailClient::inbox_status() const {
   int ret = 0;
   try {
@@ -123,4 +123,5 @@ int BMC::MailClient::SendMessage(const std::string& name_to,
   }
   return true;
 }
+#endif
 #endif  // BACKEND_SRC_MAILCLIENT_CPP_

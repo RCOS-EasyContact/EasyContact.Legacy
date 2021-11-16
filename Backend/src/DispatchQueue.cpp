@@ -27,16 +27,14 @@ DispatchQueue::~DispatchQueue() {
     }
   }
 }
-std::pair<size_t, size_t> DispatchQueue::Dispatch(
-    const Functor& Operation) noexcept {
+std::pair<size_t, size_t> DispatchQueue::Dispatch(const Functor& Operation) {
   std::unique_lock<std::mutex> u_Lock(Lock);
   Queue.push(Operation);
   u_Lock.unlock();
   CV.notify_one();
   return std::pair<size_t, size_t>(++JobID, Queue.size());
 }
-std::pair<size_t, size_t> DispatchQueue::Dispatch(
-    Functor&& Operation) noexcept {
+std::pair<size_t, size_t> DispatchQueue::Dispatch(Functor&& Operation) {
   std::unique_lock<std::mutex> u_Lock(Lock);
   Queue.push(std::move(Operation));
   u_Lock.unlock();
