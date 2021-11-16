@@ -39,6 +39,7 @@ class HTTPRouter {
       return HTTP_STATUS_NO_CONTENT;
     }
     resp->content_type = APPLICATION_JSON;
+    // std::cout << req->Dump(1, 1).c_str() << std::endl<<std::flush;
     req->ParseBody();
     return 0;
   }
@@ -241,7 +242,7 @@ class HTTPRouter {
       return 500;  // Internal Server Error
     });
     // Send Email
-    router->POST("Email/SendToName", [](HttpRequest *req, HttpResponse *resp) {
+    router->POST("/Email/SendToName", [](HttpRequest *req, HttpResponse *resp) {
       SYSLOG::PrintRequest("POST->", "/Email/SendToName");
       try {
         const std::string &Token = req->json["Token"];
@@ -267,7 +268,7 @@ class HTTPRouter {
       return 500;  // Internal Server Error
     });
     // Send Email
-    router->POST("Email/SendToAddress", [](HttpRequest *req,
+    router->POST("/Email/SendToAddress", [](HttpRequest *req,
                                            HttpResponse *resp) {
       SYSLOG::PrintRequest("POST->", "/Email/SendToAddress");
       try {
