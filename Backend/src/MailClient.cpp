@@ -111,7 +111,7 @@ bool BMC::MailClient::SendMessage(const std::string& Recipient_Name,
                                   const std::string& Messagebody) const {
   try {
     mailio::smtps SMTP(EmailServerAddress, SMTP_PORT);
-    SMTP.authenticate(RCSID, Password, mailio::smtps::auth_method_t::LOGIN);
+    SMTP.authenticate(RCSID, Password, mailio::smtps::auth_method_t::START_TLS);
     mailio::message M;
     M.from(mailio::mail_address(Nickname, EmailAddress));
     M.add_recipient(mailio::mail_address(Recipient_Name, Recipient_Email));
