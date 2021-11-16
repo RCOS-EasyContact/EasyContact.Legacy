@@ -49,6 +49,7 @@ bool BMC::MailClient::RecvEmail(const size_t& ID, mailio::message* M) const {
                    mailio::codec::line_len_policy_t::VERYLARGE);
     mailio::imaps IMAP(EmailServerAddress, IMAP_PORT);
     IMAP.authenticate(RCSID, Password, mailio::imaps::auth_method_t::LOGIN);
+    IMAP.select(std::list<std::string>({"Inbox"}));
     IMAP.fetch(ID, *M);
     return true;
   } catch (const mailio::imap_error& Err) {
