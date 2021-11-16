@@ -8,8 +8,6 @@
 #define BACKEND_INCLUDE_EASYCONTACT_HTTPROUTER_HPP_
 // Libhv Library (C Library)
 #include <hv/HttpService.h>
-
-#include <mailio/message.hpp>
 // C++ Standard Library
 #include <string>
 // Standard Template Library
@@ -269,7 +267,7 @@ class HTTPRouter {
     });
     // Send Email
     router->POST("/Email/SendToAddress", [](HttpRequest *req,
-                                           HttpResponse *resp) {
+                                            HttpResponse *resp) {
       SYSLOG::PrintRequest("POST->", "/Email/SendToAddress");
       try {
         const std::string &Token = req->json["Token"];
