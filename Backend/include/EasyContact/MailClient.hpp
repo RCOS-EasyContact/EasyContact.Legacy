@@ -30,10 +30,9 @@ bool AuthenticateLogin(const std::string& RCSID, const std::string& Password);
 class MailClient {
  private:
   const std::string RCSID;
+  const std::string Password;
   const std::string EmailAddress;
   mutable std::string Nickname;
-  mutable mailio::imaps IMAP;
-  mutable mailio::smtps SMTP;
 
  protected:
   [[nodiscard]] bool RecvEmail(const size_t& ID, MessageObj* M) const;
