@@ -288,29 +288,6 @@ class HTTPRouter {
       }
       return 500;  // Internal Server Error
     });
-    // Recieve Email
-    router->GET("Email/Recv", [](HttpRequest *req,
-                                HttpResponse *resp){
-      SYSLOG::PrintRequest("GET->", "/Email/Recv");
-      try{
-        const std::string &Token = req->json["Token"];
-        const std::unordered_map<std::string, SingleUser>::const_iterator User =
-            g_ActiveUsers.find(Token);
-        // Verify User Is Current Active
-        if (User == g_ActiveUsers.end()) {
-          return 401;  // Unauthorized
-        }
-        mailio::Message msg = new mailio::Message();
-        if(User->second.recv(msg) == False) {
-          return 402; // Recieving Failed
-        }
-        resp->json.push_back({"Subject", msg.subject()}, {"Sender", msg.sender_to_string()})
-        return 200;   // Ok
-      } catch (const std::exception &Err){
-        SYSLOG::PrintException(Err);
-      }
-      return 500;   // Internal Server Error
-    });
     // Remove Tag For One Existing Contact
     router->Delete(
         "/Contacts/Unassign", [](HttpRequest *req, HttpResponse *resp) {
