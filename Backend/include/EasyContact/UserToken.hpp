@@ -14,7 +14,7 @@
 namespace AUT {
 [[nodiscard]] inline static std::string GenerateToken() noexcept {
   static const size_t Length = 1024;
-  static const char *AlphaNum =
+  static const char AlphaNum[] =
       "0123456789"
       "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
       "abcdefghijklmnopqrstuvwxyz";
