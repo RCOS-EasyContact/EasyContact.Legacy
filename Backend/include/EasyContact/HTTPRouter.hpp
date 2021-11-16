@@ -37,8 +37,6 @@ class HTTPRouter {
       return HTTP_STATUS_NO_CONTENT;
     }
     resp->content_type = APPLICATION_JSON;
-    std::cout << req->Dump(true, true).c_str() << std::endl;
-    std::cout << req->Dump(false, false).c_str() << std::endl;
     req->ParseBody();
     return 0;
   }

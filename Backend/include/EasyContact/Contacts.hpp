@@ -21,7 +21,7 @@
  * BCS : Backend Contact System
  */
 namespace BCS {
-void CreateDirectory(const std::string &DirName);
+void CreateDirectory(const std::string &DirName)noexcept;
 class Contacts {
  private:
   const std::string RCSID;
