@@ -29,6 +29,20 @@ BMC::MailClient::MailClient(const std::string& _RCSID,
       Password(_Password),
       EmailAddress(_RCSID + "@rpi.edu"),
       Nickname(_RCSID) {}
+size_t BMC::MailClient::InboxEmails() const {
+  size_t Result = 0;
+  try {
+    mailio::imaps IMAP(EmailServerAddress, IMAP_PORT);
+    IMAP.authenticate(RCSID, Password, mailio::imaps::auth_method_t::LOGIN);
+    mailio::imaps::mailbox_stat_t STAT = IMAP.statistics("Inbox");
+    Result = STAT.messages_no;
+  } catch (const mailio::imap_error& Err) {
+    SYSLOG::PrintException(Err);
+  } catch (const mailio::dialog_error& Err) {
+    SYSLOG::PrintException(Err);
+  }
+  return Result;
+}
 bool BMC::MailClient::RecvEmail(const size_t& ID, mailio::message* M) const {
   try {
     M->line_policy(mailio::codec::line_len_policy_t::VERYLARGE,
@@ -44,14 +58,24 @@ bool BMC::MailClient::RecvEmail(const size_t& ID, mailio::message* M) const {
   }
   return false;
 }
+bool BMC::MailClient::RemoveEmail(const size_t& ID) {
+  try {
+    mailio::imaps IMAP(EmailServerAddress, IMAP_PORT);
+    IMAP.authenticate(RCSID, Password, mailio::imaps::auth_method_t::LOGIN);
+    IMAP.remove("Inbox", ID);
+    return true;
+  } catch (const mailio::imap_error& Err) {
+    SYSLOG::PrintException(Err);
+  } catch (const mailio::dialog_error& Err) {
+    SYSLOG::PrintException(Err);
+  }
+  return false;
+}
 void BMC::MailClient::ChangeNickname(const std::string& _Nickname) noexcept {
   Nickname = _Nickname;
 }
 bool BMC::MailClient::Fetch(const size_t& NumEmails) const {
-  mailio::imaps IMAP(EmailServerAddress, IMAP_PORT);
-  IMAP.authenticate(RCSID, Password, mailio::imaps::auth_method_t::LOGIN);
-  const size_t TotalEmails =
-      IMAP.select(std::list<std::string>({"Inbox"})).messages_no;
+  const size_t TotalEmails = InboxEmails();
   SYSLOG::PrintDebugMessage("TotalEmails: ", TotalEmails);
   size_t NumToFetch = TotalEmails;
   if (NumToFetch >= NumEmails) {
@@ -88,27 +112,6 @@ bool BMC::MailClient::RemoveEmail(const size_t& ID) {
   }
   return false;
 }
-#if 0
-int BMC::MailClient::inbox_status() const {
-  int ret = 0;
-  try {
-    // connect to server
-    imaps conn("mail.rpi.edu", 993);
-    // modify to use an existing zoho account
-    conn.authenticate(RCSID, Password, imaps::auth_method_t::LOGIN);
-    // query inbox statistics
-    imaps::mailbox_stat_t stat = conn.statistics("inbox");
-    ret = stat.messages_no;
-  } catch (const imap_error& Err) {
-    SYSLOG::PrintException(Err);
-    return false;
-  } catch (const dialog_error& Err) {
-    SYSLOG::PrintException(Err);
-    return false;
-  }
-  return ret;
-}
-#endif
 bool BMC::MailClient::SendMessage(const std::string& Recipient_Name,
                                   const std::string& Recipient_Email,
                                   const std::string& Subject,

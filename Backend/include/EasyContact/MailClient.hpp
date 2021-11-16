@@ -34,6 +34,7 @@ class MailClient {
   mutable std::string Nickname;
 
  protected:
+  [[nodiscard]] size_t InboxEmails() const;
   [[nodiscard]] bool RecvEmail(const size_t& ID, mailio::message* M) const;
   [[nodiscard]] bool RemoveEmail(const size_t& ID);
 
