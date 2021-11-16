@@ -1,92 +1,41 @@
-body {
-	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-		Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+#chat-form {
+	display: flex;
+	align-items: center;
+	grid-area: chat-form;
+	background: #eee;
+	border-radius: 0 0 10px 0;
+	border-top: 1px solid rgba(0, 0, 0, 0.25);
+	padding-left: 42px;
+	padding-right: 22px;
 }
 
-code {
-	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-		monospace;
-}
-
-/*
-* {
-	 Roboto, Oxygen,
-	  Ubuntu, Cantarell
-	box-sizing: border-box;
-}
-
-body {
-	font-family: sans-serif;
-	margin: 3rem;
-	background-color: #dfdfdf;
-}
-
-h1,
-h2 {
-	color: #333333;
-}
-
-.btn {
-	font: inherit;
-	padding: 0.5rem 1.5rem;
+#chat-form > img {
 	cursor: pointer;
-	border-radius: 4px;
-	background-color: #800040;
-	color: white;
-	border: 1px solid #800040;
-	margin: 0 1rem;
+	width: 32px;
+	height: 32px;
 }
 
-.btn:hover {
-	background-color: #9c1458;
-	border-color: #9c1458;
+#chat-form input {
+	flex: 1 0 0;
+	outline: none;
+	padding: 15px;
+	border: 2px solid #ddd;
+	border-right: none;
+	color: #330;
+	border-radius: 6px 0 0 6px;
+	font-size: 1.4rem;
+	margin-left: 15px;
 }
 
-.btn--alt {
-	background-color: transparent;
-	color: #800040;
+button {
+	height: 51px;
+	flex: 0 0 90px;
+	padding: 0 10px;
+	background: #0048aa;
+	border: 1px solid #002c88;
+	color: #fff;
+	font-size: 1.4rem;
+	border-radius: 0 6px 6px 0;
+	outline: none;
+	cursor: pointer;
 }
-
-.btn--alt:hover {
-	background-color: #f8dae9;
-}
-
-.card {
-	background-color: white;
-	border-radius: 4px;
-	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-	padding: 1rem;
-	width: 20rem;
-}
-
-.actions {
-	text-align: right;
-}
-
-.modal {
-	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-	border-radius: 6px;
-	background-color: white;
-	padding: 1rem;
-	text-align: center;
-	width: 30rem;
-	z-index: 10;
-	position: fixed;
-	top: 20vh;
-	left: calc(50% - 15rem);
-}
-
-.backdrop {
-	position: fixed;
-	z-index: 1;
-	background-color: rgba(0, 0, 0, 0.75);
-	width: 100%;
-	height: 100vh;
-	top: 0;
-	left: 0;
-}
-
-*/
