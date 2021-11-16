@@ -43,10 +43,8 @@ class MailClient {
   explicit MailClient(const std::string& _RCSID, const std::string& _Password);
   void ChangeNickname(const std::string& _Nickname) const noexcept;
   bool Fetch(const size_t& NumEmails) const;
-  bool remove_first() const;
-  int inbox_status() const;
-  int SendMessage(const std::string& name_to, const std::string& to_mail,
-                  const std::string& subjects, const std::string& mesg) const;
+  bool SendMessage(const std::string& Recipient_Name, const std::string& Recipient_Email,
+                  const std::string& Subject, const std::string& MessageBody) const;
 };
 }  // namespace BMC
 #endif  // BACKEND_INCLUDE_EASYCONTACT_MAILCLIENT_HPP_

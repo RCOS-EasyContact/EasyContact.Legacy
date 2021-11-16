@@ -98,30 +98,26 @@ int BMC::MailClient::inbox_status() const {
   }
   return ret;
 }
-int BMC::MailClient::SendMessage(const std::string& name_to,
-                                 const std::string& to_mail,
-                                 const std::string& subjects,
-                                 const std::string& mesg) const {
-  try {
-    MessageObj msg;
-    msg.from(
-        mail_address(Nickname,
-                     EmailAddress));  // mail_adddress(name,xxx@xxx.edu(com))
-    msg.add_recipient(mail_address(name_to, to_mail));
-    msg.subject(subjects);
-    msg.content(mesg);
-
-    smtps conn("mail.rpi.edu", 587);
-    conn.authenticate(RCSID, Password, smtps::auth_method_t::START_TLS);
-    conn.submit(msg);
-  } catch (const smtp_error& Err) {
-    SYSLOG::PrintException(Err);
-    return false;
-  } catch (const dialog_error& Err) {
-    SYSLOG::PrintException(Err);
-    return false;
-  }
-  return true;
-}
 #endif
+bool BMC::MailClient::SendMessage(const std::string& Recipient_Name,
+                                 const std::string& Recipient_Email,
+                                 const std::string& Subject,
+                                 const std::string& Messagebody) const {
+  try {
+    MessageObj M;
+    M.from(
+        mailio::mail_address(Nickname,
+                     EmailAddress));
+    M.add_recipient(mailio::mail_address(Recipient_Name, Recipient_Email));
+    M.subject(Subject);
+    M.content(Messagebody);
+    SMTP.submit(M);
+    return true;
+  } catch (const mailio::smtp_error& Err) {
+    SYSLOG::PrintException(Err);
+  } catch (const mailio::dialog_error& Err) {
+    SYSLOG::PrintException(Err);
+  }
+  return false;;
+}
 #endif  // BACKEND_SRC_MAILCLIENT_CPP_
