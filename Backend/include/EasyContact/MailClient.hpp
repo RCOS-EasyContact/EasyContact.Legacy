@@ -8,7 +8,7 @@
 #define BACKEND_INCLUDE_EASYCONTACT_MAILCLIENT_HPP_
 // Resolve Conflict with LibBoost
 #ifdef defer
-  #undef defer
+#undef defer
 #endif
 // C++ Standard Library
 #include <algorithm>
@@ -22,7 +22,7 @@
 // EasyContact Header Files
 #include <EasyContact/SysLogs.hpp>
 namespace BMC {
- typedef  mailio::message MessageObj;
+typedef mailio::message MessageObj;
 bool AuthenticateLogin(const std::string& RCSID, const std::string& Password);
 class MailClient {
  private:
@@ -34,15 +34,15 @@ class MailClient {
  public:
   explicit MailClient(const std::string& _RCSID, const std::string& _Password);
   explicit MailClient(const std::string& _RCSID, const std::string& _Password,
-                       const std::string& _Email,const std::string& _Nickname);
-  void ChangeNickname(const std::string& _Nickname)const;
+                      const std::string& _Email, const std::string& _Nickname);
+  void ChangeNickname(const std::string& _Nickname) const;
   bool Fetch(const size_t& NumEmails) const;
   // recv email, if no error, the return should be the a message;
   bool recv(MessageObj* mesg) const;
   bool remove_first() const;
   int inbox_status() const;
   int SendMessage(const std::string& name_to, const std::string& to_mail,
-                   const std::string& subjects, const std::string& mesg) const;
+                  const std::string& subjects, const std::string& mesg) const;
 };
 }  // namespace BMC
 #endif  // BACKEND_INCLUDE_EASYCONTACT_MAILCLIENT_HPP_

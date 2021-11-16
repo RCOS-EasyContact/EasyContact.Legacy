@@ -34,14 +34,15 @@ BMC::MailClient::MailClient(const std::string& _RCSID,
       Nickname(_RCSID) {}
 BMC::MailClient::MailClient(const std::string& _RCSID,
                             const std::string& _Password,
-                            const std::string& _Email,const std::string& _Nickname)
+                            const std::string& _Email,
+                            const std::string& _Nickname)
     : RCSID(_RCSID),
       Password(_Password),
       EmailAddress(_Email),
-      Nickname(_Nickname){}
-  void BMC::MailClient::ChangeNickname(const std::string& _Nickname)const{
-Nickname=_Nickname;
-  }
+      Nickname(_Nickname) {}
+void BMC::MailClient::ChangeNickname(const std::string& _Nickname) const {
+  Nickname = _Nickname;
+}
 bool BMC::MailClient::Fetch(const size_t& NumEmails) const { return false; }
 bool BMC::MailClient::recv(MessageObj* msg) const {
   // MessageObj &new_msg = *msg;
@@ -98,9 +99,9 @@ int BMC::MailClient::inbox_status() const {
   return ret;
 }
 int BMC::MailClient::SendMessage(const std::string& name_to,
-                                  const std::string& to_mail,
-                                  const std::string& subjects,
-                                  const std::string& mesg) const {
+                                 const std::string& to_mail,
+                                 const std::string& subjects,
+                                 const std::string& mesg) const {
   try {
     MessageObj msg;
     msg.from(

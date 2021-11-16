@@ -75,8 +75,7 @@ class HTTPRouter {
         if (User == g_ActiveUsers.end()) {
           return 401;  // Unauthorized
         }
-        const std::vector<std::string> &AllNames =
-            User->second.getAllNames();
+        const std::vector<std::string> &AllNames = User->second.getAllNames();
         for (const std::string &i : AllNames) {
           resp->json.push_back(i);
         }
@@ -97,8 +96,7 @@ class HTTPRouter {
         if (User == g_ActiveUsers.end()) {
           return 401;  // Unauthorized
         }
-        const std::vector<std::string> &TagContains =
-            User->second.getAllTags();
+        const std::vector<std::string> &TagContains = User->second.getAllTags();
         for (const std::string &i : TagContains) {
           resp->json.push_back(i);
         }
@@ -144,8 +142,7 @@ class HTTPRouter {
         if (User == g_ActiveUsers.end()) {
           return 401;  // Unauthorized
         }
-        const std::string &EmailAddress =
-            User->second.getEmailAddress(Name);
+        const std::string &EmailAddress = User->second.getEmailAddress(Name);
         resp->json.push_back(EmailAddress);
         return 200;  // OK
       } catch (const std::exception &Err) {
@@ -242,9 +239,9 @@ class HTTPRouter {
       return 500;  // Internal Server Error
     });
     // Send Email
-    router->POST("Email/SendToName", [](HttpRequest *req, HttpResponse *resp){
+    router->POST("Email/SendToName", [](HttpRequest *req, HttpResponse *resp) {
       SYSLOG::PrintRequest("POST->", "/Email/SendToName");
-      try{
+      try {
         const std::string &Token = req->json["Token"];
         const std::string &Reciever = req->json["Reciever"];
         const std::string &Subject = req->json["Subject"];
@@ -255,24 +252,26 @@ class HTTPRouter {
         if (User == g_ActiveUsers.end()) {
           return 401;  // Unauthorized
         }
-        const std::string &RecieverEmail = User->second.getEmailAddress(Reciever);
-        if(RecieverEmail.empty()){
-          return 412; // Precondition Failed
+        const std::string &RecieverEmail =
+            User->second.getEmailAddress(Reciever);
+        if (RecieverEmail.empty()) {
+          return 412;  // Precondition Failed
         }
-        User->second.SendMessage(Reciever,RecieverEmail,Subject,Message);
-        return 200; // Accept
+        User->second.SendMessage(Reciever, RecieverEmail, Subject, Message);
+        return 200;  // Accept
       } catch (const std::exception &Err) {
         SYSLOG::PrintException(Err);
       }
-      return 500; // Internal Server Error
+      return 500;  // Internal Server Error
     });
     // Send Email
-    router->POST("Email/SendToAddress", [](HttpRequest *req, HttpResponse *resp){
+    router->POST("Email/SendToAddress", [](HttpRequest *req,
+                                           HttpResponse *resp) {
       SYSLOG::PrintRequest("POST->", "/Email/SendToAddress");
-      try{
+      try {
         const std::string &Token = req->json["Token"];
         const std::string &Reciever = req->json["Reciever"];
-        const std::string &Email=req->json["Email"];
+        const std::string &Email = req->json["Email"];
         const std::string &Subject = req->json["Subject"];
         const std::string &Message = req->json["Message"];
         const std::unordered_map<std::string, SingleUser>::const_iterator User =
@@ -281,12 +280,12 @@ class HTTPRouter {
         if (User == g_ActiveUsers.end()) {
           return 401;  // Unauthorized
         }
-        User->second.SendMessage(Reciever,Email,Subject,Message);
-        return 200; // Accept
+        User->second.SendMessage(Reciever, Email, Subject, Message);
+        return 200;  // Accept
       } catch (const std::exception &Err) {
         SYSLOG::PrintException(Err);
       }
-      return 500; // Internal Server Error
+      return 500;  // Internal Server Error
     });
     // Remove Tag For One Existing Contact
     router->Delete(

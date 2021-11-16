@@ -21,7 +21,7 @@
  * BCS : Backend Contact System
  */
 namespace BCS {
-void CreateDirectory(const std::string &DirName)noexcept;
+void CreateDirectory(const std::string &DirName) noexcept;
 class Contacts {
  private:
   const std::string RCSID;
@@ -35,7 +35,8 @@ class Contacts {
   [[nodiscard]] std::string getEmailAddress(const std::string &Name) const;
   [[nodiscard]] std::vector<std::string> getAllNames() const;
   [[nodiscard]] std::vector<std::string> getAllTags() const;
-  [[nodiscard]] std::vector<std::string> getTagContains(const std::string &TagName) const;
+  [[nodiscard]] std::vector<std::string> getTagContains(
+      const std::string &TagName) const;
   bool assignTagTo(const std::string &TagName, const std::string &ContactName);
   bool removeTagFor(const std::string &TagName, const std::string &ContactName);
 };
