@@ -8,7 +8,7 @@
 #define BACKEND_INCLUDE_EASYCONTACT_MAILCLIENT_HPP_
 // Resolve Conflict with LibBoost
 #ifdef defer
-#undef defer
+  #undef defer
 #endif
 // C++ Standard Library
 #include <algorithm>

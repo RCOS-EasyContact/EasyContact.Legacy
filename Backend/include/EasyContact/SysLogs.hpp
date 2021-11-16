@@ -16,7 +16,7 @@
 // Standard Template Library
 #include <utility>
 namespace SYSLOG {
-inline static void PrintException(const std::exception &Err) {
+inline static void PrintException(const std::exception &Err)noexcept {
   std::time_t timenow =
       std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
   std::string Buffer = std::move(std::ctime(&timenow));
@@ -25,7 +25,7 @@ inline static void PrintException(const std::exception &Err) {
             << std::endl;
 }
 template <typename... Args>
-inline static void PrintRequest(Args &&...A) {
+inline static void PrintRequest(Args &&...A)noexcept {
   std::stringstream BUFFER;
   (BUFFER << ... << A);
   std::time_t timenow =
