@@ -35,7 +35,7 @@ class MailClient {
   mutable mailio::imaps IMAP;
   mutable mailio::smtps SMTP;
 
- private:
+ protected:
   [[nodiscard]] bool RecvEmail(const size_t& ID, MessageObj* M) const;
   [[nodiscard]] bool RemoveEmail(const size_t& ID);
 

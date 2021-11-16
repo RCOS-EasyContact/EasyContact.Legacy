@@ -118,6 +118,5 @@ bool BMC::MailClient::SendMessage(const std::string& Recipient_Name,
     SYSLOG::PrintException(Err);
   }
   return false;
-  ;
 }
 #endif  // BACKEND_SRC_MAILCLIENT_CPP_
