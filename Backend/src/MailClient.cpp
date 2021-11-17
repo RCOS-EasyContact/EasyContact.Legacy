@@ -93,8 +93,8 @@ bool BMC::MailClient::Fetch(const size_t& NumEmails) const {
       return false;
     }
     std::ofstream FILE;
-    FILE.open(std::string(UserDataLocation) + RCSID + "/" +
-              std::to_string(Current_ID) + ".txt");
+    FILE.open(std::string(UserDataLocation) + RCSID + "/" + std::to_string(i) +
+              ".txt");
     FILE << "Subject: " << M.subject() << std::endl;
     FILE << "From: " << M.from_to_string() << std::endl;
     FILE << "Content: " << M.content() << std::endl;
