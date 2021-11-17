@@ -17,8 +17,7 @@ bool BMC::AuthenticateLogin(const std::string& RCSID,
   try {
     mailio::imaps Auth(EmailServerAddress, IMAP_PORT);
     Auth.authenticate(RCSID, Password, mailio::imaps::auth_method_t::LOGIN);
-  } catch (const std::exception& Err) {
-    SYSLOG::PrintException(Err);
+  } catch (const std::exception&) {
     return false;
   }
   return true;
