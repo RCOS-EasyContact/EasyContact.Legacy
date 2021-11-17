@@ -17,7 +17,7 @@ bool BMC::AuthenticateLogin(const std::string& RCSID,
   try {
     mailio::imaps Auth(EmailServerAddress, IMAP_PORT);
     Auth.authenticate(RCSID, Password, mailio::imaps::auth_method_t::LOGIN);
-  } catch (const mailio::imap_error& Err) {
+  } catch (const std::exception& Err) {
     SYSLOG::PrintException(Err);
     return false;
   }
@@ -40,6 +40,8 @@ size_t BMC::MailClient::InboxEmails() const {
     SYSLOG::PrintException(Err);
   } catch (const mailio::dialog_error& Err) {
     SYSLOG::PrintException(Err);
+  } catch (const std::exception& Err) {
+    SYSLOG::PrintException(Err);
   }
   return Result;
 }
@@ -55,6 +57,8 @@ bool BMC::MailClient::RecvEmail(const size_t& ID, mailio::message* M) const {
     SYSLOG::PrintException(Err);
   } catch (const mailio::dialog_error& Err) {
     SYSLOG::PrintException(Err);
+  } catch (const std::exception& Err) {
+    SYSLOG::PrintException(Err);
   }
   return false;
 }
@@ -68,6 +72,8 @@ bool BMC::MailClient::RemoveEmail(const size_t& ID) {
     SYSLOG::PrintException(Err);
   } catch (const mailio::dialog_error& Err) {
     SYSLOG::PrintException(Err);
+  } catch (const std::exception& Err) {
+    SYSLOG::PrintException(Err);
   }
   return false;
 }
@@ -76,15 +82,12 @@ void BMC::MailClient::ChangeNickname(const std::string& _Nickname) noexcept {
 }
 bool BMC::MailClient::Fetch(const size_t& NumEmails) const {
   const size_t TotalEmails = InboxEmails();
-  SYSLOG::PrintDebugMessage("TotalEmails: ", TotalEmails);
   size_t NumToFetch = TotalEmails;
   if (NumToFetch >= NumEmails) {
     NumToFetch = NumEmails;
   }
-  SYSLOG::PrintDebugMessage("NumToFetch: ", NumToFetch);
   for (size_t i = 0; i < NumToFetch; ++i) {
     const size_t Current_ID = TotalEmails - i;
-    SYSLOG::PrintDebugMessage("Current_ID: ", Current_ID);
     mailio::message M;
     if (RecvEmail(Current_ID, &M) == false) {
       return false;
@@ -116,6 +119,8 @@ bool BMC::MailClient::SendMessage(const std::string& Recipient_Name,
   } catch (const mailio::smtp_error& Err) {
     SYSLOG::PrintException(Err);
   } catch (const mailio::dialog_error& Err) {
+    SYSLOG::PrintException(Err);
+  } catch (const std::exception& Err) {
     SYSLOG::PrintException(Err);
   }
   return false;
