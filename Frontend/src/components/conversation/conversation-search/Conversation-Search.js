@@ -1,12 +1,13 @@
 import React from 'react';
-import './Conversation-Item.css';
 
-function ConversationItem() {
+import './Conversation-Search.css';
+
+function ConversationSearch() {
     return (
         <div id="search-container">
             <input type="text" placeholder="Search" />
         </div>
-    )
+    );
 }
 
-export default ConversationItem;
+export default ConversationSearch;
