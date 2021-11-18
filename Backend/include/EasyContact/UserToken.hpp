@@ -12,8 +12,8 @@
 #include <ctime>
 #include <string>
 namespace AUT {
-std::string GenerateToken() {
-  static const int Length = 1024;
+[[nodiscard]] inline static std::string GenerateToken() noexcept {
+  static const size_t Length = 1024;
   static const char AlphaNum[] =
       "0123456789"
       "ABCDEFGHIJKLMNOPQRSTUVWXYZ"

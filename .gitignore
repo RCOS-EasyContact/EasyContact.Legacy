@@ -1,6 +1,7 @@
 ### CMake ###
-bin/*
-lib/*
+bin/**/*
+lib/**/*
+data/**/*
 CMakeCache.txt
 CMakeFiles
 Makefile
@@ -11,7 +12,8 @@ mailio.pc
 RCOS-EasyContact
 
 ### User Data ###
-UserData/*
+*.db3
+*.txt
 
 # Created by https://www.toptal.com/developers/gitignore/api/macos,windows,linux,c++,visualstudio,visualstudiocode,xcode,sublimetext,clion
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos,windows,linux,c++,visualstudio,visualstudiocode,xcode,sublimetext,clion

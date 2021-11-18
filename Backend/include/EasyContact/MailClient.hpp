@@ -12,9 +12,12 @@
 #endif
 // C++ Standard Library
 #include <algorithm>
+#include <fstream>
 #include <iostream>
-#include <list>
 #include <string>
+// Standard Template Library
+#include <list>
+#include <utility>
 // MailIO Header Files
 #include <mailio/imap.hpp>
 #include <mailio/message.hpp>
@@ -30,17 +33,19 @@ class MailClient {
   const std::string EmailAddress;
   mutable std::string Nickname;
 
+ protected:
+  [[nodiscard]] size_t InboxEmails() const;
+  [[nodiscard]] bool RecvEmail(const size_t& ID, mailio::message* M) const;
+  [[nodiscard]] bool RemoveEmail(const size_t& ID);
+
  public:
   explicit MailClient(const std::string& _RCSID, const std::string& _Password);
-  explicit MailClient(const std::string& _RCSID, const std::string& _Password,
-                      const std::string& _Nickname, const std::string& _Email);
-  // recv email, if no error, the return should be the a message;
+  void ChangeNickname(const std::string& _Nickname) noexcept;
   bool Fetch(const size_t& NumEmails) const;
-  bool recv(mailio::message* mesg) const;
-  bool remove_first() const;
-  int inbox_status() const;
-  int sent_message(const std::string& name_to, const std::string& to_mail,
-                   const std::string& subjects, const std::string& mesg) const;
+  bool SendMessage(const std::string& Recipient_Name,
+                   const std::string& Recipient_Email,
+                   const std::string& Subject,
+                   const std::string& MessageBody) const;
 };
 }  // namespace BMC
 #endif  // BACKEND_INCLUDE_EASYCONTACT_MAILCLIENT_HPP_

@@ -37,8 +37,7 @@ class HTTPRouter {
       return HTTP_STATUS_NO_CONTENT;
     }
     resp->content_type = APPLICATION_JSON;
-    std::cout << req->Dump(true, true).c_str() << std::endl;
-    std::cout << req->Dump(false, false).c_str() << std::endl;
+    // std::cout << req->Dump(1, 1).c_str() << std::endl<<std::flush;
     req->ParseBody();
     return 0;
   }
@@ -77,8 +76,7 @@ class HTTPRouter {
         if (User == g_ActiveUsers.end()) {
           return 401;  // Unauthorized
         }
-        const std::vector<std::string> &AllNames =
-            User->second.SQLContacts.getAllNames();
+        const std::vector<std::string> &AllNames = User->second.getAllNames();
         for (const std::string &i : AllNames) {
           resp->json.push_back(i);
         }
@@ -99,8 +97,7 @@ class HTTPRouter {
         if (User == g_ActiveUsers.end()) {
           return 401;  // Unauthorized
         }
-        const std::vector<std::string> &TagContains =
-            User->second.SQLContacts.getAllTags();
+        const std::vector<std::string> &TagContains = User->second.getAllTags();
         for (const std::string &i : TagContains) {
           resp->json.push_back(i);
         }
@@ -124,7 +121,7 @@ class HTTPRouter {
           return 401;  // Unauthorized
         }
         const std::vector<std::string> &AllTags =
-            User->second.SQLContacts.getTagContains(Name);
+            User->second.getTagContains(Name);
         for (const std::string &i : AllTags) {
           resp->json.push_back(i);
         }
@@ -146,8 +143,7 @@ class HTTPRouter {
         if (User == g_ActiveUsers.end()) {
           return 401;  // Unauthorized
         }
-        const std::string &EmailAddress =
-            User->second.SQLContacts.getEmailAddress(Name);
+        const std::string &EmailAddress = User->second.getEmailAddress(Name);
         resp->json.push_back(EmailAddress);
         return 200;  // OK
       } catch (const std::exception &Err) {
@@ -168,7 +164,7 @@ class HTTPRouter {
         if (User == g_ActiveUsers.end()) {
           return 401;  // Unauthorized
         }
-        if (User->second.SQLContacts.newContact(Name, Email) == true) {
+        if (User->second.newContact(Name, Email) == true) {
           return 200;  // OK
         } else {
           return 409;  // Conflict
@@ -190,7 +186,7 @@ class HTTPRouter {
         if (User == g_ActiveUsers.end()) {
           return 401;  // Unauthorized
         }
-        if (User->second.SQLContacts.newTag(TagName) == true) {
+        if (User->second.newTag(TagName) == true) {
           return 200;  // OK
         } else {
           return 409;  // Conflict
@@ -213,7 +209,7 @@ class HTTPRouter {
         if (User == g_ActiveUsers.end()) {
           return 401;  // Unauthorized
         }
-        if (User->second.SQLContacts.assignTagTo(TagName, Name) == true) {
+        if (User->second.assignTagTo(TagName, Name) == true) {
           return 200;  // OK
         } else {
           return 409;  // Conflict
@@ -229,15 +225,64 @@ class HTTPRouter {
       try {
         const std::string &Token = req->json["Token"];
         const size_t Num = std::move(stol(req->GetParam("Num")));
-        const std::unordered_map<std::string, SingleUser>::iterator User =
+        const std::unordered_map<std::string, SingleUser>::const_iterator User =
             g_ActiveUsers.find(Token);
         // Verify User Is Current Active
         if (User == g_ActiveUsers.end()) {
           return 401;  // Unauthorized
         }
         const SingleUser &S = User->second;
-        g_DispatchQueue.Dispatch([S, Num]() { S.MailClient.Fetch(Num); });
+        g_DispatchQueue.Dispatch([S, Num]() { S.Fetch(Num); });
         return 202;  // Accepted
+      } catch (const std::exception &Err) {
+        SYSLOG::PrintException(Err);
+      }
+      return 500;  // Internal Server Error
+    });
+    // Send Email
+    router->POST("/Email/SendToName", [](HttpRequest *req, HttpResponse *resp) {
+      SYSLOG::PrintRequest("POST->", "/Email/SendToName");
+      try {
+        const std::string &Token = req->json["Token"];
+        const std::string &Reciever = req->json["Reciever"];
+        const std::string &Subject = req->json["Subject"];
+        const std::string &Message = req->json["Message"];
+        const std::unordered_map<std::string, SingleUser>::const_iterator User =
+            g_ActiveUsers.find(Token);
+        // Verify User Is Current Active
+        if (User == g_ActiveUsers.end()) {
+          return 401;  // Unauthorized
+        }
+        const std::string &RecieverEmail =
+            User->second.getEmailAddress(Reciever);
+        if (RecieverEmail.empty()) {
+          return 412;  // Precondition Failed
+        }
+        User->second.SendMessage(Reciever, RecieverEmail, Subject, Message);
+        return 200;  // Accept
+      } catch (const std::exception &Err) {
+        SYSLOG::PrintException(Err);
+      }
+      return 500;  // Internal Server Error
+    });
+    // Send Email
+    router->POST("/Email/SendToAddress", [](HttpRequest *req,
+                                            HttpResponse *resp) {
+      SYSLOG::PrintRequest("POST->", "/Email/SendToAddress");
+      try {
+        const std::string &Token = req->json["Token"];
+        const std::string &Reciever = req->json["Reciever"];
+        const std::string &Email = req->json["Email"];
+        const std::string &Subject = req->json["Subject"];
+        const std::string &Message = req->json["Message"];
+        const std::unordered_map<std::string, SingleUser>::const_iterator User =
+            g_ActiveUsers.find(Token);
+        // Verify User Is Current Active
+        if (User == g_ActiveUsers.end()) {
+          return 401;  // Unauthorized
+        }
+        User->second.SendMessage(Reciever, Email, Subject, Message);
+        return 200;  // Accept
       } catch (const std::exception &Err) {
         SYSLOG::PrintException(Err);
       }
@@ -257,7 +302,7 @@ class HTTPRouter {
             if (User == g_ActiveUsers.end()) {
               return 401;  // Unauthorized
             }
-            if (User->second.SQLContacts.removeTagFor(TagName, Name) == true) {
+            if (User->second.removeTagFor(TagName, Name) == true) {
               return 200;  // OK
             } else {
               return 409;  // Conflict
@@ -280,7 +325,7 @@ class HTTPRouter {
             if (User == g_ActiveUsers.end()) {
               return 401;  // Unauthorized
             }
-            if (User->second.SQLContacts.removeContact(Name) == true) {
+            if (User->second.removeContact(Name) == true) {
               return 200;  // OK
             } else {
               return 409;  // Conflict
@@ -303,7 +348,7 @@ class HTTPRouter {
             if (User == g_ActiveUsers.end()) {
               return 401;  // Unauthorized
             }
-            if (User->second.SQLContacts.removeTag(TagName) == true) {
+            if (User->second.removeTag(TagName) == true) {
               return 200;  // OK
             } else {
               return 409;  // Conflict
