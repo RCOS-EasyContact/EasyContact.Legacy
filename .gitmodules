@@ -7,3 +7,4 @@
 [submodule "Backend/lib/VMime"]
 	path = Backend/lib/VMime
 	url = https://github.com/kisli/vmime.git
+	branch = master

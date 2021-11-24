@@ -6,7 +6,12 @@ CMakeCache.txt
 CMakeFiles
 Makefile
 *.cmake
-mailio.pc
+*.pc
+
+# VMime
+vmime/
+config.hpp
+export-shared.hpp
 
 ### Deployment ##
 RCOS-EasyContact
