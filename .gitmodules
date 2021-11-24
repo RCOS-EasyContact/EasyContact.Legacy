@@ -4,3 +4,6 @@
 [submodule "Backend/SQLContacts/SQLite"]
 	path = Backend/lib/SQLite
 	url = https://github.com/SRombauts/SQLiteCpp.git
+[submodule "Backend/lib/VMime"]
+	path = Backend/lib/VMime
+	url = https://github.com/kisli/vmime.git
