@@ -22,7 +22,7 @@ void BCS::CreateDirectory(const std::string& DirName) noexcept {
   }
 }
 BCS::Contacts::Contacts(const std::string& newRCSID)
-    : RCSID(newRCSID) noexcept {
+    : RCSID(newRCSID)  {
   CreateDirectory(RCSID);
 }
 bool BCS::Contacts::newContact(const std::string& Name,

@@ -30,7 +30,7 @@ class Contacts {
    * Default Class Constructor
    * @param newRCSID : RCSID For The New Database
    */
-  explicit Contacts(const std::string &newRCSID) noexcept;
+  explicit Contacts(const std::string &newRCSID) ;
   /**
    * Create A New Contact Information Inside Database
    * @param Name : Name Of The Contact
