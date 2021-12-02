@@ -6,10 +6,14 @@
  */
 #ifndef BACKEND_SRC_CONTACTS_CPP_
 #define BACKEND_SRC_CONTACTS_CPP_
+// SQL Lite Library
+#include <SQLiteCpp/SQLiteCpp.h>
+#include <SQLiteCpp/VariadicBind.h>
 // C++ Standard Library
 #include <filesystem>
 // EasyContact Header Files
 #include <EasyContact/Contacts.hpp>
+#include <EasyContact/SysLogs.hpp>
 static const char* const UserDataLocation = "data/";
 void BCS::CreateDirectory(const std::string& DirName) noexcept {
   if (!std::filesystem::directory_entry(std::string(UserDataLocation) + DirName)
@@ -21,8 +25,7 @@ void BCS::CreateDirectory(const std::string& DirName) noexcept {
                                                DirName + "/Contacts.db3"));
   }
 }
-BCS::Contacts::Contacts(const std::string& newRCSID)
-    : RCSID(newRCSID)  {
+BCS::Contacts::Contacts(const std::string& newRCSID) : RCSID(newRCSID) {
   CreateDirectory(RCSID);
 }
 bool BCS::Contacts::newContact(const std::string& Name,

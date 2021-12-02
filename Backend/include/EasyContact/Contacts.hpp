@@ -6,20 +6,19 @@
  */
 #ifndef BACKEND_INCLUDE_EASYCONTACT_CONTACTS_HPP_
 #define BACKEND_INCLUDE_EASYCONTACT_CONTACTS_HPP_
-// SQL Lite Library
-#include <SQLiteCpp/SQLiteCpp.h>
-#include <SQLiteCpp/VariadicBind.h>
 // C++ Standard Library
 #include <string>
-// Standard Template Library
 #include <vector>
-// EasyContact Header Files
-#include <EasyContact/SysLogs.hpp>
 /**
  * EasyContact Custom Namespace
  * BCS : Backend Contact System
  */
 namespace BCS {
+/**
+ * Create A User Data Directory If Such Directory
+ * Does Not Exist Already
+ * @param DirName : Name Of The Directory
+ */
 void CreateDirectory(const std::string &DirName) noexcept;
 class Contacts {
  private:
@@ -30,7 +29,7 @@ class Contacts {
    * Default Class Constructor
    * @param newRCSID : RCSID For The New Database
    */
-  explicit Contacts(const std::string &newRCSID) ;
+  explicit Contacts(const std::string &newRCSID);
   /**
    * Create A New Contact Information Inside Database
    * @param Name : Name Of The Contact
@@ -52,17 +51,49 @@ class Contacts {
    */
   bool removeContact(const std::string &Name) noexcept;
   /**
-   *
+   * Remove A Existing Group Tag From Database
+   * @param TagName : Name Of The Tag To Be Removed
+   * @return bool : Operation Successfulness
    */
   bool removeTag(const std::string &TagName) noexcept;
+  /**
+   * Get Email Address Of A Existing Contact
+   * @param Name : Name Of The Contact
+   * @return std::string : Email Address Of The Contact
+   */
   [[nodiscard]] std::string getEmailAddress(
       const std::string &Name) const noexcept;
+  /**
+   * Get Names Of All Saved Contacts
+   * @return std::vector<std::string> : Names Of All Saved Contacts
+   */
   [[nodiscard]] std::vector<std::string> getAllNames() const noexcept;
+  /**
+   * Get Names Of All Tag Groups
+   * @return std::vector<std::string> : Names Of All Tag Groups
+   */
   [[nodiscard]] std::vector<std::string> getAllTags() const noexcept;
+  /**
+   * Get Names Of All Contacts Within One Tag Group
+   * @param TagName : Name Of The Tag
+   * @return std::vector<std::string> : Names Of All Contacts Within The Group
+   */
   [[nodiscard]] std::vector<std::string> getTagContains(
       const std::string &TagName) const noexcept;
+  /**
+   * Assign One Tag To One Contact
+   * @param TagName : Name Of The Group Tag
+   * @param ContactName : Name Of The Contact
+   * @return bool : Operation Successfulness
+   */
   bool assignTagTo(const std::string &TagName,
                    const std::string &ContactName) noexcept;
+  /**
+   * Remove One Tag From One Contact
+   * @param TagName : Name Of The Group Tag
+   * @param ContactName : Name Of The Contact
+   * @return bool : Operation Successfulness
+   */
   bool removeTagFor(const std::string &TagName,
                     const std::string &ContactName) noexcept;
 };
