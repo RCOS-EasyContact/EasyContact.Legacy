@@ -6,7 +6,14 @@
  */
 #ifndef BACKEND_SRC_CONTACTS_CPP_
 #define BACKEND_SRC_CONTACTS_CPP_
+// SQL Lite Library
+#include <SQLiteCpp/SQLiteCpp.h>
+#include <SQLiteCpp/VariadicBind.h>
+// C++ Standard Library
+#include <filesystem>
+// EasyContact Header Files
 #include <EasyContact/Contacts.hpp>
+#include <EasyContact/SysLogs.hpp>
 static const char* const UserDataLocation = "data/";
 void BCS::CreateDirectory(const std::string& DirName) noexcept {
   if (!std::filesystem::directory_entry(std::string(UserDataLocation) + DirName)
@@ -22,7 +29,7 @@ BCS::Contacts::Contacts(const std::string& newRCSID) : RCSID(newRCSID) {
   CreateDirectory(RCSID);
 }
 bool BCS::Contacts::newContact(const std::string& Name,
-                               const std::string& Email) {
+                               const std::string& Email) noexcept {
   try {
     SQLite::Database DB3(
         std::string(UserDataLocation) + RCSID + "/Contacts.db3",
@@ -37,7 +44,7 @@ bool BCS::Contacts::newContact(const std::string& Name,
   }
   return true;
 }
-bool BCS::Contacts::newTag(const std::string& TagName) {
+bool BCS::Contacts::newTag(const std::string& TagName) noexcept {
   try {
     SQLite::Database DB3(
         std::string(UserDataLocation) + RCSID + "/Contacts.db3",
@@ -59,7 +66,7 @@ bool BCS::Contacts::newTag(const std::string& TagName) {
   }
   return true;
 }
-bool BCS::Contacts::removeContact(const std::string& Name) {
+bool BCS::Contacts::removeContact(const std::string& Name) noexcept {
   try {
     SQLite::Database DB3(
         std::string(UserDataLocation) + RCSID + "/Contacts.db3",
@@ -73,7 +80,7 @@ bool BCS::Contacts::removeContact(const std::string& Name) {
   }
   return true;
 }
-bool BCS::Contacts::removeTag(const std::string& TagName) {
+bool BCS::Contacts::removeTag(const std::string& TagName) noexcept {
   try {
     SQLite::Database DB3(
         std::string(UserDataLocation) + RCSID + "/Contacts.db3",
@@ -86,7 +93,8 @@ bool BCS::Contacts::removeTag(const std::string& TagName) {
   }
   return true;
 }
-std::string BCS::Contacts::getEmailAddress(const std::string& Name) const {
+std::string BCS::Contacts::getEmailAddress(
+    const std::string& Name) const noexcept {
   std::string Result;
   try {
     std::vector<std::string> Buffer;
@@ -103,7 +111,7 @@ std::string BCS::Contacts::getEmailAddress(const std::string& Name) const {
   }
   return Result;
 }
-std::vector<std::string> BCS::Contacts::getAllNames() const {
+std::vector<std::string> BCS::Contacts::getAllNames() const noexcept {
   std::vector<std::string> Result;
   try {
     SQLite::Database DB3(std::string(UserDataLocation) + RCSID +
@@ -117,7 +125,7 @@ std::vector<std::string> BCS::Contacts::getAllNames() const {
   }
   return Result;
 }
-std::vector<std::string> BCS::Contacts::getAllTags() const {
+std::vector<std::string> BCS::Contacts::getAllTags() const noexcept {
   std::vector<std::string> Result;
   try {
     SQLite::Database DB3(std::string(UserDataLocation) + RCSID +
@@ -132,7 +140,7 @@ std::vector<std::string> BCS::Contacts::getAllTags() const {
   return Result;
 }
 std::vector<std::string> BCS::Contacts::getTagContains(
-    const std::string& TagName) const {
+    const std::string& TagName) const noexcept {
   std::vector<std::string> Result;
   try {
     SQLite::Database DB3(std::string(UserDataLocation) + RCSID +
@@ -148,7 +156,7 @@ std::vector<std::string> BCS::Contacts::getTagContains(
   return Result;
 }
 bool BCS::Contacts::assignTagTo(const std::string& TagName,
-                                const std::string& ContactName) {
+                                const std::string& ContactName) noexcept {
   try {
     SQLite::Database DB3(
         std::string(UserDataLocation) + RCSID + "/Contacts.db3",
@@ -164,7 +172,7 @@ bool BCS::Contacts::assignTagTo(const std::string& TagName,
   return true;
 }
 bool BCS::Contacts::removeTagFor(const std::string& TagName,
-                                 const std::string& ContactName) {
+                                 const std::string& ContactName) noexcept {
   try {
     SQLite::Database DB3(
         std::string(UserDataLocation) + RCSID + "/Contacts.db3",
