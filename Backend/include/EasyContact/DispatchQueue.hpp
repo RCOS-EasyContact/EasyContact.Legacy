@@ -34,13 +34,54 @@ class DispatchQueue {
   void Dispatch_Hander(void);
 
  public:
+  /**
+   * Default Class Constructor
+   * @param NumThreads : Number of Threads to Create
+   */
   explicit DispatchQueue(const size_t& NumThreads);
+  /**
+   * Default Class Destructor
+   */
   ~DispatchQueue();
+  /**
+   * Add Task to Dispatch Queue
+   * @param Operation : Task Expressed in Lambda Expression
+   * @return std::pair<size_t, size_t> : Your Task ID, Number of Tasks Before
+   * Your Task
+   */
   std::pair<size_t, size_t> Dispatch(const Functor& Operation);
+  /**
+   * Add Task to Dispatch Queue
+   * @param Operation : Task Expressed in Lambda Expression
+   * @return std::pair<size_t, size_t> : Your Task ID, Number of Tasks Before
+   * Your Task
+   */
   std::pair<size_t, size_t> Dispatch(Functor&& Operation);
+  /**
+   * This Funtion Call Is Not Allowed &
+   * Will Delete Left Hand Side Instance
+   * @param RHS : Another Instance of Current Class
+   */
   DispatchQueue(const DispatchQueue& RHS) = delete;
+  /**
+   * This Funtion Call Is Not Allowed &
+   * Will Delete Left Hand Side Instance
+   * @param RHS : Another Instance of Current Class
+   * @return DispatchQueue : Reference to SELF
+   */
   DispatchQueue& operator=(const DispatchQueue& RHS) = delete;
+  /**
+   * This Funtion Call Is Not Allowed &
+   * Will Delete Left Hand Side Instance
+   * @param RHS : Another Instance of Current Class
+   */
   DispatchQueue(DispatchQueue&& RHS) = delete;
+  /**
+   * This Funtion Call Is Not Allowed &
+   * Will Delete Left Hand Side Instance
+   * @param RHS : Another Instance of Current Class
+   * @return DispatchQueue : Reference to SELF
+   */
   DispatchQueue& operator=(DispatchQueue&& RHS) = delete;
 };
 #endif  // BACKEND_INCLUDE_EASYCONTACT_DISPATCHQUEUE_HPP_
