@@ -11,16 +11,12 @@
 // C++ Standard Library
 #include <condition_variable>
 #include <functional>
-#include <iostream>
 #include <mutex>
-#include <string>
 #include <thread>
 // Standard Template Library
 #include <queue>
 #include <utility>
 #include <vector>
-// EasyContact Header Files
-#include <EasyContact/SingleUser.hpp>
 class DispatchQueue {
   using Functor = std::function<void(void)>;
 
