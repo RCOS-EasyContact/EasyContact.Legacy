@@ -22,7 +22,7 @@
 // EasyContact Header Files
 #include <EasyContact/SingleUser.hpp>
 class DispatchQueue {
-  typedef std::function<void(void)> Functor;
+  using Functor = std::function<void(void)>;
 
  private:
   size_t JobID;
