@@ -53,6 +53,8 @@ class DispatchQueue {
    * Your Task
    */
   std::pair<size_t, size_t> Dispatch(Functor&& Operation);
+
+ public:
   /**
    * This Funtion Call Is Not Allowed &
    * Will Delete Left Hand Side Instance
