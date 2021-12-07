@@ -6,8 +6,6 @@
  */
 #ifndef BACKEND_SRC_DISPATCHQUEUE_CPP_
 #define BACKEND_SRC_DISPATCHQUEUE_CPP_
-// C++ Standard Library
-#include <iostream>
 // EasyContact Header Files
 #include <EasyContact/DispatchQueue.hpp>
 #include <EasyContact/SingleUser.hpp>
