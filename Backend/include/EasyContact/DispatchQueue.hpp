@@ -27,6 +27,8 @@ class DispatchQueue {
   std::queue<Functor> Queue;
   std::condition_variable CV;
   bool inServices = true;
+
+ protected:
   void Dispatch_Hander(void);
 
  public:
