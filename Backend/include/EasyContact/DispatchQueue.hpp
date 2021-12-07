@@ -21,12 +21,12 @@ class DispatchQueue {
   using Functor = std::function<void(void)>;
 
  private:
+  bool inServices;
   size_t JobID;
   std::mutex Lock;
   std::vector<std::thread> Threads;
   std::queue<Functor> Queue;
   std::condition_variable CV;
-  bool inServices = true;
 
  protected:
   void Dispatch_Hander(void);
