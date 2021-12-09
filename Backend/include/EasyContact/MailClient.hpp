@@ -12,10 +12,10 @@ namespace BMC {
 bool AuthenticateLogin(const std::string& RCSID, const std::string& Password) noexcept;
 class MailClient {
  private:
-  const std::string __RCSID;
-  const std::string __Password;
-  const std::string __EmailAddress;
-  std::string __Nickname;
+  const std::string _RCSID;
+  const std::string _PASSWORD;
+  const std::string _EMAILADDRESS;
+  std::string _NICKNAME;
 
  public:
   explicit MailClient(const std::string& RCSID, const std::string& Password);
