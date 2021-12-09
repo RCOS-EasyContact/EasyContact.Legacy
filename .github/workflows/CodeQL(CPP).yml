@@ -34,7 +34,7 @@ jobs:
         languages: ${{ matrix.language }}
 
     - name: Build C++
-      run: git submodule update --init --recursive &&
+      run: git submodule update --init &&
            cd Backend &&
            cmake -DCMAKE_BUILD_TYPE=Debug . &&
            cmake --build . -j 2
