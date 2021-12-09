@@ -96,6 +96,34 @@ class Contacts {
    */
   bool removeTagFor(const std::string &TagName,
                     const std::string &ContactName) noexcept;
+
+                    public:
+                     /**
+   * This Funtion Call Is Not Allowed &
+   * Will Delete Left Hand Side Instance
+   * @param RHS : Another Instance of Current Class
+   */
+                    Contacts(const Contacts& RHS)=delete;
+                      /**
+   * This Funtion Call Is Not Allowed &
+   * Will Delete Left Hand Side Instance
+   * @param RHS : Another Instance of Current Class
+   * @return DispatchQueue : Reference to SELF
+   */
+                    Contacts& operator=(const Contacts& RHS)=delete;
+                     /**
+   * This Funtion Call Is Not Allowed &
+   * Will Delete Left Hand Side Instance
+   * @param RHS : Another Instance of Current Class
+   */
+                    Contacts(Contacts&& RHS)=delete;
+                    /**
+   * This Funtion Call Is Not Allowed &
+   * Will Delete Left Hand Side Instance
+   * @param RHS : Another Instance of Current Class
+   * @return DispatchQueue : Reference to SELF
+   */
+                    Contacts& operator=(Contacts&& RHS)=delete;
 };
 }  // namespace BCS
 #endif  // BACKEND_INCLUDE_EASYCONTACT_CONTACTS_HPP_
