@@ -2,7 +2,7 @@
 EasyContact Backend Information Server
 - Supports HTTP Protocol `:3126`
 - Supports WebSocket Protocol `:3127` (Under Development)
-- Using `C++ 20` Standard
+- Using `C++20` Standard
 - Other [External Libraries](lib/README.md)
 
 ## Contributors (Alphabetical Order)
