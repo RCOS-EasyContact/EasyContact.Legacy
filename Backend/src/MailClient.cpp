@@ -8,6 +8,8 @@
 #define BACKEND_SRC_MAILCLIENT_CPP_
 // C++ Standard Library
 #include <fstream>
+// VMime Library
+#include <vmime/vmime.hpp>
 // EasyContact Header Files
 #include <EasyContact/SysLogs.hpp>
 #include <EasyContact/MailClient.hpp>
