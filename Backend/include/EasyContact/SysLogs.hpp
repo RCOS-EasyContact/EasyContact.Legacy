@@ -24,10 +24,10 @@ inline static void PrintException(const std::exception &Err) noexcept {
             << std::endl
             << std::flush;
 }
-template <typename... Args>
-inline static void PrintRequest(Args &&...A) noexcept {
-  std::stringstream BUFFER;
-  (BUFFER << ... << A);
+template <typename... FoldExpression>
+inline static void PrintRequest(FoldExpression &&...Argv) noexcept {
+  std::stringstreFoldExpressionm BUFFER;
+  (BUFFER << ... << Argv);
   std::time_t timenow =
       std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
   std::string TimeBuffer = std::move(std::ctime(&timenow));
@@ -36,10 +36,10 @@ inline static void PrintRequest(Args &&...A) noexcept {
             << std::endl
             << std::flush;
 }
-template <typename... Args>
-inline static void PrintDebugMessage(Args &&...A) noexcept {
+template <typename... FoldExpression>
+inline static void PrintDebugMessage(FoldExpression &&...Argv) noexcept {
   std::stringstream BUFFER;
-  (BUFFER << ... << A);
+  (BUFFER << ... << Argv);
   std::time_t timenow =
       std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
   std::string TimeBuffer = std::move(std::ctime(&timenow));
