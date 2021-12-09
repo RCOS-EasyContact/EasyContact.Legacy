@@ -6,18 +6,16 @@
  */
 #ifndef BACKEND_SRC_MULTICLIENTMAIN_CPP_
 #define BACKEND_SRC_MULTICLIENTMAIN_CPP_
-// C Standard Library
-#include <signal.h>
-#include <stdlib.h>
-#include <time.h>
 // Libhv Library (C Library)
 #include <hv/HttpServer.h>
 #include <hv/hv.h>
 // C++ Standard Library
+#include <cstdlib>
+#include <csignal>
+#include <ctime>
 #include <iostream>
 #include <mutex>
 #include <thread>
-// Standard Template Library
 #include <queue>
 #include <unordered_map>
 #include <utility>

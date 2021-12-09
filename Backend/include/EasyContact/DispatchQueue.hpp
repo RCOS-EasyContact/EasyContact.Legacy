@@ -13,7 +13,6 @@
 #include <functional>
 #include <mutex>
 #include <thread>
-// Standard Template Library
 #include <queue>
 #include <utility>
 #include <vector>

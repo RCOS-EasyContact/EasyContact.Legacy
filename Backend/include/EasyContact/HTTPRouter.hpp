@@ -10,7 +10,6 @@
 #include <hv/HttpService.h>
 // C++ Standard Library
 #include <string>
-// Standard Template Library
 #include <unordered_map>
 #include <utility>
 #include <vector>
