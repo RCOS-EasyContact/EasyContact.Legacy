@@ -26,7 +26,7 @@ inline static void PrintException(const std::exception &Err) noexcept {
 }
 template <typename... FoldExpression>
 inline static void PrintRequest(FoldExpression &&...Argv) noexcept {
-  std::stringstreFoldExpressionm BUFFER;
+  std::stringstream BUFFER;
   (BUFFER << ... << Argv);
   std::time_t timenow =
       std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
