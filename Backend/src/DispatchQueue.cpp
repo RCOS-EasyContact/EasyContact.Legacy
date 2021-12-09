@@ -6,9 +6,11 @@
  */
 #ifndef BACKEND_SRC_DISPATCHQUEUE_CPP_
 #define BACKEND_SRC_DISPATCHQUEUE_CPP_
+// EasyContact Header Files
 #include <EasyContact/DispatchQueue.hpp>
+#include <EasyContact/SingleUser.hpp>
 DispatchQueue::DispatchQueue(const size_t& NumThreads)
-    : JobID(0), Threads(NumThreads) {
+    : inServices(true), JobID(0), Threads(NumThreads) {
   for (size_t i = 0; i < Threads.size(); ++i) {
     Threads[i] = std::thread(&DispatchQueue::Dispatch_Hander, this);
   }
